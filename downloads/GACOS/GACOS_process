@@ -75,7 +75,7 @@ gacos_flag=`grep gacos_flag: $para_file | awk '{print $2}'`
 
 	#####Prepare parameter file###
 
-    rm -rf GACOS_par
+        rm -rf GACOS_par
 	mkdir GACOS_par
 	cp $raw_par ./GACOS_par/$master.gacos.par
 	rsc=./$gacos_dir/${master}.ztd.rsc
@@ -115,17 +115,18 @@ gacos_flag=`grep gacos_flag: $para_file | awk '{print $2}'`
 
 #################################
 	# 二进制文件转换为float/fcomplex类型数据, swap_type=4(output float32)
-	swap_bytes ./$gacos_dir/$master.ztd ./$gacos_dir/$master.ztd.trans 4
-	swap_bytes ./$gacos_dir/$slave.ztd ./$gacos_dir/$slave.ztd.trans 4
+	#swap_bytes ./$gacos_dir/$master.ztd ./$gacos_dir/$master.ztd.trans 4
+	#swap_bytes ./$gacos_dir/$slave.ztd ./$gacos_dir/$slave.ztd.trans 4
 	# GACOS数据(对流层延迟图)投影变换，gacos下的坐标系转化为seg.dem.par下的地理坐标系（WGS84）
-	dem_trans ./GACOS_par/$master.gacos.par ./$gacos_dir/$master.ztd.trans ./$raw_par ./$gacos_dir/$master.ztd.poj - -
-	dem_trans ./GACOS_par/$slave.gacos.par ./$gacos_dir/$slave.ztd.trans ./$raw_par ./$gacos_dir/$slave.ztd.poj - -
+	#dem_trans ./GACOS_par/$master.gacos.par ./$gacos_dir/$master.ztd.trans ./$raw_par ./$gacos_dir/$master.ztd.poj - -
+	#dem_trans ./GACOS_par/$slave.gacos.par ./$gacos_dir/$slave.ztd.trans ./$raw_par ./$gacos_dir/$slave.ztd.poj - -
 	# GACOS求差
-	float_math ./$gacos_dir/$slave.ztd.poj ./$gacos_dir/$master.ztd.poj ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm 1 1
-	echo "geocode ./$DEM/$reference.geo_to_rdc_fine ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm ./dem/$master"_"$slave.dztd.poj.rdc $width_mli $nlines_mli 0 0 1 1 2 8"
+	#float_math ./$gacos_dir/$slave.ztd.poj ./$gacos_dir/$master.ztd.poj ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm 1 1
+	#dem_trans ./GACOS_par/$master"_"$slave.gacos.par ./$gacos_dir/$master"_"$slave.dztd.trans ./DEM/seg.dem.geo_par ./$gacos_dir/$master"_"$slave.dztd.poj - -
+	#echo "geocode ./$DEM/$reference.geo_to_rdc_fine ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm ./dem/$master"_"$slave.dztd.poj.rdc $width_mli $nlines_mli 0 0 1 1 2 8"
 	# 求差后的GACOS数据由地理坐标系（seg.dem.par）转换为雷达坐标系（.mli）
-	geocode ./$DEM/$fine_lookup_table ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm ./dem/$master"_"$slave.dztd.poj.rdc $width_mli $nlines_mli 0 0 1 1 2 8
-	rashgt ./$DEM/$master"_"$slave.dztd.poj.rdc ./rmli/$reference.mli $width_mli - - - - - - - - -
+	#geocode ./$DEM/$fine_lookup_table ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm ./dem/$master"_"$slave.dztd.poj.rdc $width_mli $nlines_mli 0 0 1 1 2 8
+	#rashgt ./$DEM/$master"_"$slave.dztd.poj.rdc ./rmli/$reference.mli $width_mli - - - - - - - - -
         
 	##############Correct in matlab############
 	echo "****************The atmospheric correction in matlab**************"
