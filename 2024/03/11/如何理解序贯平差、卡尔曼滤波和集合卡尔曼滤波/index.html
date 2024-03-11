@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://singyutang.github.io/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/5bc9086b69b842dba47bd0f43a9275a3.png">
 <meta property="article:published_time" content="2024-03-11T03:07:13.000Z">
-<meta property="article:modified_time" content="2024-03-11T13:11:14.654Z">
+<meta property="article:modified_time" content="2024-03-11T14:08:10.366Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="卡尔曼滤波">
 <meta property="article:tag" content="序贯平差">
@@ -272,7 +272,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.2k字</span>
+      <span class="post-count">1.8k字</span>
     </span>
   </span>
 
@@ -281,7 +281,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">8分</span>
     </span>
   </span>
 </div>
@@ -362,7 +362,22 @@ Q_{\hat{X}_{k}} =Q_{\hat{X}_{k-1}}-Q_{\hat{X}_{k-1}}B_{k}^T(P_{k}^{-1}+B_{k}Q_{\
 J_{k} = Q_{\hat{X}_{k-1}}B_{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}</script></li>
 </ol>
 <h2 id="推导流程"><a href="#推导流程" class="headerlink" title="推导流程"></a>推导流程</h2><p>使用参数平差值（待估状态\/参数量）$\hat{X}$ 计算<br><img src="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/5bc9086b69b842dba47bd0f43a9275a3.png" class=""></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/122926813">序贯最小二乘平差 / 递推最小二乘平差公式推导</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/131031339">序贯最小二乘平差 VS 卡尔曼滤波</a></p>
+<h1 id="卡尔曼滤波"><a href="#卡尔曼滤波" class="headerlink" title="卡尔曼滤波"></a>卡尔曼滤波</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>卡尔曼滤波是一种线性最小方差估计，采用动力学方程即状态方程描述被估计量的动态变化规律，被估计量的动态统计信息由激励白噪声的统计信息和动力学方程确定。其计算过程是一个不断地预测、修正的过程。在求解时不需要存储大量的观测数据，并且当得到新的观测数据时，可随时估算得新的滤波值，便于实时处理观测结果。<br>1.基于前一时间点的系统状态的概率分布给出当前时间点的系统状态的概率分布预测 P1<br>2.基于当前时间点的观测量的概率分布 Q 给出另一组对当前时间点系统状态的概率分布预测 P2 (这里需要注意，如果传感器能直接把系统状态都观测了，那么我们直接用观测量的概率分布 Q 作为 P2 就好了，但是有可能传感器观测的物理量量并不是直接的系统状态，而是其他物理量，这时我们需要通过做一个线性变换来获得 P2)<br>3.现在，我们有两个关于当前时间点系统状态的概率分布的预测 P1 和 P2，我们于是可以计算它们的联合概率分布，这个联合概率分布就是我们最终想要的更正过后的当前时间点的系统状态概率分布，有了它我们就可以进入下一个时间点继续迭代我们交替的预测-更正步骤了。</p>
+<h2 id="卡尔曼滤波算法"><a href="#卡尔曼滤波算法" class="headerlink" title="卡尔曼滤波算法"></a>卡尔曼滤波算法</h2><p>状态递推</p>
+<script type="math/tex; mode=display">
+x_{k}'=x_{k}+K'(\overrightarrow z_{k} - H_{k}X_{k})</script><p>方差递推</p>
+<script type="math/tex; mode=display">
+P_{k}'=P_{k}-K'H_{k}P_{k}</script><p>增益矩阵</p>
+<script type="math/tex; mode=display">
+K'=P_{k}H_{k}^T(H_{k}P_{k}H_{k}^T+R_{k})^{-1}</script><p>变量解释</p>
+<script type="math/tex; mode=display">
+x_{K}': 最佳估计</script><script type="math/tex; mode=display">
+x_{k}: 当前状态</script><script type="math/tex; mode=display">
+P_{k}: 当前状态x_{k}的协方差阵</script><script type="math/tex; mode=display">
+\overrightarrow z_{k}: 观测值平均值</script><p>$H_{k}$: 由于单位、比例等不同对传感器加上一个映射矩阵（尺度变换），从而保证每个传感器输出读数尺度相同，处于同一空间</p>
+<script type="math/tex; mode=display">
+R_{k}: 传感器噪声</script><script type="math/tex; mode=display">
+K' : 卡尔曼增益</script><h1 id="集合卡尔曼滤波"><a href="#集合卡尔曼滤波" class="headerlink" title="集合卡尔曼滤波"></a>集合卡尔曼滤波</h1><h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/122926813">序贯最小二乘平差 / 递推最小二乘平差公式推导</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/131031339">序贯最小二乘平差 VS 卡尔曼滤波</a></p>
 
     
 
