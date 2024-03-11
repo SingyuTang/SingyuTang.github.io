@@ -244,6 +244,125 @@
             
 
   
+    <article id="post-ubuntu16.04安装jdk和panoply" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/" target="_blank">ubuntu16.04安装jdk和panoply</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/" class="archive-article-date">
+        <time datetime="2023-09-26T04:01:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-26</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="安装Panoply"><a href="#安装Panoply" class="headerlink" title="安装Panoply"></a>安装Panoply</h1><p>安装包网址： <a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/">https://www.giss.nasa.gov/tools/panoply/download/</a> </p>
+<p>自行选择对应版本（windows，macOS，Linux，这里是 linux . tgz 格式），也可点击<a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.2.7.tgz">这里</a>直接下载tgz格式。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230926122259.png" class=""><br>下载完成后，复制到 ubuntu 系统下 <code>/opt</code> 文件夹下提取即可，但是此时不能直接运行，需要 安装大于 11 版本的 JDK 才行，JDK下载安装参见下文。<br>JDK安装完成后，进入 panoply 文件夹下，打开终端输入 ./Panoply.sh 运行。</p>
+<h1 id="手动安装-JDK20"><a href="#手动安装-JDK20" class="headerlink" title="手动安装 JDK20"></a>手动安装 JDK20</h1><p>下载 JDK20 安装包：<a target="_blank" rel="noopener" href="https://jdk.java.net/20/">JDK20 下载链接</a>，选择适合电脑的版本，ubuntu16.04系统 点击<a target="_blank" rel="noopener" href="https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz">下载链接</a>直接下载。<br>提示：若进入JDK20下载网页显示JDK20版本已被取代，则下载最新的JDK版本，可输入其官网网址进行下载，网址链接样式如 <code>https://jdk.java.net/xx/</code>，其中 <code>xx</code> 表示你要下载的 JDK 版本，如下载 JDK21 则其链接为 <a target="_blank" rel="noopener" href="https://jdk.java.net/21/">https://jdk.java.net/21/</a> 。对于x64操作系统的电脑，下载下图所示的 tar.gz 格式安装包。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230926122708.png" class=""></p>
+<ul>
+<li>下载完成后，使用【提取到此处】解压；</li>
+<li>将解压后的文件夹移动到/usr 文件夹下</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv jdk* /usr</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>update-alternatives</code> 命令把 Java 安装到系统上，此时就不用再设置环境了。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/jdk-20.*/bin/java 2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置默认的 Java</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
+<p>上述命令会显示目前在系统里存在的所有版本的 Java，然后你选择一个你想要的版本就可以了。</p>
+<ul>
+<li>最后查看当前的 java 版本</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>本文参考博客： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/powerwu/articles/12095326.html">如何在Linux Ubuntu16/18上安装Java JDK11/8</a></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu16.04</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Panoply</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JDK20</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件安装</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-如何在DELL工作站T7820上安装ubuntu16-04操作系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1362,7 +1481,7 @@ Wahr et al.(2015)对极潮漂移的修正。
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018-2023 <a href="https://singyutang.github.io/" target="_blank">SingyuTang</a>
+    		&copy; 2018-2024 <a href="https://singyutang.github.io/" target="_blank">SingyuTang</a>
     	</div>
       	<div class="footer-right">
 			
@@ -1591,6 +1710,18 @@ Wahr et al.(2015)对极潮漂移的修正。
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文献分享</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">卡尔曼滤波</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">序贯平差</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">公式推导</a>
               </li>
             
             <div class="clearfix"></div>
