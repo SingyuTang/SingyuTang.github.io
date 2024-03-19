@@ -6,20 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://singyutang.github.io">
-  <title>Hello World | SingyuTang</title>
+  <title>如何在ubuntu16.04上安装编译WRF4.5.2、WRF-hydro5.2.0和WPS4.5.0 | SingyuTang</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="# 1. 环境测试运行一些测试来验证Fortran编译器和C编译器是否可用。 1sudo apt-get install csh gfortran m4 build-essential 1234which gfortranwhich cppwhich gccgcc --version 12mkdir Build_WRF TESTScd TESTS 下载测试包Fortran and C Tests">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://singyutang.github.io/2023/07/24/hello-world/index.html">
+<meta property="og:title" content="如何在ubuntu16.04上安装编译WRF4.5.2、WRF-hydro5.2.0和WPS4.5.0">
+<meta property="og:url" content="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/index.html">
 <meta property="og:site_name" content="SingyuTang">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="# 1. 环境测试运行一些测试来验证Fortran编译器和C编译器是否可用。 1sudo apt-get install csh gfortran m4 build-essential 1234which gfortranwhich cppwhich gccgcc --version 12mkdir Build_WRF TESTScd TESTS 下载测试包Fortran and C Tests">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-23T19:21:39.575Z">
-<meta property="article:modified_time" content="2023-07-23T12:17:16.390Z">
+<meta property="article:published_time" content="2024-03-17T08:55:27.000Z">
+<meta property="article:modified_time" content="2024-03-19T15:49:14.931Z">
 <meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="toolkit">
+<meta property="article:tag" content="Ubuntu16.04">
+<meta property="article:tag" content="软件安装">
+<meta property="article:tag" content="WRF">
+<meta property="article:tag" content="WRF-hydro">
+<meta property="article:tag" content="WPS">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
@@ -239,22 +245,22 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-如何在ubuntu16-04上安装编译WRF4-5-2、WRF-hydro5-2-0和WPS4-5-0" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      如何在ubuntu16.04上安装编译WRF4.5.2、WRF-hydro5.2.0和WPS4.5.0
     </h1>
   
 
 
   
   
-<a href="/2023/07/24/hello-world/" class="archive-article-date">
-        <time datetime="2023-07-23T19:21:39.575Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-24</time>
+<a href="/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/" class="archive-article-date">
+        <time datetime="2024-03-17T08:55:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-17</time>
 </a>
 
   
@@ -267,7 +273,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">75字</span>
+      <span class="post-count">1.1k字</span>
     </span>
   </span>
 
@@ -276,7 +282,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -287,19 +293,145 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <h1 id="1-环境测试"><a href="#1-环境测试" class="headerlink" title="# 1. 环境测试"></a># 1. 环境测试</h1><p>运行一些测试来验证Fortran编译器和C编译器是否可用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install csh gfortran m4 build-essential</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> gfortran</span><br><span class="line"><span class="built_in">which</span> cpp</span><br><span class="line"><span class="built_in">which</span> gcc</span><br><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> Build_WRF TESTS</span><br><span class="line"><span class="built_in">cd</span> TESTS</span><br></pre></td></tr></table></figure>
+<p>下载测试包<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_tests.tar">Fortran and C Tests Tar File</a></p>
+<p>将测试包解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf Fortran_C_tests.tar</span><br></pre></td></tr></table></figure>
+<p>共有7项测试，请一次一次完成</p>
+<p><strong>Test #1:</strong>  TEST_1_fortran_only_fixed.f  </p>
+<p><em>在命令行输入以下内容:</em>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gfortran TEST_1_fortran_only_fixed.f</span><br></pre></td></tr></table></figure>
+<p><em>现在输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS test 1 fortran only fixed format</p>
+</blockquote>
+<p><strong>Test #2:</strong> TEST_2_fortran_only_free.f90  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gfortran TEST_2_fortran_only_free.f90</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>Assume Fortran 2003: has FLUSH, ALLOCATABLE, derived type, and ISO C Binding<br>SUCCESS test 2 fortran only free format</p>
+</blockquote>
+<p><strong>Test #3:</strong> <u>C</u>: TEST_3_c_only.c  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gcc TEST_3_c_only.c</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS test 3 c only</p>
+</blockquote>
+<p><strong>Test #4:</strong> : TEST_4_fortran+c_c.c, and TEST_4_fortran+x_f.f90  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gcc -c -m64 TEST_4_fortran+c_c.c</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>gfortran -c -m64 TEST_4_fortran+c_f.f90</p>
+</blockquote>
+<p><em>*然后输入:</em></p>
+<blockquote>
+<p>gfortran -m64 TEST_4_fortran+c_f.o TEST_4_fortran+c_c.o</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>SUCCESS test 4 fortran calling c</p>
+</blockquote>
+<p><strong>Test #5:</strong> csh </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_csh.csh</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS csh test</p>
+</blockquote>
+<p><strong>Test #6:</strong> perl</p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_perl.pl</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS perl test</p>
+</blockquote>
+<p><strong>Test #7:</strong> sh</p>
+<p> <em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_sh.sh</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS sh test</p>
+</blockquote>
+<h1 id="2-环境设置"><a href="#2-环境设置" class="headerlink" title="2. 环境设置"></a>2. 环境设置</h1><p>在~/.bashrc中添加以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###################  WRF 4.5.2   ############################</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> DIR=~/coding/WRF_compiling/Build_WRF/LIBRARIES</span><br><span class="line"><span class="built_in">export</span> CC=gcc</span><br><span class="line"><span class="built_in">export</span> CXX=g++</span><br><span class="line"><span class="built_in">export</span> FC=gfortran</span><br><span class="line"><span class="built_in">export</span> CFLAGS=-m64</span><br><span class="line"><span class="built_in">export</span> F77=gfortran</span><br><span class="line"><span class="built_in">export</span> FFLAGS=-m64</span><br><span class="line"><span class="built_in">export</span> JASPERLIB=<span class="variable">$DIR</span>/grib2/lib</span><br><span class="line"><span class="built_in">export</span> JASPERINC=<span class="variable">$DIR</span>/grib2/include</span><br><span class="line"><span class="built_in">export</span> LDFLAGS=-L<span class="variable">$DIR</span>/grib2/lib</span><br><span class="line"><span class="built_in">export</span> CPPFLAGS=-I<span class="variable">$DIR</span>/grib2/include</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$DIR</span>/netcdf/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> NETCDF=<span class="variable">$DIR</span>/netcdf/</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$DIR</span>/mpich/bin:<span class="variable">$DIR</span>/mpich/lib:<span class="variable">$DIR</span>/mpich/include:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF</span>:<span class="variable">$NETCDF</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LIBS=<span class="string">&quot;-lnetcdf -lz&quot;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF</span>/lib/:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$NETCDF</span>/lib:<span class="variable">$&#123;LD_LIBRARY_PATH&#125;</span></span><br><span class="line"><span class="built_in">export</span> NETCDF_INC=<span class="string">&quot;<span class="variable">$NETCDF</span>/include&quot;</span></span><br><span class="line"><span class="built_in">export</span> NETCDF_LIB=<span class="string">&quot;<span class="variable">$NETCDF</span>/lib&quot;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF_LIB</span>:<span class="variable">$NETCDF_INC</span>:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> WRF_DIR=~/coding/WRF_compiling/Build_WRF/WRFV4.5.2</span><br><span class="line"><span class="built_in">export</span> WRFIO_NCD_NO_LARGE_FILE_SUPPORT=1</span><br><span class="line"><span class="built_in">export</span> HDF5PATH=<span class="variable">$NETCDF</span></span><br></pre></td></tr></table></figure>
+<p>更改完成后，打开终端输入<code>source ~/.bashrc</code></p>
+<h1 id="3-构建库"><a href="#3-构建库" class="headerlink" title="3. 构建库"></a>3. 构建库</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> Build_WRF</span><br><span class="line"><span class="built_in">mkdir</span> LIBRARIES</span><br></pre></td></tr></table></figure>
+<h2 id="3-1-NetCDF"><a href="#3-1-NetCDF" class="headerlink" title="3.1 NetCDF"></a>3.1 NetCDF</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装netcdf-c</span></span><br><span class="line">tar xzvf netcdf-c-4.7.2.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> netcdf-c-4.7.2</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf --disable-dap --disable-netcdf-4 --disable-shared</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装netcdf-fortran</span></span><br><span class="line">tar xzvf netcdf-fortran-4.5.2.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> netcdf-fortran-4.5.2</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf --disable-dap --disable-netcdf-4 --disable-shared</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装hdf5</span></span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-MPICH"><a href="#3-2-MPICH" class="headerlink" title="3.2 MPICH"></a>3.2 MPICH</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf mpich-3.0.4.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> mpich-3.0.4</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/mpich</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-zlib"><a href="#3-3-zlib" class="headerlink" title="3.3 zlib"></a>3.3 zlib</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf zlib-1.2.11.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> zlib-1.2.11</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-libpng"><a href="#3-4-libpng" class="headerlink" title="3.4 libpng"></a>3.4 libpng</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf libpng-1.2.50.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> libpng-1.2.50</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-5-Jasper"><a href="#3-5-Jasper" class="headerlink" title="3.5 Jasper"></a>3.5 Jasper</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf jasper-1.900.1.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> jasper-1.900.1</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h1 id="4-库兼容性测试"><a href="#4-库兼容性测试" class="headerlink" title="4. 库兼容性测试"></a>4. 库兼容性测试</h1><p>下载测试包<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_NETCDF_MPI_tests.tar">Fortran_C_NETCDF_MPI_tests.tar</a></p>
+<p><strong><u>Test #1</u></strong>: Fortran + C + NetCDF</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> <span class="variable">$&#123;NETCDF&#125;</span>/include/netcdf.inc .</span><br><span class="line"></span><br><span class="line">gfortran -c 01_fortran+c+netcdf_f.f</span><br><span class="line">gcc -c 01_fortran+c+netcdf_c.c</span><br><span class="line">gfortran 01_fortran+c+netcdf_f.o 01_fortran+c+netcdf_c.o -L<span class="variable">$&#123;NETCDF&#125;</span>/lib -lnetcdff -lnetcdf</span><br><span class="line">./a.out</span><br></pre></td></tr></table></figure>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>SUCCESS test 1 fortran + c + netcdf</p>
+</blockquote>
+<p><strong><u>Test #2</u></strong>: Fortran + C + NetCDF + MPI</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> <span class="variable">$&#123;NETCDF&#125;</span>/include/netcdf.inc .</span><br><span class="line"></span><br><span class="line">mpif90 -c 02_fortran+c+netcdf+mpi_f.f</span><br><span class="line">mpicc -c 02_fortran+c+netcdf+mpi_c.c</span><br><span class="line">mpif90 02_fortran+c+netcdf+mpi_f.o 02_fortran+c+netcdf+mpi_c.o -L<span class="variable">$&#123;NETCDF&#125;</span>/lib -lnetcdff -lnetcdf</span><br><span class="line">mpirun ./a.out</span><br></pre></td></tr></table></figure>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>status = 2<br>SUCCESS test 2 fortran + c + netcdf + mpi</p>
+</blockquote>
+<h1 id="5-构建WRF"><a href="#5-构建WRF" class="headerlink" title="5. 构建WRF"></a>5. 构建WRF</h1><p>在WRF文件夹中解压<code>WRFv4.5.2.tar.gz</code>，解压后文件夹名为WRFV4.5.2，进入该文件夹。</p>
+<p>编译前使用命令<code>uname -a</code>查看电脑详细信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> WRFV4.5.2</span><br><span class="line">./configure</span><br></pre></td></tr></table></figure>
+<p>这里注意使用<code>./configure</code>命令编译WRF时，从以下32、33、34中选择；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32. (serial) 33. (smpar) 34. (dmpar) 35. (dm+sm) GNU (gfortran/gcc)</span><br></pre></td></tr></table></figure>
+<p><code>Compile for nesting?</code>选择<code>1=basic</code></p>
+<p>出现如下则说明安装成功。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Testing for NetCDF, C and Fortran compiler</span><br><span class="line"></span><br><span class="line">This installation of NetCDF is 64-bit</span><br><span class="line">                 C compiler is 64-bit</span><br><span class="line">           Fortran compiler is 64-bit</span><br><span class="line">              It will build in 64-bit</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./compile em_real &gt;&amp; log.compile</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h1 id="6-构建WPS"><a href="#6-构建WPS" class="headerlink" title="6. 构建WPS"></a>6. 构建WPS</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> WPSv4.5.0</span><br><span class="line">./clean</span><br><span class="line">./configure</span><br></pre></td></tr></table></figure>
+<p>执行<code>./clean</code>会出现以下错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">^M: Command not found.</span><br><span class="line">^M: Command not found.</span><br><span class="line"><span class="keyword">then</span>^M: Command not found.</span><br><span class="line">endif^M: Command not found.</span><br><span class="line">^M: Command not found.</span><br><span class="line"><span class="built_in">set</span>: Syntax Error.</span><br></pre></td></tr></table></figure>
+<p>或执行<code>./configure</code>出现错误<code>bash: ./configure: /bin/sh^M: 解释器错误: 没有那个文件或目录</code>。</p>
+<p>解决办法</p>
+<p>进入WPSv4.5.0文件夹内输入以下命令即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/\r$//&#x27;</span> clean</span><br><span class="line">sed -i <span class="string">&#x27;s/\r$//&#x27;</span> configure</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./compile &gt;&amp; log.compile</span><br></pre></td></tr></table></figure>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350005982">知乎-Ubuntu中配置WRF</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php">WRF-How to Compile WRF: The Complete Process</a></p>
+</li>
+<li></li>
+</ol>
 
     
 
@@ -346,7 +478,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://singyutang.github.io/2023/07/24/hello-world/" title="Hello World" target="_blank">https://singyutang.github.io/2023/07/24/hello-world/</a>
+          <a href="https://singyutang.github.io/2024/03/17/如何在ubuntu16-04上安装编译WRF4-5-2、WRF-hydro5-2-0和WPS4-5-0/" title="如何在ubuntu16.04上安装编译WRF4.5.2、WRF-hydro5.2.0和WPS4.5.0" target="_blank">https://singyutang.github.io/2024/03/17/如何在ubuntu16-04上安装编译WRF4-5-2、WRF-hydro5-2-0和WPS4-5-0/</a>
         </li>
         
         <li>
@@ -363,6 +495,37 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">toolkit</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu16.04</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件安装</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">WRF</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WRF-hydro</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">WPS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     
@@ -413,7 +576,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://singyutang.github.io/2023/07/24/hello-world/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -428,18 +591,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2023/07/24/GRCE%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%AD%E5%8F%AF%E8%83%BD%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BD%91%E7%AB%99/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          GRCE数据处理中可能用到的一些网站
-        
-      </div>
-    </a>
   
-  
-    <a href="/2023/07/23/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">测试文章</div>
+    <a href="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波</div>
       <i class="icon-circle-right"></i>
     </a>
   
