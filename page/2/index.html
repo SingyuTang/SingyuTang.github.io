@@ -244,6 +244,110 @@
             
 
   
+    <article id="post-ubuntu16.04安装一些常用软件一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E4%B8%80/" target="_blank">ubuntu16.04安装一些常用软件一</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E4%B8%80/" class="archive-article-date">
+        <time datetime="2023-09-26T04:43:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-26</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1-ubuntu16-04-安装-markText："><a href="#1-ubuntu16-04-安装-markText：" class="headerlink" title="1. ubuntu16.04 安装 markText："></a>1. ubuntu16.04 安装 markText：</h1><p>1.1 下载<br>marktext <a target="_blank" rel="noopener" href="https://github.com/marktext/marktext/releases">官网下载</a> AppImage 文件；<br>1.2.1 启动方法一<br>在终端通过 ./marktext-86_64. AppImage 直接运行<br>1.2.2 启动方法二<br>通过在/usr/share/applications 文件夹中创建 marktext.desktop 图标文件双击启动。具体图标创建方法如下。</p>
+<ul>
+<li>移动下载的<code>marktext-x86_64.AppImage</code>文件到<code>/opt</code>文件夹下，并赋予可执行权限。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入下载的AppImage文件的上级目录，打开终端执行以下命令。</span><br><span class="line">sudo mkdir /opt/marktext</span><br><span class="line">sudo mv marktext-x86_64.AppImage /opt/marktext</span><br><span class="line">sudo chmod +x /opt/marktext/marktext-x86_64.AppImage</span><br></pre></td></tr></table></figure></li>
+<li>创建图标文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/marktext</span><br><span class="line">sudo touch marktext.desktop</span><br><span class="line">gedit marktext.desktop</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>文件内容如下,Exec=AppImage文件所在的绝对路径，后面的%F务必加上，为关联文件，跟后面的右键添加打开方式有关<br>Icon=软件logo所在的绝对路径，软件的<a target="_blank" rel="noopener" href="https://github.com/marktext/marktext/tree/develop/static">图标下载</a>可在其 github 官网下载，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Name=MarkText</span><br><span class="line">Comment=Next generation markdown editor</span><br><span class="line">Exec=/opt/marktext/marktext-x86_64.AppImage %F</span><br><span class="line">Terminal=false</span><br><span class="line">Type=Application</span><br><span class="line">Icon=/opt/marktext/marktext.png</span><br><span class="line">Categories=Office;TextEditor;Utility</span><br><span class="line">MimeType=text/markdown;</span><br><span class="line">Keywords=marktext;</span><br><span class="line">StartupWMClass=marktext</span><br><span class="line">Actions=NewWindows</span><br><span class="line">StartupNotify=true</span><br><span class="line"></span><br><span class="line">[Desktop Action NewWindows]</span><br><span class="line">Name=New Window</span><br><span class="line">Exec=/opt/marktext/marktext-x86_64.AppImage %F</span><br><span class="line">Icon=/opt/marktext/marktext.png</span><br></pre></td></tr></table></figure>
+<ul>
+<li>添加桌面快捷方式<br>如果想要在菜单中显示快捷方式，可以将这个文件复制到<strong>/usr/share/applications</strong>目录下<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp marktext.destop /usr/share/applications</span><br></pre></td></tr></table></figure>
+进入defaults.list，添加一行代码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/applications</span><br><span class="line">sudo gedit defaults.list</span><br><span class="line">在最后一行添加：text/markdown=marktext.desktop</span><br></pre></td></tr></table></figure>
+就可以搜索到marktext快捷方式了。<br>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46825740/article/details/129861437">ubuntu篇—-下载安装开源markdown编辑器MarkText</a></li>
+</ul>
+<h1 id="2-ubuntu16-04-安装Chrome"><a href="#2-ubuntu16-04-安装Chrome" class="headerlink" title="2. ubuntu16.04 安装Chrome"></a>2. ubuntu16.04 安装Chrome</h1><p>参考博客：<a target="_blank" rel="noopener" href="https://www.itcoder.tech/posts/how-to-install-google-chrome-web-browser-on-ubuntu-20-04/">如何在 Ubuntu 20.04 上安装 Google Chrome 网络浏览器</a></p>
+<h1 id="3-ubuntu16-04-安装matlab"><a href="#3-ubuntu16-04-安装matlab" class="headerlink" title="3. ubuntu16.04 安装matlab"></a>3. ubuntu16.04 安装matlab</h1><p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/flyfrommath/article/details/53148455">Ubuntu Linux下安装matlab及创建快捷方式</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36477562/article/details/95103549?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-2.no_search_link">ubuntu下安装matlab</a></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu16.04</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">软件安装</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E4%B8%80/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ubuntu16.04安装Pycharm和Anaconda3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1476,106 +1580,9 @@ Wahr et al.(2015)对极潮漂移的修正。
 
 
   
-    <article id="post-测试文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/07/23/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" target="_blank">测试文章</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/07/23/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" class="archive-article-date">
-        <time datetime="2023-07-23T12:41:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>这是一篇测试文章<br><img src="/2023/07/23/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.jpg" class="" title="图片引用方法一"></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">原创</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/测试//" class="article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/07/23/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1840,6 +1847,18 @@ Wahr et al.(2015)对极潮漂移的修正。
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ubuntu16.04</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WRF-Hydro</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">tooklkit</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">netCDF</a>
               </li>
             
             <div class="clearfix"></div>
