@@ -1,0 +1,29 @@
+#mk_diff_2d的分步，用循环处理，需要更改脚本中的参考影像日期和视距比
+reference=20181229
+reference_mli_par=rmli/$reference.mli.par
+reference_slc_par=$reference.slc.par
+slc_range_samples=`grep range_samples: $reference_slc_par | awk '{print $2}'`
+mli_range_samples=`grep range_samples: $reference_mli_par | awk '{print $2}'`
+# 可在括号内定义生成干涉对的起始位置和终点位置，位置确定可查看文件bperp_file文件中的行号进行确定
+for i in {205..602};do
+echo $i > tmp
+awk '{print "sed -n "$1"p bperp_file > bperp_file1"}' tmp > ttmp
+bash ttmp
+awk '{print ""$2" "$3""}' bperp_file1 > date
+
+touch diff_dir/off_par.in
+touch diff_dir/diff_par.in
+echo -ne "\n0 0\n32 32\n256 256\n7" > diff_dir/diff_par.in
+echo -ne "\n0 0\n32 32\n256 256\n6 \n6 \n$slc_range_samples" > diff_dir/off_par.in
+
+awk '{print "create_offset "$1".slc.par "$2".slc.par diff_dir/"$1"_"$2".off 1 20 4 < diff_dir/off_par.in"}' date > DIFF_bash
+awk '{print "base_orbit "$1".slc.par "$2".slc.par diff_dir/"$1"_"$2".base"}' date >> DIFF_bash
+awk '{print "create_diff_par diff_dir/"$1"_"$2".off - diff_dir/"$1"_"$2".diff_par 0 < diff_dir/diff_par.in"}' date >> DIFF_bash
+awk '{print "phase_sim "$1".slc.par diff_dir/"$1"_"$2".off diff_dir/"$1"_"$2".base dem/fine_rdc.seg.dem diff_dir/"$1"_"$2".sim_unw 0 0 - 12 1"}' date >> DIFF_bash
+awk '{print "SLC_diff_intf "$1".slc "$2".slc "$1".slc.par "$2".slc.par diff_dir/"$1"_"$2".off diff_dir/"$1"_"$2".sim_unw diff_dir/"$1"_"$2".diff 20 4 1 1"}' date >> DIFF_bash
+awk '{print "rasmph_pwr diff_dir/"$1"_"$2".diff rmli/rmli.ave '"$mli_range_samples"' 1 1 0 1 1 0.7 0.35 "}' date >> DIFF_bash
+awk '{print "cc_wave diff_dir/"$1"_"$2".diff rmli/"$1".mli rmli/"$2".mli diff_dir/"$1"_"$2".cc '"$mli_range_samples"' 3 3 1"}' date >> DIFF_bash
+awk '{print "rascc diff_dir/"$1"_"$2".cc rmli/rmli.ave '"$mli_range_samples"' 1 1 0  1 1 .1 .9 0.7 0.35"}' date >> DIFF_bash
+rm tmp ttmp bperp_file1 date
+bash DIFF_bash
+done

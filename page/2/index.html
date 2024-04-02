@@ -244,6 +244,117 @@
             
 
   
+    <article id="post-在ubuntu16.04中使用conda安装gdal-osgeo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/" target="_blank">在ubuntu16.04中使用conda安装gdal/osgeo</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/" class="archive-article-date">
+        <time datetime="2023-09-30T15:28:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-30</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="ubuntu16-04"><a href="#ubuntu16-04" class="headerlink" title="ubuntu16.04"></a>ubuntu16.04</h1><h2 id="ubuntu安装gdal程序"><a href="#ubuntu安装gdal程序" class="headerlink" title="ubuntu安装gdal程序"></a>ubuntu安装gdal程序</h2><p>打开终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gdal-bin libgdal-dev</span><br></pre></td></tr></table></figure><br>检测是否安装成功，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdal-config --version</span><br></pre></td></tr></table></figure><br>打印版本号表示安装成功。</p>
+<h2 id="conda-安装GDAL"><a href="#conda-安装GDAL" class="headerlink" title="conda 安装GDAL"></a>conda 安装GDAL</h2><h3 id="方法一：命令安装"><a href="#方法一：命令安装" class="headerlink" title="方法一：命令安装"></a>方法一：命令安装</h3><p> (1) 更新源<br>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43287414/article/details/108791177">Ubuntu20.04中关于conda下载包速度慢或者失败的问题</a>更新conda源。</p>
+<p> (2) 激活conda环境，查找可用GDAL包<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source activate licsbas</span><br><span class="line">conda search gdal</span><br></pre></td></tr></table></figure><br> 我的conda环境名为licsbas，python=3.6，因此可选择安装gdal=3.0.2的包。</p>
+ <img src="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" class="">
+<p>使用安装命令进行安装。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install gdal=3.0.2</span><br></pre></td></tr></table></figure></p>
+<p> (3)查看是否安装成功<br> 打开终端，激活环境，输入以下内容<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line">print(gdal)</span><br></pre></td></tr></table></figure><br> 显示gdal路径则表示安装成功。</p>
+ <img src="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20231001153952.jpg" class="">
+<p>（4）查看库所在安装路径<br>通常存放在 <code>/home/root123/anaconda3/envs/licsbas/lib/python3.6/site-package</code> 路径下，路径中的 <code>licsbas</code>为虚拟环境名，<code>python3.6</code> 因为你安装的python版本不同而不同，<code>root123</code> 为用户名。采用 <a href="https://singyutang.github.io/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/">ubuntu16.04安装Pycharm和Anaconda3</a> 中的方法默认安装anaconda在 <code>/home</code> 目录下。</p>
+<img src="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20231001154025.jpg" class="">
+<h2 id="方法二：下载安装包-命令进行安装"><a href="#方法二：下载安装包-命令进行安装" class="headerlink" title="方法二：下载安装包+命令进行安装"></a>方法二：下载安装包+命令进行安装</h2><p> (1) 激活conda环境，查找可用GDAL包<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source activate licsbas</span><br><span class="line">conda search gdal</span><br></pre></td></tr></table></figure><br> 我的conda环境名为licsbas，python=3.6，因此可选择安装gdal=3.0.2的包。</p>
+<p> (2)使用<a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple/GDAL/">python第三方库清华镜像网站</a>下载适合版本的安装包。<br> <img src="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20231001160745.png" class=""></p>
+<p>（3）解压后，文件夹内有一个<code>README.rst</code>，按照该文件中的安装教程进行安装（我使用第一种方法成功了，就没有采用第二种方法）。</p>
+<h2 id="方法三：直接下载包文件-复制到指定文件夹"><a href="#方法三：直接下载包文件-复制到指定文件夹" class="headerlink" title="方法三：直接下载包文件+复制到指定文件夹"></a>方法三：直接下载包文件+复制到指定文件夹</h2><p> （1）直接下载<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/linux-64/">清华大学开源软件站</a>中的GDAL包，以GDAL3.0.2+python3.6为例，下载<code>gdal-3.0.2-py36hbb2a789_0.tar.bz2</code>包。注意最后一个数字为0的 tar.bz2 包，这个包和方法一中使用命令安装的包完全一样。<br><img src="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20231001162100.png" class=""></p>
+<p>（2）解压后，将文件目录 <code>.\gdal-3.0.2-py36hbb2a789_0\lib\python3.6\site-packages\</code> 下的所有文件复制到 conda虚拟环境下的 <code>site-packages</code> 下即可。如不知道 <code>site-packages</code> 的具体位置，可参照方法一（4）。<br><img src="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20231001162801.png" class=""></p>
+<p>（3）复制完成后，即可使用。</p>
+<h1 id="Windows10"><a href="#Windows10" class="headerlink" title="Windows10"></a>Windows10</h1><p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44467482/article/details/123851372">python01_第三方库安装gdal/osgeo</a></p>
+<h1 id="参考博客和网站"><a href="#参考博客和网站" class="headerlink" title="参考博客和网站"></a>参考博客和网站</h1><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/linux-64/">清华大学开源软件站</a><br><a target="_blank" rel="noopener" href="http://download.osgeo.org/gdal/">osgeo.ogr</a><br><a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple/">python第三方库清华镜像网站</a><br><a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal">非官方python第三方扩展包-Windows</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43542987/article/details/115455043">Ubuntu系统osgeo+gdal安装集合贴</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/61696526">pip 或 conda 安装第三方库超时（Read timed out）问题</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44467482/article/details/123851372">python01_第三方库安装gdal/osgeo</a></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu16.04</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Anaconda</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">gdal</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ubuntu16.04安装一些常用软件一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1493,93 +1604,6 @@ Wahr et al.(2015)对极潮漂移的修正。
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2023/07/24/hello-world/" target="_blank">Hello World</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2023/07/24/hello-world/" class="archive-article-date">
-        <time datetime="2023-07-23T19:21:39.575Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2023/07/24/hello-world/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1859,6 +1883,10 @@ Wahr et al.(2015)对极潮漂移的修正。
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">netCDF</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">GAMMA</a>
               </li>
             
             <div class="clearfix"></div>
