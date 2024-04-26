@@ -20,27 +20,28 @@
   <title>在ubuntu16.04中安装r和wrf-hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一 | SingyuTang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="toolkitUbuntu16.04WRF-HydroGDALrwrfhydroR" />
+  <meta name="keywords" content="toolkitUbuntu16.04GDALrwrfhydroRWRF-Hydro5.2.0question" />
   
   
   
   
-  <meta name="description" content="安装R包devtools出现错误，无法安装ragg,profvis,textshaping包将这些R包分开进行安装，将缺失的依赖一一找到并进行安装。 1234install.packages(&quot;ragg&quot;)install.packages(&quot;profvis&quot;)install.packages(&quot;textshaping&quot;) 可能遇到的详细安">
+  <meta name="description" content="前言基于WRF-Hydro包计算河道流量，整理好所需要的准备配置文件（hydro.namelist和namelist.hrldas）和数据后，需要使用命令mpirun -np 8 .&#x2F;wrf_hydro.exe运行计算最终结果，结果变量详细介绍可查看WRF-Hydro v5.2 Output Variable Matrix，对于输出结果可视化可使用rwrfhydro工具，该工具是基于R语言进行编写">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Ubuntu16.04中安装R和WRF-Hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一">
 <meta property="og:url" content="https://singyutang.github.io/2024/04/23/%E5%9C%A8Ubuntu16-04%E4%B8%AD%E5%AE%89%E8%A3%85R%E5%92%8CWRF-Hydro%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7%E7%AE%B1rwrfhydro%E6%97%B6%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E4%B8%80/index.html">
 <meta property="og:site_name" content="SingyuTang">
-<meta property="og:description" content="安装R包devtools出现错误，无法安装ragg,profvis,textshaping包将这些R包分开进行安装，将缺失的依赖一一找到并进行安装。 1234install.packages(&quot;ragg&quot;)install.packages(&quot;profvis&quot;)install.packages(&quot;textshaping&quot;) 可能遇到的详细安">
+<meta property="og:description" content="前言基于WRF-Hydro包计算河道流量，整理好所需要的准备配置文件（hydro.namelist和namelist.hrldas）和数据后，需要使用命令mpirun -np 8 .&#x2F;wrf_hydro.exe运行计算最终结果，结果变量详细介绍可查看WRF-Hydro v5.2 Output Variable Matrix，对于输出结果可视化可使用rwrfhydro工具，该工具是基于R语言进行编写">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-23T03:00:25.000Z">
-<meta property="article:modified_time" content="2024-04-23T03:43:41.554Z">
+<meta property="article:modified_time" content="2024-04-26T02:26:50.175Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="toolkit">
 <meta property="article:tag" content="Ubuntu16.04">
-<meta property="article:tag" content="WRF-Hydro">
 <meta property="article:tag" content="GDAL">
 <meta property="article:tag" content="rwrfhydro">
 <meta property="article:tag" content="R">
+<meta property="article:tag" content="WRF-Hydro5.2.0">
+<meta property="article:tag" content="question">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
@@ -211,7 +212,8 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="安装R包devtools出现错误，无法安装ragg-profvis-textshaping包"><a href="#安装R包devtools出现错误，无法安装ragg-profvis-textshaping包" class="headerlink" title="安装R包devtools出现错误，无法安装ragg,profvis,textshaping包"></a>安装R包devtools出现错误，无法安装ragg,profvis,textshaping包</h1><p>将这些R包分开进行安装，将缺失的依赖一一找到并进行安装。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基于WRF-Hydro包计算河道流量，整理好所需要的准备配置文件（hydro.namelist和namelist.hrldas）和数据后，需要使用命令<code>mpirun -np 8 ./wrf_hydro.exe</code>运行计算最终结果，结果变量详细介绍可查看<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/outputvariablematrix-v5.2.0.pdf">WRF-Hydro v5.2 Output Variable Matrix</a>，对于输出结果可视化可使用<a target="_blank" rel="noopener" href="https://github.com/NCAR/rwrfhydro​">rwrfhydro</a>工具，该工具是基于R语言进行编写，如果使用需要在ubuntu中配置R环境，这里将在配置R环境以及安装rwrfhydro工具时可能会出现的一些问题进行简单的汇总。</p>
+<h1 id="安装R包devtools出现错误，无法安装ragg-profvis-textshaping包"><a href="#安装R包devtools出现错误，无法安装ragg-profvis-textshaping包" class="headerlink" title="安装R包devtools出现错误，无法安装ragg,profvis,textshaping包"></a>安装R包devtools出现错误，无法安装ragg,profvis,textshaping包</h1><p>将这些R包分开进行安装，将缺失的依赖一一找到并进行安装。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">install.packages(&quot;ragg&quot;)</span><br><span class="line">install.packages(&quot;profvis&quot;)</span><br><span class="line">install.packages(&quot;textshaping&quot;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>可能遇到的详细安装报错信息查看下文。</p>
 <h1 id="安装rwrfhydro包提示GDAL版本低于2-0-1，需要更新"><a href="#安装rwrfhydro包提示GDAL版本低于2-0-1，需要更新" class="headerlink" title="安装rwrfhydro包提示GDAL版本低于2.0.1，需要更新"></a>安装rwrfhydro包提示GDAL版本低于2.0.1，需要更新</h1><p>参考博客<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/447664123">Ubuntu 安装 GDAL 2.1</a>进行更新，具体操作如下。</p>
@@ -232,6 +234,7 @@ var themeMenus = {};
 <p>解决方法：安装该R包所需要的相关依赖和库，可通过查看报错信息找到必须的库进行安装。我的系统为Ubuntu系统，因此选择安装deb包进行安装。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libharfbuzz-dev libfribidi-dev</span><br></pre></td></tr></table></figure>
 <h1 id="安装R包profvis配置错误"><a href="#安装R包profvis配置错误" class="headerlink" title="安装R包profvis配置错误"></a>安装R包profvis配置错误</h1><p>报错信息与安装R包textshaping相同，可参照安装R包textshaping时的解决方案进行修改。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>rwrfhydro在使用中脚本有诸多限制，可能会出现较多问题，且利用R语言进行地学制图美观性较差，绘图建议使用<a target="_blank" rel="noopener" href="https://www.ncl.ucar.edu/Download/">NCL</a>，可视化可使用<a target="_blank" rel="noopener" href="https://downloads.unidata.ucar.edu/idv/">IDV</a>或<a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/">Panoply</a></p>
 
       
     </div>
@@ -242,7 +245,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R/" rel="tag">R</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R/" rel="tag">R</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/question/" rel="tag">question</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li></ul>
 
       
         <div id="donation_div"></div>
@@ -292,10 +295,19 @@ var a = new Donate({
     
 <nav id="article-nav">
   
+    <a href="/2024/04/26/%E4%BD%BF%E7%94%A8WRF-Hydro%E9%A2%84%E6%B5%8B%E6%B2%B3%E9%81%93%E6%B5%81%E9%87%8F%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3%E6%95%B4%E7%90%86%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          使用WRF-Hydro预测河道流量入门学习文档整理一
+        
+      </div>
+    </a>
+  
   
     <a href="/2024/04/03/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85WRF-Hydro-GIS-Pre-Processing-Tools5-2-0/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">如何在ubuntu16.04上安装WRF Hydro GIS Pre-Processing Tools5.2.0</div>
+      <div class="article-nav-title">安装使用WRF Hydro GIS Pre-Processing Tools5.2.0</div>
     </a>
   
 </nav>
@@ -309,7 +321,7 @@ var a = new Donate({
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85devtools%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%EF%BC%8C%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85ragg-profvis-textshaping%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">安装R包devtools出现错误，无法安装ragg,profvis,textshaping包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85rwrfhydro%E5%8C%85%E6%8F%90%E7%A4%BAGDAL%E7%89%88%E6%9C%AC%E4%BD%8E%E4%BA%8E2-0-1%EF%BC%8C%E9%9C%80%E8%A6%81%E6%9B%B4%E6%96%B0"><span class="nav-number">2.</span> <span class="nav-text">安装rwrfhydro包提示GDAL版本低于2.0.1，需要更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85raster%E6%8A%A5%E9%94%99C-17"><span class="nav-number">3.</span> <span class="nav-text">安装R包raster报错C++17</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ragg%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">4.</span> <span class="nav-text">安装R包ragg配置错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ggmap%E6%8A%A5%E9%94%99dependency-png%E2%80%99-isnot-available-for-package-%E2%80%98ggmap%E2%80%99"><span class="nav-number">5.</span> <span class="nav-text">安装R包ggmap报错dependency png’ isnot available for package ‘ggmap’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ggmap%E6%8F%90%E7%A4%BAlibpng16-so-16%EF%BC%9A%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E5%85%B1%E4%BA%AB%E5%AF%B9%E8%B1%A1%E6%96%87%E4%BB%B6-%E6%B2%A1%E6%9C%89%E9%82%A3%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="nav-number">6.</span> <span class="nav-text">安装R包ggmap提示libpng16.so.16：无法打开共享对象文件: 没有那个文件或目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85textshaping%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">7.</span> <span class="nav-text">安装R包textshaping配置错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85profvis%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">8.</span> <span class="nav-text">安装R包profvis配置错误</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85devtools%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%EF%BC%8C%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85ragg-profvis-textshaping%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">安装R包devtools出现错误，无法安装ragg,profvis,textshaping包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85rwrfhydro%E5%8C%85%E6%8F%90%E7%A4%BAGDAL%E7%89%88%E6%9C%AC%E4%BD%8E%E4%BA%8E2-0-1%EF%BC%8C%E9%9C%80%E8%A6%81%E6%9B%B4%E6%96%B0"><span class="nav-number">3.</span> <span class="nav-text">安装rwrfhydro包提示GDAL版本低于2.0.1，需要更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85raster%E6%8A%A5%E9%94%99C-17"><span class="nav-number">4.</span> <span class="nav-text">安装R包raster报错C++17</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ragg%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">5.</span> <span class="nav-text">安装R包ragg配置错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ggmap%E6%8A%A5%E9%94%99dependency-png%E2%80%99-isnot-available-for-package-%E2%80%98ggmap%E2%80%99"><span class="nav-number">6.</span> <span class="nav-text">安装R包ggmap报错dependency png’ isnot available for package ‘ggmap’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ggmap%E6%8F%90%E7%A4%BAlibpng16-so-16%EF%BC%9A%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E5%85%B1%E4%BA%AB%E5%AF%B9%E8%B1%A1%E6%96%87%E4%BB%B6-%E6%B2%A1%E6%9C%89%E9%82%A3%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="nav-number">7.</span> <span class="nav-text">安装R包ggmap提示libpng16.so.16：无法打开共享对象文件: 没有那个文件或目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85textshaping%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">8.</span> <span class="nav-text">安装R包textshaping配置错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85profvis%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">9.</span> <span class="nav-text">安装R包profvis配置错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">10.</span> <span class="nav-text">后记</span></a></li></ol>
     
     </div>
   </aside>
