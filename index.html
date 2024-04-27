@@ -212,14 +212,20 @@ var themeMenus = {};
 <h1 id="3-工具包模块功能介绍与使用教程"><a href="#3-工具包模块功能介绍与使用教程" class="headerlink" title="3. 工具包模块功能介绍与使用教程"></a>3. 工具包模块功能介绍与使用教程</h1><p>本章内容主要是对以上内容中提到的工具包说明文档以及使用教程的分享，并简单介绍处理流程。</p>
 <ol>
 <li><p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wps.html#">在线WPS用户指南-The WRF Preprocessing System (WPS)模块功能详细介绍与运行</a></p>
-<p> 该教程中主要展示了如何利用WPS得到WRF-Hydro工具包中所需要的`</p>
+<p> 该教程中主要展示了如何利用WPS得到WRF-Hydro工具包中所需要的<code>geo_em.d*.nc</code>文件和<code>met_em.d*</code>文件。<code>geo_em.d*.nc</code>是WRFHydro_GIS_Preprocessor工具包处理所必要的文件，<code>met_em.d*</code>文件是WRF工具包生成<code>wrfinput_d*</code>的必要文件。<code>wrfinput_d*</code>文件是WRFHydro_GIS_Preprocessor工具包处理所必要的文件。WPS主要需要修改的配置文件为”namelist.wps”。</p>
+<p> WPS所必要的数据包括Static Geographical Data和Grided Meteorological Data两种数据文件，可通过查看<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/#7-%E9%9D%99%E6%80%81%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE">个人博客-静态地理数据</a>和<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/#8-%E5%AE%9E%E6%97%B6%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE">个人博客-GFS实时气象数据</a>进行下载。</p>
+<p> 关于WPS详细模块和功能介绍可点击上面链接进行查看，这里将其目录截图进行展示。<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/wrf-hydrov5.2technicaldescription.pdf">wrf-hydrov5.2用户手册</a>在第 5.2节 <em>Domain processing and description of surface physiographic input files</em>也作了简单运行流程介绍。</p>
+ <img src="/2024/04/26/%E4%BD%BF%E7%94%A8WRF-Hydro%E9%A2%84%E6%B5%8B%E6%B2%B3%E9%81%93%E6%B5%81%E9%87%8F%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3%E6%95%B4%E7%90%86%E4%B8%80/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240427160029.png" class="">
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/running_wrf.html">在线WRF用户指南-WRF运行详细步骤与说明</a></p>
-<p> 确保在运行WRF前进行<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/initialization.html">编译</a>。</p>
+<p> 该教程只介绍WRF在河道流量中使用到的处理流程，确保在运行WRF前进行<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/initialization.html">编译</a>。在WRF的处理流程中，主要会使用到WPS处理结果中<code>met_em.*</code>文件，然后利用<code>real.exe</code>程序生成<code>WRFHydro_GIS_Preprocessor</code>工具将会使用的 <code>wrfinput_d0*</code>文件，当然该文件也可通过R程序<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/create_wrfinput.zip">create_wrfinput.R</a>生成。WRF中主要修改的配置文件为”namelist.wps”和”namelist.input”。<em>注意修改WRF中的配置文件时要和WPS中的配置文件参数相对应。</em></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_arcgis_preprocessor/releases/download/5.2.0/WRFHydro_GIS_Preprocessor_v5_2_0.pdf">WRFHydro_GIS_Preprocessor_v5_2_0 pdf版本学习教程</a></p>
-<p> 该教程</p>
+<p> 该实用程序旨在帮助用户使用ArcGIS Pro软件创建 WRF-Hydro routing grids。文档中详细介绍了模块的功能、、数据介绍、操作流程、文件输入、文件输出、输入文件和输出文件的详细介绍及使用到的参数说明等。<br> 程序所需的必备文件输入为WPS中的输出”geo_em.d<em>.nc”和高程文件，高程文件主要使用<a target="_blank" rel="noopener" href="https://www.hydrosheds.org/hydrosheds-core-downloads">HydroSHEDS</a>中的Void-filled DEM产品。输出文件包含”Fulldom_hires.nc”、”GEOGRID_LDASOUT_Spatial_Metadata.nc”、”GWBASINS.nc”、”LAKEPARM.nc”、”Route_Link.nc”、”Streams.</em>“等，有关的文件说明和变量介绍在文档中有详细介绍。</p>
 </li>
+</ol>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/wrf-hydrov5.2technicaldescription.pdf">WRF-HydroV5.2.0TechnicalDescription pdf</a></li>
 </ol>
 <h1 id="4-后记"><a href="#4-后记" class="headerlink" title="4. 后记"></a>4. 后记</h1><p>本文档中分享的内容尚不完整，后续将根据实际处理进行不断完善。</p>
 
