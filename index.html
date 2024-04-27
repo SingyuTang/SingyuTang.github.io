@@ -199,7 +199,7 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>这篇文档主要是针对WRF-Hydro计算河道流量相关流程中可能使用到的工具、学习文档、使用教程进行一些汇总和梳理，其最终目的为获取河道流量及其相关变量。</p>
+        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>这篇文档主要是针对WRF-Hydro计算河道流量（Standalone Mode下）相关流程中可能使用到的工具、学习文档、使用教程进行一些汇总和梳理，其最终目的为获取河道流量及其相关变量。</p>
 <h1 id="2-软件下载、安装和编译"><a href="#2-软件下载、安装和编译" class="headerlink" title="2. 软件下载、安装和编译"></a>2. 软件下载、安装和编译</h1><p>本章主要介绍相关工具包的下载、安装与编译的文档与教程分享。</p>
 <h2 id="2-1-WRF4-5-2和WPS4-5-0下载、安装与编译"><a href="#2-1-WRF4-5-2和WPS4-5-0下载、安装与编译" class="headerlink" title="2.1 WRF4.5.2和WPS4.5.0下载、安装与编译"></a>2.1 WRF4.5.2和WPS4.5.0下载、安装与编译</h2><p>可通过结合下面两个链接查看WRF和WPS的下载安装与编译。</p>
 <p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php">在线官方教程-How to Compile WRF:The Complete Process</a></p>
@@ -209,7 +209,7 @@ var themeMenus = {};
 <h2 id="2-3-WRF-Hydro-GIS-Pre-Processing-Tools5-2-0下载、安装"><a href="#2-3-WRF-Hydro-GIS-Pre-Processing-Tools5-2-0下载、安装" class="headerlink" title="2.3 WRF Hydro GIS Pre-Processing Tools5.2.0下载、安装"></a>2.3 WRF Hydro GIS Pre-Processing Tools5.2.0下载、安装</h2><p>详细安装已在个人博客中进行介绍，可点击下面链接进行查看下载、安装与编译，该工具包支持的ArCGIS Pro的版本也在博客中提供，可点击下面的博客链接跳转进行下载。这里也给出了WRF-Hydro ArcGIS Pre-processing Tools Version v5.2.0的工具包下载链接。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_arcgis_preprocessor/archive/refs/tags/5.2.0.tar.gz">WRF-Hydro ArcGIS Pre-processing Tools Version v5.2.0 release tar.gz压缩包下载</a></p>
 <p><a href="https://singyutang.github.io/2024/04/03/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85WRF-Hydro-GIS-Pre-Processing-Tools5-2-0/">个人博客-安装使用WRF Hydro GIS Pre-Processing Tools5.2.0</a></p>
-<h1 id="3-工具包模块功能介绍与使用教程"><a href="#3-工具包模块功能介绍与使用教程" class="headerlink" title="3. 工具包模块功能介绍与使用教程"></a>3. 工具包模块功能介绍与使用教程</h1><p>本章内容主要是对以上内容中提到的工具包说明文档以及使用教程的分享，并简单介绍处理流程。</p>
+<h1 id="3-工具包模块功能介绍与使用教程"><a href="#3-工具包模块功能介绍与使用教程" class="headerlink" title="3. 工具包模块功能介绍与使用教程"></a>3. 工具包模块功能介绍与使用教程</h1><p>本章内容主要是对以上内容中提到的工具包说明文档以及使用教程的分享，并简单介绍处理流程。下面将根据工具包的使用顺序进行依次介绍。注意：本章内容都是基于WRF-Hydro在Standalone Mode下运行，使用Noah-MP陆地表面模型。</p>
 <p>1.<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wps.html#">在线WPS用户指南-The WRF Preprocessing System (WPS)模块功能详细介绍与运行</a></p>
 <p>该教程中主要展示了如何利用WPS得到WRF-Hydro工具包中所需要的<code>geo_em.d*.nc</code>文件和<code>met_em.d*</code>文件。<code>geo_em.d*.nc</code>是WRFHydro_GIS_Preprocessor工具包处理所必要的文件，<code>met_em.d*</code>文件是WRF工具包生成<code>wrfinput_d*</code>的必要文件。<code>wrfinput_d*</code>文件是WRFHydro_GIS_Preprocessor工具包处理所必要的文件。WPS主要需要修改的配置文件为”namelist.wps”。</p>
 <p>WPS所必要的数据包括Static Geographical Data和Grided Meteorological Data两种数据文件，可通过查看<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/#7-%E9%9D%99%E6%80%81%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE">个人博客-静态地理数据</a>和<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/#8-%E5%AE%9E%E6%97%B6%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE">个人博客-GFS实时气象数据</a>进行下载。</p>
@@ -221,7 +221,7 @@ var themeMenus = {};
 <p>该实用程序旨在帮助用户使用ArcGIS Pro软件创建 WRF-Hydro routing grids。文档中详细介绍了模块的功能、、数据介绍、操作流程、文件输入、文件输出、输入文件和输出文件的详细介绍及使用到的参数说明等。</p>
 <p>程序所需的必备文件输入为WPS中的输出”geo_em.d<em>.nc”和高程文件，高程文件主要使用<a target="_blank" rel="noopener" href="https://www.hydrosheds.org/hydrosheds-core-downloads">HydroSHEDS</a>中的Void-filled DEM产品。输出文件包含”Fulldom_hires.nc”、”GEOGRID_LDASOUT_Spatial_Metadata.nc”、”GWBASINS.nc”、”LAKEPARM.nc”、”Route_Link.nc”、”Streams.</em>“等，有关的文件说明和变量介绍在文档中有详细介绍。</p>
 <p>4.<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/wrf-hydrov5.2technicaldescription.pdf">WRF-HydroV5.2.0TechnicalDescription pdf</a></p>
-<p>本文档主要介绍WR-Hydro中各模块的功能介绍，对于处理流程的介绍较为简略，但对于每个配置文件的设置，每个参数的含义都有详细介绍和说明。如果想要了解和学习WRF-Hydro的详细操作流程和演示，请参照howtobuildrunwrfhydrov511instandalonemode.pdf和wrf-hydrov511testcaseuserguide.pdf</p>
+<p>本文档主要介绍WR-Hydro中各模块的功能介绍，对于处理流程的介绍较为简略，但对于每个配置文件的设置，每个参数的含义都有详细介绍和说明。如果想要了解和学习WRF-Hydro的详细操作流程和演示（独立模式，standalone mode），请参照<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">howtobuildrunwrfhydrov511instandalonemode.pdf</a>和<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">wrf-hydrov511testcaseuserguide.pdf</a></p>
 <p>5.<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">如何在独立模式下构建和运行 WRF-Hydro 5.1.1</a></p>
 <p>该文档仍然支持WRF-Hydro v5.2.0的学习。该文档用于对示例测试用例的引导，旨在引导您使用准备好的地理输入以及为特定区域（域）准备的强迫数据来运行 WRF-Hydro 建模系统。我们提供<a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_nwm_public/releases/download/v5.2.0/croton_NY_training_example_v5.2.tar.gz">测试数据</a>来测试您的 WRF-Hydro 可执行文件是否已正确编译并能够在您的系统上运行。</p>
 <p> <em>注意：这里提供的测试数据为在独立模式（Standalone Mode）下运行WRF-Hydro。</em></p>
