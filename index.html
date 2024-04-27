@@ -225,9 +225,39 @@ var themeMenus = {};
 </li>
 </ol>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/wrf-hydrov5.2technicaldescription.pdf">WRF-HydroV5.2.0TechnicalDescription pdf</a></li>
+<li><p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/wrf-hydrov5.2technicaldescription.pdf">WRF-HydroV5.2.0TechnicalDescription pdf</a></p>
+<p> 本文档主要介绍WR-Hydro中各模块的功能介绍，对于处理流程的介绍较为简略，但对于每个配置文件的设置，每个参数的含义都有详细介绍和说明。如果想要了解和学习WRF-Hydro的详细操作流程和演示，请参照howtobuildrunwrfhydrov511instandalonemode.pdf和wrf-hydrov511testcaseuserguide.pdf</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">如何在独立模式下构建和运行 WRF-Hydro 5.1.1</a></p>
+<p> 该文档仍然支持WRF-Hydro v5.2.0的学习。该文档用于对示例测试用例的引导，旨在引导您使用准备好的地理输入以及为特定区域（域）准备的强迫数据来运行 WRF-Hydro 建模系统。我们提供<a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_nwm_public/releases/download/v5.2.0/croton_NY_training_example_v5.2.tar.gz">测试数据</a>来测试您的 WRF-Hydro 可执行文件是否已正确编译并能够在您的系统上运行。</p>
+<p> <em>注意：这里提供的测试数据为在独立模式（Standalone Mode）下运行WRF-Hydro。</em></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">WRF-Hydro V5.1.1 独立测试用例用户指南</a></p>
+<p> 该文档仍然支持WRF-Hydro v5.2.0的学习。文档旨在利用示例测试用例指导完成 WRF-Hydro 模型构建过程，然后指导您完成创建自定义地理输入和强制数据与 Noah-MP 陆地表面模型一起在独立模式下运行的工作流程。详细目录和工作流程如下图所示。</p>
+<p> 该文档介绍了WRF-Hydro如下内容：</p>
+<p>  （1）WRF-Hydro的编译与运行；</p>
+<p>  （2）WRF-Hydro的所需脚本与必要安装库；</p>
+<p>  （3）WRF-Hydro的案例分享和数据下载；</p>
+<p>  （4）WRF-Hydro的详细工作流程，包含WRF、WPS和WRFHydro_GIS_Preprocessor的数据准备部分；</p>
+<p>  （5）配置文件的必要修改部分注明；</p>
+<p>  （6）WRF-Hydro的输出结果评价，主要是利用<a target="_blank" rel="noopener" href="https://github.com/NCAR/rwrfhydro">rwrfhydro</a>工具进行评价和可视化，但不建议使用这个工具包，受限太多。</p>
+</li>
 </ol>
-<h1 id="4-后记"><a href="#4-后记" class="headerlink" title="4. 后记"></a>4. 后记</h1><p>本文档中分享的内容尚不完整，后续将根据实际处理进行不断完善。</p>
+<pre><code>&#123;% asset_img 微信截图_20240427171943.png %&#125;
+&#123;% asset_img 微信截图_20240427172458.png %&#125;
+</code></pre><ol>
+<li><p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/outputvariablematrix-v5.2.0.pdf">WRF-Hydro v5.2 Output Variable Matrix pdf</a></p>
+<p> 该文档详细介绍了WRF-Hydro程序运行输出后的各文件以及变量，包含对于所有文件中变量的详细介绍，有不清楚的可进行下载查看。</p>
+</li>
+<li><p>其他文档</p>
+</li>
+</ol>
+<p>以下v5.1.1版本的文档皆可用于v5.2.0的学习。</p>
+<p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildandrunwrfhydrov511coupledtowrf.pdf">如何构建和运行与 WRF 耦合的 WRF-Hydro V5.1.1</a> 暂不使用</p>
+<p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/wrf-hydrov511testcaseuserguide.pdf">耦合 WRF|WRF-Hydro V5.1.1 测试用例用户指南</a> 暂不使用</p>
+<p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs//noah-mpoptionsindicatorsofusagewithwrfhydronwm.pdf">Noah-MP 名单 选项 WRFHydro v5.1.1/NWM 使用指标</a> NWM暂不使用，但是NOah-MP有需要可进行查看</p>
+<p><a target="_blank" rel="noopener" href="https://data.hydrosheds.org/file/technical-documentation/HydroSHEDS_TechDoc_v1_4.pdf">HydroSHEDS Technical Documentation</a></p>
+<h1 id="4-后记"><a href="#4-后记" class="headerlink" title="4. 后记"></a>4. 后记</h1><p>本文档中分享的内容尚不完整，后续将根据实际处理进行不断完善。关于气象强迫(FORCING)数据的获取以及格式转化等相关整理将于最近进行更新。</p>
 
       
     </div>
@@ -277,7 +307,7 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基于WRF-Hydro包计算河道流量，整理好所需要的准备配置文件（hydro.namelist和namelist.hrldas）和数据后，需要使用命令<code>mpirun -np 8 ./wrf_hydro.exe</code>运行计算最终结果，结果变量详细介绍可查看<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/outputvariablematrix-v5.2.0.pdf">WRF-Hydro v5.2 Output Variable Matrix</a>，对于输出结果可视化可使用<a target="_blank" rel="noopener" href="https://github.com/NCAR/rwrfhydro​">rwrfhydro</a>工具，该工具是基于R语言进行编写，如果使用需要在ubuntu中配置R环境，这里将在配置R环境以及安装rwrfhydro工具时可能会出现的一些问题进行简单的汇总。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基于WRF-Hydro包计算河道流量，整理好所需要的准备配置文件（hydro.namelist和namelist.hrldas）和数据后，需要使用命令<code>mpirun -np 8 ./wrf_hydro.exe</code>运行计算最终结果，结果变量详细介绍可查看<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/outputvariablematrix-v5.2.0.pdf">WRF-Hydro v5.2 Output Variable Matrix</a>，对于输出结果可视化可使用 <a target="_blank" rel="noopener" href="https://github.com/NCAR/rwrfhydro​">rwrfhydro</a> 工具，该工具是基于R语言进行编写，如果使用需要在ubuntu中配置R环境，这里将在配置R环境以及安装rwrfhydro工具时可能会出现的一些问题进行简单的汇总。</p>
 <h1 id="安装R包devtools出现错误，无法安装ragg-profvis-textshaping包"><a href="#安装R包devtools出现错误，无法安装ragg-profvis-textshaping包" class="headerlink" title="安装R包devtools出现错误，无法安装ragg,profvis,textshaping包"></a>安装R包devtools出现错误，无法安装ragg,profvis,textshaping包</h1><p>将这些R包分开进行安装，将缺失的依赖一一找到并进行安装。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">install.packages(&quot;ragg&quot;)</span><br><span class="line">install.packages(&quot;profvis&quot;)</span><br><span class="line">install.packages(&quot;textshaping&quot;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>可能遇到的详细安装报错信息查看下文。</p>
