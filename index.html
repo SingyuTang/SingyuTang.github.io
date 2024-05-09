@@ -199,7 +199,33 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="混淆矩阵"><a href="#混淆矩阵" class="headerlink" title="混淆矩阵"></a>混淆矩阵</h1><h1 id="准确率、精确率、召回率、F1值"><a href="#准确率、精确率、召回率、F1值" class="headerlink" title="准确率、精确率、召回率、F1值"></a>准确率、精确率、召回率、F1值</h1><h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/549835162?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_psn=1771941112158236672&amp;utm_source=wechat_session">知乎-准确率、精确率、召回率、F1值</a></p>
+        <h1 id="混淆矩阵"><a href="#混淆矩阵" class="headerlink" title="混淆矩阵"></a>混淆矩阵</h1><p>混淆矩阵特别用于监督学习。混淆矩阵的每一行的总数代表了预测该类别的个数，每一列的总数表示为该类别的实际数据的数目。<br><img src="image-1.png" alt="alt text"></p>
+<p>TP、FP、FN、TN可以理解为：</p>
+<p>TP：预测为1，实际为1，预测正确。</p>
+<p>FP：预测为1，实际为0，预测错误。</p>
+<p>FN：预测为0，实际为1，预测错误。</p>
+<p>TN：预测为0，实际为0，预测正确。</p>
+<h1 id="准确率、精确率、召回率、F1值"><a href="#准确率、精确率、召回率、F1值" class="headerlink" title="准确率、精确率、召回率、F1值"></a>准确率、精确率、召回率、F1值</h1><ul>
+<li>准确率（Accuracy）：预测正确的结果占总样本的百分比。</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{TP + TN }{TP + FP + FN + TN}</script><ul>
+<li>精确率（Precision）：在被所有预测为正的样本中实际为正样本的概率。</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{TP}{TP + FP}</script><ul>
+<li>召回率（Recall）：在实际为正的样本中被预测为正样本的概率。</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{TP}{TP + FN}</script><p><em>精确率和召回率又被叫做查准率和查全率。</em></p>
+<ul>
+<li>F1分数</li>
+</ul>
+<p>精确率和召回率无法做到双高。因此，选择合适的阈值点，就需要根据实际问题需求，比如我们想要很高的精确率，就要牺牲掉一些召回率。想要得到很高的召回率，就要牺牲掉一些精准率。但通常情况下，我们可以根据他们之间的平衡点，定义一个新的指标：F1分数(F1-Score)。F1分数同时考虑精确率和召回率，让两者同时达到最高，取得平衡。</p>
+<script type="math/tex; mode=display">
+F1分数 = \frac{2*精确率*召回率}{精确率+召回率}</script><h1 id="参考博客771941112158236672-amp-utm-source-wechat-session"><a href="#参考博客771941112158236672-amp-utm-source-wechat-session" class="headerlink" title="参考博客771941112158236672&amp;utm_source=wechat_session)"></a>参考博客771941112158236672&amp;utm_source=wechat_session)</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/549835162?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_psn=1771941112158236672&amp;utm_source=wechat_session">知乎-准确率、精确率、召回率、F1值</a></p>
+<p><a target="_blank" rel="noopener" href="https://easyaitech.medium.com/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%8C%87%E6%A0%87-%E5%87%86%E7%A1%AE%E7%8E%87-%E7%B2%BE%E5%87%86%E7%8E%87-%E5%8F%AC%E5%9B%9E%E7%8E%87-f1-roc%E6%9B%B2%E7%BA%BF-auc%E6%9B%B2%E7%BA%BF-19b1ed9e9260">Medium-一文看懂机器学习指标：准确率、精准率、召回率、F1、ROC曲线、AUC曲线</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.6aiq.com/article/1549986548173">一文让你彻底理解准确率，精准率，召回率，真正率，假正率，ROC/AUC</a></p>
 
       
     </div>
