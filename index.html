@@ -210,7 +210,7 @@ var themeMenus = {};
 </ul>
 <script type="math/tex; mode=display">
 \frac{TP + TN }{TP + FP + FN + TN}</script><ul>
-<li>精确率（Precision）：在被所有预测为正的样本中实际为正样本的概率。</li>
+<li>精确率（Precision）：在被所有预测为正的样本中实际为正样本的概率。，意思就是在预测为正样本的结果中，我们有多少把握可以预测正确。</li>
 </ul>
 <script type="math/tex; mode=display">
 \frac{TP}{TP + FP}</script><ul>
@@ -223,9 +223,33 @@ var themeMenus = {};
 </ul>
 <p>精确率和召回率无法做到双高。因此，选择合适的阈值点，就需要根据实际问题需求，比如我们想要很高的精确率，就要牺牲掉一些召回率。想要得到很高的召回率，就要牺牲掉一些精准率。但通常情况下，我们可以根据他们之间的平衡点，定义一个新的指标：F1分数(F1-Score)。F1分数同时考虑精确率和召回率，让两者同时达到最高，取得平衡。</p>
 <script type="math/tex; mode=display">
-F1分数 = \frac{2*精确率*召回率}{精确率+召回率}</script><h1 id="参考博客771941112158236672-amp-utm-source-wechat-session"><a href="#参考博客771941112158236672-amp-utm-source-wechat-session" class="headerlink" title="参考博客771941112158236672&amp;utm_source=wechat_session)"></a>参考博客771941112158236672&amp;utm_source=wechat_session)</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/549835162?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_psn=1771941112158236672&amp;utm_source=wechat_session">知乎-准确率、精确率、召回率、F1值</a></p>
+F1分数 = \frac{2*精确率*召回率}{精确率+召回率}</script><h1 id="灵敏度，特异度，真正率，假正率"><a href="#灵敏度，特异度，真正率，假正率" class="headerlink" title="灵敏度，特异度，真正率，假正率"></a>灵敏度，特异度，真正率，假正率</h1><ul>
+<li><p>灵敏度（Sensitivity）：灵敏度和召回率是一模一样的，只是名字换了而已。</p>
+<script type="math/tex; mode=display">
+\frac{TP}{TP + FN}</script></li>
+<li><p>特异度（Specificity）: </p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{TN}{FP + TN}</script><ul>
+<li><p>真正率（TPR）：在实际为正的样本中被预测为正样本的概率。</p>
+<script type="math/tex; mode=display">
+= 灵敏度 = TP/(TP+FN)</script></li>
+<li><p>假正率（FPR）：在实际为负的样本中被预测为正样本的概率。</p>
+<script type="math/tex; mode=display">
+= 1- 特异度 = FP/(FP+TN)</script></li>
+</ul>
+<h1 id="ROC曲线"><a href="#ROC曲线" class="headerlink" title="ROC曲线"></a>ROC曲线</h1><p>ROC（Receiver Operating Characteristic）曲线，又称接受者操作特征曲线。ROC曲线中的主要两个指标就是真正率和假正率， 上面也解释了这么选择的好处所在。其中横坐标为假正率（FPR），纵坐标为真正率（TPR），下面就是一个标准的ROC曲线图。</p>
+<p><img src="da2338e6537043aebce95d5e0e395164.jpg" alt="alt text"></p>
+<p>FPR表示模型虚报的响应程度，而TPR表示模型预测响应的覆盖程度。TPR越高，同时FPR越低（即ROC曲线越陡），那么模型的性能就越好。</p>
+<h1 id="AUC"><a href="#AUC" class="headerlink" title="AUC"></a>AUC</h1><p>曲线下面积（Area Under Curve）。AUC的一般判断标准</p>
+<p>0.5 - 0.7： 效果较低，但用于预测股票已经很不错了</p>
+<p>0.7 - 0.85： 效果一般</p>
+<p>0.85 - 0.95： 效果很好</p>
+<p>0.95 - 1： 效果非常好，但一般不太可能</p>
+<h1 id="参考博客771941112158236672-amp-utm-source-wechat-session"><a href="#参考博客771941112158236672-amp-utm-source-wechat-session" class="headerlink" title="参考博客771941112158236672&amp;utm_source=wechat_session)"></a>参考博客771941112158236672&amp;utm_source=wechat_session)</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/549835162?utm_campaign=shareopn&amp;utm_medium=social&amp;utm_psn=1771941112158236672&amp;utm_source=wechat_session">知乎-准确率、精确率、召回率、F1值</a></p>
 <p><a target="_blank" rel="noopener" href="https://easyaitech.medium.com/%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%8C%87%E6%A0%87-%E5%87%86%E7%A1%AE%E7%8E%87-%E7%B2%BE%E5%87%86%E7%8E%87-%E5%8F%AC%E5%9B%9E%E7%8E%87-f1-roc%E6%9B%B2%E7%BA%BF-auc%E6%9B%B2%E7%BA%BF-19b1ed9e9260">Medium-一文看懂机器学习指标：准确率、精准率、召回率、F1、ROC曲线、AUC曲线</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.6aiq.com/article/1549986548173">一文让你彻底理解准确率，精准率，召回率，真正率，假正率，ROC/AUC</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.6aiq.com/article/1549986548173">AIQ-一文让你彻底理解准确率，精准率，召回率，真正率，假正率，ROC/AUC</a></p>
 
       
     </div>
