@@ -175,6 +175,392 @@ var themeMenus = {};
         
           <section id="main">
   
+    <article id="post-如何在ubuntu16-04上安装编译WRF4-5-2、WRF-hydro5-2-0和WPS4-5-0"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/" class="article-date">
+	  <time datetime="2024-03-17T15:23:07.000Z" itemprop="datePublished">三月 17, 2024</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了方便安装，这里已经搜集了所有教程中可能使用到的数据、软件和所需库，可点击百度网盘分享链接进行下载，这里下载完成后教程后面提到的下载可无需进行再次下载。<br>百度网盘分享链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gdu_VTehi5VX6XXknZMCLw">https://pan.baidu.com/s/1gdu_VTehi5VX6XXknZMCLw</a><br>提取码：rbpn</p>
+<h1 id="1-环境测试"><a href="#1-环境测试" class="headerlink" title="1. 环境测试"></a>1. 环境测试</h1><p>在<code>~/coding</code>文件夹下创建文件夹<code>WRF</code>,进入该文件夹创建两个文件夹，分别为<code>Build_WRF</code>、<code>TESTS</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/coding/WRF</span><br><span class="line"><span class="built_in">mkdir</span> Build_WRF TESTS</span><br><span class="line"><span class="built_in">cd</span> TESTS</span><br></pre></td></tr></table></figure>
+<p>运行一些测试来验证Fortran编译器和C编译器是否可用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install csh gfortran m4 build-essential</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> gfortran</span><br><span class="line"><span class="built_in">which</span> cpp</span><br><span class="line"><span class="built_in">which</span> gcc</span><br><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
+<p>下载测试包<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_tests.tar">Fortran and C Tests Tar File</a></p>
+<p>将测试包解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf Fortran_C_tests.tar</span><br></pre></td></tr></table></figure>
+<p>共有7项测试，请一次一次完成</p>
+<p><strong>Test #1:</strong>  TEST_1_fortran_only_fixed.f  </p>
+<p><em>在命令行输入以下内容:</em>  </p>
+<blockquote>
+<p>gfortran TEST_1_fortran_only_fixed.f</p>
+</blockquote>
+<p><em>现在输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS test 1 fortran only fixed format</p>
+</blockquote>
+<p><strong>Test #2:</strong> TEST_2_fortran_only_free.f90  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gfortran TEST_2_fortran_only_free.f90</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>Assume Fortran 2003: has FLUSH, ALLOCATABLE, derived type, and ISO C Binding<br>SUCCESS test 2 fortran only free format</p>
+</blockquote>
+<p><strong>Test #3:</strong> <u>C</u>: TEST_3_c_only.c  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gcc TEST_3_c_only.c</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS test 3 c only</p>
+</blockquote>
+<p><strong>Test #4:</strong> : TEST_4_fortran+c_c.c, and TEST_4_fortran+x_f.f90  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gcc -c -m64 TEST_4_fortran+c_c.c</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>gfortran -c -m64 TEST_4_fortran+c_f.f90</p>
+</blockquote>
+<p><em>*然后输入:</em></p>
+<blockquote>
+<p>gfortran -m64 TEST_4_fortran+c_f.o TEST_4_fortran+c_c.o</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>SUCCESS test 4 fortran calling c</p>
+</blockquote>
+<p><strong>Test #5:</strong> csh </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_csh.csh</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS csh test</p>
+</blockquote>
+<p><strong>Test #6:</strong> perl</p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_perl.pl</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS perl test</p>
+</blockquote>
+<p><strong>Test #7:</strong> sh</p>
+<p> <em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_sh.sh</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS sh test</p>
+</blockquote>
+<h1 id="2-环境设置"><a href="#2-环境设置" class="headerlink" title="2. 环境设置"></a>2. 环境设置</h1><p>在~/.bashrc中添加以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###################  WRF 4.5.2 + WPS 4.5.0  ############################</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> DIR=/home/root123/coding/WRF/Build_WRF/LIBRARIES</span><br><span class="line"><span class="built_in">export</span> CC=gcc</span><br><span class="line"><span class="built_in">export</span> CXX=g++</span><br><span class="line"><span class="built_in">export</span> FC=gfortran</span><br><span class="line"><span class="built_in">export</span> FCFLAGS=-m64</span><br><span class="line"><span class="built_in">export</span> F77=gfortran</span><br><span class="line"><span class="built_in">export</span> FFLAGS=-m64</span><br><span class="line"><span class="built_in">export</span> LDFLAGS=-L<span class="variable">$DIR</span>/grib2/lib</span><br><span class="line"><span class="built_in">export</span> CPPFLAGS=-I<span class="variable">$DIR</span>/grib2/include</span><br><span class="line"><span class="built_in">export</span> CFLAGS=-m64</span><br><span class="line"><span class="built_in">export</span> JASPERLIB=<span class="variable">$DIR</span>/grib2/lib</span><br><span class="line"><span class="built_in">export</span> JASPERINC=<span class="variable">$DIR</span>/grib2/include</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$DIR</span>/netcdf/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> NETCDF=<span class="variable">$DIR</span>/netcdf/</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$DIR</span>/mpich/bin:<span class="variable">$DIR</span>/mpich/lib:<span class="variable">$DIR</span>/mpich/include:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF</span>:<span class="variable">$NETCDF</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LIBS=<span class="string">&quot;-lnetcdf -lz&quot;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF</span>/lib/:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$NETCDF</span>/lib:<span class="variable">$&#123;LD_LIBRARY_PATH&#125;</span></span><br><span class="line"><span class="built_in">export</span> NETCDF_INC=<span class="string">&quot;<span class="variable">$NETCDF</span>/include&quot;</span></span><br><span class="line"><span class="built_in">export</span> NETCDF_LIB=<span class="string">&quot;<span class="variable">$NETCDF</span>/lib&quot;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF_LIB</span>:<span class="variable">$NETCDF_INC</span>:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> WRF_DIR=~/coding/WRF/Build_WRF/WRFV4.5.2</span><br><span class="line"><span class="built_in">export</span> WRFIO_NCD_NO_LARGE_FILE_SUPPORT=1</span><br><span class="line"><span class="built_in">export</span> HDF5PATH=<span class="variable">$NETCDF</span></span><br></pre></td></tr></table></figure>
+<p>更改完成后，打开终端输入<code>source ~/.bashrc</code></p>
+<h1 id="3-构建库"><a href="#3-构建库" class="headerlink" title="3. 构建库"></a>3. 构建库</h1><h2 id="3-0-下载所需库"><a href="#3-0-下载所需库" class="headerlink" title="3.0 下载所需库"></a>3.0 下载所需库</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/">Index of /wrf/OnLineTutorial/compile_tutorial/tar_files</a></p>
+<p>需要下载的库如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">netcdf-4.1.3.tar.gz</span><br><span class="line">mpich-3.0.4.tar.gz</span><br><span class="line">zlib-1.2.7.tar.gz</span><br><span class="line">libpng-1.2.50.tar.gz</span><br><span class="line">jasper-1.900.1.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> Build_WRF</span><br><span class="line"><span class="built_in">mkdir</span> LIBRARIES</span><br><span class="line">LIBRARIES</span><br></pre></td></tr></table></figure>
+<h2 id="3-1-NetCDF"><a href="#3-1-NetCDF" class="headerlink" title="3.1 NetCDF"></a>3.1 NetCDF</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装netcdf-c</span></span><br><span class="line">tar xzvf netcdf-4.1.3.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> netcdf-4.1.3</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf --disable-dap --disable-netcdf-4 --disable-shared</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-MPICH"><a href="#3-2-MPICH" class="headerlink" title="3.2 MPICH"></a>3.2 MPICH</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf mpich-3.0.4.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> mpich-3.0.4</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/mpich</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-zlib"><a href="#3-3-zlib" class="headerlink" title="3.3 zlib"></a>3.3 zlib</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf zlib-1.2.11.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> zlib-1.2.11</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-libpng"><a href="#3-4-libpng" class="headerlink" title="3.4 libpng"></a>3.4 libpng</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf libpng-1.2.50.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> libpng-1.2.50</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-5-Jasper"><a href="#3-5-Jasper" class="headerlink" title="3.5 Jasper"></a>3.5 Jasper</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf jasper-1.900.1.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> jasper-1.900.1</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h1 id="4-库兼容性测试"><a href="#4-库兼容性测试" class="headerlink" title="4. 库兼容性测试"></a>4. 库兼容性测试</h1><p>下载测试包<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_NETCDF_MPI_tests.tar">Fortran_C_NETCDF_MPI_tests.tar</a></p>
+<p><strong><u>Test #1</u></strong>: Fortran + C + NetCDF</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> <span class="variable">$&#123;NETCDF&#125;</span>/include/netcdf.inc .</span><br><span class="line"></span><br><span class="line">gfortran -c 01_fortran+c+netcdf_f.f</span><br><span class="line">gcc -c 01_fortran+c+netcdf_c.c</span><br><span class="line">gfortran 01_fortran+c+netcdf_f.o 01_fortran+c+netcdf_c.o -L<span class="variable">$&#123;NETCDF&#125;</span>/lib -lnetcdff -lnetcdf</span><br><span class="line">./a.out</span><br></pre></td></tr></table></figure>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>SUCCESS test 1 fortran + c + netcdf</p>
+</blockquote>
+<p><strong><u>Test #2</u></strong>: Fortran + C + NetCDF + MPI</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> <span class="variable">$&#123;NETCDF&#125;</span>/include/netcdf.inc .</span><br><span class="line"></span><br><span class="line">mpif90 -c 02_fortran+c+netcdf+mpi_f.f</span><br><span class="line">mpicc -c 02_fortran+c+netcdf+mpi_c.c</span><br><span class="line">mpif90 02_fortran+c+netcdf+mpi_f.o 02_fortran+c+netcdf+mpi_c.o -L<span class="variable">$&#123;NETCDF&#125;</span>/lib -lnetcdff -lnetcdf</span><br><span class="line">mpirun ./a.out</span><br></pre></td></tr></table></figure>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>status = 2<br>SUCCESS test 2 fortran + c + netcdf + mpi</p>
+</blockquote>
+<h1 id="5-构建WRF"><a href="#5-构建WRF" class="headerlink" title="5. 构建WRF"></a>5. 构建WRF</h1><p>在<code>Build_WRF</code>文件夹中解压<code>WRFv4.5.2.tar.gz</code>，解压后文件夹名为<code>WRFV4.5.2</code>，进入该文件夹。</p>
+<p>编译前使用命令<code>uname -a</code>查看电脑详细信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> WRFV4.5.2</span><br><span class="line">./configure</span><br></pre></td></tr></table></figure>
+<p>这里注意使用<code>./configure</code>命令编译WRF时，从以下32、33、34中选择，推荐34；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32. (serial) 33. (smpar) 34. (dmpar) 35. (dm+sm) GNU (gfortran/gcc)</span><br></pre></td></tr></table></figure>
+<p><code>Compile for nesting?</code>选择<code>1=basic</code></p>
+<p>出现如下则说明安装成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Configuration successful! </span><br><span class="line">------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Testing for NetCDF, C and Fortran compiler</span><br><span class="line"></span><br><span class="line">This installation of NetCDF is 64-bit</span><br><span class="line">                 C compiler is 64-bit</span><br><span class="line">           Fortran compiler is 64-bit</span><br><span class="line">              It will build in 64-bit</span><br></pre></td></tr></table></figure>
+<p>编译 <code>em_real</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./compile em_real &gt;&amp; log.compile</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<p>编译成功<code>log.compile</code>会出现如下类似内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---&gt;                  Executables successfully built                  &lt;---</span><br><span class="line"> </span><br><span class="line">-rwxrwxr-x 1 root123 root123 45400664 3月  21 10:49 main/ndown.exe</span><br><span class="line">-rwxrwxr-x 1 root123 root123 45286000 3月  21 10:49 main/real.exe</span><br><span class="line">-rwxrwxr-x 1 root123 root123 44823216 3月  21 10:49 main/tc.exe</span><br><span class="line">-rwxrwxr-x 1 root123 root123 49968288 3月  21 10:48 main/wrf.exe</span><br><span class="line"> </span><br><span class="line">==========================================================================</span><br></pre></td></tr></table></figure>
+<p> 编译成功后会在<code>main</code>文件夹内出现以下文件，同时也可根据是否生成exe文件来检查是否编译成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wrf.exe</span><br><span class="line">real.exe</span><br><span class="line">ndown.exe</span><br><span class="line">tc.exe</span><br></pre></td></tr></table></figure>
+<h1 id="6-构建WPS"><a href="#6-构建WPS" class="headerlink" title="6. 构建WPS"></a>6. 构建WPS</h1><p>在<code>Build_WRF</code>文件夹中解压<code>WPS-master.zip</code>，解压后文件夹更改为<code>WPSV4.5.0</code>，进入该文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> WPSV4.5.0</span><br><span class="line">./clean</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf CC=mpicc CXX=mpicxx FC=mpif90</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">^M: Command not found.</span><br><span class="line">^M: Command not found.</span><br><span class="line"><span class="keyword">then</span>^M: Command not found.</span><br><span class="line">endif^M: Command not found.</span><br><span class="line">^M: Command not found.</span><br><span class="line"><span class="built_in">set</span>: Syntax Error.</span><br></pre></td></tr></table></figure>
+<p>或执行<code>./configure</code>出现错误<code>bash: ./configure: /bin/sh^M: 解释器错误: 没有那个文件或目录</code>。</p>
+<p>解决办法</p>
+<p>进入WPSV4.5.0文件夹内输入以下命令即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/\r$//&#x27;</span> clean</span><br><span class="line">sed -i <span class="string">&#x27;s/\r$//&#x27;</span> configure</span><br></pre></td></tr></table></figure>
+<p>再输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./clean</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf CC=mpicc CXX=mpicxx FC=mpif90</span><br></pre></td></tr></table></figure>
+<p>编译WPS</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/\r$//&#x27;</span> compile</span><br><span class="line">./compile &gt;&amp; log.compile</span><br></pre></td></tr></table></figure>
+<p>如果构建成功，<code>WPSV4.5.0</code>目录下应该存在3个可执行文件，链接到相应的<code>src/</code>目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">geogrid.exe -&gt; geogrid/src/geogrid.exe</span><br><span class="line">ungrib.exe -&gt; ungrib/src/ungrib.exe</span><br><span class="line">metgrid.exe -&gt; metgrid/src/metgrid.exe</span><br></pre></td></tr></table></figure>
+<h1 id="7-静态地理数据"><a href="#7-静态地理数据" class="headerlink" title="7. 静态地理数据"></a>7. 静态地理数据</h1><ol>
+<li><p>选择 <a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz">Download Highest Resolution of each Mandatory Field</a> 下载静态地理数据，这些是运行WPS和WRF所需的所有强制字段，包含每个必填字段的最高分辨率这是最常用的字段，建议用于大多数应用。如对其他字段感兴趣，可以直接访问<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html">WPS V4地理静态数据下载页面</a>进行查看和下载。</p>
+</li>
+<li><p>下载完成后，解压完成后的文件名也许为<code>geog</code>。将文件重命名为<code>WPS_GEOG</code>。</p>
+</li>
+<li><p>在<code>Build_WRF</code>文件夹下新建文件夹<code>WPS_Data</code>，将解压后的文件夹<code>WPS_GEOG</code>移动到<code>./WPS_Data/WPS_Geographical_Static_Data/</code>目录下。</p>
+</li>
+<li><p>修改<code>namelist.wps</code>文件中<code>&amp;geogrid</code>部分的<code>geog_data_path</code>变量，<code>geog_data_path=&#39;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG&#39;</code>。</p>
+<p><em>*为了确保不出错，最好将高分辨率（<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz">Highest Resolution</a>）数据和全部数据（<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_complete.tar.gz">geog_complete</a>)都下载好的数据放入上面创建的<code>WPS_GEOG</code>文件夹中。</em></p>
+</li>
+</ol>
+<h1 id="8-实时气象数据"><a href="#8-实时气象数据" class="headerlink" title="8. 实时气象数据"></a>8. 实时气象数据</h1><p>数据下载地址：<a target="_blank" rel="noopener" href="https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/">https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/</a></p>
+<p>也可使用wget命令下载GFS数据，以2024-03-12: 00时数据为例，该数据时间分辨率为6h（21600s）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20240312/00/atmos/gfs.t00z.pgrb2.0p25.f000</span><br><span class="line"></span><br><span class="line">wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20230312/00/atmos/gfs.t00z.pgrb2.0p25.f003</span><br><span class="line"></span><br><span class="line">wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20230312/00/atmos/gfs.t00z.pgrb2.0p25.f006</span><br></pre></td></tr></table></figure>
+<p>在<code>Build_WRF</code>文件夹下创建文件夹<code>DATA</code>，将下载的GFS数据移动到<code>DATA</code>文件夹下。</p>
+<h1 id="9-运行WPS和WRF"><a href="#9-运行WPS和WRF" class="headerlink" title="9. 运行WPS和WRF"></a>9. 运行WPS和WRF</h1><h2 id="9-1-运行WPS"><a href="#9-1-运行WPS" class="headerlink" title="9.1 运行WPS"></a>9.1 运行WPS</h2><p>进入<code>WPSV4.5.0</code>文件夹内，运行WPS。在运行之前，修改namelist.wps中的<code>geog-data_path</code>变量，注意一定要是绝对路径，不包含<code>~</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geog_data_path=<span class="string">&#x27;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG</span></span><br></pre></td></tr></table></figure>
+<p>另外将namelist.wps文件中的内容替换为以下内容，以GFS文件<code>gfs.t00z.pgrb2.0p25.f000</code>为例。该文件为2024-03-12: 00时间点的<a target="_blank" rel="noopener" href="https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/">气象数据</a>，时间分辨率为6h（21600s）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&amp;share</span><br><span class="line"> wrf_core = &#x27;ARW&#x27;,</span><br><span class="line"> max_dom = 2,</span><br><span class="line"> start_date = &#x27;2024-03-12_00:00:00&#x27;,&#x27;2024-03-12_00:00:00&#x27;,</span><br><span class="line"> end_date   = &#x27;2024-03-12_00:00:00&#x27;,&#x27;2024-03-12_00:00:00&#x27;,</span><br><span class="line"> interval_seconds = 21600,</span><br><span class="line"> io_form_geogrid = 2</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line">&amp;geogrid</span><br><span class="line"> parent_id         =   1,   1,</span><br><span class="line"> parent_grid_ratio =   1,   3,</span><br><span class="line"> i_parent_start    =   1,  10,</span><br><span class="line"> j_parent_start    =   1,  20,</span><br><span class="line"> e_we              =  150, 220,</span><br><span class="line"> e_sn              =  130, 214,</span><br><span class="line"> geog_data_res = &#x27;default&#x27;,&#x27;default&#x27;,</span><br><span class="line"> dx = 15000,</span><br><span class="line"> dy = 15000,</span><br><span class="line"> map_proj = &#x27;lambert&#x27;,</span><br><span class="line"> ref_lat   =  28.00,</span><br><span class="line"> ref_lon   =  104.00,</span><br><span class="line"> truelat1  =  28.0,</span><br><span class="line"> truelat2  =  28.0,</span><br><span class="line"> stand_lon =  104.0,</span><br><span class="line"> geog_data_path = &#x27;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG&#x27;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line">&amp;ungrib</span><br><span class="line"> out_format = &#x27;WPS&#x27;,</span><br><span class="line"> prefix = &#x27;FILE&#x27;,</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line">&amp;metgrid</span><br><span class="line"> fg_name = &#x27;FILE&#x27;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+<p>修改完成后，开始运行程序。</p>
+<ol>
+<li><p>执行<code>geogrid.exe</code>, 这一步将生成<code>geo_em</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> WPSV4.5.0</span><br><span class="line"></span><br><span class="line">./geogrid.exe &gt;&amp; log.geogrid</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p> <code>geogrid.exe</code>执行成功后，会在<code>geogrid.log</code> 文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2024-03-21 16:58:31.070 ---  *** Successful completion of program geogrid.exe ***</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>执行ungrib.exe，这一步将生成前缀为’FILE’的文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./link_grib.csh ../DATA/gfs.t00z.pgrb2.0p25.f000</span><br><span class="line"><span class="built_in">ln</span> -sf ungrib/Variable_Tables/Vtable.GFS Vtable</span><br><span class="line">./ungrib.exe &gt;&amp; log.ungrib</span><br></pre></td></tr></table></figure>
+<p><code>ungrib.exe</code>执行成功后，会在<code>ungrib.log</code>文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2024-03-21 17:13:42.605 --- ****  Deleting temporary files created by ungrib...</span><br><span class="line">2024-03-21 17:13:42.605 ---  Deleting file: ./PFILE:2024-03-12_00</span><br><span class="line">2024-03-21 17:13:42.756 --- ****  Done deleting temporary files.</span><br><span class="line">2024-03-21 17:13:42.756 ---  *** Successful completion of program ungrib.exe ***</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>执行metgrid.exe，这一步将生成每个时间段的前缀为<code>met_em*</code>的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./metgrid.exe &gt;&amp; log.metgrid</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>metgrid.exe</code>执行成功后，会在<code>metgrid.log</code>文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2024-03-21 17:24:05.809 ---  *** Successful completion of program metgrid.exe ***</span><br></pre></td></tr></table></figure>
+<h2 id="9-2-运行WRF"><a href="#9-2-运行WRF" class="headerlink" title="9.2 运行WRF"></a>9.2 运行WRF</h2><p>进入<code>WRFV4.5.2/test/em_real/</code>目录下。首先将刚才<code>WPSV4.5.0</code>目录下生成的前缀为<code>met_em*</code>的文件拷贝到<code>WRFV4.5.2/test/em_real/</code>目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> met_em* ../WRFV4.5.2/test/em_real/</span><br><span class="line"><span class="built_in">cd</span> ../WRFV4.5.2/test/em_real/</span><br><span class="line">mpirun -np 1 ./real.exe</span><br></pre></td></tr></table></figure>
+<p>这将生成两个文件，分别为<code>rsl.error.0000</code>和<code>rsl.out.0000</code>。如果在<code>rsl.error.0000</code>文件中看到<code>SUCCESS</code>，并且生成<code>wrfbdy_d01</code>和<code>wrfinput_d0*</code>文件，证明运行成功，继续执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpirun -np 8 ./wrf.exe</span><br></pre></td></tr></table></figure>
+<p>再次检查<code>rsl</code>文件是否<code>SUCCESS</code>，并确保拥有预期所有的<code>wrfout*</code>文件。如果有，则运行成功。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350005982">知乎-Ubuntu中配置WRF</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php">WRF-How to Compile WRF: The Complete Process</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WPS/" rel="tag">WPS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF/" rel="tag">WRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/">如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" class="article-date">
+	  <time datetime="2024-03-11T03:07:13.000Z" itemprop="datePublished">三月 11, 2024</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="序贯平差"><a href="#序贯平差" class="headerlink" title="序贯平差"></a>序贯平差</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>序贯平差也叫逐次相关间接平差，它是将观测值分成两组或多组，按组的顺序分别做相关间接平差，从而使其达到与两期或多期网一起做整体平差同样的结果。</p>
+<h2 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h2><p>将观测值 L 分为两组，记 $\overset{L_{k-1}}{\tiny n_{k-1}}$ 和 $\overset{L_{k}}{\tiny n_{k}}$, 它们的权阵分别记为 $P_{k-1}$ 和 $P_{k}$，设这两组观测值不相关，有</p>
+<script type="math/tex; mode=display">
+\overset{L}{\tiny n \ 1} = [\ \begin{matrix} L_{k-1} \\ L_{k} \end{matrix}\ ]</script><script type="math/tex; mode=display">
+\overset{P}{\tiny n \ n} = \begin{equation} \left[ \begin{matrix} P_{k-1} & 0 \\ 0 & P_{k} \end{matrix} \right] \end{equation}</script><p>当参数间不存在约束条件时，其误差方程为</p>
+<script type="math/tex; mode=display">
+\begin{equation} V_{k-1} = B_{k-1}  \hat{x} - l_{k-1}
+\tag{1}\end{equation}</script><script type="math/tex; mode=display">
+\begin{equation} V_{k} = B_{k}  \hat{x} - l_{k}
+\tag{2}\end{equation}</script><p>式中</p>
+<script type="math/tex; mode=display">
+\hat{X} = X^0 + \hat{x}, \quad l_{i}=L_{i}-L_{i}^0(i=k,k-1)</script><p>将 （1）式单独平差，得</p>
+<script type="math/tex; mode=display">
+\hat{x}_{k-1} = Q_{\hat{x}_{k-1}}B_{k-1}^TP_{k-1}l_{k-1} \tag{3}</script><p>式中，$Q_{\hat{x}_{k-1}}$ 为 $\hat{X}_{k-1}$ (即 $\hat{x}_{k-1}$) 的协因数阵，故有</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}_{k-1}} = (B_{k-1}^T P_{k-1}B_{k-1})^{-1} \tag{4}</script><p>或</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}_{k-1}} ^{-1}= (B_{k-1}^T P_{k-1}B_{k-1}) \tag{5}</script><p>$\hat{x}_{k-1}$ 表示由第一组观测值 $L_{k-1}$ 平差所得 $\hat{x}$ 的值<br>将（1）和（2）联合解算，即由两组观测值作整体平差，可组成法方程为</p>
+<script type="math/tex; mode=display">
+(Q_{\hat{X}_{k-1}} ^{-1}+ B_{k}^T P_{k}B_{k}) \hat{x}-(B_{k-1}^TP_{k-1}B_{k-1}+B_{k}^TP_{k}l_{k})=0 \tag{6}</script><p>其解为</p>
+<script type="math/tex; mode=display">
+\hat{x}=(Q_{\hat{X}_{k-1}} ^{-1}+ B_{k}^T P_{k}B_{k})^{-1}(B_{k-1}^TP_{k-1}B_{k-1}+B_{k}^TP_{k}l_{k})</script><p>它是两组观测值整体平差的结果，按间接平差知，其法方程系数的逆阵就是\ $\hat{X}$ 的协因数阵，故有</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}}=(Q_{\hat{X}_{k-1}} ^{-1}+ B_{k}^T P_{k}B_{k})^{-1} \tag{7}</script><p>于是上式为</p>
+<script type="math/tex; mode=display">
+\hat{x}=Q_{\hat{X}}B_{k-1}^TP_{k-1}B_{k-1}+Q_{\hat{X}}B_{k}^TP_{k}l_{k} \tag{8}</script><p>考虑（3）和（7）式，</p>
+<script type="math/tex; mode=display">
+B_{k-1}^TP_{k-1}l_{k-1}=Q_{\hat{X}_{k-1}}^{-1}\hat{x}_{k-1} \tag{9}</script><script type="math/tex; mode=display">
+Q_{\hat{X}_{k-1}}^{-1}=Q_{\hat{X}_{k}}^{-1}-B_{k}^T P_{k} B_{k} \tag{10}</script><p>则（8）式为</p>
+<script type="math/tex; mode=display">
+\hat{x}=\hat{x}_{k-1}+Q_{\hat{X}} B_{k}^T P_{k}(l_{k}-B_{k}\hat{x}_{k-1}) \tag{11}</script><p>令</p>
+<script type="math/tex; mode=display">
+J=Q_{\hat{X}}B_{k}^T P_{k} \tag{12}</script><script type="math/tex; mode=display">
+\bar{l}_{k} = l_{k} - B_{k}\hat{x}_{k-1} \tag{13}</script><p>则上式为</p>
+<script type="math/tex; mode=display">
+\hat{x}=\hat{x}_{k-1}+J \bar{l}_{k} \tag{14}</script><p>将（10）式两边左乘 $Q_{\hat{X}}$,，顾及（12）得</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}}Q_{\hat{X}_{k-1}}^{-1} = I-JB_{k}</script><p>再对两边右乘 $Q_{\hat{X}_{k-1}}$，得</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}}=Q_{\hat{X}_{k-1}} - JB_{k}Q_{\hat{X}_{k-1}} \tag{15}</script><p>由矩阵反演公式知</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+Q_{\hat{X}} = (Q_{\hat{X}_{k-1}}^{-1}+B_{k}^T P_{k}B_{k})^{-1}
+=Q_{\hat{X}_{k-1}}-Q_{\hat{X}_{k-1}}B_{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}B_{k}Q_{\hat{X}_{k-1}}
+\end{equation} \tag{16}</script><p>比较（15）与（16）式知：</p>
+<script type="math/tex; mode=display">
+J = Q_{\hat{X}_{k-1}}B_{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1} \tag{17}</script><p>J 阵称为卡尔曼滤波增益矩阵或称序贯平差的增益矩阵。<br>将（17）式代入（14）式即得序贯平差的递推计算式。</p>
+<h2 id="结论-序贯平差算法"><a href="#结论-序贯平差算法" class="headerlink" title="结论 (序贯平差算法)"></a>结论 (序贯平差算法)</h2><ol>
+<li><p>使用参数平差改正值 $\hat{x}$ 计算<br>状态递推</p>
+<script type="math/tex; mode=display">
+\hat{x}_{k} = \hat{x}_{k-1} + J_{k} \bar{l}_{k}</script><script type="math/tex; mode=display">
+\bar{l}_{k} = l_{k} - B_{k}\hat{x}_{k-1}</script><p>方差递推</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+Q_{\hat{X}} =Q_{\hat{X}_{k-1}}-Q_{\hat{X}_{k-1}}B_{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}B_{k}Q_{\hat{X}_{k-1}}
+\end{equation}</script><p>增益矩阵</p>
+<script type="math/tex; mode=display">
+J = Q_{\hat{X}_{k-1}}B_{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}</script></li>
+<li><p>使用参数平差值（待估状态\/参数量）$\hat{X}$ 计算<br>状态递推</p>
+<script type="math/tex; mode=display">
+\hat{X}_{k} = \hat{X}_{k-1} + J_{k} \bar{L}_{k}</script><script type="math/tex; mode=display">
+\bar{L}_{k} = L_{k} - B_{k}\hat{X}_{k-1}</script><p>方差递推</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+Q_{\hat{X}_{k}} =Q_{\hat{X}_{k-1}}-Q_{\hat{X}_{k-1}}B_{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}B_{k}Q_{\hat{X}_{k-1}}
+\end{equation}</script><p>增益矩阵</p>
+<script type="math/tex; mode=display">
+J_{k} = Q_{\hat{X}_{k-1}}B_{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}</script></li>
+</ol>
+<h2 id="推导流程"><a href="#推导流程" class="headerlink" title="推导流程"></a>推导流程</h2><p>使用参数平差值（待估状态\/参数量）$\hat{X}$ 计算<br><img src="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/5bc9086b69b842dba47bd0f43a9275a3.png" class=""></p>
+<h1 id="卡尔曼滤波"><a href="#卡尔曼滤波" class="headerlink" title="卡尔曼滤波"></a>卡尔曼滤波</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>卡尔曼滤波是一种线性最小方差估计，采用动力学方程即状态方程描述被估计量的动态变化规律，被估计量的动态统计信息由激励白噪声的统计信息和动力学方程确定。其计算过程是一个不断地预测、修正的过程。在求解时不需要存储大量的观测数据，并且当得到新的观测数据时，可随时估算得新的滤波值，便于实时处理观测结果。<br>1.基于前一时间点的系统状态的概率分布给出当前时间点的系统状态的概率分布预测 P1<br>2.基于当前时间点的观测量的概率分布 Q 给出另一组对当前时间点系统状态的概率分布预测 P2 (这里需要注意，如果传感器能直接把系统状态都观测了，那么我们直接用观测量的概率分布 Q 作为 P2 就好了，但是有可能传感器观测的物理量量并不是直接的系统状态，而是其他物理量，这时我们需要通过做一个线性变换来获得 P2)<br>3.现在，我们有两个关于当前时间点系统状态的概率分布的预测 P1 和 P2，我们于是可以计算它们的联合概率分布，这个联合概率分布就是我们最终想要的更正过后的当前时间点的系统状态概率分布，有了它我们就可以进入下一个时间点继续迭代我们交替的预测-更正步骤了。<br>注意：系统状态和测量值都服从线性高斯分布。</p>
+<h2 id="卡尔曼滤波算法"><a href="#卡尔曼滤波算法" class="headerlink" title="卡尔曼滤波算法"></a>卡尔曼滤波算法</h2><p>状态递推</p>
+<script type="math/tex; mode=display">
+x_{k}'=x_{k}+K'(\overrightarrow z_{k} - H_{k}X_{k})</script><p>方差递推</p>
+<script type="math/tex; mode=display">
+P_{k}'=P_{k}-K'H_{k}P_{k}</script><p>增益矩阵</p>
+<script type="math/tex; mode=display">
+K'=P_{k}H_{k}^T(H_{k}P_{k}H_{k}^T+R_{k})^{-1}</script><p>变量解释</p>
+<script type="math/tex; mode=display">
+x_{K}': 最佳估计</script><script type="math/tex; mode=display">
+x_{k}: 当前状态</script><script type="math/tex; mode=display">
+P_{k}: 当前状态x_{k}的协方差阵</script><script type="math/tex; mode=display">
+\overrightarrow z_{k}: 观测值平均值</script><p>$H_{k}$: 由于单位、比例等不同对传感器加上一个映射矩阵（尺度变换），从而保证每个传感器输出读数尺度相同，处于同一空间</p>
+<script type="math/tex; mode=display">
+R_{k}: 传感器噪声</script><script type="math/tex; mode=display">
+K' : 卡尔曼增益</script><h1 id="集合卡尔曼滤波"><a href="#集合卡尔曼滤波" class="headerlink" title="集合卡尔曼滤波"></a>集合卡尔曼滤波</h1><h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/122926813">序贯最小二乘平差 / 递推最小二乘平差公式推导</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/131031339">序贯最小二乘平差 VS 卡尔曼滤波</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
     <article id="post-SWOT介绍、研究现状及应用"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -629,134 +1015,11 @@ var themeMenus = {};
     
 
   
-    <article id="post-ubuntu16.04安装Pycharm和Anaconda3"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/">ubuntu16.04安装Pycharm和Anaconda3</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/" class="article-date">
-	  <time datetime="2023-09-26T04:39:07.000Z" itemprop="datePublished">九月 26, 2023</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-安装Anaconda"><a href="#1-安装Anaconda" class="headerlink" title="1. 安装Anaconda"></a>1. 安装Anaconda</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>官网网址： <a target="_blank" rel="noopener" href="https://repo.anaconda.com/archive/">https://repo.anaconda.com/archive/</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>查看<a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">如何在Linux服务器上安装Anaconda（超详细）</a>中的1.3 安装Anaconda进行安装即可。</p>
-<h2 id="配置虚拟环境"><a href="#配置虚拟环境" class="headerlink" title="配置虚拟环境"></a>配置虚拟环境</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yrwang_xd/article/details/105821002">anaconda 创建虚拟环境、激活及使用的基本方法</a></p>
-<h2 id="将虚拟环境名填入环境变量以便快捷启动"><a href="#将虚拟环境名填入环境变量以便快捷启动" class="headerlink" title="将虚拟环境名填入环境变量以便快捷启动"></a>将虚拟环境名填入环境变量以便快捷启动</h2><p>例如我的conda虚拟环境名为licsbas，打开终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br><span class="line">alias licsbas=&quot;source activate licsbas&quot;</span><br></pre></td></tr></table></figure><br>完成后保存文件并退出。<br>打开另一个终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure><br>测试是否生效，打开终端输入<code>licsbas</code>，即可激活该conda虚拟环境。</p>
-<h1 id="2-安装Pycharm"><a href="#2-安装Pycharm" class="headerlink" title="2. 安装Pycharm"></a>2. 安装Pycharm</h1><h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><p>官网网址：<a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/download/other.html">https://www.jetbrains.com/pycharm/download/other.html</a><br>社区版本的已经够用，同时建议不要安装太新的版本。<br>使用<code>uname -m</code>查看自己电脑的系统架构，如果输出为 <code>x86_64</code>，那么你的系统是 64 位的 x86 架构（通常我们称之为 x64）。如果输出是 <code>armv7l</code>或者以 arm 开头的其他值，那么你的系统是 ARM 架构。再根据不同的系统架构选择对应的版本进行下载。如下图所示，如果为x64架构，则下载 2023.2 - Linux (tar.gz)版本，如果是ARM架构，下载 2023.2 - Linux ARM64 (tar.gz) 版本。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230929231904.png" class=""></p>
-<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>下载完成后将 tar.gz包复制到 <code>/opt</code> 目录下，右键【提取到此处】即完成安装。</p>
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>进入解压后的文件夹下的<code>bin</code>目录下，运行pycharm.sh文件。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/pycharm-community-2022.2.3/bin</span><br><span class="line">sudo ./pycharm.sh</span><br></pre></td></tr></table></figure></p>
-<h2 id="创建桌面快捷方式"><a href="#创建桌面快捷方式" class="headerlink" title="创建桌面快捷方式"></a>创建桌面快捷方式</h2><p>最简单有效的方式为按照上一步启动pycharm，依次选择上方导航栏中的【Tools】，【Create Desktop Entry…】，【OK】，再重启即可。</p>
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44312186/article/details/98443374">Ubuntu创建pycharm的快捷方式两种方法（安装pycharm后启动方式）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">如何在Linux服务器上安装Anaconda（超详细）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">anaconda 创建虚拟环境、激活及使用的基本方法</a></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
-    <article id="post-ubuntu16.04安装jdk和panoply"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/">ubuntu16.04安装jdk和panoply</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/" class="article-date">
-	  <time datetime="2023-09-26T04:01:42.000Z" itemprop="datePublished">九月 26, 2023</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="安装Panoply"><a href="#安装Panoply" class="headerlink" title="安装Panoply"></a>安装Panoply</h1><p>安装包网址： <a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/">https://www.giss.nasa.gov/tools/panoply/download/</a> </p>
-<p>自行选择对应版本（windows，macOS，Linux，这里是 linux . tgz 格式），也可点击<a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.2.7.tgz">这里</a>直接下载tgz格式。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230926122259.png" class=""><br>下载完成后，复制到 ubuntu 系统下 <code>/opt</code> 文件夹下提取即可，但是此时不能直接运行，需要 安装大于 11 版本的 JDK 才行，JDK下载安装参见下文。<br>JDK安装完成后，进入 panoply 文件夹下，打开终端输入 ./Panoply.sh 运行。</p>
-<h1 id="手动安装-JDK20"><a href="#手动安装-JDK20" class="headerlink" title="手动安装 JDK20"></a>手动安装 JDK20</h1><p>下载 JDK20 安装包：<a target="_blank" rel="noopener" href="https://jdk.java.net/20/">JDK20 下载链接</a>，选择适合电脑的版本，ubuntu16.04系统 点击<a target="_blank" rel="noopener" href="https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz">下载链接</a>直接下载。<br>提示：若进入JDK20下载网页显示JDK20版本已被取代，则下载最新的JDK版本，可输入其官网网址进行下载，网址链接样式如 <code>https://jdk.java.net/xx/</code>，其中 <code>xx</code> 表示你要下载的 JDK 版本，如下载 JDK21 则其链接为 <a target="_blank" rel="noopener" href="https://jdk.java.net/21/">https://jdk.java.net/21/</a> 。对于x64操作系统的电脑，下载下图所示的 tar.gz 格式安装包。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230926122708.png" class=""></p>
-<ul>
-<li>下载完成后，使用【提取到此处】解压；</li>
-<li>将解压后的文件夹移动到/usr 文件夹下</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv jdk* /usr</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用 <code>update-alternatives</code> 命令把 Java 安装到系统上，此时就不用再设置环境了。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/jdk-20.*/bin/java 2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>设置默认的 Java</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
-<p>上述命令会显示目前在系统里存在的所有版本的 Java，然后你选择一个你想要的版本就可以了。</p>
-<ul>
-<li>最后查看当前的 java 版本</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<p>本文参考博客： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/powerwu/articles/12095326.html">如何在Linux Ubuntu16/18上安装Java JDK11/8</a></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
   </nav>
 
 </section>
@@ -854,6 +1117,30 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2024/05/14/%E5%9C%9F%E8%80%B3%E5%85%B62023%E5%8F%8C%E9%9C%87%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%E6%95%B0%E6%8D%AE%E5%92%8C%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86-%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB/">土耳其2023双震部分参考数据和处理工具整理【附原文分享】</a></h6>
+              <span>五月 14, 2024</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2024/05/10/%E6%96%87%E7%8C%AE%E6%8E%A8%E8%8D%90-%E6%97%A0%E6%B5%8B%E7%AB%99%E6%B5%81%E5%9F%9F%E7%89%B9%E5%A4%A7%E6%B4%AA%E6%B0%B4%E7%9A%84%E5%85%A8%E7%90%83%E9%A2%84%E6%B5%8B/">文献推荐-无测站流域特大洪水的全球预测</a></h6>
+              <span>五月 10, 2024</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2024/05/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/">机器学习中的评价指标</a></h6>
               <span>五月 9, 2024</span>
             </div>
@@ -896,30 +1183,6 @@ var themeMenus = {};
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2024/04/23/%E5%9C%A8Ubuntu16-04%E4%B8%AD%E5%AE%89%E8%A3%85R%E5%92%8CWRF-Hydro%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7%E7%AE%B1rwrfhydro%E6%97%B6%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E4%B8%80/">在Ubuntu16.04中安装R和WRF-Hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一</a></h6>
-              <span>四月 23, 2024</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2024/04/03/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85WRF-Hydro-GIS-Pre-Processing-Tools5-2-0/">安装使用WRF Hydro GIS Pre-Processing Tools5.2.0</a></h6>
-              <span>四月 3, 2024</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -929,7 +1192,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -939,7 +1202,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda/" rel="tag">Anaconda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS/" rel="tag">ArcGIS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS-Pro/" rel="tag">ArcGIS Pro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clash/" rel="tag">Clash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GACOS/" rel="tag">GACOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAMMA/" rel="tag">GAMMA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRACE/" rel="tag">GRACE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Global-Mapper/" rel="tag">Global Mapper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HydroSHEDS/" rel="tag">HydroSHEDS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InSAR/" rel="tag">InSAR</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT%E6%A8%A1%E6%9D%BF/" rel="tag">PPT模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R/" rel="tag">R</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBAS-InSAR/" rel="tag">SBAS-InSAR</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWOT/" rel="tag">SWOT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel-1/" rel="tag">Sentinel-1</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS/" rel="tag">WPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF/" rel="tag">WRF</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" rel="tag">WRF Hydro GIS Pre-Processing Tools</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-Object/" rel="tag">[object Object]</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/" rel="tag">documents</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdal/" rel="tag">gdal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netCDF/" rel="tag">netCDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/question/" rel="tag">question</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tooklkit/" rel="tag">tooklkit</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websites/" rel="tag">websites</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag">原创</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%AA%E6%B0%B4/" rel="tag">洪水</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" rel="tag">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a><span class="tag-list-count">7</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda/" rel="tag">Anaconda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS/" rel="tag">ArcGIS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS-Pro/" rel="tag">ArcGIS Pro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clash/" rel="tag">Clash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GACOS/" rel="tag">GACOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAMMA/" rel="tag">GAMMA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRACE/" rel="tag">GRACE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Global-Mapper/" rel="tag">Global Mapper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HydroSHEDS/" rel="tag">HydroSHEDS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InSAR/" rel="tag">InSAR</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT%E6%A8%A1%E6%9D%BF/" rel="tag">PPT模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R/" rel="tag">R</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBAS-InSAR/" rel="tag">SBAS-InSAR</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWOT/" rel="tag">SWOT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel-1/" rel="tag">Sentinel-1</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS/" rel="tag">WPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF/" rel="tag">WRF</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" rel="tag">WRF Hydro GIS Pre-Processing Tools</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-Object/" rel="tag">[object Object]</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/" rel="tag">documents</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdal/" rel="tag">gdal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netCDF/" rel="tag">netCDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/question/" rel="tag">question</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tooklkit/" rel="tag">tooklkit</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websites/" rel="tag">websites</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag">原创</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" rel="tag">土耳其双震</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%B0%E9%9C%87/" rel="tag">地震</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" rel="tag">数据分享</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%AA%E6%B0%B4/" rel="tag">洪水</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" rel="tag">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -949,7 +1212,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Anaconda3/" style="font-size: 10px;">Anaconda3</a> <a href="/tags/ArcGIS/" style="font-size: 10px;">ArcGIS</a> <a href="/tags/ArcGIS-Pro/" style="font-size: 10px;">ArcGIS Pro</a> <a href="/tags/Clash/" style="font-size: 10px;">Clash</a> <a href="/tags/GACOS/" style="font-size: 14px;">GACOS</a> <a href="/tags/GAMMA/" style="font-size: 10px;">GAMMA</a> <a href="/tags/GDAL/" style="font-size: 10px;">GDAL</a> <a href="/tags/GRACE/" style="font-size: 12px;">GRACE</a> <a href="/tags/Global-Mapper/" style="font-size: 10px;">Global Mapper</a> <a href="/tags/HydroSHEDS/" style="font-size: 10px;">HydroSHEDS</a> <a href="/tags/InSAR/" style="font-size: 18px;">InSAR</a> <a href="/tags/JDK20/" style="font-size: 10px;">JDK20</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/PPT%E6%A8%A1%E6%9D%BF/" style="font-size: 10px;">PPT模板</a> <a href="/tags/Panoply/" style="font-size: 10px;">Panoply</a> <a href="/tags/Pycharm/" style="font-size: 10px;">Pycharm</a> <a href="/tags/R/" style="font-size: 10px;">R</a> <a href="/tags/SBAS-InSAR/" style="font-size: 12px;">SBAS-InSAR</a> <a href="/tags/SWOT/" style="font-size: 12px;">SWOT</a> <a href="/tags/Sentinel-1/" style="font-size: 16px;">Sentinel-1</a> <a href="/tags/Ubuntu16-04/" style="font-size: 20px;">Ubuntu16.04</a> <a href="/tags/WPS/" style="font-size: 10px;">WPS</a> <a href="/tags/WPS4-5-0/" style="font-size: 10px;">WPS4.5.0</a> <a href="/tags/WRF/" style="font-size: 12px;">WRF</a> <a href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" style="font-size: 12px;">WRF Hydro GIS Pre-Processing Tools</a> <a href="/tags/WRF-Hydro/" style="font-size: 10px;">WRF-Hydro</a> <a href="/tags/WRF-Hydro5-2-0/" style="font-size: 14px;">WRF-Hydro5.2.0</a> <a href="/tags/WRF4-5-2/" style="font-size: 12px;">WRF4.5.2</a> <a href="/tags/Windows10/" style="font-size: 10px;">Windows10</a> <a href="/tags/object-Object/" style="font-size: 10px;">[object Object]</a> <a href="/tags/documents/" style="font-size: 12px;">documents</a> <a href="/tags/gdal/" style="font-size: 10px;">gdal</a> <a href="/tags/netCDF/" style="font-size: 10px;">netCDF</a> <a href="/tags/question/" style="font-size: 10px;">question</a> <a href="/tags/rwrfhydro/" style="font-size: 10px;">rwrfhydro</a> <a href="/tags/tooklkit/" style="font-size: 12px;">tooklkit</a> <a href="/tags/toolkit/" style="font-size: 16px;">toolkit</a> <a href="/tags/ubuntu16-04/" style="font-size: 12px;">ubuntu16.04</a> <a href="/tags/websites/" style="font-size: 12px;">websites</a> <a href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" style="font-size: 10px;">公式推导</a> <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" style="font-size: 10px;">卡尔曼滤波</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 10px;">原创</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" style="font-size: 10px;">序贯平差</a> <a href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" style="font-size: 12px;">文献分享</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">机器学习</a> <a href="/tags/%E6%B4%AA%E6%B0%B4/" style="font-size: 10px;">洪水</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" style="font-size: 10px;">系统安装</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 14px;">脚本</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" style="font-size: 18px;">软件安装</a>
+      <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Anaconda3/" style="font-size: 10px;">Anaconda3</a> <a href="/tags/ArcGIS/" style="font-size: 10px;">ArcGIS</a> <a href="/tags/ArcGIS-Pro/" style="font-size: 10px;">ArcGIS Pro</a> <a href="/tags/Clash/" style="font-size: 10px;">Clash</a> <a href="/tags/GACOS/" style="font-size: 13.33px;">GACOS</a> <a href="/tags/GAMMA/" style="font-size: 10px;">GAMMA</a> <a href="/tags/GDAL/" style="font-size: 10px;">GDAL</a> <a href="/tags/GRACE/" style="font-size: 11.67px;">GRACE</a> <a href="/tags/Global-Mapper/" style="font-size: 10px;">Global Mapper</a> <a href="/tags/HydroSHEDS/" style="font-size: 10px;">HydroSHEDS</a> <a href="/tags/InSAR/" style="font-size: 20px;">InSAR</a> <a href="/tags/JDK20/" style="font-size: 10px;">JDK20</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/PPT%E6%A8%A1%E6%9D%BF/" style="font-size: 10px;">PPT模板</a> <a href="/tags/Panoply/" style="font-size: 10px;">Panoply</a> <a href="/tags/Pycharm/" style="font-size: 10px;">Pycharm</a> <a href="/tags/R/" style="font-size: 10px;">R</a> <a href="/tags/SBAS-InSAR/" style="font-size: 11.67px;">SBAS-InSAR</a> <a href="/tags/SWOT/" style="font-size: 11.67px;">SWOT</a> <a href="/tags/Sentinel-1/" style="font-size: 16.67px;">Sentinel-1</a> <a href="/tags/Ubuntu16-04/" style="font-size: 20px;">Ubuntu16.04</a> <a href="/tags/WPS/" style="font-size: 10px;">WPS</a> <a href="/tags/WPS4-5-0/" style="font-size: 10px;">WPS4.5.0</a> <a href="/tags/WRF/" style="font-size: 11.67px;">WRF</a> <a href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" style="font-size: 11.67px;">WRF Hydro GIS Pre-Processing Tools</a> <a href="/tags/WRF-Hydro/" style="font-size: 10px;">WRF-Hydro</a> <a href="/tags/WRF-Hydro5-2-0/" style="font-size: 13.33px;">WRF-Hydro5.2.0</a> <a href="/tags/WRF4-5-2/" style="font-size: 11.67px;">WRF4.5.2</a> <a href="/tags/Windows10/" style="font-size: 10px;">Windows10</a> <a href="/tags/object-Object/" style="font-size: 10px;">[object Object]</a> <a href="/tags/documents/" style="font-size: 11.67px;">documents</a> <a href="/tags/gdal/" style="font-size: 10px;">gdal</a> <a href="/tags/netCDF/" style="font-size: 10px;">netCDF</a> <a href="/tags/question/" style="font-size: 10px;">question</a> <a href="/tags/rwrfhydro/" style="font-size: 10px;">rwrfhydro</a> <a href="/tags/tooklkit/" style="font-size: 11.67px;">tooklkit</a> <a href="/tags/toolkit/" style="font-size: 18.33px;">toolkit</a> <a href="/tags/ubuntu16-04/" style="font-size: 11.67px;">ubuntu16.04</a> <a href="/tags/websites/" style="font-size: 13.33px;">websites</a> <a href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" style="font-size: 10px;">公式推导</a> <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" style="font-size: 10px;">卡尔曼滤波</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 10px;">原创</a> <a href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" style="font-size: 10px;">土耳其双震</a> <a href="/tags/%E5%9C%B0%E9%9C%87/" style="font-size: 10px;">地震</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" style="font-size: 10px;">序贯平差</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" style="font-size: 10px;">数据分享</a> <a href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" style="font-size: 15px;">文献分享</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13.33px;">机器学习</a> <a href="/tags/%E6%B4%AA%E6%B0%B4/" style="font-size: 11.67px;">洪水</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" style="font-size: 10px;">系统安装</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 13.33px;">脚本</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" style="font-size: 18.33px;">软件安装</a>
     </div>
   </div>
 
@@ -959,7 +1222,7 @@ var themeMenus = {};
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

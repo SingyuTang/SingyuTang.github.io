@@ -175,6 +175,129 @@ var themeMenus = {};
         
           <section id="main">
   
+    <article id="post-ubuntu16.04安装Pycharm和Anaconda3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/">ubuntu16.04安装Pycharm和Anaconda3</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/" class="article-date">
+	  <time datetime="2023-09-26T04:39:07.000Z" itemprop="datePublished">九月 26, 2023</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-安装Anaconda"><a href="#1-安装Anaconda" class="headerlink" title="1. 安装Anaconda"></a>1. 安装Anaconda</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>官网网址： <a target="_blank" rel="noopener" href="https://repo.anaconda.com/archive/">https://repo.anaconda.com/archive/</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>查看<a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">如何在Linux服务器上安装Anaconda（超详细）</a>中的1.3 安装Anaconda进行安装即可。</p>
+<h2 id="配置虚拟环境"><a href="#配置虚拟环境" class="headerlink" title="配置虚拟环境"></a>配置虚拟环境</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yrwang_xd/article/details/105821002">anaconda 创建虚拟环境、激活及使用的基本方法</a></p>
+<h2 id="将虚拟环境名填入环境变量以便快捷启动"><a href="#将虚拟环境名填入环境变量以便快捷启动" class="headerlink" title="将虚拟环境名填入环境变量以便快捷启动"></a>将虚拟环境名填入环境变量以便快捷启动</h2><p>例如我的conda虚拟环境名为licsbas，打开终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br><span class="line">alias licsbas=&quot;source activate licsbas&quot;</span><br></pre></td></tr></table></figure><br>完成后保存文件并退出。<br>打开另一个终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure><br>测试是否生效，打开终端输入<code>licsbas</code>，即可激活该conda虚拟环境。</p>
+<h1 id="2-安装Pycharm"><a href="#2-安装Pycharm" class="headerlink" title="2. 安装Pycharm"></a>2. 安装Pycharm</h1><h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><p>官网网址：<a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/download/other.html">https://www.jetbrains.com/pycharm/download/other.html</a><br>社区版本的已经够用，同时建议不要安装太新的版本。<br>使用<code>uname -m</code>查看自己电脑的系统架构，如果输出为 <code>x86_64</code>，那么你的系统是 64 位的 x86 架构（通常我们称之为 x64）。如果输出是 <code>armv7l</code>或者以 arm 开头的其他值，那么你的系统是 ARM 架构。再根据不同的系统架构选择对应的版本进行下载。如下图所示，如果为x64架构，则下载 2023.2 - Linux (tar.gz)版本，如果是ARM架构，下载 2023.2 - Linux ARM64 (tar.gz) 版本。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230929231904.png" class=""></p>
+<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>下载完成后将 tar.gz包复制到 <code>/opt</code> 目录下，右键【提取到此处】即完成安装。</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>进入解压后的文件夹下的<code>bin</code>目录下，运行pycharm.sh文件。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/pycharm-community-2022.2.3/bin</span><br><span class="line">sudo ./pycharm.sh</span><br></pre></td></tr></table></figure></p>
+<h2 id="创建桌面快捷方式"><a href="#创建桌面快捷方式" class="headerlink" title="创建桌面快捷方式"></a>创建桌面快捷方式</h2><p>最简单有效的方式为按照上一步启动pycharm，依次选择上方导航栏中的【Tools】，【Create Desktop Entry…】，【OK】，再重启即可。</p>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44312186/article/details/98443374">Ubuntu创建pycharm的快捷方式两种方法（安装pycharm后启动方式）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">如何在Linux服务器上安装Anaconda（超详细）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">anaconda 创建虚拟环境、激活及使用的基本方法</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-ubuntu16.04安装jdk和panoply"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/">ubuntu16.04安装jdk和panoply</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/" class="article-date">
+	  <time datetime="2023-09-26T04:01:42.000Z" itemprop="datePublished">九月 26, 2023</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安装Panoply"><a href="#安装Panoply" class="headerlink" title="安装Panoply"></a>安装Panoply</h1><p>安装包网址： <a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/">https://www.giss.nasa.gov/tools/panoply/download/</a> </p>
+<p>自行选择对应版本（windows，macOS，Linux，这里是 linux . tgz 格式），也可点击<a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.2.7.tgz">这里</a>直接下载tgz格式。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230926122259.png" class=""><br>下载完成后，复制到 ubuntu 系统下 <code>/opt</code> 文件夹下提取即可，但是此时不能直接运行，需要 安装大于 11 版本的 JDK 才行，JDK下载安装参见下文。<br>JDK安装完成后，进入 panoply 文件夹下，打开终端输入 ./Panoply.sh 运行。</p>
+<h1 id="手动安装-JDK20"><a href="#手动安装-JDK20" class="headerlink" title="手动安装 JDK20"></a>手动安装 JDK20</h1><p>下载 JDK20 安装包：<a target="_blank" rel="noopener" href="https://jdk.java.net/20/">JDK20 下载链接</a>，选择适合电脑的版本，ubuntu16.04系统 点击<a target="_blank" rel="noopener" href="https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz">下载链接</a>直接下载。<br>提示：若进入JDK20下载网页显示JDK20版本已被取代，则下载最新的JDK版本，可输入其官网网址进行下载，网址链接样式如 <code>https://jdk.java.net/xx/</code>，其中 <code>xx</code> 表示你要下载的 JDK 版本，如下载 JDK21 则其链接为 <a target="_blank" rel="noopener" href="https://jdk.java.net/21/">https://jdk.java.net/21/</a> 。对于x64操作系统的电脑，下载下图所示的 tar.gz 格式安装包。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230926122708.png" class=""></p>
+<ul>
+<li>下载完成后，使用【提取到此处】解压；</li>
+<li>将解压后的文件夹移动到/usr 文件夹下</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv jdk* /usr</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>update-alternatives</code> 命令把 Java 安装到系统上，此时就不用再设置环境了。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/jdk-20.*/bin/java 2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置默认的 Java</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
+<p>上述命令会显示目前在系统里存在的所有版本的 Java，然后你选择一个你想要的版本就可以了。</p>
+<ul>
+<li>最后查看当前的 java 版本</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>本文参考博客： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/powerwu/articles/12095326.html">如何在Linux Ubuntu16/18上安装Java JDK11/8</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
     <article id="post-如何在DELL工作站T7820上安装ubuntu16-04操作系统"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -963,89 +1086,11 @@ Wahr et al.(2015)对极潮漂移的修正。
     
 
   
-    <article id="post-利用Clash科学上网"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">利用Clash科学上网</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="article-date">
-	  <time datetime="2023-04-22T04:54:06.000Z" itemprop="datePublished">四月 22, 2023</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Windows"><a href="#1-Windows" class="headerlink" title="1. Windows"></a>1. Windows</h1><h2 id="1-1-Clash下载与安装"><a href="#1-1-Clash下载与安装" class="headerlink" title="1.1 Clash下载与安装"></a>1.1 Clash下载与安装</h2><ol>
-<li><p>下载安装包<br>github 项目（windows）: <a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases">Clash</a></p>
-<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046111.png" class="">
-</li>
-<li><p>解压下载好的安装包，打开. exe 文件可用</p>
-<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046170.png" class="">
-</li>
-<li><p>【Generral】设置，如图</p>
-<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046205.png" class="">
-</li>
-</ol>
-<p><em>提示：该应用会使用代理，如不使用该应用后需要重新关闭代理才能联网。通过【设置】-【网络和 Internet】-【代理】-【手动设置代理】进行关闭。</em><br><img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046397.png" class=""></p>
-<h2 id="1-2-节点购买"><a href="#1-2-节点购买" class="headerlink" title="1.2 节点购买"></a>1.2 节点购买</h2><p>链接：<a target="_blank" rel="noopener" href="https://giegie.cloud/#/register?code=emwkY5R6">https://giegie.cloud/#/register?code=emwkY5R6</a></p>
-<ol>
-<li>创建账号<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682045834.png" class=""></li>
-<li>注册成功后，购买节点。<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046569.png" class=""></li>
-<li>点击【购买订阅】，选择合适产品，【下单】。</li>
-<li>导入订阅并设置代理。可通过购买网址中【使用文档】-【Windows 使用指南】查看如何将购买的订阅导入 Clash。<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046832.png" class=""></li>
-<li>如果未使用上述提供的网址购买节点而是使用其他店家进行购买的订阅，也可同样通过使用订阅地址的方式导入节点。方法如下：<br>（1）打开【Clash】；<br>（2）点击侧边栏的【Profiles】选项，如图所示（我这里为已经导入后的结果）；<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240422160803.png" class="">
-（3）将订阅地址复制到Clash窗口顶部的【Download from a URL】，点击【Download】即可导入。</li>
-<li>导入订阅完成，进入【Proxies】自行选择节点。<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046907.png" class="">
-</li>
-</ol>
-<h1 id="2-Ubuntu16-04"><a href="#2-Ubuntu16-04" class="headerlink" title="2. Ubuntu16.04"></a>2. Ubuntu16.04</h1><ol>
-<li>【下载】安装包下载：github 项目（windows）: <a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases">Clash</a>：下载<em>Clash. for. Windows-0.20.24-x64-linux. tar. gz</em></li>
-<li>【提取】将安装包拷入/opt 文件夹下（我一般把软件都放在<code>/opt</code>文件夹下），右键【提取到此处】</li>
-<li>【权限管理】将解压后的文件夹命名为Clash，进入Clash文件夹后，打开终端，输入 <code>*./cfw</code> 进行启动，这里注意不要用 root 权限（也不要用 sudo），如果出现一个权限问题，属于正常情况，查看错误后进入该文件夹中，使用 <code>sudo chmod -R 777 ./*</code> 即可（这里没有截图），然后回到Clash 文件夹中，使用 <code>*./cfw</code>命令即可，便已安装 Clash 完成，但未打开代理。</li>
-<li>【设置系统代理】：参照<a href="[ubuntu配置全局系统代理_kan2016的博客-CSDN博客](https://blog.csdn.net/kan2016/article/details/90411137">链接</a>中的配置系统代理) 中的配置系统代理进行代理设置，设置如图：<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1685888777.png" class="">
-<em>【网络设置】设置完代理后可能仍然面临无法上网的问题，参照<a href="[解决ubuntu虚拟机突然无法上网 - 知乎 (zhihu.com">此链接</a>](<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/545229582">https://zhuanlan.zhihu.com/p/545229582</a>)) 即可解决</em></li>
-<li>【节点导入】导入与 Windows 操作相同<br><strong>【可能错误】</strong><img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/fcad07e54d8f35650f4d177cdd1098b.jpg" class="">
-解决办法：不要使用 sudo 或者 root 用户</li>
-</ol>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clash/" rel="tag">Clash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
   </nav>
 
 </section>
@@ -1143,6 +1188,30 @@ Wahr et al.(2015)对极潮漂移的修正。
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2024/05/14/%E5%9C%9F%E8%80%B3%E5%85%B62023%E5%8F%8C%E9%9C%87%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%E6%95%B0%E6%8D%AE%E5%92%8C%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86-%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB/">土耳其2023双震部分参考数据和处理工具整理【附原文分享】</a></h6>
+              <span>五月 14, 2024</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2024/05/10/%E6%96%87%E7%8C%AE%E6%8E%A8%E8%8D%90-%E6%97%A0%E6%B5%8B%E7%AB%99%E6%B5%81%E5%9F%9F%E7%89%B9%E5%A4%A7%E6%B4%AA%E6%B0%B4%E7%9A%84%E5%85%A8%E7%90%83%E9%A2%84%E6%B5%8B/">文献推荐-无测站流域特大洪水的全球预测</a></h6>
+              <span>五月 10, 2024</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2024/05/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/">机器学习中的评价指标</a></h6>
               <span>五月 9, 2024</span>
             </div>
@@ -1185,30 +1254,6 @@ Wahr et al.(2015)对极潮漂移的修正。
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2024/04/23/%E5%9C%A8Ubuntu16-04%E4%B8%AD%E5%AE%89%E8%A3%85R%E5%92%8CWRF-Hydro%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7%E7%AE%B1rwrfhydro%E6%97%B6%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E4%B8%80/">在Ubuntu16.04中安装R和WRF-Hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一</a></h6>
-              <span>四月 23, 2024</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2024/04/03/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85WRF-Hydro-GIS-Pre-Processing-Tools5-2-0/">安装使用WRF Hydro GIS Pre-Processing Tools5.2.0</a></h6>
-              <span>四月 3, 2024</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1218,7 +1263,7 @@ Wahr et al.(2015)对极潮漂移的修正。
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1228,7 +1273,7 @@ Wahr et al.(2015)对极潮漂移的修正。
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda/" rel="tag">Anaconda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS/" rel="tag">ArcGIS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS-Pro/" rel="tag">ArcGIS Pro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clash/" rel="tag">Clash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GACOS/" rel="tag">GACOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAMMA/" rel="tag">GAMMA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRACE/" rel="tag">GRACE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Global-Mapper/" rel="tag">Global Mapper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HydroSHEDS/" rel="tag">HydroSHEDS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InSAR/" rel="tag">InSAR</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT%E6%A8%A1%E6%9D%BF/" rel="tag">PPT模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R/" rel="tag">R</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBAS-InSAR/" rel="tag">SBAS-InSAR</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWOT/" rel="tag">SWOT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel-1/" rel="tag">Sentinel-1</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS/" rel="tag">WPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF/" rel="tag">WRF</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" rel="tag">WRF Hydro GIS Pre-Processing Tools</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-Object/" rel="tag">[object Object]</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/" rel="tag">documents</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdal/" rel="tag">gdal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netCDF/" rel="tag">netCDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/question/" rel="tag">question</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tooklkit/" rel="tag">tooklkit</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websites/" rel="tag">websites</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag">原创</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%AA%E6%B0%B4/" rel="tag">洪水</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" rel="tag">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a><span class="tag-list-count">7</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda/" rel="tag">Anaconda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS/" rel="tag">ArcGIS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS-Pro/" rel="tag">ArcGIS Pro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clash/" rel="tag">Clash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GACOS/" rel="tag">GACOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAMMA/" rel="tag">GAMMA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRACE/" rel="tag">GRACE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Global-Mapper/" rel="tag">Global Mapper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HydroSHEDS/" rel="tag">HydroSHEDS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InSAR/" rel="tag">InSAR</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT%E6%A8%A1%E6%9D%BF/" rel="tag">PPT模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R/" rel="tag">R</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBAS-InSAR/" rel="tag">SBAS-InSAR</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWOT/" rel="tag">SWOT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel-1/" rel="tag">Sentinel-1</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS/" rel="tag">WPS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF/" rel="tag">WRF</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" rel="tag">WRF Hydro GIS Pre-Processing Tools</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-Object/" rel="tag">[object Object]</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/" rel="tag">documents</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdal/" rel="tag">gdal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netCDF/" rel="tag">netCDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/question/" rel="tag">question</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tooklkit/" rel="tag">tooklkit</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websites/" rel="tag">websites</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag">原创</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" rel="tag">土耳其双震</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%B0%E9%9C%87/" rel="tag">地震</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" rel="tag">数据分享</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%AA%E6%B0%B4/" rel="tag">洪水</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" rel="tag">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -1238,7 +1283,7 @@ Wahr et al.(2015)对极潮漂移的修正。
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Anaconda3/" style="font-size: 10px;">Anaconda3</a> <a href="/tags/ArcGIS/" style="font-size: 10px;">ArcGIS</a> <a href="/tags/ArcGIS-Pro/" style="font-size: 10px;">ArcGIS Pro</a> <a href="/tags/Clash/" style="font-size: 10px;">Clash</a> <a href="/tags/GACOS/" style="font-size: 14px;">GACOS</a> <a href="/tags/GAMMA/" style="font-size: 10px;">GAMMA</a> <a href="/tags/GDAL/" style="font-size: 10px;">GDAL</a> <a href="/tags/GRACE/" style="font-size: 12px;">GRACE</a> <a href="/tags/Global-Mapper/" style="font-size: 10px;">Global Mapper</a> <a href="/tags/HydroSHEDS/" style="font-size: 10px;">HydroSHEDS</a> <a href="/tags/InSAR/" style="font-size: 18px;">InSAR</a> <a href="/tags/JDK20/" style="font-size: 10px;">JDK20</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/PPT%E6%A8%A1%E6%9D%BF/" style="font-size: 10px;">PPT模板</a> <a href="/tags/Panoply/" style="font-size: 10px;">Panoply</a> <a href="/tags/Pycharm/" style="font-size: 10px;">Pycharm</a> <a href="/tags/R/" style="font-size: 10px;">R</a> <a href="/tags/SBAS-InSAR/" style="font-size: 12px;">SBAS-InSAR</a> <a href="/tags/SWOT/" style="font-size: 12px;">SWOT</a> <a href="/tags/Sentinel-1/" style="font-size: 16px;">Sentinel-1</a> <a href="/tags/Ubuntu16-04/" style="font-size: 20px;">Ubuntu16.04</a> <a href="/tags/WPS/" style="font-size: 10px;">WPS</a> <a href="/tags/WPS4-5-0/" style="font-size: 10px;">WPS4.5.0</a> <a href="/tags/WRF/" style="font-size: 12px;">WRF</a> <a href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" style="font-size: 12px;">WRF Hydro GIS Pre-Processing Tools</a> <a href="/tags/WRF-Hydro/" style="font-size: 10px;">WRF-Hydro</a> <a href="/tags/WRF-Hydro5-2-0/" style="font-size: 14px;">WRF-Hydro5.2.0</a> <a href="/tags/WRF4-5-2/" style="font-size: 12px;">WRF4.5.2</a> <a href="/tags/Windows10/" style="font-size: 10px;">Windows10</a> <a href="/tags/object-Object/" style="font-size: 10px;">[object Object]</a> <a href="/tags/documents/" style="font-size: 12px;">documents</a> <a href="/tags/gdal/" style="font-size: 10px;">gdal</a> <a href="/tags/netCDF/" style="font-size: 10px;">netCDF</a> <a href="/tags/question/" style="font-size: 10px;">question</a> <a href="/tags/rwrfhydro/" style="font-size: 10px;">rwrfhydro</a> <a href="/tags/tooklkit/" style="font-size: 12px;">tooklkit</a> <a href="/tags/toolkit/" style="font-size: 16px;">toolkit</a> <a href="/tags/ubuntu16-04/" style="font-size: 12px;">ubuntu16.04</a> <a href="/tags/websites/" style="font-size: 12px;">websites</a> <a href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" style="font-size: 10px;">公式推导</a> <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" style="font-size: 10px;">卡尔曼滤波</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 10px;">原创</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" style="font-size: 10px;">序贯平差</a> <a href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" style="font-size: 12px;">文献分享</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 12px;">机器学习</a> <a href="/tags/%E6%B4%AA%E6%B0%B4/" style="font-size: 10px;">洪水</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" style="font-size: 10px;">系统安装</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 14px;">脚本</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" style="font-size: 18px;">软件安装</a>
+      <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Anaconda3/" style="font-size: 10px;">Anaconda3</a> <a href="/tags/ArcGIS/" style="font-size: 10px;">ArcGIS</a> <a href="/tags/ArcGIS-Pro/" style="font-size: 10px;">ArcGIS Pro</a> <a href="/tags/Clash/" style="font-size: 10px;">Clash</a> <a href="/tags/GACOS/" style="font-size: 13.33px;">GACOS</a> <a href="/tags/GAMMA/" style="font-size: 10px;">GAMMA</a> <a href="/tags/GDAL/" style="font-size: 10px;">GDAL</a> <a href="/tags/GRACE/" style="font-size: 11.67px;">GRACE</a> <a href="/tags/Global-Mapper/" style="font-size: 10px;">Global Mapper</a> <a href="/tags/HydroSHEDS/" style="font-size: 10px;">HydroSHEDS</a> <a href="/tags/InSAR/" style="font-size: 20px;">InSAR</a> <a href="/tags/JDK20/" style="font-size: 10px;">JDK20</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/PPT%E6%A8%A1%E6%9D%BF/" style="font-size: 10px;">PPT模板</a> <a href="/tags/Panoply/" style="font-size: 10px;">Panoply</a> <a href="/tags/Pycharm/" style="font-size: 10px;">Pycharm</a> <a href="/tags/R/" style="font-size: 10px;">R</a> <a href="/tags/SBAS-InSAR/" style="font-size: 11.67px;">SBAS-InSAR</a> <a href="/tags/SWOT/" style="font-size: 11.67px;">SWOT</a> <a href="/tags/Sentinel-1/" style="font-size: 16.67px;">Sentinel-1</a> <a href="/tags/Ubuntu16-04/" style="font-size: 20px;">Ubuntu16.04</a> <a href="/tags/WPS/" style="font-size: 10px;">WPS</a> <a href="/tags/WPS4-5-0/" style="font-size: 10px;">WPS4.5.0</a> <a href="/tags/WRF/" style="font-size: 11.67px;">WRF</a> <a href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" style="font-size: 11.67px;">WRF Hydro GIS Pre-Processing Tools</a> <a href="/tags/WRF-Hydro/" style="font-size: 10px;">WRF-Hydro</a> <a href="/tags/WRF-Hydro5-2-0/" style="font-size: 13.33px;">WRF-Hydro5.2.0</a> <a href="/tags/WRF4-5-2/" style="font-size: 11.67px;">WRF4.5.2</a> <a href="/tags/Windows10/" style="font-size: 10px;">Windows10</a> <a href="/tags/object-Object/" style="font-size: 10px;">[object Object]</a> <a href="/tags/documents/" style="font-size: 11.67px;">documents</a> <a href="/tags/gdal/" style="font-size: 10px;">gdal</a> <a href="/tags/netCDF/" style="font-size: 10px;">netCDF</a> <a href="/tags/question/" style="font-size: 10px;">question</a> <a href="/tags/rwrfhydro/" style="font-size: 10px;">rwrfhydro</a> <a href="/tags/tooklkit/" style="font-size: 11.67px;">tooklkit</a> <a href="/tags/toolkit/" style="font-size: 18.33px;">toolkit</a> <a href="/tags/ubuntu16-04/" style="font-size: 11.67px;">ubuntu16.04</a> <a href="/tags/websites/" style="font-size: 13.33px;">websites</a> <a href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" style="font-size: 10px;">公式推导</a> <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" style="font-size: 10px;">卡尔曼滤波</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 10px;">原创</a> <a href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" style="font-size: 10px;">土耳其双震</a> <a href="/tags/%E5%9C%B0%E9%9C%87/" style="font-size: 10px;">地震</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" style="font-size: 10px;">序贯平差</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" style="font-size: 10px;">数据分享</a> <a href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" style="font-size: 15px;">文献分享</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 13.33px;">机器学习</a> <a href="/tags/%E6%B4%AA%E6%B0%B4/" style="font-size: 11.67px;">洪水</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" style="font-size: 10px;">系统安装</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 13.33px;">脚本</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" style="font-size: 18.33px;">软件安装</a>
     </div>
   </div>
 
@@ -1248,7 +1293,7 @@ Wahr et al.(2015)对极潮漂移的修正。
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
