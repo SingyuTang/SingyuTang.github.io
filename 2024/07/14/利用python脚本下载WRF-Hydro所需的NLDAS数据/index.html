@@ -17,31 +17,31 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>利用python脚本下载wrf所需的era5气象数据 | SingyuTang</title>
+  <title>利用python脚本下载wrf-hydro所需的nldas数并绘制变量相关图 | SingyuTang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="脚本WRFPythonERA5" />
+  <meta name="keywords" content="脚本WRFWRF-HydroPythonNLDAS绘图" />
   
   
   
   
-  <meta name="description" content="1.环境设置使用脚本下载数据之前，需要进行一些环境的设置。 （1）cdsapi url和key申请本教程的cdsapi key暂时只更新在Windows下运行，在Linux或MacOS系统申请使用的可查看ECMWF官网教程。在C:\User\xxx\目录下创建文件.cdsapirc，在文件中输入url和key，如获取api url和key可跳转博客或ECMWF官网教程进行申请。 12url: ht">
+  <meta name="description" content="SingyuTang的个人博客">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用python脚本下载WRF所需的ERA5气象数据">
-<meta property="og:url" content="https://singyutang.github.io/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF%E6%89%80%E9%9C%80%E7%9A%84ERA5%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:title" content="利用python脚本下载WRF-Hydro所需的NLDAS数并绘制变量相关图">
+<meta property="og:url" content="https://singyutang.github.io/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF-Hydro%E6%89%80%E9%9C%80%E7%9A%84NLDAS%E6%95%B0%E6%8D%AE/index.html">
 <meta property="og:site_name" content="SingyuTang">
-<meta property="og:description" content="1.环境设置使用脚本下载数据之前，需要进行一些环境的设置。 （1）cdsapi url和key申请本教程的cdsapi key暂时只更新在Windows下运行，在Linux或MacOS系统申请使用的可查看ECMWF官网教程。在C:\User\xxx\目录下创建文件.cdsapirc，在文件中输入url和key，如获取api url和key可跳转博客或ECMWF官网教程进行申请。 12url: ht">
+<meta property="og:description" content="SingyuTang的个人博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://singyutang.github.io/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF%E6%89%80%E9%9C%80%E7%9A%84ERA5%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE/image-1.png">
-<meta property="article:published_time" content="2024-07-13T16:58:46.000Z">
-<meta property="article:modified_time" content="2024-07-13T18:14:05.146Z">
+<meta property="article:published_time" content="2024-07-13T18:19:55.000Z">
+<meta property="article:modified_time" content="2024-07-13T18:22:06.590Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="脚本">
 <meta property="article:tag" content="WRF">
+<meta property="article:tag" content="WRF-Hydro">
 <meta property="article:tag" content="Python">
-<meta property="article:tag" content="ERA5">
+<meta property="article:tag" content="NLDAS">
+<meta property="article:tag" content="绘图">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://singyutang.github.io/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF%E6%89%80%E9%9C%80%E7%9A%84ERA5%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE/image-1.png">
   
     <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
   
@@ -183,7 +183,7 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-利用python脚本下载WRF所需的ERA5气象数据" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-利用python脚本下载WRF-Hydro所需的NLDAS数据" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -191,7 +191,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      利用python脚本下载WRF所需的ERA5气象数据
+      利用python脚本下载WRF-Hydro所需的NLDAS数并绘制变量相关图
     </h1>
   
 
@@ -199,8 +199,8 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF%E6%89%80%E9%9C%80%E7%9A%84ERA5%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE/" class="article-date">
-	  <time datetime="2024-07-13T16:58:46.000Z" itemprop="datePublished">七月 14, 2024</time>
+	Posted on <a href="/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF-Hydro%E6%89%80%E9%9C%80%E7%9A%84NLDAS%E6%95%B0%E6%8D%AE/" class="article-date">
+	  <time datetime="2024-07-13T18:19:55.000Z" itemprop="datePublished">七月 14, 2024</time>
 	</a>
 
       
@@ -211,19 +211,7 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-环境设置"><a href="#1-环境设置" class="headerlink" title="1.环境设置"></a>1.环境设置</h1><p>使用脚本下载数据之前，需要进行一些环境的设置。</p>
-<p>（1）cdsapi url和key申请<br><em>本教程的cdsapi key暂时只更新在Windows下运行，在Linux或MacOS系统申请使用的可查看<a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/api-how-to">ECMWF官网教程</a>。</em><br>在<code>C:\User\xxx\</code>目录下创建文件.cdsapirc，在文件中输入url和key，如获取api url和key可跳转<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40505953/article/details/124745310">博客</a>或<a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/api-how-to">ECMWF官网教程</a>进行申请。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url: https://cds.climate.copernicus.eu/api/v2</span><br><span class="line">key: 178412:48fc6bf4-c18a-4aee-9950-341af67efbf2</span><br></pre></td></tr></table></figure>
-<p>（2）python<br>在python环境中下载<code>cdsapi</code>库</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip installl cdsapi</span><br></pre></td></tr></table></figure>
-<h1 id="2-数据下载"><a href="#2-数据下载" class="headerlink" title="2.数据下载"></a>2.数据下载</h1><p>WRF运行所需的气象数据可以使用ECMWF机构的ERA5再分析数据，共包括<a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form">ERA5 hourly data on single levels from 1940 to present</a> 和<a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-pressure-levels?tab=form">ERA5 hourly data on pressure levels from 1940 to present</a>两种数据（分辨率都为0.25°），可以使用附件中的脚本进行下载，所需要的变量也可通过脚本查看。</p>
-<p>但该脚本下载通常会失败，但我们依旧可以使用该脚本在终端中提供的grib文件的URL地址复制到浏览器进行下载。</p>
-<p><em>注意：脚本运行期间终端长时间处于以下状态为正常，因为下载该数据需要排队，一般来说为30min~60min。</em><br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2024-07-14 01:12:39,393 INFO Welcome to the CDS</span><br><span class="line">2024-07-14 01:12:39,393 INFO Sending request to https://cds.climate.copernicus.eu/api/v2/resources/reanalysis-era5-pressure-levels</span><br><span class="line">2024-07-14 01:12:39,906 INFO Request is queued</span><br><span class="line">2024-07-14 01:12:41,420 INFO Request is running</span><br></pre></td></tr></table></figure></p>
-<img src="/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF%E6%89%80%E9%9C%80%E7%9A%84ERA5%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE/image-1.png" class="">
-<h1 id="3-WRF使用ERA5数据"><a href="#3-WRF使用ERA5数据" class="headerlink" title="3.WRF使用ERA5数据"></a>3.WRF使用ERA5数据</h1><p>详细WRF设置可查看博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40505953/article/details/124745310">WRF中使用ERA5再分析数据</a>。</p>
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_64799803/article/details/137654097">CSDN - 运行WRF的常用气象场数据</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40505953/article/details/124745310">CSDN - WRF中使用ERA5再分析数据</a></p>
-<h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><p><a href="/downloads/dld_ERA5_to_WRF.py" download>ERA5下载脚本</a></p>
-
+        
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -233,7 +221,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ERA5/" rel="tag">ERA5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF/" rel="tag">WRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLDAS/" rel="tag">NLDAS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF/" rel="tag">WRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%98%E5%9B%BE/" rel="tag">绘图</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a></li></ul>
 
       
         <div id="donation_div"></div>
@@ -283,19 +271,10 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF-Hydro%E6%89%80%E9%9C%80%E7%9A%84NLDAS%E6%95%B0%E6%8D%AE/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          利用python脚本下载WRF-Hydro所需的NLDAS数并绘制变量相关图
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/07/12/WRF-Hydro%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83%E5%8E%9F%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB%E4%BA%8C/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF%E6%89%80%E9%9C%80%E7%9A%84ERA5%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">WRF-Hydro模型配置的相关参数配置参考原论文分享二</div>
+      <div class="article-nav-title">利用python脚本下载WRF所需的ERA5气象数据</div>
     </a>
   
 </nav>
@@ -309,7 +288,7 @@ var a = new Donate({
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">1.环境设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">2.数据下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-WRF%E4%BD%BF%E7%94%A8ERA5%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">3.WRF使用ERA5数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2"><span class="nav-number">4.</span> <span class="nav-text">参考博客</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">附件</span></a></li></ol>
+      <ol class="nav">无</ol>
     
     </div>
   </aside>
