@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>运行wps、wrf、wrf-hydro的一些错误总结一 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="ubuntu16.04WRF-Hydro5.2.0WRF4.5.2WPS4.5.0错误总结" />
+  
+  
+  
+  
+  <meta name="description" content="运行WRF&#x2F;WRF-Hydro的一些错误经验1.执行mpirun -np 1 .&#x2F;real.exe命令，rsl.error.0000文件出现以下错误。 12345678910 metgrid input_wrf.F first_date_input &#x3D; 2024-03-12_00:00:00 metgrid input_wrf.F first_date_nml &#x3D; 2024-03-12_00:00">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运行WPS、WRF、WRF-Hydro的一些错误总结一">
+<meta property="og:url" content="https://singyutang.github.io/2024/07/22/%E8%BF%90%E8%A1%8CWPS%E3%80%81WRF%E3%80%81WRF-Hydro%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93%E4%B8%80/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="运行WRF&#x2F;WRF-Hydro的一些错误经验1.执行mpirun -np 1 .&#x2F;real.exe命令，rsl.error.0000文件出现以下错误。 12345678910 metgrid input_wrf.F first_date_input &#x3D; 2024-03-12_00:00:00 metgrid input_wrf.F first_date_nml &#x3D; 2024-03-12_00:00">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-22T03:50:07.000Z">
+<meta property="article:modified_time" content="2024-07-22T04:16:16.410Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="ubuntu16.04">
+<meta property="article:tag" content="WRF-Hydro5.2.0">
+<meta property="article:tag" content="WRF4.5.2">
+<meta property="article:tag" content="WPS4.5.0">
+<meta property="article:tag" content="错误总结">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-运行WPS、WRF、WRF-Hydro的一些错误总结一" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      运行WPS、WRF、WRF-Hydro的一些错误总结一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/07/22/%E8%BF%90%E8%A1%8CWPS%E3%80%81WRF%E3%80%81WRF-Hydro%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93%E4%B8%80/" class="article-date">
+	  <time datetime="2024-07-22T03:50:07.000Z" itemprop="datePublished">七月 22, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="运行WRF-WRF-Hydro的一些错误经验"><a href="#运行WRF-WRF-Hydro的一些错误经验" class="headerlink" title="运行WRF/WRF-Hydro的一些错误经验"></a>运行WRF/WRF-Hydro的一些错误经验</h1><p>1.执行<code>mpirun -np 1 ./real.exe</code>命令，rsl.error.0000文件出现以下错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> metgrid input_wrf.F first_date_input = 2024-03-12_00:00:00</span><br><span class="line"> metgrid input_wrf.F first_date_nml = 2024-03-12_00:00:00</span><br><span class="line"> i_parent_start from namelist.input file =           53</span><br><span class="line"> i_parent_start from gridded input file  =           10</span><br><span class="line"> j_parent_start from namelist.input file =           25</span><br><span class="line"> j_parent_start from gridded input file  =           20</span><br><span class="line">d02 2024-03-12_00:00:00 ---- ERROR: Nest start locations do not match: namelist.input vs gridded input file</span><br><span class="line">NOTE:       1 namelist vs input data inconsistencies found.</span><br><span class="line">-------------- FATAL CALLED ---------------</span><br><span class="line">FATAL CALLED FROM FILE:  &lt;stdin&gt;  LINE:    1298</span><br></pre></td></tr></table></figure>
+<p>解决办法：</p>
+<blockquote>
+<p>使namelist.wps和namelist.input两个文件中的 i_parent_start 和 j_parent_start 两个参数保持一致。</p>
+</blockquote>
+<p>2.操作：WRF-Hydro在执行xxx命令出现错误。</p>
+<p>错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netcdf_layer.f90:77:19:            </span><br><span class="line">    &amp;  comm = object%mpi_communicator, info = object%default_info)                    </span><br><span class="line">1 Error: Keyword argument ‘comm’ at (1) is not in the procedure</span><br></pre></td></tr></table></figure>
+<p>重新设置netcdf环境，参考<a href="https://singyutang.github.io/2024/03/23/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF-Hydro5-2-0/">教程</a>。</p>
+<p>3.操作：安装netcdf-fortran，尽管我的netcdf-c的版本大于4.7.4依旧error。</p>
+<p>错误：configure netcdf-fortran error，详细错误如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">..l...</span><br><span class="line">checking for nc_def_var_szip...no</span><br><span class="line">configure:error:netcdf-c version 4.7.4 or greater is required.</span><br></pre></td></tr></table></figure>
+<p>解决方案: 向<code>~/.bashrc</code>文件添加环境变量如下，主要是<code>LDFLAGS</code>变量和<code>CPPFLAGS</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## netcdf 4.9.2</span><br><span class="line"></span><br><span class="line">export WRFHYDRO_DIR=~/coding/WRF_Hydro/LIBRARIES</span><br><span class="line">export NETCDF=$WRFHYDRO_DIR/netcdf</span><br><span class="line">export LDFLAGS=-L$NETCDF/lib</span><br><span class="line">export CPPFLAGS=-I$NETCDF/include</span><br></pre></td></tr></table></figure>
+<p>感谢<a target="_blank" rel="noopener" href="https://github.com/Unidata/netcdf-fortran/issues/299">WardF</a>的回答，同时参考了他的<a target="_blank" rel="noopener" href="https://github.com/Unidata/netcdf-fortran/issues/278">另一次解答</a>。</p>
+<p>4.利用3的解决方案解决了错误后出现了另外一个错误。错误大致如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">configure error: netcdf could not link to netcdfc library.Please set LDFLAGS;</span><br><span class="line">for static builds set LIBS to the results fo nc-config--libs ....</span><br></pre></td></tr></table></figure>
+<p>解决方案：没能直接解决这个问题。也参考过别的博客上在环境变量中添加或更改<code>LDFLAGS</code>和<code>LIBS</code>的值依旧未成功，在<code>configure</code>时添加这两个参数也未成功。最终通过在<code>/usr/local/netcdf4</code>中新建了一个netcdf环境才解决，相应的安装教程和环境设置参考xxx。虽然没能查明原因，但是很大可能是因为在安装netcdf-fortran时netcdf-c库、netcdf-fortran库、zlib库、hdf5库和curl库的安装位置和安装顺序的原因，在教程xxx中将其放在同个位置下进行另一个版本的netcdf安装并重新设置环境变量就解决了这个问题。</p>
+<p>综合3和4，出现这两个错误的很大程度上的原因是因为通过教程安装的netcdf版本为v4.1.3，不满足运行WRF-Hydro的条件，WRF-Hydro运行的netcdf版本为v4.4+。</p>
+<p>5.操作：在WRF-Hydro中执行<code>./compile_offline_Noah.sh setEnvar.sh</code></p>
+<p>错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f951: Warning: Nonexistent include directory ‘/home/root123/coding/WRF/Build_WRF/LIBRARIES/netcdf/include’ [-Wmissing-include-dirs]</span><br><span class="line">netcdf_layer.f90:2:6:</span><br><span class="line"></span><br><span class="line">   use netcdf</span><br><span class="line">      1</span><br><span class="line">Fatal Error: Can&#x27;t open module file ‘netcdf.mod’ for reading at (1): 没有那个文件或目录</span><br><span class="line">compilation terminated.</span><br></pre></td></tr></table></figure>
+<p>解决方案：netcdf版本不够，升级版本，参考<a href="https://singyutang.github.io/2024/03/23/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF-Hydro5-2-0/">安装教程</a>。</p>
+<p>6.[错误] 运行命令<code>mpirun -np 4 ./wrf_hydro.exe &gt; log</code>出现错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"> Calling config noahlsm_offline</span><br><span class="line"> Calling config noahlsm_offline</span><br><span class="line"> Calling config noahlsm_offline</span><br><span class="line"> Calling config noahlsm_offline</span><br><span class="line">WARNING:  LDASIN file has a perverse version identifier</span><br><span class="line">ldasin_version =        0</span><br><span class="line">WARNING:  LDASIN file has a perverse version identifier</span><br><span class="line">ldasin_version =        0</span><br><span class="line">WARNING:  LDASIN file has a perverse version identifier</span><br><span class="line">ldasin_version =        0</span><br><span class="line">WARNING:  LDASIN file has a perverse version identifier</span><br><span class="line">ldasin_version =        0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> SNOW HEIGHT NOT FOUND - VALUE DEFINED IN LSMINIT</span><br><span class="line"> SNOW HEIGHT NOT FOUND - VALUE DEFINED IN LSMINIT</span><br><span class="line"> SNOW HEIGHT NOT FOUND - VALUE DEFINED IN LSMINIT</span><br><span class="line"> SNOW HEIGHT NOT FOUND - VALUE DEFINED IN LSMINIT</span><br><span class="line"> The job is stopped due to the fatal error. hydro.namelist ERROR: Please specify a udmap_file file.</span><br><span class="line"> ---</span><br><span class="line"> FATAL ERROR! Program stopped. Recompile with environment variable HYDRO_D set to 1 for enhanced debug information.</span><br><span class="line"></span><br><span class="line"> The job is stopped due to the fatal error. hydro.namelist ERROR: Please specify a udmap_file file.</span><br><span class="line"> ---</span><br><span class="line"> FATAL ERROR! Program stopped. Recompile with environment variable HYDRO_D set to 1 for enhanced debug information.</span><br><span class="line"></span><br><span class="line"> The job is stopped due to the fatal error. hydro.namelist ERROR: Please specify a udmap_file file.</span><br><span class="line"> ---</span><br><span class="line"> FATAL ERROR! Program stopped. Recompile with environment variable HYDRO_D set to 1 for enhanced debug information.</span><br><span class="line"></span><br><span class="line"> The job is stopped due to the fatal error. hydro.namelist ERROR: Please specify a udmap_file file.</span><br><span class="line"> ---</span><br><span class="line"> FATAL ERROR! Program stopped. Recompile with environment variable HYDRO_D set to 1 for enhanced debug information.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">===================================================================================</span><br><span class="line">=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES</span><br><span class="line">=   EXIT CODE: 1</span><br><span class="line">=   CLEANING UP REMAINING PROCESSES</span><br><span class="line">=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES</span><br><span class="line">===================================================================================</span><br></pre></td></tr></table></figure>
+<p>解决方案:重新编译wrf-hydro，在setEnvar.sh文件中调整WRF_HYDRO参数为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HYDRO_D=1</span><br></pre></td></tr></table></figure>
+<p>重新编译</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">./compile_offline_NoahMP.sh setEnvar.sh</span><br></pre></td></tr></table></figure>
+<p>7.[错误]运行命令 <code>mpirun -np 4 ./wrf_hydro.exe &gt; log</code>出现错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> The job is stopped due to the fatal error. hydro.namelist ERROR: Please specify a udmap_file file.</span><br><span class="line"> The job is stopped due to the fatal error. hydro.namelist ERROR: Please specify a udmap_file file.</span><br><span class="line"> The job is stopped due to the fatal error. hydro.namelist ERROR: Please specify a udmap_file file.</span><br><span class="line"> The job is stopped due to the fatal error. hydro.namelist ERROR: Please specify a udmap_file file.</span><br><span class="line"></span><br><span class="line">===================================================================================</span><br><span class="line">=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES</span><br><span class="line">=   EXIT CODE: 1</span><br><span class="line">=   CLEANING UP REMAINING PROCESSES</span><br><span class="line">=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES</span><br><span class="line">===================================================================================</span><br></pre></td></tr></table></figure>
+<p>解决方案：修改 hydro.namelist 文件中的UDMP_OPT参数和udmap_file参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UDMP_OPT = 0</span><br><span class="line">udmap_file = &quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>8.[错误]运行命令 <code>mpirun -np 4 ./wrf_hydro.exe</code>出现错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">*** Error in `./wrf_hydro.exe&#x27;: free(): invalid next size (fast): 0x000000001dafcb80 ***</span><br><span class="line">*** Error in `./wrf_hydro.exe&#x27;: munmap_chunk(): invalid pointer: 0x000000001bd0e9f0 ***</span><br><span class="line">======= Backtrace: =========</span><br><span class="line">======= Backtrace: =========</span><br><span class="line">/lib/x86_64-linux-gnu/libc.so.6(+0x777f5)[0x7f480ffc37f5]</span><br><span class="line">/lib/x86_64-linux-gnu/libc.so.6(+0x777f5)[0x7f7f0b95a7f5]</span><br><span class="line">/lib/x86_64-linux-gnu/libc.so.6(cfree+0x1a8)[0x7f480ffd06e8]</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">#13  0x46E9B9 in __module_noahmp_hrldas_driver_MOD_land_driver_ini</span><br><span class="line">#9  0x4A1404 in __module_hydro_io_MOD_read_routelink</span><br><span class="line">#10  0x55D48A in __module_routing_MOD_landrt_ini</span><br><span class="line">#11  0x52A6FA in __module_hydro_drv_MOD_hydro_ini</span><br><span class="line">#12  0x52C889 in __module_hrldas_hydro_MOD_hrldas_cpl_hydro_ini</span><br><span class="line">#13  0x52FB65 in hrldas_drv_hydro_ini_</span><br><span class="line">#14  0x46E9B9 in __module_noahmp_hrldas_driver_MOD_land_driver_ini</span><br></pre></td></tr></table></figure>
+<p>不使用mpirun命令执行<code>./wrf_hydro.exe</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">RNING: KDAY is deprecated and may be removed in a future version, please use KHOUR.</span><br><span class="line">WARNING: In land_driver_ini() - KHOUR &lt; 0. DEFINED USING KDAY.</span><br><span class="line">WARNING:  LDASIN file has a perverse version identifier</span><br><span class="line">ldasin_version =        0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> SNOW HEIGHT NOT FOUND - VALUE DEFINED IN LSMINIT</span><br><span class="line">getting dimension from file: ./DOMAIN/Route_Link.nc</span><br><span class="line"> reading from hydrotbl_f(HYDRO.TBL.nc)  file ....</span><br><span class="line"> WARNING: get2d_real: failed to find the variables: CHAN_DEPTH and CHAN_DEPTH                                                                                                                                                                                    </span><br><span class="line"> compound_channel is FALSE in hydro.namelist.</span><br><span class="line"> read gwbasmskfil as nc format: ./DOMAIN/GWBASINS.nc</span><br><span class="line"> read GWBUCKPARM file as nc format: ./DOMAIN/GWBUCKPARM.nc</span><br><span class="line"> Resetting RESTART Accumulation Variables to 0...           1</span><br><span class="line">application called MPI_Abort(comm=0x84000000, 1) - process 0</span><br></pre></td></tr></table></figure>
+<p>使用<code>./wrf_hydro.exe &gt; log</code>打印日志文件，log文件中的错误意思差不多为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无法找到wrfout_d01_2024-02-01_00:00:00相关forcing数据</span><br></pre></td></tr></table></figure>
+<p>解决方案</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FORCING文件夹中的文件名不能使用wrfout_d02_*，必须使用wrfout_d01_*，</span><br><span class="line">如果要使用d02的数据也必须重命名为d01</span><br></pre></td></tr></table></figure>
+<p>9.[错误]运行命令 <code>mpirun -np 4 ./wrf_hydro.exe</code>出现错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> starting wrf task            0  of            4</span><br><span class="line"> starting wrf task            1  of            4</span><br><span class="line"> starting wrf task            2  of            4</span><br><span class="line"> starting wrf task            3  of            4</span><br><span class="line"></span><br><span class="line">===================================================================================</span><br><span class="line">=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES</span><br><span class="line">=   EXIT CODE: 139</span><br><span class="line">=   CLEANING UP REMAINING PROCESSES</span><br><span class="line">=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES</span><br><span class="line">===================================================================================</span><br><span class="line">YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Segmentation fault (signal 11)</span><br><span class="line">This typically refers to a problem with your application.</span><br><span class="line">Please see the FAQ page for debugging suggestions</span><br></pre></td></tr></table></figure>
+<p>解决方案</p>
+<p>减小时间步长，同时能够被时间间隔整除，history_interval是积分步长time_step的整数倍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&amp;domains</span><br><span class="line">time_step </span><br></pre></td></tr></table></figure>
+<p>分辨率太高，区域太大，内存不足，参数化方案更换（微物理方案）</p>
+<p>10.利用i_parent_start和e_we选择WRF domain的问题</p>
+<p>i_parent_start和e_we相关</p>
+<p>j_parent_start和e_sn相关</p>
+<p>11.运行命令<code>./metgrid.exe</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Processing domain 1 of 3</span><br><span class="line"> Processing 2024-02-01_00</span><br><span class="line">    FILE</span><br><span class="line">WARNING: Field PRES has missing values at level 200100 at (i,j)=(1,1)</span><br><span class="line">WARNING: Field PMSL has missing values at level 200100 at (i,j)=(1,1)</span><br><span class="line">WARNING: Field PSFC has missing values at level 200100 at (i,j)=(1,1)</span><br><span class="line">ERROR: Missing values encountered in interpolated fields. Stopping.</span><br><span class="line">application called MPI_Abort(MPI_COMM_WORLD, 0) - process 0</span><br></pre></td></tr></table></figure>
+<p>ERA5数据范围比domain小，重新下载</p>
+<p>12.运行<code>./wrf_hydro.exe</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">......</span><br><span class="line">(Near) match for destination layer:  Taking destination layer at  0.7000 from source layer at  0.7000</span><br><span class="line">(Near) match for destination layer:  Taking destination layer at  1.5000 from source layer at  1.5000</span><br><span class="line"> xstart,xend, ystart, yend           1         159           1         159</span><br><span class="line"> xstart,xend, ystart, yend           1         159           1         159</span><br><span class="line"> xstart,xend, ystart, yend           1         159           1         159</span><br><span class="line"> xstart,xend, ystart, yend           1         159           1         159</span><br><span class="line">  SOIL TEXTURE CLASSIFICATION = STAS FOUND          19  CATEGORIES</span><br><span class="line"> SNOW HEIGHT NOT FOUND - VALUE DEFINED IN LSMINIT</span><br><span class="line"> NTIME =          216 KHOUR=         216 dtbl =    3600.00000    </span><br><span class="line"> zsoil/soil_thick_input =   0.100000001      0.300000012      0.600000024       1.00000000    </span><br><span class="line"> The job is stopped due to the fatal error. HYDRO_nlst namelist error in read_rt_nlst</span><br><span class="line">application called MPI_Abort(comm=0x84000000, 1) - process 0</span><br></pre></td></tr></table></figure>
+<p>解决方案</p>
+<p>hydro.namelist中的变量格式错误，我这里是这样的（不知道什么时候弄得）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GWBUCKPARM_file = &quot;./DOMAIN/</span><br><span class="line">GWBUCKPARM.nc&quot;</span><br><span class="line">................................................................</span><br></pre></td></tr></table></figure>
+<p>需更改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GWBUCKPARM_file = &quot;./DOMAIN/GWBUCKPARM.nc&quot;</span><br></pre></td></tr></table></figure>
+<p>3.运行命令   <code>./wrf_hydro.exe</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PrPt/LkIn   0 *** ********** ********* 1588 1590</span><br><span class="line">PrPt/LkIn   0 *** ********** ********* 1589 1590</span><br><span class="line">PrPt/LkIn   0 *** ********** ********* 1590 1590</span><br><span class="line"> found type 0 nodes         291</span><br><span class="line"> total number of channel elements         292</span><br><span class="line"> total number of NLINKS               2528100</span><br><span class="line"> Apparent error in network topology         292     2528100</span><br><span class="line"> ixrt =        1590 jxrt =        1590</span><br><span class="line"> The job is stopped due to the fatal error. READ_ROUTEDIM</span><br><span class="line">application called MPI_Abort(comm=0x84000000, 1) - process 0</span><br></pre></td></tr></table></figure>
+<p>终端打印的错误中开始报错的位置及信息如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">(Near) match for destination layer:  Taking destination layer at  1.5000 from source layer at  1.5000</span><br><span class="line"> xstart,xend, ystart, yend           1         159           1         159</span><br><span class="line"> xstart,xend, ystart, yend           1         159           1         159</span><br><span class="line"> xstart,xend, ystart, yend           1         159           1         159</span><br><span class="line"> xstart,xend, ystart, yend           1         159           1         159</span><br><span class="line">  SOIL TEXTURE CLASSIFICATION = STAS FOUND          19  CATEGORIES</span><br><span class="line"> SNOW HEIGHT NOT FOUND - VALUE DEFINED IN LSMINIT</span><br><span class="line"> NTIME =          216 KHOUR=         216 dtbl =    3600.00000    </span><br><span class="line"> zsoil/soil_thick_input =   0.100000001      0.300000012      0.600000024       1.00000000    </span><br><span class="line"> rt_domain(did)%g_IXRT, rt_domain(did)%g_JXRT, rt_domain(did)%ixrt, rt_domain(did)%jxrt</span><br><span class="line">        1431        1431        1431        1431</span><br><span class="line"> rt_domain(did)%ix, rt_domain(did)%jx </span><br><span class="line">         159         159</span><br><span class="line"> global_nx, global_ny, local_nx, local_ny</span><br><span class="line">         159         159         159         159</span><br><span class="line"> Channel Option in Routedim is            3</span><br><span class="line"> get2d_int: failed to read the variable: CHANNELGRID in ./DOMAIN/Fulldom_hires.nc</span><br><span class="line"> read LINKID for CH_LNKRT from ./DOMAIN/Fulldom_hires.nc</span><br><span class="line"> get2d_int: failed to read the variable: FLOWDIRECTION in ./DOMAIN/Fulldom_hires.nc</span><br><span class="line"> get2d_int: failed to read the variable: LAKEGRID in ./DOMAIN/Fulldom_hires.nc</span><br><span class="line"> WARNING: get2d_real: failed to read the variable: LATITUDE or LATITUDE</span><br><span class="line"> WARNING: get2d_real: failed to read the variable: LONGITUDE or LONGITUDE</span><br><span class="line"> NLINKS IS      2047761</span><br><span class="line">PrPt/LkIn   0 *** ********** *********    1    1</span><br><span class="line">PrPt/LkIn   0 *** ********** *********    2    1</span><br><span class="line">PrPt/LkIn   0 *** ********** *********    3    1</span><br><span class="line">PrPt/LkIn   0 *** ********** *********    4    1</span><br><span class="line">PrPt/LkIn   0 *** ********** *********    5    1</span><br><span class="line">PrPt/LkIn   0 *** ********** *********    6    1</span><br><span class="line">...................................................................</span><br><span class="line">...................................................................</span><br><span class="line">...................................................................</span><br><span class="line">...................................................................</span><br></pre></td></tr></table></figure>
+<p>分析</p>
+<p>与AGGFACTRT有关，具体原因未知。目前想到的办法就是提高geo_em.d01的分辨率或者尽可能使用小的AGGFACTRT，大的DXRT（但是这个一般在洪水预测中低于300），所以只能提高geo_em.d01的分辨率。</p>
+<p>一个很大可能性的原因：根据错误出现开始的位置，报错信息与Fulldom_hires文件有关，可能是Fulldom_hires中的变量和geo_em.d01、FORCING的分辨率冲突。分析如下：在WPS GIS Preprocessing工具箱中有一个参数为Ridgridding Factor，可计算Routing Resolution = GEOGRID Resolution / Regridding Factor. 包括Fulldom_hires文件在内的由WPS GIS Preprocessing工具箱生成的所有变量分辨率都为Routing Resolution，FORCING的分辨率与geo_em.d01的分辨率相同，如果AGGFACTRT和DXRT设置不恰当，geo_em.d01与FORCING生成的子网格的分辨率就和Fulldom_hires的分辨率对不上，就会出现上述错误。</p>
+<p>与DOMAIN中是否有海洋无关。</p>
+<p>解决方案</p>
+<p>公式：Routing Resolution = GEOGRID Resolution / Regridding Factor</p>
+<pre><code>        GEOGRID Resolution = AGGFACTRT × DXRT
+</code></pre><p>预测洪水要求子网格大小 DXRT &lt; 300m</p>
+<p>假设DXRT 取300m，geo_em.d01的分辨率为3km，则Routing Resolution为300m，推导得出Regridding Factor为10，AGGFACTRT等于10。</p>
+<p>14.运行命令<code>./wrf.exe</code>或<code>mpirun -np 2 ./wrf.exe</code>出现段错误。</p>
+<p>物理参数使用默认。参数错误？格网点太多？分辨率太低或太高？内存不够？我使用两个（27和9km）或三个域（27、9、3km）运行时就会出错，用一个域（3km）跑模型的时候就不会，是不是证明和内存有关。</p>
+<p>15.使用NLDAS重新网格化后的数据（已经替换NAN值）作为FORCING数据运行<code>mpirun -np 6 ./wrf_hydro.exe</code>报错，通过diag_hydro.00000文件查看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t0OutputFlag:            1</span><br><span class="line">read forcing data at 2024-02-01_00:00:00./FORCING/2024020101.LDASIN_DOMAIN1</span><br><span class="line">name = &quot;T2D&quot;</span><br><span class="line">The job is stopped due to the fatal error. In get_2d_netcdf() - nf90_get_var problem</span><br></pre></td></tr></table></figure>
+<p>FORCING中的LDASIN_DOMAIN1类型数据覆盖范围与DOMAIN中的geo_em.d01数据覆盖范围不匹配，一开始我以为FORCING是全球覆盖的，就直接拷贝了过来，后来可视化发现覆盖范围对不上，一定要用geo_em.d01数据和NLDAS数据重新网格化，保证LDASIN_DOMAI数据是DOMAIN中的geo_em.d01生成。</p>
+<p>16.<code>mpirun -np 4 ./wrf_hydro.exe</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> get2d_int: failed to read the variable: LAKEGRID in ./DOMAIN/Fulldom_hires.nc</span><br><span class="line"> WARNING: get2d_real: failed to read the variable: LATITUDE or LATITUDE</span><br><span class="line"> WARNING: get2d_real: failed to read the variable: LONGITUDE or LONGITUDE</span><br><span class="line"> Apparent error in network topology           4       13967</span><br><span class="line"> ixrt =         150 jxrt =         160</span><br><span class="line"> The job is stopped due to the fatal error. READ_ROUTEDIM</span><br><span class="line"> ---</span><br><span class="line"> FATAL ERROR! Program stopped. Recompile with environment variable HYDRO_D set to 1 for enhanced debug information.</span><br><span class="line"></span><br><span class="line">application called MPI_Abort(comm=0x84000004, 1) - process 0</span><br><span class="line"></span><br><span class="line">===================================================================================</span><br><span class="line">=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES</span><br><span class="line">=   EXIT CODE: 1</span><br><span class="line">=   CLEANING UP REMAINING PROCESSES</span><br><span class="line">=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES</span><br><span class="line">===================================================================================</span><br></pre></td></tr></table></figure>
+<p>调整DXRT和AGGFACTRT参数，DXRT×AGGFACTRT=geo_dem.d0*分辨率</p>
+<p>17.<code>mpirun -np 4 ./ungrib.exe</code>报错，错误位于ungrib.log。错误如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">...</span><br><span class="line">2024-07-21 16:04:32.899 ---       200         X         -         X         X         X         X         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         - </span><br><span class="line">2024-07-21 16:04:32.902 ---       100         X         -         X         X         X         X         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         -         - </span><br><span class="line">2024-07-21 16:04:32.906 --- -------------------------------------------------</span><br><span class="line">2024-07-21 16:04:36.462 --- INFORM: First pass done, doing a reprocess</span><br><span class="line">2024-07-21 16:04:36.485 --- ERROR: unknown out_format, ifv = 1176463528</span><br></pre></td></tr></table></figure>
+<p>解决办法; 不能使用mpirun运行ungrib.exe</p>
+<h1 id="其他错误参考资料"><a href="#其他错误参考资料" class="headerlink" title="其他错误参考资料"></a>其他错误参考资料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangyimings/article/details/128979015">CSDN-WRF报错记录</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/517219915">知乎-WRF模型模拟时所遇到的问题及解决方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://wk-atmchem.github.io/2021/06/03/WRFCMAQ-bugandSolutions/">WRF常见bug及解决方案</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/stanlyYP/article/details/127365156">CSDN-WRF-Hydro运行过程与错误总结</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/" rel="tag">错误总结</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/07/15/WRF-Hydro%E4%BD%BF%E7%94%A8%E4%B8%AD%E4%B8%8ENLDAS%E7%9B%B8%E5%85%B3%E7%9A%84%E5%A4%84%E7%90%86%E8%84%9A%E6%9C%AC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">WRF-Hydro使用的一些处理脚本</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8CWRF-WRF-Hydro%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E7%BB%8F%E9%AA%8C"><span class="nav-number">1.</span> <span class="nav-text">运行WRF&#x2F;WRF-Hydro的一些错误经验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%94%99%E8%AF%AF%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">其他错误参考资料</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2024 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
