@@ -199,11 +199,14 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为。</p>
+        <p>本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为有降雨变量（total_precipitation）和无降雨变量（total_precipitation）两种处理方法。</p>
 <h1 id="ERA5-Land数据下载"><a href="#ERA5-Land数据下载" class="headerlink" title="ERA5_Land数据下载"></a>ERA5_Land数据下载</h1><p><a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land?tab=form">ERA5-Land hourly data from 1950 to present</a></p>
 <p>下载变量：10m_u_component_of_wind’,                 ‘10m_v_component_of_wind’, ‘2m_dewpoint_temperature’,<br>            ‘2m_temperature’, ‘surface_pressure’, ‘surface_solar_radiation_downwards’,<br>            ‘surface_thermal_radiation_downwards’, ‘total_precipitation’</p>
 <p>下载数据格式：Zipped NetCDF-3 (experimental)</p>
+<p><em>根据需要选择是否下载total_precipitation变量</em></p>
 <h1 id="处理代码下载"><a href="#处理代码下载" class="headerlink" title="处理代码下载"></a>处理代码下载</h1><p><a target="_blank" rel="noopener" href="https://github.com/SingyuTang/prepare_era5_land_for_wrf_hydro_forcing">prepare_era5_land_for_wrf_hydro_forcing</a></p>
+<h1 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h1><p>  （1）创建文件夹input_files1；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir input_files1</span><br></pre></td></tr></table></figure><br>  （2）读取处理ERA5数据变量；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python read_era5_land_with_precipitaion.py</span><br></pre></td></tr></table></figure><br>  （3）生成重新网格化权重网格文件；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncl &#x27;interp_opt=&quot;bilinear&quot;&#x27; &#x27;srcGridName=&quot;input_files1/ERA5_025_1H.20060601.0100.nc4&quot;&#x27; &#x27;dstGridName=&quot;geo_em.d03.nc&quot;&#x27; ERA52WRFHydro_generate_weights.ncl</span><br></pre></td></tr></table></figure><br>  （4）重新网格化。<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncl &#x27;srcFileName=&quot;*.nc4&quot;&#x27; &#x27;dstGridName=&quot;geo_em.d03.nc&quot;&#x27; ERA52WRFHydro_regrid.ncl</span><br></pre></td></tr></table></figure></p>
+<p>  <em>如果在代码运行过程中出现权限问题报错，运行以下代码给予权限</em><br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R 777 *</span><br></pre></td></tr></table></figure></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Zf69Ot_KG2_KhuD1aWmFUA">应用ERA5-Land小时数据到WRF-hydro模型</a></p>
 
       

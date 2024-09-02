@@ -23,15 +23,15 @@
   
   
   
-  <meta name="description" content="本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为。 ERA5_Land数据下载ERA5-Land hourly data from 1950 to present 下载变量：10m_u_component_of_wind’,                 ‘10m_v_component_of_wi">
+  <meta name="description" content="本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为有降雨变量（total_precipitation）和无降雨变量（total_precipitation）两种处理方法。 ERA5_Land数据下载ERA5-Land hourly data from 1950 to present 下载变量：10m_u">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用ERA5_Land小时数据作为WRF-Hydro气象强迫数据输入">
 <meta property="og:url" content="https://singyutang.github.io/2024/09/01/%E4%BD%BF%E7%94%A8ERA5-Land%E5%B0%8F%E6%97%B6%E6%95%B0%E6%8D%AE%E4%BD%9C%E4%B8%BAWRF-Hydro%E6%B0%94%E8%B1%A1%E5%BC%BA%E8%BF%AB%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5/index.html">
 <meta property="og:site_name" content="SingyuTang">
-<meta property="og:description" content="本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为。 ERA5_Land数据下载ERA5-Land hourly data from 1950 to present 下载变量：10m_u_component_of_wind’,                 ‘10m_v_component_of_wi">
+<meta property="og:description" content="本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为有降雨变量（total_precipitation）和无降雨变量（total_precipitation）两种处理方法。 ERA5_Land数据下载ERA5-Land hourly data from 1950 to present 下载变量：10m_u">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-01T13:57:27.000Z">
-<meta property="article:modified_time" content="2024-09-02T02:14:17.341Z">
+<meta property="article:modified_time" content="2024-09-02T02:25:51.025Z">
 <meta property="article:author" content="SingyuTang">
 <meta name="twitter:card" content="summary">
   
@@ -203,11 +203,14 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为。</p>
+        <p>本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为有降雨变量（total_precipitation）和无降雨变量（total_precipitation）两种处理方法。</p>
 <h1 id="ERA5-Land数据下载"><a href="#ERA5-Land数据下载" class="headerlink" title="ERA5_Land数据下载"></a>ERA5_Land数据下载</h1><p><a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land?tab=form">ERA5-Land hourly data from 1950 to present</a></p>
 <p>下载变量：10m_u_component_of_wind’,                 ‘10m_v_component_of_wind’, ‘2m_dewpoint_temperature’,<br>            ‘2m_temperature’, ‘surface_pressure’, ‘surface_solar_radiation_downwards’,<br>            ‘surface_thermal_radiation_downwards’, ‘total_precipitation’</p>
 <p>下载数据格式：Zipped NetCDF-3 (experimental)</p>
+<p><em>根据需要选择是否下载total_precipitation变量</em></p>
 <h1 id="处理代码下载"><a href="#处理代码下载" class="headerlink" title="处理代码下载"></a>处理代码下载</h1><p><a target="_blank" rel="noopener" href="https://github.com/SingyuTang/prepare_era5_land_for_wrf_hydro_forcing">prepare_era5_land_for_wrf_hydro_forcing</a></p>
+<h1 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h1><p>  （1）创建文件夹input_files1；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir input_files1</span><br></pre></td></tr></table></figure><br>  （2）读取处理ERA5数据变量；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python read_era5_land_with_precipitaion.py</span><br></pre></td></tr></table></figure><br>  （3）生成重新网格化权重网格文件；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncl &#x27;interp_opt=&quot;bilinear&quot;&#x27; &#x27;srcGridName=&quot;input_files1/ERA5_025_1H.20060601.0100.nc4&quot;&#x27; &#x27;dstGridName=&quot;geo_em.d03.nc&quot;&#x27; ERA52WRFHydro_generate_weights.ncl</span><br></pre></td></tr></table></figure><br>  （4）重新网格化。<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncl &#x27;srcFileName=&quot;*.nc4&quot;&#x27; &#x27;dstGridName=&quot;geo_em.d03.nc&quot;&#x27; ERA52WRFHydro_regrid.ncl</span><br></pre></td></tr></table></figure></p>
+<p>  <em>如果在代码运行过程中出现权限问题报错，运行以下代码给予权限</em><br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R 777 *</span><br></pre></td></tr></table></figure></p>
 <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Zf69Ot_KG2_KhuD1aWmFUA">应用ERA5-Land小时数据到WRF-hydro模型</a></p>
 
       
@@ -280,7 +283,7 @@ var a = new Donate({
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ERA5-Land%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">ERA5_Land数据下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E4%BB%A3%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">处理代码下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">3.</span> <span class="nav-text">参考文档</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ERA5-Land%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">ERA5_Land数据下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E4%BB%A3%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">处理代码下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">运行流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol>
     
     </div>
   </aside>
