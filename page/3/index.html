@@ -175,6 +175,257 @@ var themeMenus = {};
         
           <section id="main">
   
+    <article id="post-如何在ubuntu16-04上安装编译WRF4-5-2、WRF-hydro5-2-0和WPS4-5-0"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/" class="article-date">
+	  <time datetime="2024-03-17T15:23:07.000Z" itemprop="datePublished">三月 17, 2024</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了方便安装，这里已经搜集了所有教程中可能使用到的数据、软件和所需库，可点击百度网盘分享链接进行下载，这里下载完成后教程后面提到的下载可无需进行再次下载。<br>百度网盘分享链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gdu_VTehi5VX6XXknZMCLw">https://pan.baidu.com/s/1gdu_VTehi5VX6XXknZMCLw</a><br>提取码：rbpn</p>
+<h1 id="1-环境测试"><a href="#1-环境测试" class="headerlink" title="1. 环境测试"></a>1. 环境测试</h1><p>在<code>~/coding</code>文件夹下创建文件夹<code>WRF</code>,进入该文件夹创建两个文件夹，分别为<code>Build_WRF</code>、<code>TESTS</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/coding/WRF</span><br><span class="line"><span class="built_in">mkdir</span> Build_WRF TESTS</span><br><span class="line"><span class="built_in">cd</span> TESTS</span><br></pre></td></tr></table></figure>
+<p>运行一些测试来验证Fortran编译器和C编译器是否可用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install csh gfortran m4 build-essential</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">which</span> gfortran</span><br><span class="line"><span class="built_in">which</span> cpp</span><br><span class="line"><span class="built_in">which</span> gcc</span><br><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
+<p>下载测试包<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_tests.tar">Fortran and C Tests Tar File</a></p>
+<p>将测试包解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf Fortran_C_tests.tar</span><br></pre></td></tr></table></figure>
+<p>共有7项测试，请一次一次完成</p>
+<p><strong>Test #1:</strong>  TEST_1_fortran_only_fixed.f  </p>
+<p><em>在命令行输入以下内容:</em>  </p>
+<blockquote>
+<p>gfortran TEST_1_fortran_only_fixed.f</p>
+</blockquote>
+<p><em>现在输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS test 1 fortran only fixed format</p>
+</blockquote>
+<p><strong>Test #2:</strong> TEST_2_fortran_only_free.f90  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gfortran TEST_2_fortran_only_free.f90</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>Assume Fortran 2003: has FLUSH, ALLOCATABLE, derived type, and ISO C Binding<br>SUCCESS test 2 fortran only free format</p>
+</blockquote>
+<p><strong>Test #3:</strong> <u>C</u>: TEST_3_c_only.c  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gcc TEST_3_c_only.c</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS test 3 c only</p>
+</blockquote>
+<p><strong>Test #4:</strong> : TEST_4_fortran+c_c.c, and TEST_4_fortran+x_f.f90  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gcc -c -m64 TEST_4_fortran+c_c.c</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>gfortran -c -m64 TEST_4_fortran+c_f.f90</p>
+</blockquote>
+<p><em>*然后输入:</em></p>
+<blockquote>
+<p>gfortran -m64 TEST_4_fortran+c_f.o TEST_4_fortran+c_c.o</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>./a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>SUCCESS test 4 fortran calling c</p>
+</blockquote>
+<p><strong>Test #5:</strong> csh </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_csh.csh</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS csh test</p>
+</blockquote>
+<p><strong>Test #6:</strong> perl</p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_perl.pl</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS perl test</p>
+</blockquote>
+<p><strong>Test #7:</strong> sh</p>
+<p> <em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>./TEST_sh.sh</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS sh test</p>
+</blockquote>
+<h1 id="2-环境设置"><a href="#2-环境设置" class="headerlink" title="2. 环境设置"></a>2. 环境设置</h1><p>在~/.bashrc中添加以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###################  WRF 4.5.2 + WPS 4.5.0  ############################</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> DIR=/home/root123/coding/WRF/Build_WRF/LIBRARIES</span><br><span class="line"><span class="built_in">export</span> CC=gcc</span><br><span class="line"><span class="built_in">export</span> CXX=g++</span><br><span class="line"><span class="built_in">export</span> FC=gfortran</span><br><span class="line"><span class="built_in">export</span> FCFLAGS=-m64</span><br><span class="line"><span class="built_in">export</span> F77=gfortran</span><br><span class="line"><span class="built_in">export</span> FFLAGS=-m64</span><br><span class="line"><span class="built_in">export</span> LDFLAGS=-L<span class="variable">$DIR</span>/grib2/lib</span><br><span class="line"><span class="built_in">export</span> CPPFLAGS=-I<span class="variable">$DIR</span>/grib2/include</span><br><span class="line"><span class="built_in">export</span> CFLAGS=-m64</span><br><span class="line"><span class="built_in">export</span> JASPERLIB=<span class="variable">$DIR</span>/grib2/lib</span><br><span class="line"><span class="built_in">export</span> JASPERINC=<span class="variable">$DIR</span>/grib2/include</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$DIR</span>/netcdf/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> NETCDF=<span class="variable">$DIR</span>/netcdf/</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$DIR</span>/mpich/bin:<span class="variable">$DIR</span>/mpich/lib:<span class="variable">$DIR</span>/mpich/include:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF</span>:<span class="variable">$NETCDF</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LIBS=<span class="string">&quot;-lnetcdf -lz&quot;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF</span>/lib/:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$NETCDF</span>/lib:<span class="variable">$&#123;LD_LIBRARY_PATH&#125;</span></span><br><span class="line"><span class="built_in">export</span> NETCDF_INC=<span class="string">&quot;<span class="variable">$NETCDF</span>/include&quot;</span></span><br><span class="line"><span class="built_in">export</span> NETCDF_LIB=<span class="string">&quot;<span class="variable">$NETCDF</span>/lib&quot;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$NETCDF_LIB</span>:<span class="variable">$NETCDF_INC</span>:<span class="variable">$PATH</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> WRF_DIR=~/coding/WRF/Build_WRF/WRFV4.5.2</span><br><span class="line"><span class="built_in">export</span> WRFIO_NCD_NO_LARGE_FILE_SUPPORT=1</span><br><span class="line"><span class="built_in">export</span> HDF5PATH=<span class="variable">$NETCDF</span></span><br></pre></td></tr></table></figure>
+<p>更改完成后，打开终端输入<code>source ~/.bashrc</code></p>
+<h1 id="3-构建库"><a href="#3-构建库" class="headerlink" title="3. 构建库"></a>3. 构建库</h1><h2 id="3-0-下载所需库"><a href="#3-0-下载所需库" class="headerlink" title="3.0 下载所需库"></a>3.0 下载所需库</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/">Index of /wrf/OnLineTutorial/compile_tutorial/tar_files</a></p>
+<p>需要下载的库如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">netcdf-4.1.3.tar.gz</span><br><span class="line">mpich-3.0.4.tar.gz</span><br><span class="line">zlib-1.2.7.tar.gz</span><br><span class="line">libpng-1.2.50.tar.gz</span><br><span class="line">jasper-1.900.1.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> Build_WRF</span><br><span class="line"><span class="built_in">mkdir</span> LIBRARIES</span><br><span class="line">LIBRARIES</span><br></pre></td></tr></table></figure>
+<h2 id="3-1-NetCDF"><a href="#3-1-NetCDF" class="headerlink" title="3.1 NetCDF"></a>3.1 NetCDF</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装netcdf-c</span></span><br><span class="line">tar xzvf netcdf-4.1.3.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> netcdf-4.1.3</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf --disable-dap --disable-netcdf-4 --disable-shared</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-MPICH"><a href="#3-2-MPICH" class="headerlink" title="3.2 MPICH"></a>3.2 MPICH</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf mpich-3.0.4.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> mpich-3.0.4</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/mpich</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-zlib"><a href="#3-3-zlib" class="headerlink" title="3.3 zlib"></a>3.3 zlib</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf zlib-1.2.11.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> zlib-1.2.11</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-libpng"><a href="#3-4-libpng" class="headerlink" title="3.4 libpng"></a>3.4 libpng</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf libpng-1.2.50.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> libpng-1.2.50</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h2 id="3-5-Jasper"><a href="#3-5-Jasper" class="headerlink" title="3.5 Jasper"></a>3.5 Jasper</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xzvf jasper-1.900.1.tar.gz     <span class="comment">#or just .tar if no .gz present</span></span><br><span class="line"><span class="built_in">cd</span> jasper-1.900.1</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/grib2</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<h1 id="4-库兼容性测试"><a href="#4-库兼容性测试" class="headerlink" title="4. 库兼容性测试"></a>4. 库兼容性测试</h1><p>下载测试包<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_NETCDF_MPI_tests.tar">Fortran_C_NETCDF_MPI_tests.tar</a></p>
+<p><strong><u>Test #1</u></strong>: Fortran + C + NetCDF</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> <span class="variable">$&#123;NETCDF&#125;</span>/include/netcdf.inc .</span><br><span class="line"></span><br><span class="line">gfortran -c 01_fortran+c+netcdf_f.f</span><br><span class="line">gcc -c 01_fortran+c+netcdf_c.c</span><br><span class="line">gfortran 01_fortran+c+netcdf_f.o 01_fortran+c+netcdf_c.o -L<span class="variable">$&#123;NETCDF&#125;</span>/lib -lnetcdff -lnetcdf</span><br><span class="line">./a.out</span><br></pre></td></tr></table></figure>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>SUCCESS test 1 fortran + c + netcdf</p>
+</blockquote>
+<p><strong><u>Test #2</u></strong>: Fortran + C + NetCDF + MPI</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> <span class="variable">$&#123;NETCDF&#125;</span>/include/netcdf.inc .</span><br><span class="line"></span><br><span class="line">mpif90 -c 02_fortran+c+netcdf+mpi_f.f</span><br><span class="line">mpicc -c 02_fortran+c+netcdf+mpi_c.c</span><br><span class="line">mpif90 02_fortran+c+netcdf+mpi_f.o 02_fortran+c+netcdf+mpi_c.o -L<span class="variable">$&#123;NETCDF&#125;</span>/lib -lnetcdff -lnetcdf</span><br><span class="line">mpirun ./a.out</span><br></pre></td></tr></table></figure>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx = 2.00 and ii = 1<br>status = 2<br>SUCCESS test 2 fortran + c + netcdf + mpi</p>
+</blockquote>
+<h1 id="5-构建WRF"><a href="#5-构建WRF" class="headerlink" title="5. 构建WRF"></a>5. 构建WRF</h1><p>在<code>Build_WRF</code>文件夹中解压<code>WRFv4.5.2.tar.gz</code>，解压后文件夹名为<code>WRFV4.5.2</code>，进入该文件夹。</p>
+<p>编译前使用命令<code>uname -a</code>查看电脑详细信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> WRFV4.5.2</span><br><span class="line">./configure</span><br></pre></td></tr></table></figure>
+<p>这里注意使用<code>./configure</code>命令编译WRF时，从以下32、33、34中选择，推荐34；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">32. (serial) 33. (smpar) 34. (dmpar) 35. (dm+sm) GNU (gfortran/gcc)</span><br></pre></td></tr></table></figure>
+<p><code>Compile for nesting?</code>选择<code>1=basic</code></p>
+<p>出现如下则说明安装成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Configuration successful! </span><br><span class="line">------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Testing for NetCDF, C and Fortran compiler</span><br><span class="line"></span><br><span class="line">This installation of NetCDF is 64-bit</span><br><span class="line">                 C compiler is 64-bit</span><br><span class="line">           Fortran compiler is 64-bit</span><br><span class="line">              It will build in 64-bit</span><br></pre></td></tr></table></figure>
+<p>编译 <code>em_real</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./compile em_real &gt;&amp; log.compile</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<p>编译成功<code>log.compile</code>会出现如下类似内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---&gt;                  Executables successfully built                  &lt;---</span><br><span class="line"> </span><br><span class="line">-rwxrwxr-x 1 root123 root123 45400664 3月  21 10:49 main/ndown.exe</span><br><span class="line">-rwxrwxr-x 1 root123 root123 45286000 3月  21 10:49 main/real.exe</span><br><span class="line">-rwxrwxr-x 1 root123 root123 44823216 3月  21 10:49 main/tc.exe</span><br><span class="line">-rwxrwxr-x 1 root123 root123 49968288 3月  21 10:48 main/wrf.exe</span><br><span class="line"> </span><br><span class="line">==========================================================================</span><br></pre></td></tr></table></figure>
+<p> 编译成功后会在<code>main</code>文件夹内出现以下文件，同时也可根据是否生成exe文件来检查是否编译成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wrf.exe</span><br><span class="line">real.exe</span><br><span class="line">ndown.exe</span><br><span class="line">tc.exe</span><br></pre></td></tr></table></figure>
+<h1 id="6-构建WPS"><a href="#6-构建WPS" class="headerlink" title="6. 构建WPS"></a>6. 构建WPS</h1><p>在<code>Build_WRF</code>文件夹中解压<code>WPS-master.zip</code>，解压后文件夹更改为<code>WPSV4.5.0</code>，进入该文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> WPSV4.5.0</span><br><span class="line">./clean</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf CC=mpicc CXX=mpicxx FC=mpif90</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">^M: Command not found.</span><br><span class="line">^M: Command not found.</span><br><span class="line"><span class="keyword">then</span>^M: Command not found.</span><br><span class="line">endif^M: Command not found.</span><br><span class="line">^M: Command not found.</span><br><span class="line"><span class="built_in">set</span>: Syntax Error.</span><br></pre></td></tr></table></figure>
+<p>或执行<code>./configure</code>出现错误<code>bash: ./configure: /bin/sh^M: 解释器错误: 没有那个文件或目录</code>。</p>
+<p>解决办法</p>
+<p>进入WPSV4.5.0文件夹内输入以下命令即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/\r$//&#x27;</span> clean</span><br><span class="line">sed -i <span class="string">&#x27;s/\r$//&#x27;</span> configure</span><br></pre></td></tr></table></figure>
+<p>再输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./clean</span><br><span class="line">./configure --prefix=<span class="variable">$DIR</span>/netcdf CC=mpicc CXX=mpicxx FC=mpif90</span><br></pre></td></tr></table></figure>
+<p>编译WPS</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/\r$//&#x27;</span> compile</span><br><span class="line">./compile &gt;&amp; log.compile</span><br></pre></td></tr></table></figure>
+<p>如果构建成功，<code>WPSV4.5.0</code>目录下应该存在3个可执行文件，链接到相应的<code>src/</code>目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">geogrid.exe -&gt; geogrid/src/geogrid.exe</span><br><span class="line">ungrib.exe -&gt; ungrib/src/ungrib.exe</span><br><span class="line">metgrid.exe -&gt; metgrid/src/metgrid.exe</span><br></pre></td></tr></table></figure>
+<h1 id="7-静态地理数据"><a href="#7-静态地理数据" class="headerlink" title="7. 静态地理数据"></a>7. 静态地理数据</h1><ol>
+<li><p>选择 <a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz">Download Highest Resolution of each Mandatory Field</a> 下载静态地理数据，这些是运行WPS和WRF所需的所有强制字段，包含每个必填字段的最高分辨率这是最常用的字段，建议用于大多数应用。如对其他字段感兴趣，可以直接访问<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html">WPS V4地理静态数据下载页面</a>进行查看和下载。</p>
+</li>
+<li><p>下载完成后，解压完成后的文件名也许为<code>geog</code>。将文件重命名为<code>WPS_GEOG</code>。</p>
+</li>
+<li><p>在<code>Build_WRF</code>文件夹下新建文件夹<code>WPS_Data</code>，将解压后的文件夹<code>WPS_GEOG</code>移动到<code>./WPS_Data/WPS_Geographical_Static_Data/</code>目录下。</p>
+</li>
+<li><p>修改<code>namelist.wps</code>文件中<code>&amp;geogrid</code>部分的<code>geog_data_path</code>变量，<code>geog_data_path=&#39;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG&#39;</code>。</p>
+<p><em>*为了确保不出错，最好将高分辨率（<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz">Highest Resolution</a>）数据和全部数据（<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_complete.tar.gz">geog_complete</a>)都下载好的数据放入上面创建的<code>WPS_GEOG</code>文件夹中。</em></p>
+</li>
+</ol>
+<h1 id="8-实时气象数据"><a href="#8-实时气象数据" class="headerlink" title="8. 实时气象数据"></a>8. 实时气象数据</h1><p>数据下载地址：<a target="_blank" rel="noopener" href="https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/">https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/</a></p>
+<p>也可使用wget命令下载GFS数据，以2024-03-12: 00时数据为例，该数据时间分辨率为6h（21600s）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20240312/00/atmos/gfs.t00z.pgrb2.0p25.f000</span><br><span class="line"></span><br><span class="line">wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20230312/00/atmos/gfs.t00z.pgrb2.0p25.f003</span><br><span class="line"></span><br><span class="line">wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20230312/00/atmos/gfs.t00z.pgrb2.0p25.f006</span><br></pre></td></tr></table></figure>
+<p>在<code>Build_WRF</code>文件夹下创建文件夹<code>DATA</code>，将下载的GFS数据移动到<code>DATA</code>文件夹下。</p>
+<h1 id="9-运行WPS和WRF"><a href="#9-运行WPS和WRF" class="headerlink" title="9. 运行WPS和WRF"></a>9. 运行WPS和WRF</h1><h2 id="9-1-运行WPS"><a href="#9-1-运行WPS" class="headerlink" title="9.1 运行WPS"></a>9.1 运行WPS</h2><p>进入<code>WPSV4.5.0</code>文件夹内，运行WPS。在运行之前，修改namelist.wps中的<code>geog-data_path</code>变量，注意一定要是绝对路径，不包含<code>~</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geog_data_path=<span class="string">&#x27;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG</span></span><br></pre></td></tr></table></figure>
+<p>另外将namelist.wps文件中的内容替换为以下内容，以GFS文件<code>gfs.t00z.pgrb2.0p25.f000</code>为例。该文件为2024-03-12: 00时间点的<a target="_blank" rel="noopener" href="https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/">气象数据</a>，时间分辨率为6h（21600s）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&amp;share</span><br><span class="line"> wrf_core = &#x27;ARW&#x27;,</span><br><span class="line"> max_dom = 2,</span><br><span class="line"> start_date = &#x27;2024-03-12_00:00:00&#x27;,&#x27;2024-03-12_00:00:00&#x27;,</span><br><span class="line"> end_date   = &#x27;2024-03-12_00:00:00&#x27;,&#x27;2024-03-12_00:00:00&#x27;,</span><br><span class="line"> interval_seconds = 21600,</span><br><span class="line"> io_form_geogrid = 2</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line">&amp;geogrid</span><br><span class="line"> parent_id         =   1,   1,</span><br><span class="line"> parent_grid_ratio =   1,   3,</span><br><span class="line"> i_parent_start    =   1,  10,</span><br><span class="line"> j_parent_start    =   1,  20,</span><br><span class="line"> e_we              =  150, 220,</span><br><span class="line"> e_sn              =  130, 214,</span><br><span class="line"> geog_data_res = &#x27;default&#x27;,&#x27;default&#x27;,</span><br><span class="line"> dx = 15000,</span><br><span class="line"> dy = 15000,</span><br><span class="line"> map_proj = &#x27;lambert&#x27;,</span><br><span class="line"> ref_lat   =  28.00,</span><br><span class="line"> ref_lon   =  104.00,</span><br><span class="line"> truelat1  =  28.0,</span><br><span class="line"> truelat2  =  28.0,</span><br><span class="line"> stand_lon =  104.0,</span><br><span class="line"> geog_data_path = &#x27;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG&#x27;</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line">&amp;ungrib</span><br><span class="line"> out_format = &#x27;WPS&#x27;,</span><br><span class="line"> prefix = &#x27;FILE&#x27;,</span><br><span class="line">/</span><br><span class="line"></span><br><span class="line">&amp;metgrid</span><br><span class="line"> fg_name = &#x27;FILE&#x27;</span><br><span class="line">/</span><br></pre></td></tr></table></figure>
+<p>修改完成后，开始运行程序。</p>
+<ol>
+<li><p>执行<code>geogrid.exe</code>, 这一步将生成<code>geo_em</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> WPSV4.5.0</span><br><span class="line"></span><br><span class="line">./geogrid.exe &gt;&amp; log.geogrid</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p> <code>geogrid.exe</code>执行成功后，会在<code>geogrid.log</code> 文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2024-03-21 16:58:31.070 ---  *** Successful completion of program geogrid.exe ***</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>执行ungrib.exe，这一步将生成前缀为’FILE’的文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./link_grib.csh ../DATA/gfs.t00z.pgrb2.0p25.f000</span><br><span class="line"><span class="built_in">ln</span> -sf ungrib/Variable_Tables/Vtable.GFS Vtable</span><br><span class="line">./ungrib.exe &gt;&amp; log.ungrib</span><br></pre></td></tr></table></figure>
+<p><code>ungrib.exe</code>执行成功后，会在<code>ungrib.log</code>文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2024-03-21 17:13:42.605 --- ****  Deleting temporary files created by ungrib...</span><br><span class="line">2024-03-21 17:13:42.605 ---  Deleting file: ./PFILE:2024-03-12_00</span><br><span class="line">2024-03-21 17:13:42.756 --- ****  Done deleting temporary files.</span><br><span class="line">2024-03-21 17:13:42.756 ---  *** Successful completion of program ungrib.exe ***</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>执行metgrid.exe，这一步将生成每个时间段的前缀为<code>met_em*</code>的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./metgrid.exe &gt;&amp; log.metgrid</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>metgrid.exe</code>执行成功后，会在<code>metgrid.log</code>文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2024-03-21 17:24:05.809 ---  *** Successful completion of program metgrid.exe ***</span><br></pre></td></tr></table></figure>
+<h2 id="9-2-运行WRF"><a href="#9-2-运行WRF" class="headerlink" title="9.2 运行WRF"></a>9.2 运行WRF</h2><p>进入<code>WRFV4.5.2/test/em_real/</code>目录下。首先将刚才<code>WPSV4.5.0</code>目录下生成的前缀为<code>met_em*</code>的文件拷贝到<code>WRFV4.5.2/test/em_real/</code>目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> met_em* ../WRFV4.5.2/test/em_real/</span><br><span class="line"><span class="built_in">cd</span> ../WRFV4.5.2/test/em_real/</span><br><span class="line">mpirun -np 1 ./real.exe</span><br></pre></td></tr></table></figure>
+<p>这将生成两个文件，分别为<code>rsl.error.0000</code>和<code>rsl.out.0000</code>。如果在<code>rsl.error.0000</code>文件中看到<code>SUCCESS</code>，并且生成<code>wrfbdy_d01</code>和<code>wrfinput_d0*</code>文件，证明运行成功，继续执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpirun -np 8 ./wrf.exe</span><br></pre></td></tr></table></figure>
+<p>再次检查<code>rsl</code>文件是否<code>SUCCESS</code>，并确保拥有预期所有的<code>wrfout*</code>文件。如果有，则运行成功。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350005982">知乎-Ubuntu中配置WRF</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php">WRF-How to Compile WRF: The Complete Process</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
     <article id="post-如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -764,66 +1015,11 @@ K' : 卡尔曼增益</script><h1 id="集合卡尔曼滤波"><a href="#集合卡�
     
 
   
-    <article id="post-ubuntu16.04安装Pycharm和Anaconda3"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/">ubuntu16.04安装Pycharm和Anaconda3</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/" class="article-date">
-	  <time datetime="2023-09-26T04:39:07.000Z" itemprop="datePublished">九月 26, 2023</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-安装Anaconda"><a href="#1-安装Anaconda" class="headerlink" title="1. 安装Anaconda"></a>1. 安装Anaconda</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>官网网址： <a target="_blank" rel="noopener" href="https://repo.anaconda.com/archive/">https://repo.anaconda.com/archive/</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>查看<a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">如何在Linux服务器上安装Anaconda（超详细）</a>中的1.3 安装Anaconda进行安装即可。</p>
-<h2 id="配置虚拟环境"><a href="#配置虚拟环境" class="headerlink" title="配置虚拟环境"></a>配置虚拟环境</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yrwang_xd/article/details/105821002">anaconda 创建虚拟环境、激活及使用的基本方法</a></p>
-<h2 id="将虚拟环境名填入环境变量以便快捷启动"><a href="#将虚拟环境名填入环境变量以便快捷启动" class="headerlink" title="将虚拟环境名填入环境变量以便快捷启动"></a>将虚拟环境名填入环境变量以便快捷启动</h2><p>例如我的conda虚拟环境名为licsbas，打开终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br><span class="line">alias licsbas=&quot;source activate licsbas&quot;</span><br></pre></td></tr></table></figure><br>完成后保存文件并退出。<br>打开另一个终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure><br>测试是否生效，打开终端输入<code>licsbas</code>，即可激活该conda虚拟环境。</p>
-<h1 id="2-安装Pycharm"><a href="#2-安装Pycharm" class="headerlink" title="2. 安装Pycharm"></a>2. 安装Pycharm</h1><h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><p>官网网址：<a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/download/other.html">https://www.jetbrains.com/pycharm/download/other.html</a><br>社区版本的已经够用，同时建议不要安装太新的版本。<br>使用<code>uname -m</code>查看自己电脑的系统架构，如果输出为 <code>x86_64</code>，那么你的系统是 64 位的 x86 架构（通常我们称之为 x64）。如果输出是 <code>armv7l</code>或者以 arm 开头的其他值，那么你的系统是 ARM 架构。再根据不同的系统架构选择对应的版本进行下载。如下图所示，如果为x64架构，则下载 2023.2 - Linux (tar.gz)版本，如果是ARM架构，下载 2023.2 - Linux ARM64 (tar.gz) 版本。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230929231904.png" class=""></p>
-<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>下载完成后将 tar.gz包复制到 <code>/opt</code> 目录下，右键【提取到此处】即完成安装。</p>
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>进入解压后的文件夹下的<code>bin</code>目录下，运行pycharm.sh文件。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/pycharm-community-2022.2.3/bin</span><br><span class="line">sudo ./pycharm.sh</span><br></pre></td></tr></table></figure></p>
-<h2 id="创建桌面快捷方式"><a href="#创建桌面快捷方式" class="headerlink" title="创建桌面快捷方式"></a>创建桌面快捷方式</h2><p>最简单有效的方式为按照上一步启动pycharm，依次选择上方导航栏中的【Tools】，【Create Desktop Entry…】，【OK】，再重启即可。</p>
-<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44312186/article/details/98443374">Ubuntu创建pycharm的快捷方式两种方法（安装pycharm后启动方式）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">如何在Linux服务器上安装Anaconda（超详细）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">anaconda 创建虚拟环境、激活及使用的基本方法</a></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
   </nav>
 
 </section>
@@ -921,6 +1117,18 @@ K' : 卡尔曼增益</script><h1 id="集合卡尔曼滤波"><a href="#集合卡�
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2024/09/01/%E4%BD%BF%E7%94%A8ERA5-Land%E5%B0%8F%E6%97%B6%E6%95%B0%E6%8D%AE%E4%BD%9C%E4%B8%BAWRF-Hydro%E6%B0%94%E8%B1%A1%E5%BC%BA%E8%BF%AB%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5/">使用ERA5_Land小时数据作为WRF-Hydro气象强迫数据输入</a></h6>
+              <span>九月 1, 2024</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2024/07/22/%E8%BF%90%E8%A1%8CWPS%E3%80%81WRF%E3%80%81WRF-Hydro%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93%E4%B8%80/">运行WPS、WRF、WRF-Hydro的一些错误总结一</a></h6>
               <span>七月 22, 2024</span>
             </div>
@@ -975,18 +1183,6 @@ K' : 卡尔曼增益</script><h1 id="集合卡尔曼滤波"><a href="#集合卡�
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2024/06/01/WRF-Hydro%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%8E%9F%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB/">WRF-Hydro模型配置的相关参数配置参考原论文分享一</a></h6>
-              <span>六月 1, 2024</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1026,7 +1222,7 @@ K' : 卡尔曼增益</script><h1 id="集合卡尔曼滤波"><a href="#集合卡�
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

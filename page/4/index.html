@@ -175,6 +175,61 @@ var themeMenus = {};
         
           <section id="main">
   
+    <article id="post-ubuntu16.04安装Pycharm和Anaconda3"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/">ubuntu16.04安装Pycharm和Anaconda3</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/" class="article-date">
+	  <time datetime="2023-09-26T04:39:07.000Z" itemprop="datePublished">九月 26, 2023</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-安装Anaconda"><a href="#1-安装Anaconda" class="headerlink" title="1. 安装Anaconda"></a>1. 安装Anaconda</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>官网网址： <a target="_blank" rel="noopener" href="https://repo.anaconda.com/archive/">https://repo.anaconda.com/archive/</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>查看<a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">如何在Linux服务器上安装Anaconda（超详细）</a>中的1.3 安装Anaconda进行安装即可。</p>
+<h2 id="配置虚拟环境"><a href="#配置虚拟环境" class="headerlink" title="配置虚拟环境"></a>配置虚拟环境</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yrwang_xd/article/details/105821002">anaconda 创建虚拟环境、激活及使用的基本方法</a></p>
+<h2 id="将虚拟环境名填入环境变量以便快捷启动"><a href="#将虚拟环境名填入环境变量以便快捷启动" class="headerlink" title="将虚拟环境名填入环境变量以便快捷启动"></a>将虚拟环境名填入环境变量以便快捷启动</h2><p>例如我的conda虚拟环境名为licsbas，打开终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br><span class="line">alias licsbas=&quot;source activate licsbas&quot;</span><br></pre></td></tr></table></figure><br>完成后保存文件并退出。<br>打开另一个终端，输入<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure><br>测试是否生效，打开终端输入<code>licsbas</code>，即可激活该conda虚拟环境。</p>
+<h1 id="2-安装Pycharm"><a href="#2-安装Pycharm" class="headerlink" title="2. 安装Pycharm"></a>2. 安装Pycharm</h1><h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><p>官网网址：<a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/download/other.html">https://www.jetbrains.com/pycharm/download/other.html</a><br>社区版本的已经够用，同时建议不要安装太新的版本。<br>使用<code>uname -m</code>查看自己电脑的系统架构，如果输出为 <code>x86_64</code>，那么你的系统是 64 位的 x86 架构（通常我们称之为 x64）。如果输出是 <code>armv7l</code>或者以 arm 开头的其他值，那么你的系统是 ARM 架构。再根据不同的系统架构选择对应的版本进行下载。如下图所示，如果为x64架构，则下载 2023.2 - Linux (tar.gz)版本，如果是ARM架构，下载 2023.2 - Linux ARM64 (tar.gz) 版本。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230929231904.png" class=""></p>
+<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>下载完成后将 tar.gz包复制到 <code>/opt</code> 目录下，右键【提取到此处】即完成安装。</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>进入解压后的文件夹下的<code>bin</code>目录下，运行pycharm.sh文件。<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/pycharm-community-2022.2.3/bin</span><br><span class="line">sudo ./pycharm.sh</span><br></pre></td></tr></table></figure></p>
+<h2 id="创建桌面快捷方式"><a href="#创建桌面快捷方式" class="headerlink" title="创建桌面快捷方式"></a>创建桌面快捷方式</h2><p>最简单有效的方式为按照上一步启动pycharm，依次选择上方导航栏中的【Tools】，【Create Desktop Entry…】，【OK】，再重启即可。</p>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44312186/article/details/98443374">Ubuntu创建pycharm的快捷方式两种方法（安装pycharm后启动方式）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">如何在Linux服务器上安装Anaconda（超详细）</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/wyf2017/article/details/118676765">anaconda 创建虚拟环境、激活及使用的基本方法</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
     <article id="post-ubuntu16.04安装jdk和panoply"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -1031,89 +1086,11 @@ Wahr et al.(2015)对极潮漂移的修正。
     
 
   
-    <article id="post-利用Clash科学上网"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">利用Clash科学上网</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="article-date">
-	  <time datetime="2023-04-22T04:54:06.000Z" itemprop="datePublished">四月 22, 2023</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Windows"><a href="#1-Windows" class="headerlink" title="1. Windows"></a>1. Windows</h1><h2 id="1-1-Clash下载与安装"><a href="#1-1-Clash下载与安装" class="headerlink" title="1.1 Clash下载与安装"></a>1.1 Clash下载与安装</h2><ol>
-<li><p>下载安装包<br>github 项目（windows）: <a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases">Clash</a></p>
-<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046111.png" class="">
-</li>
-<li><p>解压下载好的安装包，打开. exe 文件可用</p>
-<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046170.png" class="">
-</li>
-<li><p>【Generral】设置，如图</p>
-<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046205.png" class="">
-</li>
-</ol>
-<p><em>提示：该应用会使用代理，如不使用该应用后需要重新关闭代理才能联网。通过【设置】-【网络和 Internet】-【代理】-【手动设置代理】进行关闭。</em><br><img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046397.png" class=""></p>
-<h2 id="1-2-节点购买"><a href="#1-2-节点购买" class="headerlink" title="1.2 节点购买"></a>1.2 节点购买</h2><p>链接：<a target="_blank" rel="noopener" href="https://giegie.cloud/#/register?code=emwkY5R6">https://giegie.cloud/#/register?code=emwkY5R6</a></p>
-<ol>
-<li>创建账号<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682045834.png" class=""></li>
-<li>注册成功后，购买节点。<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046569.png" class=""></li>
-<li>点击【购买订阅】，选择合适产品，【下单】。</li>
-<li>导入订阅并设置代理。可通过购买网址中【使用文档】-【Windows 使用指南】查看如何将购买的订阅导入 Clash。<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046832.png" class=""></li>
-<li>如果未使用上述提供的网址购买节点而是使用其他店家进行购买的订阅，也可同样通过使用订阅地址的方式导入节点。方法如下：<br>（1）打开【Clash】；<br>（2）点击侧边栏的【Profiles】选项，如图所示（我这里为已经导入后的结果）；<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20240422160803.png" class="">
-（3）将订阅地址复制到Clash窗口顶部的【Download from a URL】，点击【Download】即可导入。</li>
-<li>导入订阅完成，进入【Proxies】自行选择节点。<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1682046907.png" class="">
-</li>
-</ol>
-<h1 id="2-Ubuntu16-04"><a href="#2-Ubuntu16-04" class="headerlink" title="2. Ubuntu16.04"></a>2. Ubuntu16.04</h1><ol>
-<li>【下载】安装包下载：github 项目（windows）: <a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases">Clash</a>：下载<em>Clash. for. Windows-0.20.24-x64-linux. tar. gz</em></li>
-<li>【提取】将安装包拷入/opt 文件夹下（我一般把软件都放在<code>/opt</code>文件夹下），右键【提取到此处】</li>
-<li>【权限管理】将解压后的文件夹命名为Clash，进入Clash文件夹后，打开终端，输入 <code>*./cfw</code> 进行启动，这里注意不要用 root 权限（也不要用 sudo），如果出现一个权限问题，属于正常情况，查看错误后进入该文件夹中，使用 <code>sudo chmod -R 777 ./*</code> 即可（这里没有截图），然后回到Clash 文件夹中，使用 <code>*./cfw</code>命令即可，便已安装 Clash 完成，但未打开代理。</li>
-<li>【设置系统代理】：参照<a href="[ubuntu配置全局系统代理_kan2016的博客-CSDN博客](https://blog.csdn.net/kan2016/article/details/90411137">链接</a>中的配置系统代理) 中的配置系统代理进行代理设置，设置如图：<img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E6%9C%AA%E5%91%BD%E5%90%8D1685888777.png" class="">
-<em>【网络设置】设置完代理后可能仍然面临无法上网的问题，参照<a href="[解决ubuntu虚拟机突然无法上网 - 知乎 (zhihu.com">此链接</a>](<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/545229582">https://zhuanlan.zhihu.com/p/545229582</a>)) 即可解决</em></li>
-<li>【节点导入】导入与 Windows 操作相同<br><strong>【可能错误】</strong><img src="/2023/04/22/%E5%88%A9%E7%94%A8Clash%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/fcad07e54d8f35650f4d177cdd1098b.jpg" class="">
-解决办法：不要使用 sudo 或者 root 用户</li>
-</ol>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clash/" rel="tag">Clash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
   </nav>
 
 </section>
@@ -1211,6 +1188,18 @@ Wahr et al.(2015)对极潮漂移的修正。
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2024/09/01/%E4%BD%BF%E7%94%A8ERA5-Land%E5%B0%8F%E6%97%B6%E6%95%B0%E6%8D%AE%E4%BD%9C%E4%B8%BAWRF-Hydro%E6%B0%94%E8%B1%A1%E5%BC%BA%E8%BF%AB%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5/">使用ERA5_Land小时数据作为WRF-Hydro气象强迫数据输入</a></h6>
+              <span>九月 1, 2024</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2024/07/22/%E8%BF%90%E8%A1%8CWPS%E3%80%81WRF%E3%80%81WRF-Hydro%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93%E4%B8%80/">运行WPS、WRF、WRF-Hydro的一些错误总结一</a></h6>
               <span>七月 22, 2024</span>
             </div>
@@ -1265,18 +1254,6 @@ Wahr et al.(2015)对极潮漂移的修正。
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2024/06/01/WRF-Hydro%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%8E%9F%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB/">WRF-Hydro模型配置的相关参数配置参考原论文分享一</a></h6>
-              <span>六月 1, 2024</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1316,7 +1293,7 @@ Wahr et al.(2015)对极潮漂移的修正。
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
