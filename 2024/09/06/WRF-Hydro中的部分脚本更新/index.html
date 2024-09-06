@@ -17,28 +17,35 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>使用era5_land小时数据作为wrf-hydro气象强迫数据输入 | SingyuTang</title>
+  <title>wrf-hydro中的部分脚本更新一 | SingyuTang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="脚本WRF-Hydro5.2.0ERA5_Land" />
+  <meta name="keywords" content="脚本WRFRWRF-Hydro5.2.0PythonFNL" />
   
   
   
   
-  <meta name="description" content="本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为有降雨变量（total_precipitation）和无降雨变量（total_precipitation）两种处理方法。 ERA5_Land数据下载ERA5-Land hourly data from 1950 to present 下载变量：10m_u">
+  <meta name="description" content="FNL和GFS数据介绍-WRF&#x2F;WPS气象数据输入FNL再分析数据：常用的气象再分析数据；GFS数据：最常用的气象预报数据。除GFS&#x2F;FNL数据外，还可使用其它气象数据源作为输入，如NAM、RAP&#x2F;HRRR、重新分析（NARR、CFSR、NNRP、ERA-interim、ERA5 等）、其他 WRF 运行。详细可用数据源可查看WRF-WPS  FNL（Final analyzed field）数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用ERA5_Land小时数据作为WRF-Hydro气象强迫数据输入">
-<meta property="og:url" content="https://singyutang.github.io/2024/09/01/%E4%BD%BF%E7%94%A8ERA5-Land%E5%B0%8F%E6%97%B6%E6%95%B0%E6%8D%AE%E4%BD%9C%E4%B8%BAWRF-Hydro%E6%B0%94%E8%B1%A1%E5%BC%BA%E8%BF%AB%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5/index.html">
+<meta property="og:title" content="WRF-Hydro中的部分脚本更新一">
+<meta property="og:url" content="https://singyutang.github.io/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/index.html">
 <meta property="og:site_name" content="SingyuTang">
-<meta property="og:description" content="本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为有降雨变量（total_precipitation）和无降雨变量（total_precipitation）两种处理方法。 ERA5_Land数据下载ERA5-Land hourly data from 1950 to present 下载变量：10m_u">
+<meta property="og:description" content="FNL和GFS数据介绍-WRF&#x2F;WPS气象数据输入FNL再分析数据：常用的气象再分析数据；GFS数据：最常用的气象预报数据。除GFS&#x2F;FNL数据外，还可使用其它气象数据源作为输入，如NAM、RAP&#x2F;HRRR、重新分析（NARR、CFSR、NNRP、ERA-interim、ERA5 等）、其他 WRF 运行。详细可用数据源可查看WRF-WPS  FNL（Final analyzed field）数据">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-09-01T13:57:27.000Z">
-<meta property="article:modified_time" content="2024-09-06T02:40:29.731Z">
+<meta property="og:image" content="https://singyutang.github.io/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/Vtable_input_data.png">
+<meta property="og:image" content="https://singyutang.github.io/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/FNL_data.png">
+<meta property="og:image" content="https://singyutang.github.io/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/GFS_data.png">
+<meta property="article:published_time" content="2024-09-05T20:28:33.000Z">
+<meta property="article:modified_time" content="2024-09-06T03:31:58.770Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="脚本">
+<meta property="article:tag" content="WRF">
+<meta property="article:tag" content="R">
 <meta property="article:tag" content="WRF-Hydro5.2.0">
-<meta property="article:tag" content="ERA5_Land">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="FNL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://singyutang.github.io/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/Vtable_input_data.png">
   
     <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
   
@@ -180,7 +187,7 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-使用ERA5-Land小时数据作为WRF-Hydro气象强迫数据输入" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-WRF-Hydro中的部分脚本更新" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -188,7 +195,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      使用ERA5_Land小时数据作为WRF-Hydro气象强迫数据输入
+      WRF-Hydro中的部分脚本更新一
     </h1>
   
 
@@ -196,8 +203,8 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2024/09/01/%E4%BD%BF%E7%94%A8ERA5-Land%E5%B0%8F%E6%97%B6%E6%95%B0%E6%8D%AE%E4%BD%9C%E4%B8%BAWRF-Hydro%E6%B0%94%E8%B1%A1%E5%BC%BA%E8%BF%AB%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5/" class="article-date">
-	  <time datetime="2024-09-01T13:57:27.000Z" itemprop="datePublished">九月 1, 2024</time>
+	Posted on <a href="/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/" class="article-date">
+	  <time datetime="2024-09-05T20:28:33.000Z" itemprop="datePublished">九月 6, 2024</time>
 	</a>
 
       
@@ -208,17 +215,22 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本教程用于下载ERA5_Land数据处理作为WRF-Hydro FORCING输入数据（YYYYMMDDHH.LDASIN_DOMAINX），分为有降雨变量（total_precipitation）和无降雨变量（total_precipitation）两种处理方法。</p>
-<h1 id="ERA5-Land数据下载"><a href="#ERA5-Land数据下载" class="headerlink" title="ERA5_Land数据下载"></a>ERA5_Land数据下载</h1><p><a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land?tab=form">ERA5-Land hourly data from 1950 to present</a></p>
-<p>下载变量：10m_u_component_of_wind’,                 ‘10m_v_component_of_wind’, ‘2m_dewpoint_temperature’,<br>            ‘2m_temperature’, ‘surface_pressure’, ‘surface_solar_radiation_downwards’,<br>            ‘surface_thermal_radiation_downwards’, ‘total_precipitation’</p>
-<p>下载数据格式：Zipped NetCDF-3 (experimental)</p>
-<p><em>根据需要代码选择是否下载total_precipitation变量</em></p>
-<h1 id="处理代码下载"><a href="#处理代码下载" class="headerlink" title="处理代码下载"></a>处理代码下载</h1><p><a target="_blank" rel="noopener" href="https://github.com/SingyuTang/prepare_era5_land_for_wrf_hydro_forcing">prepare_era5_land_for_wrf_hydro_forcing</a></p>
-<h1 id="运行流程"><a href="#运行流程" class="headerlink" title="运行流程"></a>运行流程</h1><p>  （1）创建文件夹input_files1；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir input_files1</span><br></pre></td></tr></table></figure><br>  （2）读取处理ERA5数据变量；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python read_era5_land_with_precipitaion.py</span><br></pre></td></tr></table></figure><br>  （3）生成重新网格化权重网格文件；<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncl &#x27;interp_opt=&quot;bilinear&quot;&#x27; &#x27;srcGridName=&quot;input_files1/ERA5_025_1H.20060601.0100.nc4&quot;&#x27; &#x27;dstGridName=&quot;geo_em.d03.nc&quot;&#x27; ERA52WRFHydro_generate_weights.ncl</span><br></pre></td></tr></table></figure><br>  （4）重新网格化。<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncl &#x27;srcFileName=&quot;*.nc4&quot;&#x27; &#x27;dstGridName=&quot;geo_em.d03.nc&quot;&#x27; ERA52WRFHydro_regrid.ncl</span><br></pre></td></tr></table></figure></p>
-<p><em>如果在代码运行过程中出现权限问题报错，运行以下代码给予权限</em><br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R 777 *</span><br></pre></td></tr></table></figure></p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Zf69Ot_KG2_KhuD1aWmFUA">应用ERA5-Land小时数据到WRF-hydro模型</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ruo-li-suo-yi/p/7772777.html">博客园 - 温度、水汽压、湿度计算公式</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.fao.org/4/X0490E/x0490e07.htm">Crop evapotranspiration - Guidelines for computing crop water requirements - Chapter 3 Meteorological data - FAO Irrigation and drainage paper 56 </a></p>
+        <h1 id="FNL和GFS数据介绍-WRF-WPS气象数据输入"><a href="#FNL和GFS数据介绍-WRF-WPS气象数据输入" class="headerlink" title="FNL和GFS数据介绍-WRF/WPS气象数据输入"></a>FNL和GFS数据介绍-WRF/WPS气象数据输入</h1><p>FNL再分析数据：常用的气象再分析数据；<br>GFS数据：最常用的气象预报数据。<br>除GFS/FNL数据外，还可使用其它气象数据源作为输入，如NAM、RAP/HRRR、重新分析（NARR、CFSR、NNRP、ERA-interim、ERA5 等）、其他 WRF 运行。详细可用数据源可查看<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wps.html#function-of-each-wps-program">WRF-WPS</a></p>
+<img src="/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/Vtable_input_data.png" class="">
+<p>FNL（Final analyzed field）数据集和GFS（Global Forecast System）数据集虽有联系，但在同一资料同化和预报系统中却有不同的产品。它们基于相同的基础模型和数据同化技术，且包含相同的数据源。FNL是最终分析场，是经过同化处理后的结果，可以补充实时状态下没有收集齐全的某些观测资料。大部分情况下，FNL和GFS的初始场相近。FNL是再分析资料，获取方便，有长期的历史数据，而GFS官方只提供近几天的下载，获取历史数据比较麻烦。</p>
+<p>FNL数据官网：<a target="_blank" rel="noopener" href="https://rda.ucar.edu/datasets/d083002/dataaccess/#">https://rda.ucar.edu/datasets/d083002/dataaccess/#</a></p>
+<img src="/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/FNL_data.png" class="">
+<p>GFS官方数据下载：<a target="_blank" rel="noopener" href="https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/">https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/</a></p>
+<img src="/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/GFS_data.png" class="">
+<h1 id="FNL数据下载脚本"><a href="#FNL数据下载脚本" class="headerlink" title="FNL数据下载脚本"></a>FNL数据下载脚本</h1><p>FNL可以作为WRF模型的输入数据，用于模型初始化和创建边界条件网格。<br>脚本下载链接：<a target="_blank" rel="noopener" href="https://github.com/SingyuTang/wrf_scripts/blob/main/fnl_download_for_wrf.py">https://github.com/SingyuTang/wrf_scripts/blob/main/fnl_download_for_wrf.py</a></p>
+<h1 id="create-soilproperties-R脚本"><a href="#create-soilproperties-R脚本" class="headerlink" title="create_soilproperties.R脚本"></a>create_soilproperties.R脚本</h1><p>官方没有将GENPARM.TBL中的refdk, refkdt, slope参数和MPTABLE.TBL中的rsurf_exp参数添加到soil_properties.nc文件中，修改后的create_soilproperties_Zuo.R对这一特性进行了修复。</p>
+<p>脚本下载链接：<a target="_blank" rel="noopener" href="https://github.com/SingyuTang/wrf_scripts/tree/main/create_soilproperties">https://github.com/SingyuTang/wrf_scripts/tree/main/create_soilproperties</a></p>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://www.heywhale.com/mw/notebook/6476e6cd3f075e5cb1519a34">Model Whale - Workshop第一期：初探气象数据 Part2</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/avivi/p/10880131.html">博客园 - GFS和Fnl文件的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_64799803/article/details/137654097">CSDN - 运行WRF的常用气象场数据</a></p>
+<p><a target="_blank" rel="noopener" href="http://bbs.06climate.com/forum.php?mod=viewthread&amp;tid=104598">气象家园 - Fnl.Gfs的区别 </a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/avivi/p/14833263.html">博客园 - 跑 wrf 所需 fnl 数据下载</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44237337/article/details/137228430">CSDN - Real-data WRF | setup and run and experiment</a></p>
 
       
     </div>
@@ -229,7 +241,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ERA5-Land/" rel="tag">ERA5_Land</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FNL/" rel="tag">FNL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R/" rel="tag">R</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF/" rel="tag">WRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a></li></ul>
 
       
         <div id="donation_div"></div>
@@ -279,19 +291,10 @@ var a = new Donate({
     
 <nav id="article-nav">
   
-    <a href="/2024/09/06/WRF-Hydro%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E8%84%9A%E6%9C%AC%E6%9B%B4%E6%96%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          WRF-Hydro中的部分脚本更新一
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/07/22/%E8%BF%90%E8%A1%8CWPS%E3%80%81WRF%E3%80%81WRF-Hydro%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/09/01/%E4%BD%BF%E7%94%A8ERA5-Land%E5%B0%8F%E6%97%B6%E6%95%B0%E6%8D%AE%E4%BD%9C%E4%B8%BAWRF-Hydro%E6%B0%94%E8%B1%A1%E5%BC%BA%E8%BF%AB%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">运行WPS、WRF、WRF-Hydro的一些错误总结一</div>
+      <div class="article-nav-title">使用ERA5_Land小时数据作为WRF-Hydro气象强迫数据输入</div>
     </a>
   
 </nav>
@@ -305,7 +308,7 @@ var a = new Donate({
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">文章目录</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ERA5-Land%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">ERA5_Land数据下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E4%BB%A3%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">处理代码下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">运行流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FNL%E5%92%8CGFS%E6%95%B0%E6%8D%AE%E4%BB%8B%E7%BB%8D-WRF-WPS%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">FNL和GFS数据介绍-WRF&#x2F;WPS气象数据输入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FNL%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="nav-number">2.</span> <span class="nav-text">FNL数据下载脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#create-soilproperties-R%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">create_soilproperties.R脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2"><span class="nav-number">4.</span> <span class="nav-text">参考博客</span></a></li></ol>
     
     </div>
   </aside>
