@@ -175,6 +175,141 @@ var themeMenus = {};
         
           <section id="main">
   
+    <article id="post-如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/">如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" class="article-date">
+	  <time datetime="2024-03-11T03:07:13.000Z" itemprop="datePublished">三月 11, 2024</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="序贯平差"><a href="#序贯平差" class="headerlink" title="序贯平差"></a>序贯平差</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>序贯平差也叫逐次相关间接平差，它是将观测值分成两组或多组，按组的顺序分别做相关间接平差，从而使其达到与两期或多期网一起做整体平差同样的结果。</p>
+<h2 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h2><p>将观测值 L 分为两组，记 $\overset{L_{k-1}}{\tiny n_{k-1}}$ 和 $\overset{L_{k}}{\tiny n_{k}}$, 它们的权阵分别记为 $P_{k-1}$ 和 $P_{k}$，设这两组观测值不相关，有</p>
+<script type="math/tex; mode=display">
+\overset{L}{\tiny n \ 1} = [\ \begin{matrix} L_{k-1} \\ L_{k} \end{matrix}\ ]</script><script type="math/tex; mode=display">
+\overset{P}{\tiny n \ n} = \begin{equation} \left[ \begin{matrix} P_{k-1} & 0 \\ 0 & P_{k} \end{matrix} \right] \end{equation}</script><p>当参数间不存在约束条件时，其误差方程为</p>
+<script type="math/tex; mode=display">
+\begin{equation} V_{k-1} = B_{k-1}  \hat{x} - l_{k-1}
+\tag{1}\end{equation}</script><script type="math/tex; mode=display">
+\begin{equation} V_{k} = B_{k}  \hat{x} - l_{k}
+\tag{2}\end{equation}</script><p>式中</p>
+<script type="math/tex; mode=display">
+\hat{X} = X^0 + \hat{x}, \quad l_{i}=L_{i}-L_{i}^0(i=k,k-1)</script><p>将 （1）式单独平差，得</p>
+<script type="math/tex; mode=display">
+\hat{x}_{k-1} = Q_{\hat{x}_{k-1}}B_{k-1}^TP_{k-1}l_{k-1} \tag{3}</script><p>式中，$Q_{\hat{x}_{k-1}}$ 为 $\hat{X}_{k-1}$ (即 $\hat{x}_{k-1}$) 的协因数阵，故有</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}_{k-1}} = (B_{k-1}^T P_{k-1}B_{k-1})^{-1} \tag{4}</script><p>或</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}_{k-1}} ^{-1}= (B_{k-1}^T P_{k-1}B_{k-1}) \tag{5}</script><p>$\hat{x}_{k-1}$ 表示由第一组观测值 $L_{k-1}$ 平差所得 $\hat{x}$ 的值<br>将（1）和（2）联合解算，即由两组观测值作整体平差，可组成法方程为</p>
+<script type="math/tex; mode=display">
+(Q_{\hat{X}_{k-1}} ^{-1}+ B_{k}^T P_{k}B_{k}) \hat{x}-(B_{k-1}^TP_{k-1}B_{k-1}+B_{k}^TP_{k}l_{k})=0 \tag{6}</script><p>其解为</p>
+<script type="math/tex; mode=display">
+\hat{x}=(Q_{\hat{X}_{k-1}} ^{-1}+ B_{k}^T P_{k}B_{k})^{-1}(B_{k-1}^TP_{k-1}B_{k-1}+B_{k}^TP_{k}l_{k})</script><p>它是两组观测值整体平差的结果，按间接平差知，其法方程系数的逆阵就是\ $\hat{X}$ 的协因数阵，故有</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}}=(Q_{\hat{X}_{k-1}} ^{-1}+ B_{k}^T P_{k}B_{k})^{-1} \tag{7}</script><p>于是上式为</p>
+<script type="math/tex; mode=display">
+\hat{x}=Q_{\hat{X}}B_{k-1}^TP_{k-1}B_{k-1}+Q_{\hat{X}}B_{k}^TP_{k}l_{k} \tag{8}</script><p>考虑（3）和（7）式，</p>
+<script type="math/tex; mode=display">
+B_{k-1}^TP_{k-1}l_{k-1}=Q_{\hat{X}_{k-1}}^{-1}\hat{x}_{k-1} \tag{9}</script><script type="math/tex; mode=display">
+Q_{\hat{X}_{k-1}}^{-1}=Q_{\hat{X}_{k}}^{-1}-B_{k}^T P_{k} B_{k} \tag{10}</script><p>则（8）式为</p>
+<script type="math/tex; mode=display">
+\hat{x}=\hat{x}_{k-1}+Q_{\hat{X}} B_{k}^T P_{k}(l_{k}-B_{k}\hat{x}_{k-1}) \tag{11}</script><p>令</p>
+<script type="math/tex; mode=display">
+J=Q_{\hat{X}}B_{k}^T P_{k} \tag{12}</script><script type="math/tex; mode=display">
+\bar{l}_{k} = l_{k} - B_{k}\hat{x}_{k-1} \tag{13}</script><p>则上式为</p>
+<script type="math/tex; mode=display">
+\hat{x}=\hat{x}_{k-1}+J \bar{l}_{k} \tag{14}</script><p>将（10）式两边左乘 $Q_{\hat{X}}$,，顾及（12）得</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}}Q_{\hat{X}_{k-1}}^{-1} = I-JB_{k}</script><p>再对两边右乘 $Q_{\hat{X}_{k-1}}$，得</p>
+<script type="math/tex; mode=display">
+Q_{\hat{X}}=Q_{\hat{X}_{k-1}} - JB_{k}Q_{\hat{X}_{k-1}} \tag{15}</script><p>由矩阵反演公式知</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+Q_{\hat{X}} = (Q_{\hat{X}_{k-1}}^{-1}+B_{k}^T P_{k}B_{k})^{-1}
+=Q_{\hat{X}_{k-1}}-Q_{\hat{X}_{k-1}}B_{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}B_{k}Q_{\hat{X}_{k-1}}
+\end{equation} \tag{16}</script><p>比较（15）与（16）式知：</p>
+<script type="math/tex; mode=display">
+J = Q_{\hat{X}_{k-1}}B_{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1} \tag{17}</script><p>J 阵称为卡尔曼滤波增益矩阵或称序贯平差的增益矩阵。<br>将（17）式代入（14）式即得序贯平差的递推计算式。</p>
+<h2 id="结论-序贯平差算法"><a href="#结论-序贯平差算法" class="headerlink" title="结论 (序贯平差算法)"></a>结论 (序贯平差算法)</h2><ol>
+<li><p>使用参数平差改正值 $\hat{x}$ 计算<br>状态递推</p>
+<script type="math/tex; mode=display">
+\hat{x}_{k} = \hat{x}_{k-1} + J_{k} \bar{l}_{k}</script><script type="math/tex; mode=display">
+\bar{l}_{k} = l_{k} - B_{k}\hat{x}_{k-1}</script><p>方差递推</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+Q_{\hat{X}} =Q_{\hat{X}_{k-1}}-Q_{\hat{X}_{k-1}}B_{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}B_{k}Q_{\hat{X}_{k-1}}
+\end{equation}</script><p>增益矩阵</p>
+<script type="math/tex; mode=display">
+J = Q_{\hat{X}_{k-1}}B_{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}</script></li>
+<li><p>使用参数平差值（待估状态\/参数量）$\hat{X}$ 计算<br>状态递推</p>
+<script type="math/tex; mode=display">
+\hat{X}_{k} = \hat{X}_{k-1} + J_{k} \bar{L}_{k}</script><script type="math/tex; mode=display">
+\bar{L}_{k} = L_{k} - B_{k}\hat{X}_{k-1}</script><p>方差递推</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+Q_{\hat{X}_{k}} =Q_{\hat{X}_{k-1}}-Q_{\hat{X}_{k-1}}B_{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}B_{k}Q_{\hat{X}_{k-1}}
+\end{equation}</script><p>增益矩阵</p>
+<script type="math/tex; mode=display">
+J_{k} = Q_{\hat{X}_{k-1}}B_{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}_{k-1}}B_{k}^T)^{-1}</script></li>
+</ol>
+<h2 id="推导流程"><a href="#推导流程" class="headerlink" title="推导流程"></a>推导流程</h2><p>使用参数平差值（待估状态\/参数量）$\hat{X}$ 计算<br><img src="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/5bc9086b69b842dba47bd0f43a9275a3.png" class=""></p>
+<h1 id="卡尔曼滤波"><a href="#卡尔曼滤波" class="headerlink" title="卡尔曼滤波"></a>卡尔曼滤波</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>卡尔曼滤波是一种线性最小方差估计，采用动力学方程即状态方程描述被估计量的动态变化规律，被估计量的动态统计信息由激励白噪声的统计信息和动力学方程确定。其计算过程是一个不断地预测、修正的过程。在求解时不需要存储大量的观测数据，并且当得到新的观测数据时，可随时估算得新的滤波值，便于实时处理观测结果。<br>1.基于前一时间点的系统状态的概率分布给出当前时间点的系统状态的概率分布预测 P1<br>2.基于当前时间点的观测量的概率分布 Q 给出另一组对当前时间点系统状态的概率分布预测 P2 (这里需要注意，如果传感器能直接把系统状态都观测了，那么我们直接用观测量的概率分布 Q 作为 P2 就好了，但是有可能传感器观测的物理量量并不是直接的系统状态，而是其他物理量，这时我们需要通过做一个线性变换来获得 P2)<br>3.现在，我们有两个关于当前时间点系统状态的概率分布的预测 P1 和 P2，我们于是可以计算它们的联合概率分布，这个联合概率分布就是我们最终想要的更正过后的当前时间点的系统状态概率分布，有了它我们就可以进入下一个时间点继续迭代我们交替的预测-更正步骤了。<br>注意：系统状态和测量值都服从线性高斯分布。</p>
+<h2 id="卡尔曼滤波算法"><a href="#卡尔曼滤波算法" class="headerlink" title="卡尔曼滤波算法"></a>卡尔曼滤波算法</h2><p>状态递推</p>
+<script type="math/tex; mode=display">
+x_{k}'=x_{k}+K'(\overrightarrow z_{k} - H_{k}X_{k})</script><p>方差递推</p>
+<script type="math/tex; mode=display">
+P_{k}'=P_{k}-K'H_{k}P_{k}</script><p>增益矩阵</p>
+<script type="math/tex; mode=display">
+K'=P_{k}H_{k}^T(H_{k}P_{k}H_{k}^T+R_{k})^{-1}</script><p>变量解释</p>
+<script type="math/tex; mode=display">
+x_{K}': 最佳估计</script><script type="math/tex; mode=display">
+x_{k}: 当前状态</script><script type="math/tex; mode=display">
+P_{k}: 当前状态x_{k}的协方差阵</script><script type="math/tex; mode=display">
+\overrightarrow z_{k}: 观测值平均值</script><p>$H_{k}$: 由于单位、比例等不同对传感器加上一个映射矩阵（尺度变换），从而保证每个传感器输出读数尺度相同，处于同一空间</p>
+<script type="math/tex; mode=display">
+R_{k}: 传感器噪声</script><script type="math/tex; mode=display">
+K' : 卡尔曼增益</script><h1 id="集合卡尔曼滤波"><a href="#集合卡尔曼滤波" class="headerlink" title="集合卡尔曼滤波"></a>集合卡尔曼滤波</h1><h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/122926813">序贯最小二乘平差 / 递推最小二乘平差公式推导</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/131031339">序贯最小二乘平差 VS 卡尔曼滤波</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
     <article id="post-SWOT介绍、研究现状及应用"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -684,74 +819,6 @@ var themeMenus = {};
     
 
   
-    <article id="post-ubuntu16.04安装jdk和panoply"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/">ubuntu16.04安装jdk和panoply</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/" class="article-date">
-	  <time datetime="2023-09-26T04:01:42.000Z" itemprop="datePublished">九月 26, 2023</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="安装Panoply"><a href="#安装Panoply" class="headerlink" title="安装Panoply"></a>安装Panoply</h1><p>安装包网址： <a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/">https://www.giss.nasa.gov/tools/panoply/download/</a> </p>
-<p>自行选择对应版本（windows，macOS，Linux，这里是 linux . tgz 格式），也可点击<a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.2.7.tgz">这里</a>直接下载tgz格式。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230926122259.png" class=""><br>下载完成后，复制到 ubuntu 系统下 <code>/opt</code> 文件夹下提取即可，但是此时不能直接运行，需要 安装大于 11 版本的 JDK 才行，JDK下载安装参见下文。<br>JDK安装完成后，进入 panoply 文件夹下，打开终端输入 ./Panoply.sh 运行。</p>
-<h1 id="手动安装-JDK20"><a href="#手动安装-JDK20" class="headerlink" title="手动安装 JDK20"></a>手动安装 JDK20</h1><p>下载 JDK20 安装包：<a target="_blank" rel="noopener" href="https://jdk.java.net/20/">JDK20 下载链接</a>，选择适合电脑的版本，ubuntu16.04系统 点击<a target="_blank" rel="noopener" href="https://download.java.net/java/GA/jdk20.0.1/b4887098932d415489976708ad6d1a4b/9/GPL/openjdk-20.0.1_linux-x64_bin.tar.gz">下载链接</a>直接下载。<br>提示：若进入JDK20下载网页显示JDK20版本已被取代，则下载最新的JDK版本，可输入其官网网址进行下载，网址链接样式如 <code>https://jdk.java.net/xx/</code>，其中 <code>xx</code> 表示你要下载的 JDK 版本，如下载 JDK21 则其链接为 <a target="_blank" rel="noopener" href="https://jdk.java.net/21/">https://jdk.java.net/21/</a> 。对于x64操作系统的电脑，下载下图所示的 tar.gz 格式安装包。<br><img src="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20230926122708.png" class=""></p>
-<ul>
-<li>下载完成后，使用【提取到此处】解压；</li>
-<li>将解压后的文件夹移动到/usr 文件夹下</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv jdk* /usr</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用 <code>update-alternatives</code> 命令把 Java 安装到系统上，此时就不用再设置环境了。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/jdk-20.*/bin/java 2</span><br></pre></td></tr></table></figure>
-<ul>
-<li>设置默认的 Java</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
-<p>上述命令会显示目前在系统里存在的所有版本的 Java，然后你选择一个你想要的版本就可以了。</p>
-<ul>
-<li>最后查看当前的 java 版本</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-<p>本文参考博客： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/powerwu/articles/12095326.html">如何在Linux Ubuntu16/18上安装Java JDK11/8</a></p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
 
 
   <nav id="page-nav">
@@ -854,6 +921,18 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/2025/01/07/GRACE%E4%B8%AD%E7%9A%84MASCON%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E7%AE%80%E4%BB%8B/">GRACE中的MASCON数据最新下载简介</a></h6>
+              <span>一月 7, 2025</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/">GitHub如何上传大于25MB的文件</a></h6>
               <span>一月 5, 2025</span>
             </div>
@@ -908,18 +987,6 @@ var themeMenus = {};
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2024/07/22/%E8%BF%90%E8%A1%8CWPS%E3%80%81WRF%E3%80%81WRF-Hydro%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93%E4%B8%80/">运行WPS、WRF、WRF-Hydro的一些错误总结一</a></h6>
-              <span>七月 22, 2024</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -929,7 +996,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a><span class="category-list-count">33</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8B%E8%AF%95/">测试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -939,7 +1006,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda/" rel="tag">Anaconda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS/" rel="tag">ArcGIS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS-Pro/" rel="tag">ArcGIS Pro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clash/" rel="tag">Clash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ERA5/" rel="tag">ERA5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ERA5-Land/" rel="tag">ERA5_Land</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FNL/" rel="tag">FNL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GACOS/" rel="tag">GACOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAMMA/" rel="tag">GAMMA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRACE/" rel="tag">GRACE</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRACE-FO/" rel="tag">GRACE-FO</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Global-Mapper/" rel="tag">Global Mapper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HydroSHEDS/" rel="tag">HydroSHEDS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InSAR/" rel="tag">InSAR</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLDAS/" rel="tag">NLDAS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT%E6%A8%A1%E6%9D%BF/" rel="tag">PPT模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R/" rel="tag">R</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBAS-InSAR/" rel="tag">SBAS-InSAR</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWOT/" rel="tag">SWOT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel-1/" rel="tag">Sentinel-1</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF/" rel="tag">WRF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" rel="tag">WRF Hydro GIS Pre-Processing Tools</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-Object/" rel="tag">[object Object]</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/" rel="tag">documents</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdal/" rel="tag">gdal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netCDF/" rel="tag">netCDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tooklkit/" rel="tag">tooklkit</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websites/" rel="tag">websites</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag">原创</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" rel="tag">土耳其双震</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%B0%E9%9C%87/" rel="tag">地震</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" rel="tag">数据分享</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%96%86/" rel="tag">新疆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%85%E6%B8%B8/" rel="tag">旅游</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%AA%E6%B0%B4/" rel="tag">洪水</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%AA%E6%B0%B4%E9%A2%84%E6%8A%A5/" rel="tag">洪水预报</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AA%84%E9%97%A8/" rel="tag">窄门</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" rel="tag">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%98%E5%9B%BE/" rel="tag">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">读后感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/" rel="tag">错误总结</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda/" rel="tag">Anaconda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Anaconda3/" rel="tag">Anaconda3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS/" rel="tag">ArcGIS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ArcGIS-Pro/" rel="tag">ArcGIS Pro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clash/" rel="tag">Clash</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ERA5/" rel="tag">ERA5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ERA5-Land/" rel="tag">ERA5_Land</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FNL/" rel="tag">FNL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GACOS/" rel="tag">GACOS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAMMA/" rel="tag">GAMMA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRACE/" rel="tag">GRACE</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GRACE-FO/" rel="tag">GRACE-FO</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Global-Mapper/" rel="tag">Global Mapper</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HydroSHEDS/" rel="tag">HydroSHEDS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InSAR/" rel="tag">InSAR</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK20/" rel="tag">JDK20</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MASCON/" rel="tag">MASCON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Matlab/" rel="tag">Matlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NLDAS/" rel="tag">NLDAS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PPT%E6%A8%A1%E6%9D%BF/" rel="tag">PPT模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Panoply/" rel="tag">Panoply</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pycharm/" rel="tag">Pycharm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/R/" rel="tag">R</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SBAS-InSAR/" rel="tag">SBAS-InSAR</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWOT/" rel="tag">SWOT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel-1/" rel="tag">Sentinel-1</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF/" rel="tag">WRF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" rel="tag">WRF Hydro GIS Pre-Processing Tools</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows10/" rel="tag">Windows10</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/object-Object/" rel="tag">[object Object]</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documents/" rel="tag">documents</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdal/" rel="tag">gdal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netCDF/" rel="tag">netCDF</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tooklkit/" rel="tag">tooklkit</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websites/" rel="tag">websites</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%9F%E5%88%9B/" rel="tag">原创</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" rel="tag">土耳其双震</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%B0%E9%9C%87/" rel="tag">地震</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" rel="tag">数据分享</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E7%96%86/" rel="tag">新疆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%85%E6%B8%B8/" rel="tag">旅游</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%AA%E6%B0%B4/" rel="tag">洪水</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B4%AA%E6%B0%B4%E9%A2%84%E6%8A%A5/" rel="tag">洪水预报</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AA%84%E9%97%A8/" rel="tag">窄门</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" rel="tag">系统安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%98%E5%9B%BE/" rel="tag">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/" rel="tag">读后感</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/" rel="tag">错误总结</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -949,7 +1016,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Anaconda3/" style="font-size: 10px;">Anaconda3</a> <a href="/tags/ArcGIS/" style="font-size: 10px;">ArcGIS</a> <a href="/tags/ArcGIS-Pro/" style="font-size: 10px;">ArcGIS Pro</a> <a href="/tags/Clash/" style="font-size: 10px;">Clash</a> <a href="/tags/ERA5/" style="font-size: 10px;">ERA5</a> <a href="/tags/ERA5-Land/" style="font-size: 10px;">ERA5_Land</a> <a href="/tags/FNL/" style="font-size: 10px;">FNL</a> <a href="/tags/GACOS/" style="font-size: 12.5px;">GACOS</a> <a href="/tags/GAMMA/" style="font-size: 10px;">GAMMA</a> <a href="/tags/GDAL/" style="font-size: 10px;">GDAL</a> <a href="/tags/GRACE/" style="font-size: 13.75px;">GRACE</a> <a href="/tags/GRACE-FO/" style="font-size: 10px;">GRACE-FO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Global-Mapper/" style="font-size: 10px;">Global Mapper</a> <a href="/tags/HydroSHEDS/" style="font-size: 10px;">HydroSHEDS</a> <a href="/tags/InSAR/" style="font-size: 18.75px;">InSAR</a> <a href="/tags/JDK20/" style="font-size: 10px;">JDK20</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/NLDAS/" style="font-size: 10px;">NLDAS</a> <a href="/tags/PPT%E6%A8%A1%E6%9D%BF/" style="font-size: 10px;">PPT模板</a> <a href="/tags/Panoply/" style="font-size: 10px;">Panoply</a> <a href="/tags/Pycharm/" style="font-size: 10px;">Pycharm</a> <a href="/tags/Python/" style="font-size: 12.5px;">Python</a> <a href="/tags/R/" style="font-size: 11.25px;">R</a> <a href="/tags/SBAS-InSAR/" style="font-size: 11.25px;">SBAS-InSAR</a> <a href="/tags/SWOT/" style="font-size: 11.25px;">SWOT</a> <a href="/tags/Sentinel-1/" style="font-size: 16.25px;">Sentinel-1</a> <a href="/tags/Ubuntu16-04/" style="font-size: 18.75px;">Ubuntu16.04</a> <a href="/tags/WPS4-5-0/" style="font-size: 13.75px;">WPS4.5.0</a> <a href="/tags/WRF/" style="font-size: 12.5px;">WRF</a> <a href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" style="font-size: 11.25px;">WRF Hydro GIS Pre-Processing Tools</a> <a href="/tags/WRF-Hydro/" style="font-size: 11.25px;">WRF-Hydro</a> <a href="/tags/WRF-Hydro5-2-0/" style="font-size: 20px;">WRF-Hydro5.2.0</a> <a href="/tags/WRF4-5-2/" style="font-size: 15px;">WRF4.5.2</a> <a href="/tags/Windows10/" style="font-size: 10px;">Windows10</a> <a href="/tags/object-Object/" style="font-size: 11.25px;">[object Object]</a> <a href="/tags/documents/" style="font-size: 11.25px;">documents</a> <a href="/tags/gdal/" style="font-size: 10px;">gdal</a> <a href="/tags/netCDF/" style="font-size: 10px;">netCDF</a> <a href="/tags/rwrfhydro/" style="font-size: 10px;">rwrfhydro</a> <a href="/tags/tooklkit/" style="font-size: 11.25px;">tooklkit</a> <a href="/tags/toolkit/" style="font-size: 17.5px;">toolkit</a> <a href="/tags/ubuntu16-04/" style="font-size: 12.5px;">ubuntu16.04</a> <a href="/tags/websites/" style="font-size: 16.25px;">websites</a> <a href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" style="font-size: 10px;">公式推导</a> <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" style="font-size: 10px;">卡尔曼滤波</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 10px;">原创</a> <a href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" style="font-size: 10px;">土耳其双震</a> <a href="/tags/%E5%9C%B0%E9%9C%87/" style="font-size: 10px;">地震</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" style="font-size: 10px;">序贯平差</a> <a href="/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" style="font-size: 13.75px;">数据分享</a> <a href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" style="font-size: 20px;">文献分享</a> <a href="/tags/%E6%96%B0%E7%96%86/" style="font-size: 10px;">新疆</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 12.5px;">机器学习</a> <a href="/tags/%E6%B4%AA%E6%B0%B4/" style="font-size: 13.75px;">洪水</a> <a href="/tags/%E6%B4%AA%E6%B0%B4%E9%A2%84%E6%8A%A5/" style="font-size: 10px;">洪水预报</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%AA%84%E9%97%A8/" style="font-size: 10px;">窄门</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" style="font-size: 10px;">系统安装</a> <a href="/tags/%E7%BB%98%E5%9B%BE/" style="font-size: 10px;">绘图</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 17.5px;">脚本</a> <a href="/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 10px;">读后感</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" style="font-size: 17.5px;">软件安装</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/" style="font-size: 11.25px;">错误总结</a>
+      <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Anaconda3/" style="font-size: 10px;">Anaconda3</a> <a href="/tags/ArcGIS/" style="font-size: 10px;">ArcGIS</a> <a href="/tags/ArcGIS-Pro/" style="font-size: 10px;">ArcGIS Pro</a> <a href="/tags/Clash/" style="font-size: 10px;">Clash</a> <a href="/tags/ERA5/" style="font-size: 10px;">ERA5</a> <a href="/tags/ERA5-Land/" style="font-size: 10px;">ERA5_Land</a> <a href="/tags/FNL/" style="font-size: 10px;">FNL</a> <a href="/tags/GACOS/" style="font-size: 12.5px;">GACOS</a> <a href="/tags/GAMMA/" style="font-size: 10px;">GAMMA</a> <a href="/tags/GDAL/" style="font-size: 10px;">GDAL</a> <a href="/tags/GRACE/" style="font-size: 15px;">GRACE</a> <a href="/tags/GRACE-FO/" style="font-size: 11.25px;">GRACE-FO</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Global-Mapper/" style="font-size: 10px;">Global Mapper</a> <a href="/tags/HydroSHEDS/" style="font-size: 10px;">HydroSHEDS</a> <a href="/tags/InSAR/" style="font-size: 18.75px;">InSAR</a> <a href="/tags/JDK20/" style="font-size: 10px;">JDK20</a> <a href="/tags/MASCON/" style="font-size: 10px;">MASCON</a> <a href="/tags/Matlab/" style="font-size: 10px;">Matlab</a> <a href="/tags/NLDAS/" style="font-size: 10px;">NLDAS</a> <a href="/tags/PPT%E6%A8%A1%E6%9D%BF/" style="font-size: 10px;">PPT模板</a> <a href="/tags/Panoply/" style="font-size: 10px;">Panoply</a> <a href="/tags/Pycharm/" style="font-size: 10px;">Pycharm</a> <a href="/tags/Python/" style="font-size: 12.5px;">Python</a> <a href="/tags/R/" style="font-size: 11.25px;">R</a> <a href="/tags/SBAS-InSAR/" style="font-size: 11.25px;">SBAS-InSAR</a> <a href="/tags/SWOT/" style="font-size: 11.25px;">SWOT</a> <a href="/tags/Sentinel-1/" style="font-size: 16.25px;">Sentinel-1</a> <a href="/tags/Ubuntu16-04/" style="font-size: 18.75px;">Ubuntu16.04</a> <a href="/tags/WPS4-5-0/" style="font-size: 13.75px;">WPS4.5.0</a> <a href="/tags/WRF/" style="font-size: 12.5px;">WRF</a> <a href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" style="font-size: 11.25px;">WRF Hydro GIS Pre-Processing Tools</a> <a href="/tags/WRF-Hydro/" style="font-size: 11.25px;">WRF-Hydro</a> <a href="/tags/WRF-Hydro5-2-0/" style="font-size: 20px;">WRF-Hydro5.2.0</a> <a href="/tags/WRF4-5-2/" style="font-size: 15px;">WRF4.5.2</a> <a href="/tags/Windows10/" style="font-size: 10px;">Windows10</a> <a href="/tags/object-Object/" style="font-size: 11.25px;">[object Object]</a> <a href="/tags/documents/" style="font-size: 11.25px;">documents</a> <a href="/tags/gdal/" style="font-size: 10px;">gdal</a> <a href="/tags/netCDF/" style="font-size: 10px;">netCDF</a> <a href="/tags/rwrfhydro/" style="font-size: 10px;">rwrfhydro</a> <a href="/tags/tooklkit/" style="font-size: 11.25px;">tooklkit</a> <a href="/tags/toolkit/" style="font-size: 17.5px;">toolkit</a> <a href="/tags/ubuntu16-04/" style="font-size: 12.5px;">ubuntu16.04</a> <a href="/tags/websites/" style="font-size: 17.5px;">websites</a> <a href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" style="font-size: 10px;">公式推导</a> <a href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" style="font-size: 10px;">卡尔曼滤波</a> <a href="/tags/%E5%8E%9F%E5%88%9B/" style="font-size: 10px;">原创</a> <a href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" style="font-size: 10px;">土耳其双震</a> <a href="/tags/%E5%9C%B0%E9%9C%87/" style="font-size: 10px;">地震</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" style="font-size: 10px;">序贯平差</a> <a href="/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" style="font-size: 13.75px;">数据分享</a> <a href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" style="font-size: 20px;">文献分享</a> <a href="/tags/%E6%96%B0%E7%96%86/" style="font-size: 10px;">新疆</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 12.5px;">机器学习</a> <a href="/tags/%E6%B4%AA%E6%B0%B4/" style="font-size: 13.75px;">洪水</a> <a href="/tags/%E6%B4%AA%E6%B0%B4%E9%A2%84%E6%8A%A5/" style="font-size: 10px;">洪水预报</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%AA%84%E9%97%A8/" style="font-size: 10px;">窄门</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" style="font-size: 10px;">系统安装</a> <a href="/tags/%E7%BB%98%E5%9B%BE/" style="font-size: 10px;">绘图</a> <a href="/tags/%E8%84%9A%E6%9C%AC/" style="font-size: 17.5px;">脚本</a> <a href="/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/" style="font-size: 10px;">读后感</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" style="font-size: 17.5px;">软件安装</a> <a href="/tags/%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/" style="font-size: 11.25px;">错误总结</a>
     </div>
   </div>
 
@@ -959,7 +1026,7 @@ var themeMenus = {};
     <h3 class="widget-title">归档</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

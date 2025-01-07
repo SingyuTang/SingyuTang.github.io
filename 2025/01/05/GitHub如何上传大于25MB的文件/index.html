@@ -32,15 +32,14 @@
 <meta property="og:site_name" content="SingyuTang">
 <meta property="og:description" content="前言利用Git上传代码，当大于25MB的文件时，会提示上传失败，此时需要使用Git LFS(Git Large File)来上传大文件。Git安装可参考Git的安装步骤。 1 下载安装Git LFS1.1 下载Git LFSGit LFS 下载链接：https:&#x2F;&#x2F;github.com&#x2F;git-lfs&#x2F;git-lfs&#x2F;releases  1.2 安装Git LFS下载完成后，双击安装包，按照提示进">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://singyutang.github.io/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/image-1.png">
 <meta property="og:image" content="https://singyutang.github.io/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/s1.png">
 <meta property="article:published_time" content="2025-01-05T08:29:01.000Z">
-<meta property="article:modified_time" content="2025-01-05T10:02:54.751Z">
+<meta property="article:modified_time" content="2025-01-07T05:43:22.765Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="Git">
 <meta property="article:tag" content="GitHub">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://singyutang.github.io/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/image-1.png">
+<meta name="twitter:image" content="https://singyutang.github.io/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/s1.png">
   
     <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
   
@@ -212,7 +211,7 @@ var themeMenus = {};
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>利用Git上传代码，当大于25MB的文件时，会提示上传失败，此时需要使用Git LFS(Git Large File)来上传大文件。Git安装可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46351233/article/details/124733661">Git的安装步骤</a>。</p>
 <h1 id="1-下载安装Git-LFS"><a href="#1-下载安装Git-LFS" class="headerlink" title="1 下载安装Git LFS"></a>1 下载安装Git LFS</h1><h2 id="1-1-下载Git-LFS"><a href="#1-1-下载Git-LFS" class="headerlink" title="1.1 下载Git LFS"></a>1.1 下载Git LFS</h2><p>Git LFS 下载链接：<a target="_blank" rel="noopener" href="https://github.com/git-lfs/git-lfs/releases">https://github.com/git-lfs/git-lfs/releases</a></p>
-<p><img src="image-1.png" alt="alt text"><br><img src="/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/s1.png" class=""></p>
+<img src="/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/s1.png" class="">
 <h2 id="1-2-安装Git-LFS"><a href="#1-2-安装Git-LFS" class="headerlink" title="1.2 安装Git LFS"></a>1.2 安装Git LFS</h2><p>下载完成后，双击安装包，按照提示进行安装即可。</p>
 <h1 id="2-使用Git-LFS"><a href="#2-使用Git-LFS" class="headerlink" title="2.使用Git LFS"></a>2.使用Git LFS</h1><h2 id="2-1-初始化并推送单个文件"><a href="#2-1-初始化并推送单个文件" class="headerlink" title="2.1 初始化并推送单个文件"></a>2.1 初始化并推送单个文件</h2><p>进入我的项目文件夹路径<code>C:\Users\tang xingyou\MyGithub\GRACE_GMT_scripts</code>，打开Git Bash，输入以下命令：</p>
 <p>初始化仓库并安装LFS应用<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git lfs install</span><br><span class="line">git lfs track *</span><br><span class="line">git add .gitattributes</span><br><span class="line"></span><br></pre></td></tr></table></figure><br>添加属性文件上传的说明：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;.gitattributes commit&quot;</span><br></pre></td></tr></table></figure><br>建立本地和 Github 仓库的链接（origin 后接自己仓库的链接）<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/SingyuTang/GRACE_GMT_scripts.git</span><br></pre></td></tr></table></figure></p>
@@ -284,6 +283,15 @@ var a = new Donate({
   
     
 <nav id="article-nav">
+  
+    <a href="/2025/01/07/GRACE%E4%B8%AD%E7%9A%84MASCON%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E7%AE%80%E4%BB%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          GRACE中的MASCON数据最新下载简介
+        
+      </div>
+    </a>
   
   
     <a href="/2024/09/29/GRACE-GRACE-FO-L2%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E9%93%BE%E6%8E%A5/" id="article-nav-older" class="article-nav-link-wrap">
