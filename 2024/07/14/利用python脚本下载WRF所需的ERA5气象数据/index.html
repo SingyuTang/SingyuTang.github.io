@@ -1,31 +1,25 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
 
-  <!-- PACE Progress Bar START -->
-  
-    
-<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
-
-    
-<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
-
-  
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/singyutang.jpg">
+  <link rel="icon" href="/img/singyutang.jpg">
   
 
-  <!-- PACE Progress Bar START -->
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <title>利用python脚本下载wrf所需的era5气象数据 | SingyuTang</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="SingyuTang">
+  <meta name="keywords" content="">
   
-  <meta name="keywords" content="脚本PythonWRFERA5" />
-  
-  
-  
-  
-  <meta name="description" content="1.环境设置使用脚本下载数据之前，需要进行一些环境的设置。 （1）cdsapi url和key申请本教程的cdsapi key暂时只更新在Windows下运行，在Linux或MacOS系统申请使用的可查看ECMWF官网教程。在C:\User\xxx\目录下创建文件.cdsapirc，在文件中输入url和key，如获取api url和key可跳转博客或ECMWF官网教程进行申请。 12url: ht">
+    <meta name="description" content="1.环境设置使用脚本下载数据之前，需要进行一些环境的设置。 （1）cdsapi url和key申请本教程的cdsapi key暂时只更新在Windows下运行，在Linux或MacOS系统申请使用的可查看ECMWF官网教程。在C:\User\xxx\目录下创建文件.cdsapirc，在文件中输入url和key，如获取api url和key可跳转博客或ECMWF官网教程进行申请。 12url: ht">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用python脚本下载WRF所需的ERA5气象数据">
 <meta property="og:url" content="https://singyutang.github.io/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF%E6%89%80%E9%9C%80%E7%9A%84ERA5%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE/index.html">
@@ -39,171 +33,253 @@
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="WRF">
 <meta property="article:tag" content="ERA5">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
   
-    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
   
-  <link rel="icon" href="/css/images/favicon.ico">
   
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-    
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  
-<link rel="stylesheet" href="/css/style.css">
+  <title>利用python脚本下载WRF所需的ERA5气象数据 - SingyuTang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-  
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
-  <link rel="stylesheet" href="/css/hiero.css" >
-  <link rel="stylesheet" href="/css/glyphs.css" >
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link rel="stylesheet" href="/css/vdonate.css" >
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
-  <!-- Custom CSS -->
-  
-<link rel="stylesheet" href="/css/my.css">
 
-  <!-- Google Adsense -->
-  
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-0123456789ABCDEF",
-          enable_page_level_ads: true
-      });
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"singyutang.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 7.3.0"></head>
 
-<script>
-var themeMenus = {};
 
-  themeMenus["/"] = "首页"; 
+<body>
+  
 
-  themeMenus["/archives"] = "归档"; 
+  <header>
+    
 
-  themeMenus["/about"] = "关于"; 
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
 
-</script>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
-
-
-  <header id="allheader" class="site-header" role="banner">
-  <div class="clearfix container">
-      <div class="site-branding">
-
-          <h1 class="site-title">
-            
-              <a href="/" rel="home" >
-                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
               </a>
-            
-          </h1>
-
+            </li>
           
-            <div class="site-description">SingyuTang的个人博客</div>
+        
           
-            
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-            <div class="clearfix sf-menu">
-
-              <ul id="main-nav" class="nmenu sf-js-enabled">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
-                    
-              </ul>
-            </div>
-          </nav>
-
-
-      </div>
-  </div>
-</header>
-
-
-  <div id="originBgDiv" style="background: #fff; width: 100%;">
-
-      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
-        <img id="originBg" width="100%" alt="" src="">
-      </div>
-
-  </div>
-
-  <script>
-  function setAboutIMG(){
-      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
-      var random = Math.floor((Math.random() * imgUrls.length ));
-      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-        document.getElementById("originBg").src=imgUrls[random];
-      } else {
-        document.getElementById("originBg").src='/' + imgUrls[random];
-      }
-  }
-  bgDiv=document.getElementById("originBgDiv");
-  if(location.pathname.match('about')){
-    setAboutIMG();
-    bgDiv.style.display='block';
-  }else{
-    bgDiv.style.display='none';
-  }
-  </script>
-
-
-
-  <div id="container">
-    <div id="wrap">
-            
-      <div id="content" class="outer">
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
         
-          <section id="main" style="float:none;"><article id="post-利用python脚本下载WRF所需的ERA5气象数据" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
         
-  
-    <h1 class="thumb" class="article-title" itemprop="name">
-      利用python脚本下载WRF所需的ERA5气象数据
-    </h1>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
   
 
-      </header>
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="利用python脚本下载WRF所需的ERA5气象数据"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
     
-    <div class="article-meta">
-      
-	Posted on <a href="/2024/07/14/%E5%88%A9%E7%94%A8python%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BDWRF%E6%89%80%E9%9C%80%E7%9A%84ERA5%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE/" class="article-date">
-	  <time datetime="2024-07-13T16:58:46.000Z" itemprop="datePublished">七月 14, 2024</time>
-	</a>
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-14 00:58" pubdate>
+          2024年7月14日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          364 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          4 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
 
       
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
 
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-环境设置"><a href="#1-环境设置" class="headerlink" title="1.环境设置"></a>1.环境设置</h1><p>使用脚本下载数据之前，需要进行一些环境的设置。</p>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">利用python脚本下载WRF所需的ERA5气象数据</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-环境设置"><a href="#1-环境设置" class="headerlink" title="1.环境设置"></a>1.环境设置</h1><p>使用脚本下载数据之前，需要进行一些环境的设置。</p>
 <p>（1）cdsapi url和key申请<br><em>本教程的cdsapi key暂时只更新在Windows下运行，在Linux或MacOS系统申请使用的可查看<a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/api-how-to">ECMWF官网教程</a>。</em><br>在<code>C:\User\xxx\</code>目录下创建文件.cdsapirc，在文件中输入url和key，如获取api url和key可跳转<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40505953/article/details/124745310">博客</a>或<a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/api-how-to">ECMWF官网教程</a>进行申请。</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">url</span>: https://cds.climate.copernicus.eu/api/v2<br><span class="hljs-attribute">key</span>: <span class="hljs-number">178412</span>:<span class="hljs-number">48</span>fc6bf4-c18a-<span class="hljs-number">4</span>aee-<span class="hljs-number">9950</span>-<span class="hljs-number">341</span>af67efbf2<br></code></pre></td></tr></table></figure>
 <p>（2）python<br>在python环境中下载<code>cdsapi</code>库</p>
@@ -220,216 +296,377 @@ var themeMenus = {};
 <h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_64799803/article/details/137654097">CSDN - 运行WRF的常用气象场数据</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40505953/article/details/124745310">CSDN - WRF中使用ERA5再分析数据</a></p>
 <h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><p><a href="/downloads/dld_ERA5_to_WRF.py" download>ERA5下载脚本</a></p>
 
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ERA5/" rel="tag">ERA5</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF/" rel="tag">WRF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%84%9A%E6%9C%AC/" rel="tag">脚本</a></li></ul>
-
-      
-        <div id="donation_div"></div>
-
-
-<script src="/js/vdonate.js"></script>
-
-<script>
-var a = new Donate({
-  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
-  btnText: '打赏支持', // 可选参数，打赏按钮文字
-  el: document.getElementById('donation_div'),
-  wechatImage: '/img/wxpay.jpg',
-  alipayImage: '/img/alipay.jpg'
-});
-</script>
-      
+                
+              </div>
             
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
       
-        
-	<div id="comment">
-		<!-- 来必力City版安装代码 -->
-		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
-		<script type="text/javascript">
-		   (function(d, s) {
-		       var j, e = d.getElementsByTagName(s)[0];
 
-		       if (typeof LivereTower === 'function') { return; }
-
-		       j = d.createElement(s);
-		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-		       j.async = true;
-
-		       e.parentNode.insertBefore(j, e);
-		   })(document, 'script');
-		</script>
-		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-		</div>
-		<!-- City版安装代码已完成 -->
-	</div>
-
-
-      
-    </footer>
-  </div>
+<span class="category-chains">
+  
   
     
-<nav id="article-nav">
-  
-    <a href="/2024/07/15/WRF-Hydro%E4%BD%BF%E7%94%A8%E4%B8%AD%E4%B8%8ENLDAS%E7%9B%B8%E5%85%B3%E7%9A%84%E5%A4%84%E7%90%86%E8%84%9A%E6%9C%AC/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
+      <span class="category-chain">
         
-          WRF-Hydro使用的一些处理脚本
-        
-      </div>
-    </a>
+  <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="category-chain-item">学习</a>
   
   
-    <a href="/2024/07/12/WRF-Hydro%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83%E5%8E%9F%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB%E4%BA%8C/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">WRF-Hydro模型配置的相关参数配置参考原论文分享二</div>
-    </a>
-  
-</nav>
 
-  
-</article>
-
-<!-- Table of Contents -->
-
-  <aside id="sidebar">
-    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
-    <strong class="toc-title">文章目录</strong>
+      </span>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">1.环境设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">2.数据下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-WRF%E4%BD%BF%E7%94%A8ERA5%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">3.WRF使用ERA5数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2"><span class="nav-number">4.</span> <span class="nav-text">参考博客</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">附件</span></a></li></ol>
-    
+  
+</span>
+
     </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%84%9A%E6%9C%AC/" class="print-no-link">#脚本</a>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/WRF/" class="print-no-link">#WRF</a>
+      
+        <a href="/tags/ERA5/" class="print-no-link">#ERA5</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>利用python脚本下载WRF所需的ERA5气象数据</div>
+      <div>https://singyutang.github.io/2024/07/14/利用python脚本下载WRF所需的ERA5气象数据/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>SingyuTang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/15/WRF-Hydro%E4%BD%BF%E7%94%A8%E4%B8%AD%E4%B8%8ENLDAS%E7%9B%B8%E5%85%B3%E7%9A%84%E5%A4%84%E7%90%86%E8%84%9A%E6%9C%AC/" title="WRF-Hydro使用的一些处理脚本">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WRF-Hydro使用的一些处理脚本</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/12/WRF-Hydro%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E7%9A%84%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83%E5%8E%9F%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB%E4%BA%8C/" title="WRF-Hydro模型配置的相关参数配置参考原论文分享二">
+                        <span class="hidden-mobile">WRF-Hydro模型配置的相关参数配置参考原论文分享二</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
   </aside>
-</section>
-        
-      </div>
-      <footer id="footer" class="site-footer">
-  
 
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2025 SingyuTang All Rights Reserved.
-          
-            <span id="busuanzi_container_site_uv">
-              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
-      </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
-      </div>
-  </div>
-</footer>
-
-
-<!-- min height -->
-
-<script>
-    var contentdiv = document.getElementById("content");
-
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-</script>
-
-<!-- Custome JS -->
-
-<script src="/js/my.js"></script>
 
     </div>
-    <!-- <nav id="mobile-nav">
+  </div>
+</div>
+
+
+
+
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
   
-    <a href="/about" class="mobile-nav-link">About</a>
+
+
+
   
-</nav> -->
+
+
+
+  
+
+
+
+
+
+
+
     
 
-<!-- mathjax config similar to math.stackexchange -->
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
     }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
   });
 </script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
       }
     });
+  });
 </script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
 
 
   
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
 
   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
-
-
-
-<script src="/js/scripts.js"></script>
-
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<script src="/js/main.js"></script>
-
-
-
-
-
-
-
-
-  <div style="display: none;">
-    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-  </div>
-
-
-
-	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
-	</script>
-
-
-
-
-
-
-  </div>
-
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
