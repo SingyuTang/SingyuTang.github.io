@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>wrf-hydro的文献调研 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="文献分享WRF-Hydro" />
+  
+  
+  
+  
+  <meta name="description" content="1. 2023 - WRF-Hydro 模型模拟西北干旱区径流的标定与评估——以开都河流域为例https:&#x2F;&#x2F;www.mdpi.com&#x2F;2071-1050&#x2F;15&#x2F;7&#x2F;6175 本研究采用天气研究与预报模型（WRF-Hydro）的水文系统来模拟开都河流域的水流，这对中国西北塔里木河下游的生态系统至关重要。离线WRF-Hydro模型与Noah多参数化地表模型（Noah-MP）耦合，并由中国气象强迫数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WRF-Hydro的文献调研">
+<meta property="og:url" content="https://singyutang.github.io/2024/04/25/WRF-Hydro%E7%9A%84%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="1. 2023 - WRF-Hydro 模型模拟西北干旱区径流的标定与评估——以开都河流域为例https:&#x2F;&#x2F;www.mdpi.com&#x2F;2071-1050&#x2F;15&#x2F;7&#x2F;6175 本研究采用天气研究与预报模型（WRF-Hydro）的水文系统来模拟开都河流域的水流，这对中国西北塔里木河下游的生态系统至关重要。离线WRF-Hydro模型与Noah多参数化地表模型（Noah-MP）耦合，并由中国气象强迫数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-25T15:42:22.000Z">
+<meta property="article:modified_time" content="2024-10-25T15:57:44.221Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="文献分享">
+<meta property="article:tag" content="WRF-Hydro">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-WRF-Hydro的文献调研" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      WRF-Hydro的文献调研
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/04/25/WRF-Hydro%E7%9A%84%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/" class="article-date">
+	  <time datetime="2024-04-25T15:42:22.000Z" itemprop="datePublished">四月 25, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-2023-WRF-Hydro-模型模拟西北干旱区径流的标定与评估——以开都河流域为例"><a href="#1-2023-WRF-Hydro-模型模拟西北干旱区径流的标定与评估——以开都河流域为例" class="headerlink" title="1. 2023 - WRF-Hydro 模型模拟西北干旱区径流的标定与评估——以开都河流域为例"></a>1. 2023 - WRF-Hydro 模型模拟西北干旱区径流的标定与评估——以开都河流域为例</h1><p><a target="_blank" rel="noopener" href="https://www.mdpi.com/2071-1050/15/7/6175">https://www.mdpi.com/2071-1050/15/7/6175</a></p>
+<p>本研究采用天气研究与预报模型（WRF-Hydro）的水文系统来<strong>模拟开都河流域的水流</strong>，这对中国西北塔里木河下游的生态系统至关重要。离线WRF-Hydro模型与Noah多参数化地表模型（Noah-MP）耦合，并由中国气象强迫数据集（CMFD）强制，水文路由模块的网格间距为250 m。使用3年期（1983年至1985年）进行校准，并使用17年期（1986年至2002年）进行评估。对 WRF-Hydro 的几个关键参数和四个 Noah-MP 参数化选项进行了校准，并使用每日水流观测来评估具有优化模型设置的 WRF-Hydro 的性能。结果表明，WRF-Hydro 可以合理地再现观测到的水流，并且低估了水流峰值。开都河流域模拟水流对bexp、dksat、smcmax、REFKDT、坡度、OVROUGHRTAC、mann等参数敏感。同时，Noah-MP的参数化选项对水流模拟也有很大的影响。经过优化模型设置的 WRF-Hydro 模型在校准期内的相关系数（CC）和纳什效率系数（NSE）统计得分分别为 0.78 和 0.61。同时，在评估期间，得分分别为0.7和0.50。本研究表明了基于物理的WRF-Hydro模型在西北地区应用的重要性，为附近地区提供了参考。</p>
+<h1 id="2-2023-使用-Noah-MP-模型对-WRF-Hydro-进行基于网格的校准，并改进地下水和蒸腾过程方程"><a href="#2-2023-使用-Noah-MP-模型对-WRF-Hydro-进行基于网格的校准，并改进地下水和蒸腾过程方程" class="headerlink" title="2. 2023 -  使用 Noah-MP 模型对 WRF-Hydro 进行基于网格的校准，并改进地下水和蒸腾过程方程"></a>2. 2023 -  使用 Noah-MP 模型对 WRF-Hydro 进行基于网格的校准，并改进地下水和蒸腾过程方程</h1><p><a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.jhydrol.2022.128991" title="使用数字对象标识符的持久链接"> https://doi.org/10.1016/j.jHydrol.2022.128991 </a></p>
+<p>基于物理的分布式 WRF-Hydro 建模系统，包括具有多种参数化选项的 Noah 陆地表面模型（Noah-MP）和 WRF 大气模型（天气研究和预报模型）的水文扩展，最近已被广泛应用于水平衡研究、水流和陆地-大气耦合模拟。尽管模型中有多个可用的物理参数化，但缺少模拟水平衡特定损失的方程，并且尚未研究跨多个流域的分布式参数的基于网格的校准。为了填补这些空白，本研究的目的是：（i）分析土壤、径流、地下水和植被参数对水平衡组成部分的影响； (ii) 改进基流和蒸腾方程； (iii) 使用水流观测来测试分布式模型参数的基于网格的校准方法。<strong>通过引入地下水损失因子改进了 WRF-Hydro 地下水模型</strong>，并对 Jarvis 气孔导度模型进行了修改以考虑夜间蒸腾作用。使用参数估计 (PEST) 软件对 19 个空间分布类别的三个参数（渗透、导水率和渗滤）进行基于网格的校准。研究区域包括东地中海塞浦路斯的 31 个小型山区流域（5-115 km 2 ）。使用两年期（2011-2013）进行校准，使用五年期（2013-2018）进行评估。基线模型设置在 2011-2012 年平均高估了 50% 的水流，在 2012-2013 年高估了 100% 以上。总体而言，使用不同的模型参数和模型选项，水流和蒸散量 (ET) 可能与基线模拟相差约 ±30%。将地下水损失模拟为地下水位的函数，使总水流平均减少 30%。使用拟议的 Jarvis 夜间蒸腾方程使总 ET 平均增加了 25%。基于网格的方法有助于校准 31 个流域区域的分布参数。校准期间的中位纳什-萨特克利夫效率 (NSE) 为 0.49，但在干燥评估期间为 0.02。校准后的 WRF-Hydro 模型再现了 ET 的年度变化，改进的地下水和蒸腾方程减少了 WRF-Hydro 的水流大幅高估。干旱年份的模型性能表明需要表示更多发生在半干旱环境中且具有短暂流的过程，并且这些过程未包含在 WRF-Hydro 和 Noah-MP 中。基于网格的 WRF-Hydro 参数化可应用于整个研究区域，进行完全耦合的大气-水文模拟。</p>
+<h2 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h2><ul>
+<li><p>新的 WRF-Hydro 地下水损失系数可减少<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/earth-and-planetary-sciences/streamflow" title="从 ScienceDirect 的 AI 生成的主题页面了解有关流的更多信息">水流</a>高估。</p>
+</li>
+<li><p>贾维斯模型通过夜间蒸腾成分得到增强。</p>
+</li>
+<li><p>Jarvis 模型在半干旱地区的表现优于默认的 Noah-MP Ball-Berry。</p>
+</li>
+<li><p>基于网格的校准对分布式 WRF-Hydro 参数有效且有效。</p>
+</li>
+</ul>
+<h1 id="3-2020-利用单向耦合大气-水文建模系统模拟地中海小流域的极端降雨和径流事件"><a href="#3-2020-利用单向耦合大气-水文建模系统模拟地中海小流域的极端降雨和径流事件" class="headerlink" title="3. 2020 -  利用单向耦合大气-水文建模系统模拟地中海小流域的极端降雨和径流事件"></a>3. 2020 -  利用单向耦合大气-水文建模系统模拟地中海小流域的极端降雨和径流事件</h1><p><a target="_blank" rel="noopener" href="https://nhess.copernicus.org/articles/20/2791/2020/">https://nhess.copernicus.org/articles/20/2791/2020/</a></p>
+<p>大气-水文耦合系统越来越多地用作洪水预报和水管理目的的工具，使水文程序的性能成为模型功能的关键指标。本研究的目标是 (i) 校准单向耦合 WRF-Hydro 模型，用于通过观测到的降水来模拟塞浦路斯的极端事件，以及 (ii) 评估强制使用 WRF 缩小尺度 ( 1×1  km 2 )时的模型性能重新分析降水数据（ERA-中期）。这种设置类似于用于预测应用和气候预测的现实建模链。对 1989 年 1 月（校准）和 1994 年 11 月（验证）22 个山区流域发生的<strong>极端降雨事件期间的水流进行了建模</strong>。在六个流域中，两个事件的纳什-萨克利夫效率 (NSE) 均大于 0.5。 WRF 模拟的降雨量显示 1989 年 1 月的平均 NSE 为 0.83，1994 年 11 月的平均 NSE 为 0.49。然而，使用 WRF 模拟的降雨量和校准的 WRF-Hydro 对这两个事件进行的水文模拟返回了 1989 年 1 月 13 个流域的负水流 NSE。以及1994年11月的18个流域。这些结果表明，与观测到的降水相比，模拟降雨量或时间或空间变化的微小差异可以强烈改变小流域对极端事件的水文响应。因此，小流域 WRF-Hydro 的校准取决于具有高时间和空间分辨率的观测降雨的可用性。然而，使用模拟降水输入数据对于研究未来极端事件对洪水和水资源的影响仍然很重要。</p>
+<h1 id="4-2022-我国干旱区典型湖盆大气水文剖面耦合重建与干涸风险预测"><a href="#4-2022-我国干旱区典型湖盆大气水文剖面耦合重建与干涸风险预测" class="headerlink" title="4. 2022 - # 我国干旱区典型湖盆大气水文剖面耦合重建与干涸风险预测"></a>4. 2022 - # 我国干旱区典型湖盆大气水文剖面耦合重建与干涸风险预测</h1><p><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41598-022-10284-y">https://www.nature.com/articles/s41598-022-10284-y</a></p>
+<p>干旱地区对全球变暖非常敏感，极易受到气候变化的影响。而且，干旱地区水资源系统脆弱，将随着气候变化而发生巨大变化。因此，干旱区气候与水文的相互作用对区域小气候的形成和水文变化具有重要影响。岱海是我国干旱区典型的封闭式内陆湖泊，也是华北地区生态保护的重点区域。<strong>本文采用WRF-Hydro模型模拟了岱海流域1980—2020年的气候水文耦合情况，并通过气象统计、径流计算和遥感分析对耦合结果进行了验证和校准</strong>。在总结近40年气候、水文概况的基础上，分析了岱海流域水文要素的成因及未来趋势。通过分析发现，岱海盆地降水量年际变化剧烈，1980—1994年平均降水量为401.75毫米； 1995年至2011年波动剧烈，最大值与最小值年际相差近400毫米； 2012年至2020年波动较小。蒸发量年际变化虽有波动，但呈上升趋势，斜率为8.855毫米&#x2F;年。年平均气温呈明显上升趋势，上升趋势为0.040℃&#x2F;年。 1980年至2020年，岱海入湖流量呈下降趋势； 2013年以来，入湖径流量趋于平缓。气候变化和人类活动是导致岱海水量变化的决定性因素，其中人类活动的作用更大。耕地灌溉和工业用水与湖泊流量高度相关，这两个因素对湖泊流量影响很大。如果现在的农业和工业用水量不增加，岱海还有近120年的寿命。如果人类活动不改变，不及时采取任何保护措施，在全球气候变化的背景下，2025年岱海入湖流量将减少为零，2025年岱海将彻底干涸。 2031–2033。岱海流域长时间序列的气候水文耦合研究不仅可以弥补径流资料的不足，而且可以为水资源管理、防灾减灾提供依据。</p>
+<h1 id="5-2021-2020-2050年长江上游流域水文预测"><a href="#5-2021-2020-2050年长江上游流域水文预测" class="headerlink" title="5. 2021 - # 2020-2050年长江上游流域水文预测"></a>5. 2021 - # 2020-2050年长江上游流域水文预测</h1><p><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41598-021-88135-5?fromPaywallRec=false">https://www.nature.com/articles/s41598-021-88135-5?fromPaywallRec=false</a><br>了解气候变化对径流的影响对于有效的水资源管理和规划至关重要。在本研究中，区域气候模型 (RCM) RegCM4.5 用于将长江上游 (UYRB) 的近期气候预测<strong>从两个全球气候模型动态缩小到 50 公里的水平分辨率。基于偏差校正的气候预测结果，评估了气候变化对21世纪中叶青藏高原降水和气温的影响</strong>。然后，通过大尺度水文模型与RegCM4.5的耦合，<strong>评估了气候变化对乌干达河口河道流量的影响</strong>。据预测，与参考期相比，近期乌干达东部地区将趋于暖干，而乌干达西部地区将趋于暖湿。降水量将以19.05～19.25毫米&#x2F;10年的速度减少，多年平均年降水量变化在-0.5～0.5毫米&#x2F;天之间。气温预计将以 0.38-0.52 °C&#x2F;10 a 的速度显着升高，预计多年平均气温升高约为 1.3-1.5 ℃。融雪径流对UYBR年径流的贡献仅约为4%，而对春季径流的贡献约为9.2%。受气候变暖影响，流域年平均融雪径流将减少36%<del>39%，年径流总量将减少4.1%</del>5%，极端径流略有减少。预计径流深度减少的区域主要集中在流域东南部地区。东南部地区降水量减少是导致径流深度减少的原因，而西北地区径流深度减少则主要是由于蒸发量增加造成的。</p>
+<h1 id="6-侧向陆地水流对降水的贡献-–-WRF-Hydro-系综分析和欧洲大陆蒸发标记"><a href="#6-侧向陆地水流对降水的贡献-–-WRF-Hydro-系综分析和欧洲大陆蒸发标记" class="headerlink" title="6. 侧向陆地水流对降水的贡献 – WRF-Hydro 系综分析和欧洲大陆蒸发标记"></a>6. 侧向陆地水流对降水的贡献 – WRF-Hydro 系综分析和欧洲大陆蒸发标记</h1><p><a target="_blank" rel="noopener" href="https://publikationen.bibliothek.kit.edu/1000129004">https://publikationen.bibliothek.kit.edu/1000129004</a></p>
+<p>陆地-大气反馈过程是地球气候系统的关键组成部分。一般来说，地表状态在多大程度上反馈到大气状态是值得怀疑的。这个问题可以通过耦合的地表-大气模型来解决，并且可以通过模型与观测的比较来评估模拟反馈的真实性。本研究调查了连接侧向陆地水流、土壤湿度、地表蒸发和降水的过程链的特殊情况。重点关注欧洲地区的夏季降水。研究期限定为 2008 年 6 月至 9 月的四个月。进行这项研究的工具是大气-水文耦合模型 WRF-Hydro，它允许地表水和地下水路由。对于大气部分的设置，选择水平网格为700x500网格点，网格间距为5 km，覆盖面积为3500 km x 2500 km，垂直网格为50个，最高可达10 hPa。对于陆地水路由的设置，选择了由 14000x10000 网格点组成的水平网格，网格间距为 250 m，并且选择了 4 个土层，深度为 2 m。所采用的模型版本包括表面蒸发标记程序，以便量化源自整个欧洲大陆蒸发的欧洲降水部分。该方法包括通过使用随机动能反向散射方案的随机实现来生成一组有或没有陆地水路由的 WRF-Hydro 模拟，并使用每日网格降水观测数据集评估侧向陆地水流对降水的影响。欧洲（E-OBS）。使用由 20 名成员组成的集合规模来理清导致 WRF-Hydro 模拟（有或没有陆地水路由）之间降水差异的两个过程的贡献，即地表蒸发的变化和大气混沌行为。结果发现，**考虑侧向陆地水流通过增强地表蒸发使夏季降水量增加了10%**，从而减少了对E-OBS的偏差。</p>
+<h1 id="7-WRF-Hydro-中降水对陆地水流不确定性的敏感性：中欧的集合分析"><a href="#7-WRF-Hydro-中降水对陆地水流不确定性的敏感性：中欧的集合分析" class="headerlink" title="7. WRF-Hydro 中降水对陆地水流不确定性的敏感性：中欧的集合分析"></a>7. WRF-Hydro 中降水对陆地水流不确定性的敏感性：中欧的集合分析</h1><p><a target="_blank" rel="noopener" href="https://publikationen.bibliothek.kit.edu/1000084710">https://publikationen.bibliothek.kit.edu/1000084710</a></p>
+<p>降水量受土壤湿度空间变化的影响。然而，这种变异性在没有将土壤水分输送视为三维过程的大气模型中并没有得到很好的体现。本研究调查降水对陆地水流表示的不确定性的敏感性。本次调查使用的工具是天气研究和预报 (WRF) 模型及其水文增强版本 WRF-Hydro，于 2008 年 4 月至 10 月在中欧应用。模型网格允许对流，水平间距为 2.8 公里。 WRF-Hydro 子网格采用 280 米分辨率来解析横向陆地水流。通过修改控制地表径流和渗透之间的划分的参数以及改变行星边界层（PBL）方案来构建 WRF&#x2F;WRF-Hydro 系综。该系综代表了陆地水流的不确定性，该不确定性源于对已解决的横向流、垂直方向的陆地水流不确定性和湍流参数化不确定性的考虑。<strong>在地形温和、地表通量空间变异性高、天气状况受局部过程主导的情况下，陆地水流的不确定性显着增加了日降水量的归一化集合分布。</strong> 调整后的连续排名概率得分表明，PBL 不确定性将集合子集从 E-OBS 观测产品再现每日降水量的技能提高了 16%–20%。与 WRF 相比，WRF-Hydro 将这项技能提高了 0.4%–0.7%。 Nash-Sutcliffe 模型效率系数普遍高于 0.3 的每日观测流量的再现证明了 WRF-Hydro 在水文科学中的潜力。</p>
+<h1 id="8-2019-WRF-Hydro-土壤-植被-大气水联合标记程序：在多瑙河上游流域降水分区案例中的实施和应用"><a href="#8-2019-WRF-Hydro-土壤-植被-大气水联合标记程序：在多瑙河上游流域降水分区案例中的实施和应用" class="headerlink" title="8. 2019 - WRF-Hydro 土壤-植被-大气水联合标记程序：在多瑙河上游流域降水分区案例中的实施和应用"></a>8. 2019 - WRF-Hydro 土壤-植被-大气水联合标记程序：在多瑙河上游流域降水分区案例中的实施和应用</h1><p><a target="_blank" rel="noopener" href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2019WR024780">https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2019WR024780</a></p>
+<p>天气研究和预报 (WRF) 模型等大气模型提供了评估区域水文循环组成部分（包括降水、蒸散、土壤水储存和径流）行为的工具。最近的模型开发重点关注大气-水文耦合建模系统，例如 WRF-Hydro，以考虑地下、陆上和河流流量，并有可能改善陆地-大气相互作用的表示。本研究的目的是借助 WRF-tag 和 WRF-Hydro- 中新开发的土壤-植被-大气水联合标记程序，调查<strong>侧向陆地水流对区域水文循环</strong>的贡献。标记模型。介绍了两种模型在 2008 年 8 月 15 日多瑙河上游流域德国和奥地利部分地区（94,100 km 2 ）高降水事件中的应用。该事件期间流域内的降水被视为水源，被标记并随后跟踪 40 个月，直至 2011 年 12 月。在研究期结束时，在两次模拟中，大约 57%标记的水已经流失，41% 蒸发回到大气中，其中 2% 作为降水在多瑙河上游流域循环利用。在 WRF-Hydro-tag 中，标记水的表面蒸发因地表流渗透而略有增强，而在地形梯度较低的区域则因地下侧向水流而略有减弱。这对源降水回收的影响很小，可以忽略不计。</p>
+<h1 id="9-2018-在美国东北部使用-WRF-Hydro-来估算小流域的水收支趋势"><a href="#9-2018-在美国东北部使用-WRF-Hydro-来估算小流域的水收支趋势" class="headerlink" title="9. 2018 -在美国东北部使用 WRF-Hydro 来估算小流域的水收支趋势"></a>9. 2018 -在美国东北部使用 WRF-Hydro 来估算小流域的水收支趋势</h1><p><a target="_blank" rel="noopener" href="https://www.mdpi.com/2073-4441/10/12/1709">https://www.mdpi.com/2073-4441/10/12/1709</a></p>
+<p>在美国东北部，气候变化将对陆地水文带来一系列影响。观察表明，上个世纪气温稳步上升，降水量也发生变化。本研究实施了天气研究和预报 (WRF)-Hydro 框架以及目前在国家水模型中使用的诺亚多参数化 (Noah-MP) 模型，以<strong>估计构成东北部水预算的不同变量的趋势</strong>美国1980年至2016年期间的数据。我们使用北美土地数据同化系统-2（NLDAS-2）气候数据作为强迫，并使用192个美国地质调查局（USGS）用于评估径流II的测量仪的地理空间属性来校准模型（量具 II) 参考站。我们使用最大三天平均流量、七天最小流量和单调五天平均时间序列来研究确定水流肯德尔-泰尔斜率的趋势。对于水预算，我们确定了降水量、地表和地下径流、蒸散量、蒸腾量、土壤湿度和积雪月值变化的肯德尔-泰尔斜率。结果表明，<strong>降水量的变化在水预算的各个组成部分中的分布并不均匀</strong>。降水量冬季减少，夏季增加，直接影响是积雪减少、蒸散量增加。土壤趋于干燥，这并不意味着入渗增加，因为地表径流聚集趋势为正，地下径流聚集趋势为负。<strong>气候变化对径流的影响被较大的区域所缓冲</strong>，这表明需要更多地关注小型流域以适应气候变化。</p>
+<h1 id="10-2018-年喀拉拉邦洪水：气候变化视角"><a href="#10-2018-年喀拉拉邦洪水：气候变化视角" class="headerlink" title="10. 2018 年喀拉拉邦洪水：气候变化视角"></a>10. 2018 年喀拉拉邦洪水：气候变化视角</h1><p><a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s00382-020-05123-7">https://link.springer.com/article/10.1007/s00382-020-05123-7</a></p>
+<p>2018 年 8 月，印度喀拉拉邦遭受了长时间的强降雨，原因是月初出现低压系统，几天后又出现季风低压。由此引发的洪水导致 400 多人死亡，100 万人流离失所。在这里，天气研究和预报 (WRF) 模型的高分辨率设置（4 km）与水文模型（WRF-Hydro，以 125 m 分辨率运行）结合使用，以探索导致洪水的情况。除了控制实验之外，还<strong>通过扰动边界条件进行了两个附加实验，以模拟工业化前和 RCP8.5 背景气候中的事件</strong>。模拟降雨量与研究期间的观测结果非常吻合，并且发现，由于最近季风低压系统的减弱，在工业化前时期，降雨量会增加约 18%，但在 RCP8 中，降雨量会增加 36% .5 热带对流层湿润造成的气候。模拟的河流水流会做出相应的响应：结果显示，为该州服务的六个主要水库需要增加 34% 的容量来应对强降雨，而如果 RCP8.5 气候导致洪水放大，则需要增加 43% 的容量。进一步表明，这种未来的气候将大大扩展洪水的南部边界。因此得出的结论是，虽然迄今为止的气候变化很可能减轻了洪水的影响，但未来的气候变化可能会加剧洪水的影响。</p>
+<h1 id="11-2023-使用集成-WRF-Hydro-模拟预测-21-世纪中叶美国东北部极端水流和内陆洪水的变化"><a href="#11-2023-使用集成-WRF-Hydro-模拟预测-21-世纪中叶美国东北部极端水流和内陆洪水的变化" class="headerlink" title="11. 2023 - 使用集成 WRF-Hydro 模拟预测 21 世纪中叶美国东北部极端水流和内陆洪水的变化"></a>11. 2023 - 使用集成 WRF-Hydro 模拟预测 21 世纪中叶美国东北部极端水流和内陆洪水的变化</h1><p><a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.ejrh.2023.101371" title="使用数字对象标识符的持久链接"> https://doi.org/10.1016/j.ejrh.2023.101371 </a></p>
+<p>研究地区： 美国东北部 (NEUS)。研究重点： 我们研究了 21 世纪中叶气候变化对美国东北部降水、溪流和内陆洪水的潜在影响。在 “一切照旧 “的情景下，使用三个全球气候模型对历史时期（1995-2004 年）和未来时期（2045-2054 年）的气候进行<strong>动态降尺度预测</strong>，以 200 米的分辨率强制 WRF-Hydro 水文模型，并创建集合<strong>水文模拟</strong>。此外，还开发了一个极值模型，以<strong>预测与低频水文事件相关的风险</strong>。为该地区提供新的水文见解： 四个主要流域的研究结果表明，冬季的水文状况明显较湿，而春末夏初可能较干。预计秋季北部流域的排水量将减少，南部流域的排水量将增加。预计极端内陆洪水造成的极端流量和水深将分别增加 5-20% 和 &gt;100%。到本世纪中期，洪水泛滥的总面积可能会增加 20%。这些风险的增加可归因于：(i) 十年平均<strong>降水强度</strong>增加约 25%，十年极端降水强度增加 &gt;40%；(ii) 全年<strong>积雪</strong>供应量减少多达 30%，<strong>蒸散</strong>量增加 5-25%；(iii) 除夏季外，其他季节<strong>土壤湿度</strong>预计增加 5%。此外，冬季积雪迅速融化可能会导致<strong>河流流量</strong>峰值提前。</p>
+<h1 id="12-2023-使用动态地面路由系统对漫滩洪水进行建模"><a href="#12-2023-使用动态地面路由系统对漫滩洪水进行建模" class="headerlink" title="12. 2023 - 使用动态地面路由系统对漫滩洪水进行建模"></a>12. 2023 - 使用动态地面路由系统对漫滩洪水进行建模</h1><p><a target="_blank" rel="noopener" href="https://gfzpublic.gfz-potsdam.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_5019836">https://gfzpublic.gfz-potsdam.de/pubman/faces/ViewItemOverviewPage.jsp?itemId=item_5019836</a></p>
+<p>当前的洪水淹没预测模型基于非物理和水动力方法。圣维南方程源自浅水方程，通常用于动态模拟地表水流。考虑河流性质，基于圣维南方程，地表水演算过程分为河道演算和径流演算。渠道路由被建模为预定义渠道网格上的一维明渠流量，侧向流量源自地表径流路由。然而，<strong>WRF-Hydro 系统集成了动态地表水流，不允许漫滩水流返回非河道网格，限制了模拟漫滩淹没的能力</strong>。本研究提出基于一维&#x2F;二维圣维南方程对地表水流模型进行修订，以考虑渠道路由和陆路路由的优点来模拟漫滩淹没。修正后的模型不仅<strong>预测了淹没面积</strong>，而且由于洪泛区水持续时间的增加而改变了土壤湿度的空间分布。这导致沿河<strong>土壤湿度的记忆增加</strong>。该模型被应用于 2020 年夏季韩国洪水案例，当时破纪录的强降雨导致全国河流水位上升，并导致下游洪水泛滥。卫星图像用于验证数据。预计改进后的水文系统将成为建立业务洪水预警系统的基础，并为更好地预测大气模型提供改进的边界条件。</p>
+<h1 id="13-2022-增强-WRF-Hydro-来模拟烧伤疤痕中地流和水流产生的泥石流敏感性"><a href="#13-2022-增强-WRF-Hydro-来模拟烧伤疤痕中地流和水流产生的泥石流敏感性" class="headerlink" title="13. 2022 - 增强 WRF-Hydro 来模拟烧伤疤痕中地流和水流产生的泥石流敏感性"></a>13. 2022 - 增强 WRF-Hydro 来模拟烧伤疤痕中地流和水流产生的泥石流敏感性</h1><p><a target="_blank" rel="noopener" href="https://escholarship.org/uc/item/7fz7s1cv">https://escholarship.org/uc/item/7fz7s1cv</a></p>
+<p>在陡峭的野火烧毁地区，强降雨会产生大量径流，引发极具破坏性的泥石流。然而，使用基于物理的工具准确描述和预测烧毁地区泥石流敏感性的能力仍然有限。在这里，我们增强了天气研究和预报水文建模系统（WRF-Hydro），以<strong>模拟陆上和渠道流，并评估区域范围内的火灾后泥石流敏感性</strong>。我们使用高分辨率天气雷达得出的降水和再分析数据进行后报模拟，以驱动非烧伤基线和烧伤疤痕敏感性实验。我们的模拟重点关注 2021 年 1 月，当时一条大气河在大苏尔的野火烧伤疤痕内引发了大量泥石流，其中一场烧毁了加利福尼亚州著名的 1 号高速公路。与基线相比，我们的烧伤疤痕模拟显示总排放量和峰值排放量急剧增加，降雨开始和流量峰值之间的滞后时间较短，这与美国地质调查局 (USGS) 附近水流监测站的水流观测结果一致。对于位于模拟烧伤疤痕区域的 404 个集水区，中位集水区归一化峰值流量与基线相比增加了约 450%。集<strong>水区归一化峰值流量异常高的集水区与事件后基于现场和遥感的泥石流观测结果非常吻合</strong>。我们建议，我们的区域火后泥石流敏感性分析表明，WRF-Hydro 是一种引人注目的基于物理的新型工具，其效用可以通过与沉积物侵蚀和输送模型和&#x2F;或基于集合的业务天气预报的耦合来进一步扩展。鉴于我们增强版 WRF-Hydro 的高保真性能，以及其在概率灾害预测中的潜在用途，我们主张其在火灾后水文和自然灾害评估中的持续开发和应用。</p>
+<h1 id="14-2021-关联水文气象模型在水文预报中应用可能性的研究和评价"><a href="#14-2021-关联水文气象模型在水文预报中应用可能性的研究和评价" class="headerlink" title="14.2021 - 关联水文气象模型在水文预报中应用可能性的研究和评价"></a>14.2021 - 关联水文气象模型在水文预报中应用可能性的研究和评价</h1><p><a target="_blank" rel="noopener" href="https://vjol.info.vn/index.php/TCKHBDKH/article/view/57486">https://vjol.info.vn/index.php/TCKHBDKH/article/view/57486</a></p>
+<p>在这项研究中，分布式参数水文模型（WRF-Hydro）与数值气象模型（WRF）双向连接，以计算Luy河和Binh河子流域的短期水文预报。气象模型采用全球预报模型数据，网格分辨率分别为9 km、3 km、1 km 3个，水文模型网格分辨率为250 m。采用网格雨量数据结合地面实测雨量数据对独立水文模型进行标定和测试，取得了纳什指数0.9的高结果。然而，当实现双向连接时，流量预测质量显着下降，纳什指数达到0.5。然而，结果表明该模型对输入变化反应良好，并且流量变化对预报降雨很敏感。为保证精度并提高预报时效，在与水文模型双向对接之前，需要对气象预报结果进行研究和校准。研究中的实验表明，利用水文气象联动模型是水文预报的一个新的、可行的方向。</p>
+<h1 id="15-2016-径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非-WRF-水力耦合建模系统的案例研究"><a href="#15-2016-径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非-WRF-水力耦合建模系统的案例研究" class="headerlink" title="15. 2016 - 径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非 WRF-水力耦合建模系统的案例研究"></a>15. 2016 - 径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非 WRF-水力耦合建模系统的案例研究</h1><p><a target="_blank" rel="noopener" href="https://publikationen.bibliothek.kit.edu/1000059010">https://publikationen.bibliothek.kit.edu/1000059010</a></p>
+<p>陆地-大气反馈的分析需要大气模型中陆地过程的详细表示。这里的重点是径流渗透分区和解决的地表径流。在 WRF 的标准版本中，径流-入渗分区被描述为纯粹的垂直过程。在 WRF-Hydro 中，横向水流增强了径流。研究区域为 Sissili 流域（12 800 平方公里）22）在西非，研究期间为2003年3月至2004年2月。这里的WRF设置包括分辨率为10公里和2公里的外部域和内部域，分别覆盖西非和西西里地区。在此 WRF-Hydro 设置中，内部域与分辨率为 500 米的子网格相结合，以<strong>计算陆上和河流流量</strong>。将模型结果与 TRMM 降水、模型树集合 (MTE) 蒸散量、气候变化倡议 (CCI) 土壤湿度、CRU 温度和水流观测进行比较。径流-入渗分配和已解决的地表流量对陆地-大气反馈的作用通过 WRF 结果对径流-入渗分配参数的敏感性分析以及 WRF 和 WRF-Hydro 结果之间的比较分别得到解决。 在外部区域，降水对西西里地区（~100 × 100 km2）规模的径流入渗分配敏感，但对 A 地区（500 × 2500 km2）不敏感。22）。在内部区域，降水模式主要由横向边界条件决定，敏感性很小，但另外解决的地面流明显增加了雨季开始时土壤仍然干燥时的渗透和蒸散。这里介绍的 WRF-Hydro 设置显示了联合大气和陆地水平衡研究的潜力，并以 0.43 的 Nash-Sutcliffe 模型效率系数重现了观测到的每日流量。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro/" rel="tag">WRF-Hydro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/04/26/%E4%BD%BF%E7%94%A8WRF-Hydro%E9%A2%84%E6%B5%8B%E6%B2%B3%E9%81%93%E6%B5%81%E9%87%8F%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3%E6%95%B4%E7%90%86%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          使用WRF-Hydro预测河道流量入门学习文档整理一
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/04/23/%E5%9C%A8Ubuntu16-04%E4%B8%AD%E5%AE%89%E8%A3%85R%E5%92%8CWRF-Hydro%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7%E7%AE%B1rwrfhydro%E6%97%B6%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">在Ubuntu16.04中安装R和WRF-Hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2023-WRF-Hydro-%E6%A8%A1%E5%9E%8B%E6%A8%A1%E6%8B%9F%E8%A5%BF%E5%8C%97%E5%B9%B2%E6%97%B1%E5%8C%BA%E5%BE%84%E6%B5%81%E7%9A%84%E6%A0%87%E5%AE%9A%E4%B8%8E%E8%AF%84%E4%BC%B0%E2%80%94%E2%80%94%E4%BB%A5%E5%BC%80%E9%83%BD%E6%B2%B3%E6%B5%81%E5%9F%9F%E4%B8%BA%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 2023 - WRF-Hydro 模型模拟西北干旱区径流的标定与评估——以开都河流域为例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-2023-%E4%BD%BF%E7%94%A8-Noah-MP-%E6%A8%A1%E5%9E%8B%E5%AF%B9-WRF-Hydro-%E8%BF%9B%E8%A1%8C%E5%9F%BA%E4%BA%8E%E7%BD%91%E6%A0%BC%E7%9A%84%E6%A0%A1%E5%87%86%EF%BC%8C%E5%B9%B6%E6%94%B9%E8%BF%9B%E5%9C%B0%E4%B8%8B%E6%B0%B4%E5%92%8C%E8%92%B8%E8%85%BE%E8%BF%87%E7%A8%8B%E6%96%B9%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">2. 2023 -  使用 Noah-MP 模型对 WRF-Hydro 进行基于网格的校准，并改进地下水和蒸腾过程方程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E8%B0%83"><span class="nav-number">2.1.</span> <span class="nav-text">强调</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-2020-%E5%88%A9%E7%94%A8%E5%8D%95%E5%90%91%E8%80%A6%E5%90%88%E5%A4%A7%E6%B0%94-%E6%B0%B4%E6%96%87%E5%BB%BA%E6%A8%A1%E7%B3%BB%E7%BB%9F%E6%A8%A1%E6%8B%9F%E5%9C%B0%E4%B8%AD%E6%B5%B7%E5%B0%8F%E6%B5%81%E5%9F%9F%E7%9A%84%E6%9E%81%E7%AB%AF%E9%99%8D%E9%9B%A8%E5%92%8C%E5%BE%84%E6%B5%81%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">3. 2020 -  利用单向耦合大气-水文建模系统模拟地中海小流域的极端降雨和径流事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-2022-%E6%88%91%E5%9B%BD%E5%B9%B2%E6%97%B1%E5%8C%BA%E5%85%B8%E5%9E%8B%E6%B9%96%E7%9B%86%E5%A4%A7%E6%B0%94%E6%B0%B4%E6%96%87%E5%89%96%E9%9D%A2%E8%80%A6%E5%90%88%E9%87%8D%E5%BB%BA%E4%B8%8E%E5%B9%B2%E6%B6%B8%E9%A3%8E%E9%99%A9%E9%A2%84%E6%B5%8B"><span class="nav-number">4.</span> <span class="nav-text">4. 2022 - # 我国干旱区典型湖盆大气水文剖面耦合重建与干涸风险预测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-2021-2020-2050%E5%B9%B4%E9%95%BF%E6%B1%9F%E4%B8%8A%E6%B8%B8%E6%B5%81%E5%9F%9F%E6%B0%B4%E6%96%87%E9%A2%84%E6%B5%8B"><span class="nav-number">5.</span> <span class="nav-text">5. 2021 - # 2020-2050年长江上游流域水文预测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E4%BE%A7%E5%90%91%E9%99%86%E5%9C%B0%E6%B0%B4%E6%B5%81%E5%AF%B9%E9%99%8D%E6%B0%B4%E7%9A%84%E8%B4%A1%E7%8C%AE-%E2%80%93-WRF-Hydro-%E7%B3%BB%E7%BB%BC%E5%88%86%E6%9E%90%E5%92%8C%E6%AC%A7%E6%B4%B2%E5%A4%A7%E9%99%86%E8%92%B8%E5%8F%91%E6%A0%87%E8%AE%B0"><span class="nav-number">6.</span> <span class="nav-text">6. 侧向陆地水流对降水的贡献 – WRF-Hydro 系综分析和欧洲大陆蒸发标记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-WRF-Hydro-%E4%B8%AD%E9%99%8D%E6%B0%B4%E5%AF%B9%E9%99%86%E5%9C%B0%E6%B0%B4%E6%B5%81%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%9A%84%E6%95%8F%E6%84%9F%E6%80%A7%EF%BC%9A%E4%B8%AD%E6%AC%A7%E7%9A%84%E9%9B%86%E5%90%88%E5%88%86%E6%9E%90"><span class="nav-number">7.</span> <span class="nav-text">7. WRF-Hydro 中降水对陆地水流不确定性的敏感性：中欧的集合分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-2019-WRF-Hydro-%E5%9C%9F%E5%A3%A4-%E6%A4%8D%E8%A2%AB-%E5%A4%A7%E6%B0%94%E6%B0%B4%E8%81%94%E5%90%88%E6%A0%87%E8%AE%B0%E7%A8%8B%E5%BA%8F%EF%BC%9A%E5%9C%A8%E5%A4%9A%E7%91%99%E6%B2%B3%E4%B8%8A%E6%B8%B8%E6%B5%81%E5%9F%9F%E9%99%8D%E6%B0%B4%E5%88%86%E5%8C%BA%E6%A1%88%E4%BE%8B%E4%B8%AD%E7%9A%84%E5%AE%9E%E6%96%BD%E5%92%8C%E5%BA%94%E7%94%A8"><span class="nav-number">8.</span> <span class="nav-text">8. 2019 - WRF-Hydro 土壤-植被-大气水联合标记程序：在多瑙河上游流域降水分区案例中的实施和应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-2018-%E5%9C%A8%E7%BE%8E%E5%9B%BD%E4%B8%9C%E5%8C%97%E9%83%A8%E4%BD%BF%E7%94%A8-WRF-Hydro-%E6%9D%A5%E4%BC%B0%E7%AE%97%E5%B0%8F%E6%B5%81%E5%9F%9F%E7%9A%84%E6%B0%B4%E6%94%B6%E6%94%AF%E8%B6%8B%E5%8A%BF"><span class="nav-number">9.</span> <span class="nav-text">9. 2018 -在美国东北部使用 WRF-Hydro 来估算小流域的水收支趋势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-2018-%E5%B9%B4%E5%96%80%E6%8B%89%E6%8B%89%E9%82%A6%E6%B4%AA%E6%B0%B4%EF%BC%9A%E6%B0%94%E5%80%99%E5%8F%98%E5%8C%96%E8%A7%86%E8%A7%92"><span class="nav-number">10.</span> <span class="nav-text">10. 2018 年喀拉拉邦洪水：气候变化视角</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-2023-%E4%BD%BF%E7%94%A8%E9%9B%86%E6%88%90-WRF-Hydro-%E6%A8%A1%E6%8B%9F%E9%A2%84%E6%B5%8B-21-%E4%B8%96%E7%BA%AA%E4%B8%AD%E5%8F%B6%E7%BE%8E%E5%9B%BD%E4%B8%9C%E5%8C%97%E9%83%A8%E6%9E%81%E7%AB%AF%E6%B0%B4%E6%B5%81%E5%92%8C%E5%86%85%E9%99%86%E6%B4%AA%E6%B0%B4%E7%9A%84%E5%8F%98%E5%8C%96"><span class="nav-number">11.</span> <span class="nav-text">11. 2023 - 使用集成 WRF-Hydro 模拟预测 21 世纪中叶美国东北部极端水流和内陆洪水的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-2023-%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E5%9C%B0%E9%9D%A2%E8%B7%AF%E7%94%B1%E7%B3%BB%E7%BB%9F%E5%AF%B9%E6%BC%AB%E6%BB%A9%E6%B4%AA%E6%B0%B4%E8%BF%9B%E8%A1%8C%E5%BB%BA%E6%A8%A1"><span class="nav-number">12.</span> <span class="nav-text">12. 2023 - 使用动态地面路由系统对漫滩洪水进行建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-2022-%E5%A2%9E%E5%BC%BA-WRF-Hydro-%E6%9D%A5%E6%A8%A1%E6%8B%9F%E7%83%A7%E4%BC%A4%E7%96%A4%E7%97%95%E4%B8%AD%E5%9C%B0%E6%B5%81%E5%92%8C%E6%B0%B4%E6%B5%81%E4%BA%A7%E7%94%9F%E7%9A%84%E6%B3%A5%E7%9F%B3%E6%B5%81%E6%95%8F%E6%84%9F%E6%80%A7"><span class="nav-number">13.</span> <span class="nav-text">13. 2022 - 增强 WRF-Hydro 来模拟烧伤疤痕中地流和水流产生的泥石流敏感性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-2021-%E5%85%B3%E8%81%94%E6%B0%B4%E6%96%87%E6%B0%94%E8%B1%A1%E6%A8%A1%E5%9E%8B%E5%9C%A8%E6%B0%B4%E6%96%87%E9%A2%84%E6%8A%A5%E4%B8%AD%E5%BA%94%E7%94%A8%E5%8F%AF%E8%83%BD%E6%80%A7%E7%9A%84%E7%A0%94%E7%A9%B6%E5%92%8C%E8%AF%84%E4%BB%B7"><span class="nav-number">14.</span> <span class="nav-text">14.2021 - 关联水文气象模型在水文预报中应用可能性的研究和评价</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-2016-%E5%BE%84%E6%B5%81-%E5%85%A5%E6%B8%97%E5%88%86%E5%8C%BA%E5%92%8C%E5%B7%B2%E8%A7%A3%E5%86%B3%E7%9A%84%E5%9C%B0%E8%A1%A8%E6%B5%81%E9%87%8F%E5%AF%B9%E9%99%86%E5%9C%B0-%E5%A4%A7%E6%B0%94%E5%8F%8D%E9%A6%88%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9A%E8%A5%BF%E9%9D%9E-WRF-%E6%B0%B4%E5%8A%9B%E8%80%A6%E5%90%88%E5%BB%BA%E6%A8%A1%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6"><span class="nav-number">15.</span> <span class="nav-text">15. 2016 - 径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非 WRF-水力耦合建模系统的案例研究</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

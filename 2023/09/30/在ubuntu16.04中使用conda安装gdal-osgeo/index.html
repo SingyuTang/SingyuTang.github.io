@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>在ubuntu16.04中使用conda安装gdal/osgeo | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Ubuntu16.04Anacondagdal" />
+  
+  
+  
+  
+  <meta name="description" content="ubuntu16.04ubuntu安装gdal程序打开终端，输入 1sudo apt-get install gdal-bin libgdal-dev 检测是否安装成功，输入 1gdal-config --version 打印版本号表示安装成功。 conda 安装GDAL方法一：命令安装 (1) 更新源参考Ubuntu20.04中关于conda下载包速度慢或者失败的问题更新conda源。  (2)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在ubuntu16.04中使用conda安装gdal&#x2F;osgeo">
+<meta property="og:url" content="https://singyutang.github.io/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="ubuntu16.04ubuntu安装gdal程序打开终端，输入 1sudo apt-get install gdal-bin libgdal-dev 检测是否安装成功，输入 1gdal-config --version 打印版本号表示安装成功。 conda 安装GDAL方法一：命令安装 (1) 更新源参考Ubuntu20.04中关于conda下载包速度慢或者失败的问题更新conda源。  (2)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-30T15:28:21.000Z">
+<meta property="article:modified_time" content="2024-04-22T07:31:30.466Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="Ubuntu16.04">
+<meta property="article:tag" content="Anaconda">
+<meta property="article:tag" content="gdal">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-在ubuntu16.04中使用conda安装gdal-osgeo" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      在ubuntu16.04中使用conda安装gdal/osgeo
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2023/09/30/%E5%9C%A8ubuntu16.04%E4%B8%AD%E4%BD%BF%E7%94%A8conda%E5%AE%89%E8%A3%85gdal-osgeo/" class="article-date">
+	  <time datetime="2023-09-30T15:28:21.000Z" itemprop="datePublished">九月 30, 2023</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ubuntu16-04"><a href="#ubuntu16-04" class="headerlink" title="ubuntu16.04"></a>ubuntu16.04</h1><h2 id="ubuntu安装gdal程序"><a href="#ubuntu安装gdal程序" class="headerlink" title="ubuntu安装gdal程序"></a>ubuntu安装gdal程序</h2><p>打开终端，输入</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo apt-get <span class="hljs-keyword">install </span>gdal-<span class="hljs-keyword">bin </span>libgdal-dev<br></code></pre></td></tr></table></figure>
+<p>检测是否安装成功，输入</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">gdal-<span class="hljs-built_in">config</span> <span class="hljs-comment">--version</span><br></code></pre></td></tr></table></figure>
+<p>打印版本号表示安装成功。</p>
+<h2 id="conda-安装GDAL"><a href="#conda-安装GDAL" class="headerlink" title="conda 安装GDAL"></a>conda 安装GDAL</h2><h3 id="方法一：命令安装"><a href="#方法一：命令安装" class="headerlink" title="方法一：命令安装"></a>方法一：命令安装</h3><p> (1) 更新源<br>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43287414/article/details/108791177">Ubuntu20.04中关于conda下载包速度慢或者失败的问题</a>更新conda源。</p>
+<p> (2) 激活conda环境，查找可用GDAL包<br> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">source</span> activate licsbas<br>conda <span class="hljs-built_in">search</span> gdal<br></code></pre></td></tr></table></figure><br> 我的conda环境名为licsbas，python&#x3D;3.6，因此可选择安装gdal&#x3D;3.0.2的包。</p>
+ 
+
+<p>使用安装命令进行安装。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">conda</span> install gdal=<span class="hljs-number">3</span>.<span class="hljs-number">0</span>.<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+
+<p> (3)查看是否安装成功<br> 打开终端，激活环境，输入以下内容<br> <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">python<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(gdal)</span></span><br></code></pre></td></tr></table></figure><br> 显示gdal路径则表示安装成功。</p>
+ 
+
+<p>（4）查看库所在安装路径<br>通常存放在 <code>/home/root123/anaconda3/envs/licsbas/lib/python3.6/site-package</code> 路径下，路径中的 <code>licsbas</code>为虚拟环境名，<code>python3.6</code> 因为你安装的python版本不同而不同，<code>root123</code> 为用户名。采用 <a href="https://singyutang.github.io/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85Pycharm%E5%92%8CAnaconda3/">ubuntu16.04安装Pycharm和Anaconda3</a> 中的方法默认安装anaconda在 <code>/home</code> 目录下。</p>
+
+
+<h3 id="方法二：下载安装包-命令进行安装"><a href="#方法二：下载安装包-命令进行安装" class="headerlink" title="方法二：下载安装包+命令进行安装"></a>方法二：下载安装包+命令进行安装</h3><p> (1) 激活conda环境，查找可用GDAL包<br> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">source</span> activate licsbas<br>conda <span class="hljs-built_in">search</span> gdal<br></code></pre></td></tr></table></figure><br> 我的conda环境名为licsbas，python&#x3D;3.6，因此可选择安装gdal&#x3D;3.0.2的包。</p>
+<p> (2)使用<a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple/GDAL/">python第三方库清华镜像网站</a>下载适合版本的安装包。<br> </p>
+<p>（3）解压后，文件夹内有一个<code>README.rst</code>，按照该文件中的安装教程进行安装（我使用第一种方法成功了，就没有采用第二种方法）。</p>
+<h3 id="方法三：直接下载包文件-复制到指定文件夹"><a href="#方法三：直接下载包文件-复制到指定文件夹" class="headerlink" title="方法三：直接下载包文件+复制到指定文件夹"></a>方法三：直接下载包文件+复制到指定文件夹</h3><p> （1）直接下载<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/linux-64/">清华大学开源软件站</a>中的GDAL包，以GDAL3.0.2+python3.6为例，下载<code>gdal-3.0.2-py36hbb2a789_0.tar.bz2</code>包。注意最后一个数字为0的 tar.bz2 包，这个包和方法一中使用命令安装的包完全一样。</p>
+
+
+<p>（2）解压后，将文件目录 <code>.\gdal-3.0.2-py36hbb2a789_0\lib\python3.6\site-packages\</code> 下的所有文件复制到 conda虚拟环境下的 <code>site-packages</code> 下即可。如不知道 <code>site-packages</code> 的具体位置，可参照方法一（4）。</p>
+
+
+<p>（3）复制完成后，即可使用。</p>
+<h1 id="Windows10"><a href="#Windows10" class="headerlink" title="Windows10"></a>Windows10</h1><p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44467482/article/details/123851372">python01_第三方库安装gdal&#x2F;osgeo</a></p>
+<h1 id="参考博客和网站"><a href="#参考博客和网站" class="headerlink" title="参考博客和网站"></a>参考博客和网站</h1><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/linux-64/">清华大学开源软件站</a><br><a target="_blank" rel="noopener" href="http://download.osgeo.org/gdal/">osgeo.ogr</a><br><a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple/">python第三方库清华镜像网站</a><br><a target="_blank" rel="noopener" href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#gdal">非官方python第三方扩展包-Windows</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43542987/article/details/115455043">Ubuntu系统osgeo+gdal安装集合贴</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/61696526">pip 或 conda 安装第三方库超时（Read timed out）问题</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44467482/article/details/123851372">python01_第三方库安装gdal&#x2F;osgeo</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Anaconda/" rel="tag">Anaconda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gdal/" rel="tag">gdal</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/10/01/%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8GACOS%E6%95%B0%E6%8D%AE%E5%8E%BB%E9%99%A4Sentinel-1%E5%B9%B2%E6%B6%89%E5%9B%BE%E4%B8%AD%E7%9A%84%E5%A4%A7%E6%B0%94/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          如何利用GACOS数据去除Sentinel-1干涉图中的大气
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ubuntu16.04安装一些常用软件一</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu16-04"><span class="nav-number">1.</span> <span class="nav-text">ubuntu16.04</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu%E5%AE%89%E8%A3%85gdal%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.1.</span> <span class="nav-text">ubuntu安装gdal程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conda-%E5%AE%89%E8%A3%85GDAL"><span class="nav-number">1.2.</span> <span class="nav-text">conda 安装GDAL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.1.</span> <span class="nav-text">方法一：命令安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85-%E5%91%BD%E4%BB%A4%E8%BF%9B%E8%A1%8C%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.2.</span> <span class="nav-text">方法二：下载安装包+命令进行安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9A%E7%9B%B4%E6%8E%A5%E4%B8%8B%E8%BD%BD%E5%8C%85%E6%96%87%E4%BB%B6-%E5%A4%8D%E5%88%B6%E5%88%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">方法三：直接下载包文件+复制到指定文件夹</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows10"><span class="nav-number">2.</span> <span class="nav-text">Windows10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2%E5%92%8C%E7%BD%91%E7%AB%99"><span class="nav-number">3.</span> <span class="nav-text">参考博客和网站</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

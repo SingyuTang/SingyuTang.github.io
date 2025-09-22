@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>如何在dell工作站t7820上安装ubuntu16.04操作系统 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Ubuntu16.04系统安装" />
+  
+  
+  
+  
+  <meta name="description" content="一、准备硬件：一台 DELL 工作站 T7820；一个 U 盘镜像文件软件：软碟通（UltraISO）；ubuntu 16.04.7 LTS 版本； 二、制作系统盘ubuntu16.04.7 LTS 版本可前往 ubuntu官网进行下载。   利用 u 盘制作系统盘可参考# Windows10安装ubuntu16.04双系统教程 三、在 Windows10 下创建空白分区此处使用的工作站为双硬盘。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在DELL工作站T7820上安装ubuntu16.04操作系统">
+<meta property="og:url" content="https://singyutang.github.io/2023/09/18/%E5%A6%82%E4%BD%95%E5%9C%A8DELL%E5%B7%A5%E4%BD%9C%E7%AB%99T7820%E4%B8%8A%E5%AE%89%E8%A3%85ubuntu16-04%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="一、准备硬件：一台 DELL 工作站 T7820；一个 U 盘镜像文件软件：软碟通（UltraISO）；ubuntu 16.04.7 LTS 版本； 二、制作系统盘ubuntu16.04.7 LTS 版本可前往 ubuntu官网进行下载。   利用 u 盘制作系统盘可参考# Windows10安装ubuntu16.04双系统教程 三、在 Windows10 下创建空白分区此处使用的工作站为双硬盘。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-18T08:34:10.000Z">
+<meta property="article:modified_time" content="2024-04-08T13:34:28.526Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="Ubuntu16.04">
+<meta property="article:tag" content="系统安装">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-如何在DELL工作站T7820上安装ubuntu16-04操作系统" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      如何在DELL工作站T7820上安装ubuntu16.04操作系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2023/09/18/%E5%A6%82%E4%BD%95%E5%9C%A8DELL%E5%B7%A5%E4%BD%9C%E7%AB%99T7820%E4%B8%8A%E5%AE%89%E8%A3%85ubuntu16-04%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="article-date">
+	  <time datetime="2023-09-18T08:34:10.000Z" itemprop="datePublished">九月 18, 2023</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h1><p>硬件：<br>一台 DELL 工作站 T7820；<br>一个 U 盘镜像文件<br>软件：<br>软碟通（UltraISO）；<br>ubuntu 16.04.7 LTS 版本；</p>
+<h1 id="二、制作系统盘"><a href="#二、制作系统盘" class="headerlink" title="二、制作系统盘"></a>二、制作系统盘</h1><p>ubuntu16.04.7 LTS 版本可前往 <a target="_blank" rel="noopener" href="https://releases.ubuntu.com/16.04/">ubuntu官网</a>进行下载。</p>
+
+
+<p>利用 u 盘制作系统盘可参考# <a target="_blank" rel="noopener" href="https://www.cnblogs.com/masbay/p/10844857.html">Windows10安装ubuntu16.04双系统教程</a></p>
+<h1 id="三、在-Windows10-下创建空白分区"><a href="#三、在-Windows10-下创建空白分区" class="headerlink" title="三、在 Windows10 下创建空白分区"></a>三、在 Windows10 下创建空白分区</h1><p>此处使用的工作站为双硬盘。在 C 盘分出 1G（我的为 2G） 的空白分区用来安装 ubuntu 的启动项，然后再在另一块硬盘选择最后一个盘（比如 CD 两个盘的最后一个是 D 盘，CDE 盘的最后一个是 E 盘，CDEF 盘的最后一个是 F 盘，以此类推），在该盘点击右键，选择压缩卷，如下，输入压缩空间量，单位为 M, 如果空间充足，工作站一般空间较多，建议分 400G 以上，我分了 1000G。以下是我的分区结果。</p>
+
+
+<h1 id="四、设置工作站的-BIOS-启动项设置"><a href="#四、设置工作站的-BIOS-启动项设置" class="headerlink" title="四、设置工作站的 BIOS 启动项设置"></a>四、设置工作站的 BIOS 启动项设置</h1><p>插好系统盘，重启电脑，按【F2】进行 BIOS 启动项设置。设置如下：</p>
+<ol>
+<li>修改启动模式，把 UEFI 改为 Legacy；</li>
+<li>检查 SATA Operation 模式为：AHCI;</li>
+<li>设置 Secure Boot 为 Disable。当然如果 Boot Mode 是 UEFI 我们就将下面的 Secure Boot 设置 Disable。如果 Boot Mode 是 Legacy 那么我们就跳过这步。（设置了更保险。）</li>
+<li>BIOS 启动项设置完成后，按 exit 退出。</li>
+</ol>
+<h1 id="五、用做好的系统盘安装系统"><a href="#五、用做好的系统盘安装系统" class="headerlink" title="五、用做好的系统盘安装系统"></a>五、用做好的系统盘安装系统</h1><ol>
+<li>重新开机，长按【F12】，进入以下界面。</li>
+<li>选择【UEFI：KingstonDataTraveler 3.0】，出现以下界面。选择【Install Ubuntu】。</li>
+<li>选择【中文（简体）】，【继续】。</li>
+<li>选择【我现在不想连接这个无线 wifi 网络】，【继续】。</li>
+<li>选择第二项【为图形或无线硬件，以及 MP3 和其它媒体安装第三方软件】，【继续】。</li>
+<li>安装类型选择最后一个【其它选项】，因为需要手动分区，【继续】。
+进行分区设置，这是最关键的一步，这里按照总空间 1000G 来进行分区演示。<br>分区之前我先介绍一下 Linux 的文件系统 ：<br>swap：用作虚拟内存，这个一般和自己电脑的物理内存一般大即可，一般是 8G。<br>&#x2F;：主要用来存放Linux系统文件<br>&#x2F;boot : 存放linux内核，用来引导系统的，如果是Legacy启动就要设置引导，UEFI就不用设置这个（UEFI要设置EFI文件）<br>&#x2F;home:存放用户文件</li>
+<li>进行分区设置<br>我们在看磁盘信息的时候可以发现自己当初没有分配盘符的那个空闲磁盘，选中那个空闲磁盘，然后点击+ 号，开始分配，如下。<br>分配前分区设置如下所示，我们可以看到一个 2148 MB 和 1048577MB 大小的空闲区域。分别用于设置引导和其它分区。
+DELL T7820 采用 Legacy 启动方式启动，因此下列分区也是按照 Legacy 启动进行分区设置。（注意，这是因为在设置引导向时没有 efi 分区才设置为 Legacy 启动）<br>1）设置【BIOS 保留区域】<br>在设置引导之前，需要设置【BIOS 保留区域】，选项选择逻辑分区，空间起始位置，保留 BIOS 启动区域，大小 20MB，设置如图。在每个分区之间都需要设置【BIOS 保留区域】，否则会出错，下同。
+2）设置引导<br>设置 Boot 引导，我们选择逻辑分区，空间起始位置，用于 Ext4 日志文件，挂载点：&#x2F;boot，大小设置 2G（最少 500MB），也就是之前在 Windows 中预留的 2G 空间。这个分区必不可少，用于安装 ubuntu 启动项。</li>
+</ol>
+<p>3）下面的分区就在另一个空闲的盘（大小 1048577MB）进行。同样需要首先设置【BIOS 保留区域】，选项选择逻辑分区，空间起始位置，保留 BIOS 启动区域，大小 200MB，设置如图。</p>
+
+
+<p>4）设置【交换空间（swap）】，充当 ubuntu 的虚拟内存，一般的大小为电脑物理内存的 2 倍左右，如我的工作站内存为 32G，则可以将其分为 64G，选择逻辑分区，空间起始位置，用于”swap”或”交换空间”。</p>
+
+
+<p>5）同 3）的设置进行【BIOS 保留区域】的设置。<br>6）&#x2F;: 这是 ubuntu 的根目录, 用于安装系统和软件，相当于 windows 的 C 盘，我们将其分为 500G，主分区，空间起始位置，用于”ext4 日志文件系统”，挂载点为”&#x2F;“（根据你的磁盘空间调整，可以大一点，毕竟 ubuntu 装软件都是默认装在根目录的）</p>
+<p>7）同 3）的设置进行【BIOS 保留区域】的设置。<br>8）&#x2F;home: 相当于 windows 的其他盘，剩下的全分给它，逻辑分区，空间起始位置，用于”ext4 日志文件系统”，挂载点为”&#x2F;home”。<br>9）设置安装启动项的位置，我们刚刚不是创建了 2G 的 &#x2F;boot 分区吗，现在你看看这个区前面的编号是多少，比如是&#x2F;dev&#x2F;sda1, 不同的机子会有不同的编号，下拉列表选择这个 efi 分区编号，之后点击【现在安装】。<br>上述设置完成后，如图所示。</p>
+
+
+
+<p>10）分区设置完成，设置地区【Shanghai】。</p>
+
+<p>11）键盘布局默认是英语的，建议不改（默认中文也行）。</p>
+
+<p>12）这里设置用户，自己输入就可以了，例如英文字母，尽量简单点，密码也简单点。</p>
+
+<p>13）系统开始安装，耐心等待安装完毕就可以了。</p>
+
+<p>14）全部完成之后，会提醒你重启，把 U 盘拔了，点”现在重启”，如果卡死就强制关机再重启就好。</p>
+
+
+<h1 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h1><p><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_1037119/2332920">如何在DELL工作站T5820上安装ubuntu 16.04操作系统?安装的硬盘为M.2 SSD硬盘</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38621214/article/details/93657889">win10下Ubuntu 双系统安装（解决关机卡死问题和WiFi问题）</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/masbay/p/10844857.html">Windows10安装ubuntu16.04双系统教程</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/" rel="tag">系统安装</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          ubuntu16.04安装jdk和panoply
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/06/%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDGACOS%E6%95%B0%E6%8D%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">如何下载GACOS数据</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">一、准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%88%B6%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9B%98"><span class="nav-number">2.</span> <span class="nav-text">二、制作系统盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%9C%A8-Windows10-%E4%B8%8B%E5%88%9B%E5%BB%BA%E7%A9%BA%E7%99%BD%E5%88%86%E5%8C%BA"><span class="nav-number">3.</span> <span class="nav-text">三、在 Windows10 下创建空白分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%AE%BE%E7%BD%AE%E5%B7%A5%E4%BD%9C%E7%AB%99%E7%9A%84-BIOS-%E5%90%AF%E5%8A%A8%E9%A1%B9%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">四、设置工作站的 BIOS 启动项设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%94%A8%E5%81%9A%E5%A5%BD%E7%9A%84%E7%B3%BB%E7%BB%9F%E7%9B%98%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="nav-number">5.</span> <span class="nav-text">五、用做好的系统盘安装系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%95%99%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">参考教程</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

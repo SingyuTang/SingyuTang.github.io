@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>gravity-toolkit安装和使用笔记整理一 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="GRACEtoolkit" />
+  
+  
+  
+  
+  <meta name="description" content="安装软件安装anaconda和jupyter notebook，并在conda中创建虚拟环境，命名为grace，创建虚拟环境见[[Anaconda安装与环境配置]] 工具包https:&#x2F;&#x2F;github.com&#x2F;tsutterley&#x2F;gravity-toolkit https:&#x2F;&#x2F;github.com&#x2F;tsutterley&#x2F;geoid-toolkit&#x2F; https:&#x2F;&#x2F;github.com&#x2F;tsut">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gravity-toolkit安装和使用笔记整理一">
+<meta property="og:url" content="https://singyutang.github.io/2025/09/22/gravity-toolkit%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%E4%B8%80/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="安装软件安装anaconda和jupyter notebook，并在conda中创建虚拟环境，命名为grace，创建虚拟环境见[[Anaconda安装与环境配置]] 工具包https:&#x2F;&#x2F;github.com&#x2F;tsutterley&#x2F;gravity-toolkit https:&#x2F;&#x2F;github.com&#x2F;tsutterley&#x2F;geoid-toolkit&#x2F; https:&#x2F;&#x2F;github.com&#x2F;tsut">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-22T14:42:12.561Z">
+<meta property="article:modified_time" content="2023-07-23T11:26:00.000Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="GRACE">
+<meta property="article:tag" content="toolkit">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-gravity-toolkit安装和使用笔记整理一" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      gravity-toolkit安装和使用笔记整理一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2025/09/22/gravity-toolkit%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%E4%B8%80/" class="article-date">
+	  <time datetime="2025-09-22T14:42:12.561Z" itemprop="datePublished">九月 22, 2025</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><p>安装anaconda和jupyter notebook，并在conda中创建虚拟环境，命名为grace，创建虚拟环境见[[Anaconda安装与环境配置]]</p>
+<h2 id="工具包"><a href="#工具包" class="headerlink" title="工具包"></a>工具包</h2><p><a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit">https://github.com/tsutterley/gravity-toolkit</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tsutterley/geoid-toolkit/">https://github.com/tsutterley/geoid-toolkit/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tsutterley/read-GRACE-geocenter">https://github.com/tsutterley/read-GRACE-geocenter</a></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>ubuntu16.04</p>
+<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><p>conda激活grace环境，安装依赖。</p>
+<p>激活：conda activate grace</p>
+<p>安装：conda install -c conda-forge package_name</p>
+<h3 id="根目录-gravity-toolkit"><a href="#根目录-gravity-toolkit" class="headerlink" title="根目录(gravity-toolkit)"></a>根目录(gravity-toolkit)</h3><ol>
+<li><p>参照github作者中的<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit/tree/main#dependencies">gravity-toolkit&#x2F;README.rst#dependencies</a>安装依赖，包括</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.numpy.org/">numpy: Scientific Computing Tools For Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/">scipy: Scientific Tools for Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://dateutil.readthedocs.io/en/stable/">dateutil: powerful extensions to datetime</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/yaml/pyyaml">PyYAML: YAML parser and emitter for Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/lxml">lxml: processing XML and HTML in Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://python-future.org/">future: Compatibility layer between Python 2 and Python 3</a></li>
+<li><a target="_blank" rel="noopener" href="https://matplotlib.org/">matplotlib: Python 2D plotting library</a></li>
+<li><a target="_blank" rel="noopener" href="https://scitools.org.uk/cartopy/docs/latest/">cartopy: Python package designed for geospatial data processing</a></li>
+<li><a target="_blank" rel="noopener" href="https://unidata.github.io/netcdf4-python/">netCDF4: Python interface to the netCDF C library</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.h5py.org/">h5py: Python interface for Hierarchal Data Format 5 (HDF5)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tsutterley/geoid-toolkit/">geoid-toolkit: Python utilities for calculating geoid heights from static gravity field coefficients</a></li>
+</ul>
+</li>
+<li><p>参照github作者中的<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit/blob/main/requirements.txt">gravity-toolkit&#x2F;requirements.txt</a>安装第三方库，包括</p>
+<ul>
+<li>boto3</li>
+<li>future</li>
+<li>lxml</li>
+<li>matplotlib</li>
+<li>numpy</li>
+<li>python-dateutil</li>
+<li>pyyaml</li>
+<li>scipy</li>
+</ul>
+</li>
+</ol>
+<h3 id="binder文件夹"><a href="#binder文件夹" class="headerlink" title=".binder文件夹"></a>.binder文件夹</h3><p>github中作者中的<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit/blob/main/.binder/environment.yml">gravity-toolkit&#x2F;.binder&#x2F;environment.yml</a>中的依赖，详细信息如下。</p>
+<p>name: gravity_toolkit<br>channels:</p>
+<ul>
+<li>conda-forge</li>
+</ul>
+<p>dependencies:</p>
+<ul>
+<li>boto3</li>
+<li>cartopy</li>
+<li>future</li>
+<li>h5py</li>
+<li><a target="_blank" rel="noopener" href="https://pypi.org/project/ipywidgets/#history">ipywidgets&gt;&#x3D;7.6,&lt;8.0</a>(&#x3D;7.7.5)</li>
+<li>ipympl</li>
+<li>jupyter</li>
+<li>jupyterlab&#x3D;3</li>
+<li>jupyterlab_widgets</li>
+<li>lxml</li>
+<li>markupsafe&#x3D;&#x3D;2.0.1</li>
+<li>matplotlib</li>
+<li>netCDF4</li>
+<li>notebook</li>
+<li>numpy</li>
+<li>python&gt;&#x3D;3.6</li>
+<li>python-dateutil</li>
+<li>pyyaml</li>
+<li>scipy</li>
+<li>tk</li>
+<li>pip</li>
+<li>pip:<ul>
+<li>git+<a target="_blank" rel="noopener" href="https://github.com/tsutterley/geoid-toolkit.git">https://github.com/tsutterley/geoid-toolkit.git</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="github-workflows"><a href="#github-workflows" class="headerlink" title=".github&#x2F;workflows"></a>.github&#x2F;workflows</h3><ol>
+<li><p>github中作者中的<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit/blob/main/.github/workflows/python-request.yml">gravity-toolkit&#x2F;.github&#x2F;workflows&#x2F;python-request.yml</a>中的安装依赖，详细信息如下。</p>
+<p>此工作流将安装 Python 依赖项、运行测试并使用各种 Python 版本进行 lint。</p>
+<p>name: Python on pull request</p>
+<p>on:<br>  pull_request:</p>
+<p>jobs:<br>  build:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs python">runs-on: $&#123;&#123; matrix.os &#125;&#125;<br>strategy:<br>  matrix:<br>    os: [ubuntu-latest, macos-latest, windows-latest]<br>    python-version: [<span class="hljs-number">3.8</span>]<br>env:<br>  OS: $&#123;&#123; matrix.os &#125;&#125;<br>  PYTHON: $&#123;&#123; matrix.python-version &#125;&#125;<br>defaults:<br>  run:<br>    shell: bash -l &#123;<span class="hljs-number">0</span>&#125;<br><br>steps:<br>- uses: actions/checkout@v2<br>- name: <span class="hljs-type">Set</span> up conda $&#123;&#123; matrix.python-version &#125;&#125;<br>  uses: conda-incubator/setup-miniconda@v2<br>  <span class="hljs-keyword">with</span>:<br>    auto-update-conda: true<br>    python-version: $&#123;&#123; matrix.python-version &#125;&#125;<br>    activate-environment: gravity_toolkit<br>    environment-file: .binder/environment.yml<br>- name: Create conda Test Environment<br>  run: |<br>    conda install flake8 pytest pytest-cov cython<br>    pip install git+https://github.com/tsutterley/read-GRACE-geocenter.git<br>- name: Lint <span class="hljs-keyword">with</span> flake8<br>  run: |<br>    <span class="hljs-comment"># stop the build if there are Python syntax errors or undefined names</span><br>    flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics<br>    <span class="hljs-comment"># exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide</span><br>    flake8 . --count --exit-zero --<span class="hljs-built_in">max</span>-complexity=<span class="hljs-number">10</span> --<span class="hljs-built_in">max</span>-line-length=<span class="hljs-number">127</span> --statistics<br>- name: Test <span class="hljs-keyword">with</span> pytest<br>  run: |<br>    pip install --no-deps .<br>    pytest --verbose --capture=no --cov=./ --cov-report=xml \<br>        --username=$&#123;&#123; secrets.EARTHDATA_USERNAME &#125;&#125; \<br>        --password=$&#123;&#123; secrets.EARTHDATA_PASSWORD &#125;&#125; \<br>        --webdav=$&#123;&#123; secrets.PODAAC_PASSWORD &#125;&#125;<br>- name: Archive code coverage results<br>  uses: actions/upload-artifact@v2<br>  <span class="hljs-keyword">with</span>:<br>    name: code-coverage-report<br>    path: ./coverage.xml<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="doc文件夹"><a href="#doc文件夹" class="headerlink" title=".doc文件夹"></a>.doc文件夹</h3><ol>
+<li><p>github中作者中的<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit/blob/main/doc/environment.yml">gravity-toolkit&#x2F;doc&#x2F;environment.yml</a>安装doc 环境，包括下列库。安装命令：<code>conda install -c conda-forge package_name</code></p>
+<p>name: gravity-docs<br>channels:</p>
+<ul>
+<li>conda-forge<br>dependencies:</li>
+<li>docutils&lt;0.18</li>
+<li>fontconfig</li>
+<li>fonttools</li>
+<li>freetype</li>
+<li>future</li>
+<li>graphviz</li>
+<li>lxml</li>
+<li>markupsafe&#x3D;&#x3D;2.0.1</li>
+<li>numpy</li>
+<li>numpydoc</li>
+<li>pip</li>
+<li>python&gt;&#x3D;3.6</li>
+<li>python-dateutil</li>
+<li>pyyaml</li>
+<li>scipy</li>
+<li>sphinx</li>
+<li>sphinx_rtd_theme</li>
+<li>pip:<ul>
+<li>sphinx-argparse&gt;&#x3D;0.4</li>
+<li>..</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>github中作者中的<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit/blob/main/doc/source/getting_started/Citations.rst">gravity-toolkit&#x2F;doc&#x2F;source&#x2F;getting_started&#x2F;Citations.rst</a>中的依赖，包括下列库。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://scitools.org.uk/cartopy/docs/latest/">cartopy: Python package designed for geospatial data processing</a></li>
+<li><a target="_blank" rel="noopener" href="https://python-future.org/">future: Compatibility layer between Python 2 and Python 3</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.h5py.org/">h5py: Python interface for Hierarchal Data Format 5 (HDF5)</a></li>
+<li><a target="_blank" rel="noopener" href="https://ipywidgets.readthedocs.io/en/latest/">ipywidgets: interactive HTML widgets for Jupyter notebooks and IPython</a></li>
+<li><a target="_blank" rel="noopener" href="https://pypi.python.org/pypi/lxml">lxml: processing XML and HTML in Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://matplotlib.org/">matplotlib: Python 2D plotting library</a></li>
+<li><a target="_blank" rel="noopener" href="https://unidata.github.io/netcdf4-python/">netCDF4: Python interface to the netCDF C library</a></li>
+<li><a target="_blank" rel="noopener" href="https://numpy.org/">numpy: Scientific Computing Tools For Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://dateutil.readthedocs.io/en/stable/">python-dateutil: powerful extensions to datetime</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/yaml/pyyaml">PyYAML: YAML parser and emitter for Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.scipy.org/doc/">scipy: Scientific Tools for Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/tkinter.html">tkinter: Python interface to the Tcl&#x2F;Tk GUI toolkit</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><h3 id="pip-安装-或选择下面的setup安装"><a href="#pip-安装-或选择下面的setup安装" class="headerlink" title="pip 安装(或选择下面的setup安装)"></a>pip 安装(或选择下面的setup安装)</h3><p>python3 -m pip install –user git+<a target="_blank" rel="noopener" href="https://github.com/tsutterley/read-GRACE-geocenter.git">https://github.com/tsutterley/read-GRACE-geocenter.git</a></p>
+<p>python3 -m pip install –user git+<a target="_blank" rel="noopener" href="https://github.com/tsutterley/geoid-toolkit.git">https://github.com/tsutterley/geoid-toolkit.git</a></p>
+<p>python3 -m pip install –user git+<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit">https://github.com/tsutterley/gravity-toolkit</a></p>
+<h3 id="setup安装"><a href="#setup安装" class="headerlink" title="setup安装"></a>setup安装</h3><p>进入gravity-toolkit文件夹（setup.py）同级目录，运行<em>python setup.py install</em></p>
+<p>同理，将read-GRACE-geocenter和geoid-toolkit拷贝入gravity-toolkit文件夹，运行<em>python setup.py install</em></p>
+<h3 id="拷贝"><a href="#拷贝" class="headerlink" title="拷贝"></a>拷贝</h3><p>将github上下载的文件夹中的script文件夹拷贝到~&#x2F;anaconda3&#x2F;envs&#x2F;grace&#x2F;lib&#x2F;python3.8&#x2F;site-packages&#x2F;gravity_toolkit-1.2.0-py3.8.egg&#x2F;gravity_toolkit 文件夹下便于直接访问script下的函数。</p>
+<h3 id="环境变量设置"><a href="#环境变量设置" class="headerlink" title="环境变量设置"></a>环境变量设置</h3><p>将gravity_toolkit、gravity_toolkit&#x2F;scripts和geoid_toolkit添加到环境变量(<del>&#x2F;.bashrc)</del>中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">&lt;&lt;&lt; <span class="hljs-string">GRACE conda initialize &lt;&lt;&lt;</span></span><br>alias grace=&quot;source activate grace&quot;<br>export PATH=&quot;~/anaconda3/envs/grace/lib/python3.8/site-packages/gravity_toolkit-1.2.0-py3.8.egg/gravity_toolkit:$PATH&quot;<br>export PATH=&quot;~/anaconda3/envs/grace/lib/python3.8/site-packages/gravity_toolkit-1.2.0-py3.8.egg/gravity_toolkit/scripts:$PATH&quot;<br>export PATH=&quot;~/anaconda3/envs/grace/lib/python3.8/site-packages/geoid_toolkit-1.1.1-py3.8.egg/geoid_toolkit:$PATH&quot;<br></code></pre></td></tr></table></figure>
+
+<p>添加完成后，终端执行<code>source ~/.bashrc</code></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>终端执行<code>cnes_grace_sync.py --help</code>和<code>podaac_cumulus.py --help</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">podaac_cumulus.py --directory=&quot;/home/manasakura/draft&quot; --release RL06<br></code></pre></td></tr></table></figure>
+
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>setup安装后，在conda虚拟环境中就已存在該工具包，路径为<code>~/anaconda3/envs/grace/lib/python3.8/site-packages</code>，在调用工具包中的函数时实际上是调用site-packages中的函数，而不是从github上下载的文件夹中的函数，所以如果按照github文件夹的路径进行函数访问将不会访问到。</p>
+<h1 id="学习笔记"><a href="#学习笔记" class="headerlink" title="学习笔记"></a>学习笔记</h1><h2 id="文档学习"><a href="#文档学习" class="headerlink" title="文档学习"></a>文档学习</h2><h3 id="doc文件夹-1"><a href="#doc文件夹-1" class="headerlink" title="doc文件夹"></a>doc文件夹</h3><p>doc学习顺序可按照该<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit/blob/main/doc/source/index.rst">文档</a>进行</p>
+<p>函数用法可查看<a target="_blank" rel="noopener" href="https://gravity-toolkit.readthedocs.io/en/latest/">readdocs.io</a>和<a target="_blank" rel="noopener" href="https://github.com/tsutterley/gravity-toolkit/tree/main/doc/source/api_reference">api_reference</a></p>
+<h3 id="gravity-toolkit文件夹"><a href="#gravity-toolkit文件夹" class="headerlink" title="gravity_toolkit文件夹"></a>gravity_toolkit文件夹</h3><h4 id="SLR文件夹"><a href="#SLR文件夹" class="headerlink" title="SLR文件夹"></a>SLR文件夹</h4><p>将C20.py, CS2.py, C30.py, C40.py, C50.py计算出的球协系数值（去除AOD）与matlab中计算出的进行对比，二者答案一致（只校对了GRACE_months 1～4月，对应2002年1月～2002年4月），matlab的计算值保存为<code>~/coding/gravity_workspace/myworkspace/cs2m_c30_c40_c50_gracemonth_1_4_check.mat</code></p>
+<h5 id="C20-py"><a href="#C20-py" class="headerlink" title="C20.py"></a>C20.py</h5><h6 id="C20-RL06-txt-PROC-CSR"><a href="#C20-RL06-txt-PROC-CSR" class="headerlink" title="C20_RL06.txt(PROC&#x3D;CSR)"></a>C20_RL06.txt(PROC&#x3D;CSR)</h6><p>SLR.C20中的data变量不是直接读取的C20_RL06.txt中的Column 2中的C20，而是将第二列的C20数据减去Column 5中的AOD产品，详细信息查看原文件中的comment如下。</p>
+<p>The RL-06 background gravity model includes solid earth and ocean tides, solid earth and ocean pole tides, and the Atmosphere-Ocean De-aliasing (AOD1B) product. However, the monthly mean of the AOD model has been restored; subtract Column 5 to remove it.</p>
+<p>源代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python">dinput[<span class="hljs-string">&#x27;time&#x27;</span>] = file_input[<span class="hljs-string">&#x27;time&#x27;</span>]<br>dinput[<span class="hljs-string">&#x27;month&#x27;</span>] = gravity_toolkit.time.calendar_to_grace(dinput[<span class="hljs-string">&#x27;time&#x27;</span>])<br><span class="hljs-comment"># monthly spherical harmonic replacement solutions</span><br>dinput[<span class="hljs-string">&#x27;data&#x27;</span>] = file_input[<span class="hljs-string">&#x27;C20&#x27;</span>].copy()<br><span class="hljs-comment"># monthly spherical harmonic formal standard deviations</span><br>dinput[<span class="hljs-string">&#x27;error&#x27;</span>] = file_input[<span class="hljs-string">&#x27;sigma&#x27;</span>]*<span class="hljs-number">1e-10</span><br><span class="hljs-comment"># Background gravity model includes solid earth and ocean tides, solid</span><br><span class="hljs-comment"># earth and ocean pole tides, and the Atmosphere-Ocean De-aliasing</span><br><span class="hljs-comment"># product. The monthly mean of the AOD model has been restored.</span><br><span class="hljs-keyword">if</span> AOD:<br>    <span class="hljs-comment"># Removing AOD product that was restored in the solution</span><br>    dinput[<span class="hljs-string">&#x27;data&#x27;</span>] -= file_input[<span class="hljs-string">&#x27;AOD&#x27;</span>]*<span class="hljs-number">1e-10</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="CS2-py"><a href="#CS2-py" class="headerlink" title="CS2.py"></a>CS2.py</h5><h6 id="C21-22-S21-22-RL06-txt-PROC-CSR"><a href="#C21-22-S21-22-RL06-txt-PROC-CSR" class="headerlink" title="C21(22)_S21(22)_RL06.txt(PROC&#x3D;CSR)&#96;"></a>C21(22)_S21(22)_RL06.txt(PROC&#x3D;CSR)&#96;</h6><p>读取的CS21&#x2F;CS22是文件中SLR CS21&#x2F;CS22（Column 2,3）减去AOD(大气-海洋去混叠,Column 6,7）之后的CS21&#x2F;CS22,AOD简述可查看<a target="_blank" rel="noopener" href="https://ui.adsabs.harvard.edu/abs/2019AGUFM.G51B0583C/abstract#:~:text=The%20Atmosphere-Ocean%20De-aliasing%20%28AOD%29%20product%20is%20a%20set,attraction%20due%20to%20the%20changing%20atmosphere-ocean%20mass%20distribution.">Atmosphere-Ocean De-aliasing For GRACE-FO - NASA&#x2F;ADS</a> 和  <a target="_blank" rel="noopener" href="http://dx.doi.org/10.1029/2011GL048881">Evaluation of high-frequency oceanographic signal in GRACE data: Implications for de-aliasing</a></p>
+<p>大气-海洋去锯齿 (AOD) 产品是一组 Stokes 系数，表示由于大气-海洋质量分布变化引起的非潮汐引力的时间效应。它被用作处理数据流的力模型，以防止高频大气和海洋运动的影响混叠到月解中。</p>
+<p>源代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">dinput[<span class="hljs-string">&#x27;time&#x27;</span>] = content[<span class="hljs-string">&#x27;time&#x27;</span>].copy()<br>dinput[<span class="hljs-string">&#x27;month&#x27;</span>] = gravity_toolkit.time.calendar_to_grace(dinput[<span class="hljs-string">&#x27;time&#x27;</span>])<br><span class="hljs-comment"># remove the monthly mean of the AOD model</span><br>dinput[<span class="hljs-string">&#x27;C2m&#x27;</span>] = content[<span class="hljs-string">&#x27;C2&#x27;</span>] - content[<span class="hljs-string">&#x27;C2aod&#x27;</span>]*<span class="hljs-number">10</span>**-<span class="hljs-number">10</span><br>dinput[<span class="hljs-string">&#x27;S2m&#x27;</span>] = content[<span class="hljs-string">&#x27;S2&#x27;</span>] - content[<span class="hljs-string">&#x27;S2aod&#x27;</span>]*<span class="hljs-number">10</span>**-<span class="hljs-number">10</span><br><span class="hljs-comment"># scale SLR solution sigmas</span><br>dinput[<span class="hljs-string">&#x27;eC2m&#x27;</span>] = content[<span class="hljs-string">&#x27;eC2&#x27;</span>]*<span class="hljs-number">10</span>**-<span class="hljs-number">10</span><br>dinput[<span class="hljs-string">&#x27;eS2m&#x27;</span>] = content[<span class="hljs-string">&#x27;eS2&#x27;</span>]*<span class="hljs-number">10</span>**-<span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="C30-py"><a href="#C30-py" class="headerlink" title="C30.py"></a>C30.py</h5><h6 id="CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR"><a href="#CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR" class="headerlink" title="CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)"></a>CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)</h6><p>利用read_SLR_harmonics.py计算C30完整球协系数，并返回C30完整球协系数，GRACE_month为从2002.0起算的月份（见time.py中的calendar_to_grace函数）。从GGMO5C平均重力场模型（头文件中）和SLR观测值（正文，系数以相对于平均重力场的变化形式给出，已经去除AOD）相加求C30完整球协系数，并将求得的C30完整球协系数作为返回值。</p>
+<p>核心代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#### CSR_Monthly_5x5_Gravity_Harmonics.txt</span><br><span class="hljs-comment"># GGM05C重力场表头（头文件）</span><br>    L    M         C                  S               sigma C      sigma S<br><span class="hljs-comment"># SLR观测值（正文内容，球协系数异常值）表头及单位</span><br>n, m, Cnm, Snm, Cnm+AOD, Snm+AOD, C-sigma, S-sigma, MJD_mid_point, Year_mid_point<br>Units <span class="hljs-number">1.0e-10</span><br><span class="hljs-comment">#### read_GRACE_harmonics.py</span><br><span class="hljs-comment"># fill mean field Ylms（头文件中GGMO5C平均重力场模型）</span><br>mean_Ylms[<span class="hljs-string">&#x27;clm&#x27;</span>][l1,m1] = np.float64(line[<span class="hljs-number">2</span>].replace(<span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-string">&#x27;E&#x27;</span>))<br>mean_Ylms[<span class="hljs-string">&#x27;slm&#x27;</span>][l1,m1] = np.float64(line[<span class="hljs-number">3</span>].replace(<span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-string">&#x27;E&#x27;</span>))<br>mean_Ylm_error[<span class="hljs-string">&#x27;clm&#x27;</span>][l1,m1] = np.float64(line[<span class="hljs-number">4</span>].replace(<span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-string">&#x27;E&#x27;</span>))<br>mean_Ylm_error[<span class="hljs-string">&#x27;slm&#x27;</span>][l1,m1] = np.float64(line[<span class="hljs-number">5</span>].replace(<span class="hljs-string">&#x27;D&#x27;</span>,<span class="hljs-string">&#x27;E&#x27;</span>))<br><br><span class="hljs-comment"># fill anomaly field Ylms and rescale to output（SLR观测的cs_lm异常值和cs_lm_error）</span><br>Ylm_anomalies[<span class="hljs-string">&#x27;clm&#x27;</span>][l1,m1,d] = np.float64(line[<span class="hljs-number">2</span>])*SCALE<br>Ylm_anomalies[<span class="hljs-string">&#x27;slm&#x27;</span>][l1,m1,d] = np.float64(line[<span class="hljs-number">3</span>])*SCALE<br>Ylm_anomaly_error[<span class="hljs-string">&#x27;clm&#x27;</span>][l1,m1,d] = np.float64(line[<span class="hljs-number">6</span>])*SCALE<br>Ylm_anomaly_error[<span class="hljs-string">&#x27;slm&#x27;</span>][l1,m1,d] = np.float64(line[<span class="hljs-number">7</span>])*SCALE<br><br><span class="hljs-comment"># calculate full coefficients and full errors（C30完整球协系数）</span><br>Ylms[<span class="hljs-string">&#x27;clm&#x27;</span>][:,:,d] = Ylm_anomalies[<span class="hljs-string">&#x27;clm&#x27;</span>][:,:,d] + mean_Ylms[<span class="hljs-string">&#x27;clm&#x27;</span>][:,:]<br>Ylms[<span class="hljs-string">&#x27;slm&#x27;</span>][:,:,d] = Ylm_anomalies[<span class="hljs-string">&#x27;slm&#x27;</span>][:,:,d] + mean_Ylms[<span class="hljs-string">&#x27;slm&#x27;</span>][:,:]<br>Ylms[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;clm&#x27;</span>][:,:,d]=np.sqrt(Ylm_anomaly_error[<span class="hljs-string">&#x27;clm&#x27;</span>][:,:,d]**<span class="hljs-number">2</span> +<br>    mean_Ylm_error[<span class="hljs-string">&#x27;clm&#x27;</span>][:,:]**<span class="hljs-number">2</span>)<br>Ylms[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;slm&#x27;</span>][:,:,d]=np.sqrt(Ylm_anomaly_error[<span class="hljs-string">&#x27;slm&#x27;</span>][:,:,d]**<span class="hljs-number">2</span> +<br>    mean_Ylm_error[<span class="hljs-string">&#x27;slm&#x27;</span>][:,:]**<span class="hljs-number">2</span>)<br><br><span class="hljs-comment">#### C30.py</span><br><span class="hljs-comment"># CSR 5x5 + 6,1 file from CSR and extract C3,0 coefficients</span><br>Ylms = gravity_toolkit.read_SLR_harmonics(SLR_file, HEADER=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># extract dates, C30 harmonics and errors</span><br>dinput[<span class="hljs-string">&#x27;time&#x27;</span>] = Ylms[<span class="hljs-string">&#x27;time&#x27;</span>].copy()<br>dinput[<span class="hljs-string">&#x27;data&#x27;</span>] = Ylms[<span class="hljs-string">&#x27;clm&#x27;</span>][<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,:].copy()<br>dinput[<span class="hljs-string">&#x27;error&#x27;</span>] = Ylms[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;clm&#x27;</span>][<span class="hljs-number">3</span>,<span class="hljs-number">0</span>,:].copy()<br></code></pre></td></tr></table></figure>
+
+<h5 id="C40-py"><a href="#C40-py" class="headerlink" title="C40.py"></a>C40.py</h5><h6 id="CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR-1"><a href="#CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR-1" class="headerlink" title="CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)"></a>CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)</h6><p>同C30.py的方法计算C40完整球协系数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#### CSR_Monthly_5x5_Gravity_Harmonics.txt 同上C30.py</span><br><br><span class="hljs-comment">#### read_GRACE_harmonics.py 同上C30.py</span><br><br><span class="hljs-comment">#### C30.py</span><br><span class="hljs-comment"># read 5x5 + 6,1 file from CSR and extract C4,0 coefficients</span><br>Ylms = gravity_toolkit.read_SLR_harmonics(SLR_file, HEADER=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># extract dates, C40 harmonics and errors</span><br>dinput[<span class="hljs-string">&#x27;time&#x27;</span>] = Ylms[<span class="hljs-string">&#x27;time&#x27;</span>].copy()<br>dinput[<span class="hljs-string">&#x27;data&#x27;</span>] = Ylms[<span class="hljs-string">&#x27;clm&#x27;</span>][<span class="hljs-number">4</span>,<span class="hljs-number">0</span>,:].copy()<br>dinput[<span class="hljs-string">&#x27;error&#x27;</span>] = Ylms[<span class="hljs-string">&#x27;error&#x27;</span>][<span class="hljs-string">&#x27;clm&#x27;</span>][<span class="hljs-number">4</span>,<span class="hljs-number">0</span>,:].copy()<br></code></pre></td></tr></table></figure>
+
+<h5 id="C50-py"><a href="#C50-py" class="headerlink" title="C50.py"></a>C50.py</h5><h6 id="CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR-2"><a href="#CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR-2" class="headerlink" title="CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)"></a>CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)</h6><p>同C30.py的方法计算C50完整球协系数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#### CSR_Monthly_5x5_Gravity_Harmonics.txt 同上C30.py</span><br><br><span class="hljs-comment">#### read_GRACE_harmonics.py 同上C30.py#### C50.py</span><br><br><span class="hljs-comment"># read 5x5 + 6,1 file from GSFC and extract coefficients</span><br>Ylms = gravity_toolkit.read_SLR_harmonics(SLR_file, HEADER=<span class="hljs-literal">True</span>)<br><span class="hljs-comment"># calculate 28-day moving-average solution from 7-day arcs</span><br>dinput.update(gravity_toolkit.convert_weekly(Ylms[<span class="hljs-string">&#x27;time&#x27;</span>],Ylms[<span class="hljs-string">&#x27;clm&#x27;</span>][<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,:], DATE=DATE, NEIGHBORS=<span class="hljs-number">28</span>))<br><span class="hljs-comment"># no estimated spherical harmonic errors</span><br>dinput[<span class="hljs-string">&#x27;error&#x27;</span>] = np.zeros_like(DATE,dtype=<span class="hljs-string">&#x27;f8&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="gen-averaging-kernel-py"><a href="#gen-averaging-kernel-py" class="headerlink" title="gen_averaging_kernel.py"></a>gen_averaging_kernel.py</h4><p>生成平均核系数，从而最大限度地减少总误差。</p>
+<p>其中输入参数为</p>
+<p>INPUTS:<br>    gclm: cosine spherical harmonics of exact averaging kernel    </p>
+<p>    gslm: sine spherical harmonics of exact averaging kernel    </p>
+<p>    eclm: measurement error in the cosine harmonics    </p>
+<p>    eslm: measurement error in the sine harmonics    </p>
+<p>    sigma: variance of the surface mass signal    </p>
+<p>    hw: Gaussian radius of the kernel in kilometers</p>
+<p>需要用到的计算公式如下：</p>
+<p>区域核函数（exact averaging kernel）</p>
+<p>$$<br>\vartheta(\theta, \phi)&#x3D;0 \quad outside \quad the \quad basin\<br>\vartheta(\theta, \phi)&#x3D;1 \quad inside \quad the \quad basin<br>$$</p>
+<p>求gclm&#x2F;gslm</p>
+<p>$$<br>\begin{Bmatrix}<br>\Delta{\vartheta}<em>{lm}^c \ \Delta\hat{\vartheta}</em>{lm}^s<br>\end{Bmatrix}&#x3D;<br>\int \vartheta(\theta,\phi) \widetilde{P}_{lm}(cos\theta)<br>\begin{Bmatrix}<br>cosm\phi \ sinm\phi<br>\end{Bmatrix}d\Omega<br>$$</p>
+<p>离散形式为</p>
+<p>$$<br>\begin{Bmatrix}<br>\Delta{\vartheta}<em>{lm}^c \ \Delta\hat{\vartheta}</em>{lm}^s<br>\end{Bmatrix}&#x3D;<br>\sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360} \vartheta(\theta_i,\lambda_j)\widetilde P_{lm}(cos\theta_i)sin(m \lambda_j)</p>
+<p>\begin{Bmatrix}<br>cosm\phi \ sinm\phi<br>\end{Bmatrix}<br>sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>附上$\vartheta(\theta, \phi)$的球谐展开形式</p>
+<p>$$<br>\vartheta(\theta,\phi) &#x3D; \frac{1}{4\pi}</p>
+<p>\sum_{l&#x3D;0}^{\infty}\sum_{m&#x3D;0}^l \widetilde{P}<em>{lm}(cos\theta)(\vartheta</em>{lm}^c \Delta C+\vartheta_{lm}^s \Delta S)<br>$$</p>
+<p>计算Wlms：</p>
+<h4 id="gen-disc-load-py"><a href="#gen-disc-load-py" class="headerlink" title="gen_disc_load.py"></a>gen_disc_load.py</h4><p>计算均匀 disc load（负荷，与mass含义相近）的重力（gravitational）球谐系数。</p>
+<h4 id="gen-harmonics-py"><a href="#gen-harmonics-py" class="headerlink" title="gen_harmonics.py"></a>gen_harmonics.py</h4><p>gen_harmonics.py函数进行球谐系数展开主要是利用下列公式：</p>
+<p>$$<br>\Delta C_{lm}&#x3D;\frac{1}{4\pi} \sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360}\Delta \sigma(\theta_i,\lambda_j)P_{lm}(cos\theta_i)cos(m \lambda_j)sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>$$<br>\Delta S_{lm}&#x3D;\frac{1}{4\pi} \sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360}\Delta \sigma(\theta_i,\lambda_j)P_{lm}(cos\theta_i)sin(m \lambda_j)sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>其中，</p>
+<p>$$<br>\Delta \theta &#x3D; \Delta \lambda &#x3D; \pi&#x2F;180<br>$$</p>
+<p>上面公式与<a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s00190-015-0824-2">Chen（2015）</a>中公式有所不同，<a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s00190-015-0824-2">Chen（2015）</a>公式如下：</p>
+<p>$$<br>\Delta C_{lm}&#x3D;\frac{3}{4\pi \rho_E a} \frac{k_l + 1}{2l+1} \sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360}\Delta \sigma(\theta_i,\lambda_j)P_{lm}(cos\theta_i)cos(m \lambda_j)sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>$$<br>\Delta S_{lm}&#x3D;\frac{3}{4\pi \rho_E a} \frac{k_l + 1}{2l+1} \sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360}\Delta \sigma(\theta_i,\lambda_j)P_{lm}(cos\theta_i)sin(m \lambda_j)sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>将空间域的数据转化为球协系数.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">demo2</span>():<br>    grid_dir = <span class="hljs-string">&#x27;~/coding/gravity_workspace/gwrks0628/CSR_RL06_GSM_ICE6G-D_High_Res_wCSR_C20_wCSR_21_wCSR_22_wCSR_C30_wCSR_C40_wCSR_C50_wTellus_DEG1_cmwe_L60M60_r300km_FL_004-248.nc&#x27;</span><br>    grid = spatial().from_netCDF4(grid_dir)<br>    grid_data = grid.data[:, :, <span class="hljs-number">0</span>]<br>    lon = grid.lon<br>    lat = grid.lat<br>    Ylms = gen_harmonics(grid_data, lon, lat, METHOD=<span class="hljs-string">&#x27;integration&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Finished!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>在上述代码中，grid_dir路径指向的文件是由<code>[GRACE-Spatial-Maps.ipynb]</code>文件生成的grid对象，包含计算出的等效水高格网。gen_stokes函数可将該格网（二维）展开为球谐系数，其计算结果与matlab包中的<code>grid2cs.m</code>计算结果相同。matlab代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs matlab">grid_dir = <span class="hljs-string">&#x27;~/coding/gravity_workspace/gwrks0628/CSR_RL06_GSM_ICE6G-D_High_Res_wCSR_C20_wCSR_21_wCSR_22_wCSR_C30_wCSR_C40_wCSR_C50_wTellus_DEG1_cmwe_L60M60_r300km_FL_004-248.nc&#x27;</span>;;<br>info = ncinfo(grid_dir);<br>variables = info.Variables;<br>grid_data = ncread(grid_dir, <span class="hljs-string">&#x27;z&#x27;</span>);    <span class="hljs-comment">% n_lon * n_lat * n_month</span><br>lon = ncread(grid_dir, <span class="hljs-string">&#x27;lon&#x27;</span>);        <span class="hljs-comment">% 西经（-180-0）：东经（0-180）</span><br>lat = ncread(grid_dir, <span class="hljs-string">&#x27;lat&#x27;</span>);        <span class="hljs-comment">% 北纬（90-0）：南纬（0：-90）</span><br>time = ncread(grid_dir, <span class="hljs-string">&#x27;time&#x27;</span>);<br><span class="hljs-comment">% matlab包要求grid_data格网数据呈东经：西经（0：180：-180/0）、北纬：南纬（90：-90）分布。</span><br>clear grid_data_temp;<br>grid_data_temp(:,:) = grid_data(<span class="hljs-number">1</span>,:,:);<br>grid_data_temp2 = grid_data_temp&#x27;;<br>grid_data_temp3 = [grid_data_temp2(:,<span class="hljs-number">721</span>:<span class="hljs-number">1440</span>) grid_data_temp2(:,<span class="hljs-number">1</span>:<span class="hljs-number">720</span>)];        <span class="hljs-comment">% n_lat * n_lon, 呈东经：西经（0：180：-180/0）、北纬：南纬（90：-90）分布</span><br>cs2 = gmt_grid2cs(grid_data_temp3/<span class="hljs-number">100</span>, <span class="hljs-number">60</span>);<br></code></pre></td></tr></table></figure>
+
+<p>需要注意的是，在利用matlab包进行计算时，grid单位换算成了m（grid_data_temp3&#x2F;100），上面两个计算结果相同，结果如下。</p>
+
+
+
+<p>备注：该函数不涉及units类的引入和factor的计算。</p>
+<h4 id="gen-stokes-py"><a href="#gen-stokes-py" class="headerlink" title="gen_stokes.py"></a>gen_stokes.py</h4><p>将空间域的数据转化为球协系数，可在ocean_stokes.py中查看其如何使用。</p>
+<p>公式引用自<a target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s00190-015-0824-2">Chen（2015）</a> ，计算公式如下，</p>
+<p>$$<br>\Delta C_{lm}&#x3D;\frac{3}{4\pi \rho_E a} \frac{k_l + 1}{2l+1} \sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360}\Delta \sigma(\theta_i,\lambda_j)P_{lm}(cos\theta_i)cos(m \lambda_j)sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>$$<br>\Delta S_{lm}&#x3D;\frac{3}{4\pi \rho_E a} \frac{k_l + 1}{2l+1} \sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360}\Delta \sigma(\theta_i,\lambda_j)P_{lm}(cos\theta_i)sin(m \lambda_j)sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>因为</p>
+<p>$$<br>M_e &#x3D; \rho_e V &#x3D; \frac{4 \pi a^3 \rho_e}{3}<br>$$</p>
+<p>上面公式等价于下式，</p>
+<p>$$<br>\Delta C_{lm}&#x3D;\frac{a^2}{M_e} \frac{k_l + 1}{2l+1} \sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360}\Delta \sigma(\theta_i,\lambda_j)P_{lm}(cos\theta_i)cos(m \lambda_j)sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>$$<br>\Delta S_{lm}&#x3D;\frac{a^2}{M_e} \frac{k_l + 1}{2l+1} \sum_{i&#x3D;1}^{180} \sum_{j&#x3D;1}^{360}\Delta \sigma(\theta_i,\lambda_j)P_{lm}(cos\theta_i)sin(m \lambda_j)sin \theta_i \Delta \theta_i \Delta \lambda_j<br>$$</p>
+<p>核心实现代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs python">    <span class="hljs-comment">#### gen_stokes.py</span><br><br>    <span class="hljs-comment"># longitude degree spacing in radians</span><br>    dphi = dlon*np.pi/<span class="hljs-number">180.0</span><br>    <span class="hljs-comment"># colatitude degree spacing in radians</span><br>    dth = dlat*np.pi/<span class="hljs-number">180.0</span><br>    factors = gravity_toolkit.units(lmax=LMAX)<br><br>    <span class="hljs-comment"># reforming data to lonXlat if input latXlon</span><br>    sz = np.shape(data)<br>    data = data.T <span class="hljs-keyword">if</span> (sz[<span class="hljs-number">0</span>] == nlat) <span class="hljs-keyword">else</span> np.copy(data)<br><br>    <span class="hljs-keyword">elif</span> (UNITS == <span class="hljs-number">1</span>):<br>    <span class="hljs-comment"># Default Parameter: Input in cm w.e. (g/cm^2)</span><br>    dfactor = factors.spatial(*LOVE).cmwe<br>    int_fact[:] = np.sin(th)*dphi*dth<br><br>    <span class="hljs-comment"># Calculating cos/sin of phi arrays</span><br><span class="hljs-comment"># output [m,phi]</span><br>m = np.arange(MMAX+<span class="hljs-number">1</span>)<br>ccos = np.cos(np.dot(m[:,np.newaxis],phi))<br>ssin = np.sin(np.dot(m[:,np.newaxis],phi))<br><br><span class="hljs-comment"># Calculating fully-normalized Legendre Polynomials</span><br><span class="hljs-comment"># Output is plm[l,m,th]</span><br>plm = np.zeros((LMAX+<span class="hljs-number">1</span>, MMAX+<span class="hljs-number">1</span>, nlat))<br><span class="hljs-comment"># added option to precompute plms to improve computational speed</span><br><span class="hljs-keyword">if</span> PLM <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>    <span class="hljs-comment"># if plms are not pre-computed: calculate Legendre polynomials</span><br>    PLM, dPLM = plm_holmes(LMAX, np.cos(th))<br><br><span class="hljs-comment"># Multiplying by integration factors [sin(theta)*dtheta*dphi]</span><br><span class="hljs-comment"># truncate legendre polynomials to spherical harmonic order MMAX</span><br><span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,nlat):<br>    plm[:,m,j] = PLM[:,m,j]*int_fact[j]<br><br><span class="hljs-comment"># Initializing preliminary spherical harmonic matrices</span><br>yclm = np.zeros((LMAX+<span class="hljs-number">1</span>, MMAX+<span class="hljs-number">1</span>))<br>yslm = np.zeros((LMAX+<span class="hljs-number">1</span>, MMAX+<span class="hljs-number">1</span>))<br><span class="hljs-comment"># Initializing output spherical harmonic matrices</span><br>Ylms = gravity_toolkit.harmonics(lmax=LMAX, mmax=MMAX)<br>Ylms.clm = np.zeros((LMAX+<span class="hljs-number">1</span>, MMAX+<span class="hljs-number">1</span>))<br>Ylms.slm = np.zeros((LMAX+<span class="hljs-number">1</span>, MMAX+<span class="hljs-number">1</span>))<br><span class="hljs-comment"># Multiplying gridded data with sin/cos of m#phis</span><br><span class="hljs-comment"># This will sum through all phis in the dot product</span><br><span class="hljs-comment"># output [m,theta]</span><br>dcos = np.dot(ccos,data)<br>dsin = np.dot(ssin,data)<br><span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(LMIN,LMAX+<span class="hljs-number">1</span>):<span class="hljs-comment"># equivalent to LMIN:LMAX</span><br>    mm = np.<span class="hljs-built_in">min</span>([MMAX,l])<span class="hljs-comment"># truncate to MMAX if specified (if l &gt; MMAX)</span><br>    m = np.arange(<span class="hljs-number">0</span>,mm+<span class="hljs-number">1</span>)<span class="hljs-comment"># mm+1 elements between 0 and mm</span><br>    <span class="hljs-comment"># Summing product of plms and data over all latitudes</span><br>    <span class="hljs-comment"># axis=1 signifies the direction of the summation</span><br>    yclm[l,m] = np.<span class="hljs-built_in">sum</span>(plm[l,m,:]*dcos[m,:], axis=<span class="hljs-number">1</span>)<br>    yslm[l,m] = np.<span class="hljs-built_in">sum</span>(plm[l,m,:]*dsin[m,:], axis=<span class="hljs-number">1</span>)<br>    <span class="hljs-comment"># Multiplying by factors to convert to fully normalized coefficients</span><br>    Ylms.clm[l,m] = dfactor[l]*yclm[l,m]<br>    Ylms.slm[l,m] = dfactor[l]*yslm[l,m]<br><br><span class="hljs-comment"># return the output spherical harmonics object</span><br><span class="hljs-keyword">return</span> Ylms<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#### units.py</span><br>        <span class="hljs-comment"># set default keyword arguments</span><br>        kwargs.setdefault(<span class="hljs-string">&#x27;include_elastic&#x27;</span>, <span class="hljs-literal">True</span>)<br>        fraction = np.ones((<span class="hljs-variable language_">self</span>.lmax+<span class="hljs-number">1</span>))<br>        <span class="hljs-comment"># compensate for elastic deformation within the solid earth</span><br>        <span class="hljs-keyword">if</span> kwargs[<span class="hljs-string">&#x27;include_elastic&#x27;</span>]:<br>            fraction += kl[<span class="hljs-variable language_">self</span>.l]<br>        <span class="hljs-comment"># degree dependent coefficients</span><br>        <span class="hljs-comment"># norm, fully normalized spherical harmonics</span><br>        <span class="hljs-variable language_">self</span>.norm = np.ones((<span class="hljs-variable language_">self</span>.lmax+<span class="hljs-number">1</span>))<br>        <span class="hljs-comment"># cmwe, centimeters water equivalent [g/cm^2]</span><br>        <span class="hljs-variable language_">self</span>.cmwe = <span class="hljs-variable language_">self</span>.rho_e*<span class="hljs-variable language_">self</span>.rad_e*(<span class="hljs-number">2.0</span>*<span class="hljs-variable language_">self</span>.l+<span class="hljs-number">1.0</span>)/fraction/<span class="hljs-number">3.0</span><br>        <span class="hljs-comment"># mmwe, millimeters water equivalent [kg/m^2]</span><br>        <span class="hljs-variable language_">self</span>.mmwe = <span class="hljs-number">10.0</span>*<span class="hljs-variable language_">self</span>.rho_e*<span class="hljs-variable language_">self</span>.rad_e*(<span class="hljs-number">2.0</span>*<span class="hljs-variable language_">self</span>.l+<span class="hljs-number">1.0</span>)/fraction/<span class="hljs-number">3.0</span><br></code></pre></td></tr></table></figure>
+
+<p>使用 gen_harmonics.py中使用过的同种grid格网数据，进行球谐系数展开，代码如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_lovenumbers</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    read love numbers</span><br><span class="hljs-string">    Returns</span><br><span class="hljs-string">    -------</span><br><span class="hljs-string">    hl, kl, ll: tuple</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    love_numbers_file = utilities.get_data_path([<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-string">&#x27;love_numbers&#x27;</span>])<br>    header = <span class="hljs-number">2</span><br>    columns = [<span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;hl&#x27;</span>, <span class="hljs-string">&#x27;kl&#x27;</span>, <span class="hljs-string">&#x27;ll&#x27;</span>]<br>    hl, kl, ll = read_love_numbers(love_numbers_file, LMAX=<span class="hljs-number">60</span>,<br>                                   HEADER=header, COLUMNS=columns, REFERENCE=<span class="hljs-string">&#x27;CF&#x27;</span>, FORMAT=<span class="hljs-string">&#x27;tuple&#x27;</span>)<br>    <span class="hljs-keyword">return</span> hl, kl, ll<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">demo</span>():<br>    grid_dir = <span class="hljs-string">&#x27;~/coding/gravity_workspace/gwrks0628/CSR_RL06_GSM_ICE6G-D_High_Res_wCSR_C20_wCSR_21_wCSR_22_wCSR_C30_wCSR_C40_wCSR_C50_wTellus_DEG1_cmwe_L60M60_r300km_FL_004-248.nc&#x27;</span><br>    love_number = load_lovenumbers()<br>    grid = spatial().from_netCDF4(grid_dir)<br><br>    grid_data = grid.data[:,:,<span class="hljs-number">0</span>]<br>    lon = grid.lon<br>    lat = grid.lat<br>    Ylms = gen_stokes(grid_data, lon, lat, LOVE=love_number)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Finished!&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>运行结果如下</p>
+
+
+<h4 id="grace-date-py"><a href="#grace-date-py" class="headerlink" title="grace_date.py"></a>grace_date.py</h4><p>相关介绍查看test_gravity_notebook.ipynb。</p>
+<h4 id="grace-find-months-py"><a href="#grace-find-months-py" class="headerlink" title="grace_find_months.py"></a>grace_find_months.py</h4><p>相关介绍查看test_gravity_notebook.ipynb。</p>
+<h4 id="grace-months-index-py"><a href="#grace-months-index-py" class="headerlink" title="grace_months_index.py"></a>grace_months_index.py</h4><p>相关介绍查看test_gravity_notebook.ipynb。</p>
+<h4 id="grace-input-months-py"><a href="#grace-input-months-py" class="headerlink" title="grace_input_months.py"></a>grace_input_months.py</h4><p>读取GRACE&#x2F;GRACE- fo文件中指定的球谐l（阶数）和m（次数）以及指定的日期范围。</p>
+<p>改正包括：</p>
+<p>    一阶项替换(如果指定)。</p>
+<p>    用单反值替换C20(如果指定)。</p>
+<p>    用179+月份的单反值替换C21&#x2F;S21&#x2F;C22&#x2F;S22&#x2F;C30&#x2F;C50(如果指定)。</p>
+<p>    更正使用GAE, GAF和GAG文件的ECMWF大气“跳跃”。</p>
+<p>    Wahr et al.(2015)对极潮漂移的修正。</p>
+<p>疑问：該函数中CS21&#x2F;CS22&#x2F;C30&#x2F;C40&#x2F;C50项为什么要设置当grace_month大于179（源码中为 grace_month &gt; 176）时才能用SLR观测值替换GRACE观测值，请问是否在哪篇文献中有所提及，是否可以解答或者提供一下文献链接呢？代码如下（此处仅展示C21项的替换代码，S21&#x2F;CS22&#x2F;C30&#x2F;C40&#x2F;C50代码基本相同）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i,grace_month <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(months):<br>    count = np.count_nonzero(C21_input[<span class="hljs-string">&#x27;month&#x27;</span>] == grace_month)<br>    <span class="hljs-keyword">if</span> (count != <span class="hljs-number">0</span>) <span class="hljs-keyword">and</span> (grace_month &gt; <span class="hljs-number">176</span>):<br>        k, = np.nonzero(C21_input[<span class="hljs-string">&#x27;month&#x27;</span>] == grace_month)<br>        grace_Ylms[<span class="hljs-string">&#x27;clm&#x27;</span>][<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,i] = np.copy(C21_input[<span class="hljs-string">&#x27;C2m&#x27;</span>][k])<br>        grace_Ylms[<span class="hljs-string">&#x27;slm&#x27;</span>][<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,i] = np.copy(C21_input[<span class="hljs-string">&#x27;S2m&#x27;</span>][k])<br>        grace_Ylms[<span class="hljs-string">&#x27;eclm&#x27;</span>][<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,i] = np.copy(C21_input[<span class="hljs-string">&#x27;eC2m&#x27;</span>][k])<br>        grace_Ylms[<span class="hljs-string">&#x27;eslm&#x27;</span>][<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,i] = np.copy(C21_input[<span class="hljs-string">&#x27;eS2m&#x27;</span>][k])<br></code></pre></td></tr></table></figure>
+
+<h4 id="geocenter-py"><a href="#geocenter-py" class="headerlink" title="geocenter.py"></a>geocenter.py</h4><h5 id="from-tellus"><a href="#from-tellus" class="headerlink" title="from_tellus()"></a>from_tellus()</h5><p>读取一阶项文件TN-13_GEOC_CSR_RL06.txt，不做处理，详细用法见test_gravity_notebook.ipynb.</p>
+<h4 id="harmonics-py"><a href="#harmonics-py" class="headerlink" title="harmonics.py"></a>harmonics.py</h4><h5 id="drift-self-t-epoch-2003-3"><a href="#drift-self-t-epoch-2003-3" class="headerlink" title="drift(self, t, epoch&#x3D;2003.3)"></a>drift(self, t, epoch&#x3D;2003.3)</h5><p>将球协系数速度场按照时间积分计算漂移。</p>
+<p>核心代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># # gravity_test_substep.py</span><br>GRACE_Ylms = harmonics().from_dict(Ylms)<br>GIA_Ylms_rate = gia(lmax=LMAX).from_GIA(filename=GIA_file,<br>    GIA=GIA, mmax=MMAX)<br>GIA_Ylms = GIA_Ylms_rate.drift(GRACE_Ylms.time, epoch=<span class="hljs-number">2003.3</span>)<br><br><span class="hljs-comment"># # drift(self, t, epoch=2003.3)</span><br><span class="hljs-comment"># calculate drift</span><br><span class="hljs-keyword">for</span> i,ti <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(t):<br>    temp.clm[:,:,i] = <span class="hljs-variable language_">self</span>.clm*(ti - epoch)<br>    temp.slm[:,:,i] = <span class="hljs-variable language_">self</span>.slm*(ti - epoch)<br><span class="hljs-comment"># assign degree and order fields</span><br>temp.update_dimensions()<br><span class="hljs-keyword">return</span> temp<br></code></pre></td></tr></table></figure>
+
+<h5 id="from-dict-self-d-kwargs"><a href="#from-dict-self-d-kwargs" class="headerlink" title="from_dict(self, d, **kwargs)"></a>from_dict(self, d, **kwargs)</h5><p>将字典转化为harmonics类型。</p>
+<p>用法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">Ylms = grace_input_months(base_dir, PROC=PROC, DREL=DREL, DSET=DREL, LMAX=<span class="hljs-number">60</span>, start_mon=<span class="hljs-number">4</span>, end_mon=<span class="hljs-number">24</span>,<br>                                 missing=[<span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">18</span>], SLR_C20=SLR_C20, DEG1=DEG1, SLR_21=SLR_21, SLR_22=SLR_22,<br>                                 SLR_C30=SLR_C30, SLR_C40=SLR_C40, SLR_C50=SLR_C50)<br>GRACE_Ylms = harmonics().from_dict(Ylms)<br></code></pre></td></tr></table></figure>
+
+<h5 id="mean-self-apply-False-indices-Ellipsis"><a href="#mean-self-apply-False-indices-Ellipsis" class="headerlink" title="mean(self, apply&#x3D;False, indices&#x3D;Ellipsis)"></a>mean(self, apply&#x3D;False, indices&#x3D;Ellipsis)</h5><p>执行后就会更新GRACE_Ylms内的变量，返回值为球协系数均值。</p>
+<p>用法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">GRACE_Ylms.mean(apply=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="ocean-stokes-py"><a href="#ocean-stokes-py" class="headerlink" title="ocean_stokes.py"></a>ocean_stokes.py</h4><p>读取land-sea mask文件并转化为球协系数。</p>
+<h5 id="ocean-stokes-LANDMASK-LMAX-MMAX-None-LOVE-None-VARNAME-’LSMASK’-SIMPLIFY-False"><a href="#ocean-stokes-LANDMASK-LMAX-MMAX-None-LOVE-None-VARNAME-’LSMASK’-SIMPLIFY-False" class="headerlink" title="ocean_stokes(LANDMASK, LMAX, MMAX&#x3D;None, LOVE&#x3D;None, VARNAME&#x3D;’LSMASK’,       SIMPLIFY&#x3D;False)"></a>ocean_stokes(LANDMASK, LMAX, MMAX&#x3D;None, LOVE&#x3D;None, VARNAME&#x3D;’LSMASK’,       SIMPLIFY&#x3D;False)</h5><h6 id="读取landsea-nc文件"><a href="#读取landsea-nc文件" class="headerlink" title="读取landsea.nc文件"></a>读取landsea.nc文件</h6><p>下载源：<a target="_blank" rel="noopener" href="https://www.ncl.ucar.edu/Applications/Data/cdf/landsea.nc">https://www.ncl.ucar.edu/Applications/Data/cdf/landsea.nc</a> 。</p>
+<p>1x1 degree mask distributed from UCAR as part of NCL。<br>landsea.nc文件中的变量名包括lon,lat和LSMASK三类，可使用ncview landsea.nc进行查看。<br>landsea.nc中各值的含义：<br>    0： ocean<br>    1：land<br>    2：lake<br>    3：small island<br>    4：ice shelf</p>
+<p>ocean_stokes代码使用如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> gravity_toolkit <span class="hljs-keyword">import</span> ocean_stokes<br>landsea_mask_file = <span class="hljs-string">&quot;/home/manasakura/coding/gravity_workspace/Data/LANDSEA_MASK/landsea.nc&quot;</span><br><span class="hljs-keyword">from</span> gravity_toolkit.utilities <span class="hljs-keyword">import</span> get_data_path<br><span class="hljs-keyword">from</span> gravity_toolkit.read_love_numbers <span class="hljs-keyword">import</span> read_love_numbers<br>love_numbers_file = get_data_path([<span class="hljs-string">&#x27;data&#x27;</span>,<span class="hljs-string">&#x27;love_numbers&#x27;</span>])<br>hl,kl,ll = read_love_numbers(love_numbers_file, HEADER=<span class="hljs-number">2</span>, FORMAT=<span class="hljs-string">&#x27;tuple&#x27;</span>, REFERENCE=<span class="hljs-string">&#x27;CF&#x27;</span>)<br>ocean_Ylms = ocean_stokes(LANDMASK=landsea_mask_file, LMAX=<span class="hljs-number">60</span>, MMAX=<span class="hljs-number">60</span>, LOVE=(hl,kl,ll), VARNAME=<span class="hljs-string">&#x27;LSMASK&#x27;</span>,<br>    SIMPLIFY=<span class="hljs-literal">False</span>)<br><span class="hljs-built_in">print</span>(ocean_Ylms)<br></code></pre></td></tr></table></figure>
+
+<p>ocean_stokes函数会调用spatial.py中的spatial.from_netCDF4()函数，主要用于读取landsea.nc文件，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># # ocean_stokes.py</span><br>landsea = spatial().from_netCDF4(LANDMASK,<br>        date=<span class="hljs-literal">False</span>, varname=VARNAME)<br></code></pre></td></tr></table></figure>
+
+<p>ocean_stokes函数还会调用gen_stokes.py中的gen_stokes()函数，用于将空间域的数据转化为球协系数，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># # ocean_stokes.py</span><br><span class="hljs-comment"># create land function</span><br>nth,nphi = landsea.shape<br>land_function = np.zeros((nth,nphi), dtype=np.float64)<br><span class="hljs-comment"># combine land and island levels for land function</span><br>indx,indy = np.nonzero((landsea.data &gt;= <span class="hljs-number">1</span>) &amp; (landsea.data &lt;= <span class="hljs-number">3</span>))<br>land_function[indx,indy] = <span class="hljs-number">1.0</span><br><span class="hljs-comment"># remove isolated points if specified</span><br><span class="hljs-keyword">if</span> SIMPLIFY:<br>    land_function -= find_isolated_points(land_function)<br><span class="hljs-comment"># ocean function reciprocal of land function</span><br>ocean_function = <span class="hljs-number">1.0</span> - land_function<br><span class="hljs-comment"># convert to spherical harmonics (1 cm w.e.)</span><br>Ylms = gen_stokes(ocean_function.T, landsea.lon, landsea.lat,<br>    UNITS=<span class="hljs-number">1</span>, LMIN=<span class="hljs-number">0</span>, LMAX=LMAX, MMAX=MMAX, LOVE=LOVE)<br></code></pre></td></tr></table></figure>
+
+<p>上一段代码可简单表达为制作海洋掩膜（海洋部分的值为1），并转化为球协系数。</p>
+<h4 id="read-GRACE-harmonics-py"><a href="#read-GRACE-harmonics-py" class="headerlink" title="read_GRACE_harmonics.py"></a>read_GRACE_harmonics.py</h4><p>读取GRACE&#x2F;GRACE-FO Level-2 数据。用法见test_gravity_notebook.ipynb。</p>
+<h4 id="read-love-numbers-py"><a href="#read-love-numbers-py" class="headerlink" title="read_love_numbers.py"></a>read_love_numbers.py</h4><h5 id="load-love-numbers"><a href="#load-love-numbers" class="headerlink" title="load love_numbers"></a>load love_numbers</h5><p>Load Love Numbers match expected for reference frame。用法见test_gravity_notebook.ipynb。</p>
+<h5 id="load-Load-Love2-CE-dat"><a href="#load-Load-Love2-CE-dat" class="headerlink" title="load Load_Love2_CE.dat"></a>load Load_Love2_CE.dat</h5><p>Gegout (2005) Load Love Numbers。用法见test_gravity_notebook.ipynb。</p>
+<h5 id="load-PREM-LLNs-truncated-dat"><a href="#load-PREM-LLNs-truncated-dat" class="headerlink" title="load PREM-LLNs-truncated.dat"></a>load PREM-LLNs-truncated.dat</h5><p>Wang et al. (2012) Load Love Numbers。用法见test_gravity_notebook.ipynb。</p>
+<h4 id="read-GIA-model-py"><a href="#read-GIA-model-py" class="headerlink" title="read_GIA_model.py"></a>read_GIA_model.py</h4><p>读取GIA文件（球协系数）。</p>
+<h5 id="read-GIA-model-input-file-GIA-None-MMAX-None-DATAFORM-None-kwargs"><a href="#read-GIA-model-input-file-GIA-None-MMAX-None-DATAFORM-None-kwargs" class="headerlink" title="read_GIA_model(input_file, GIA&#x3D;None, MMAX&#x3D;None, DATAFORM&#x3D;None, **kwargs)"></a>read_GIA_model(input_file, GIA&#x3D;None, MMAX&#x3D;None, DATAFORM&#x3D;None, **kwargs)</h5><p>从文件中（ICE-6G_High_Res_Stokes_trend.txt）直接读取GIA球协系数值（GRACE Approximation）。用法见test_gravity_notebook.ipynb。</p>
+<h5 id="gia-from-GIA-self-filename-kwargs"><a href="#gia-from-GIA-self-filename-kwargs" class="headerlink" title="gia.from_GIA(self, filename, **kwargs)"></a>gia.from_GIA(self, filename, **kwargs)</h5><p>从文件中（ICE-6G_High_Res_Stokes_trend.txt）直接读取GIA球协系数值（GRACE Approximation）。用法见test_gravity_notebook.ipynb。</p>
+<h4 id="spatial-py"><a href="#spatial-py" class="headerlink" title="spatial.py"></a>spatial.py</h4><p>对空间数据进行读、写等操作。</p>
+<h5 id="spatial-from-netCDF4-self-filename-kwargs"><a href="#spatial-from-netCDF4-self-filename-kwargs" class="headerlink" title="spatial.from_netCDF4(self, filename, **kwargs)"></a>spatial.from_netCDF4(self, filename, **kwargs)</h5><p>读取nc文件。</p>
+<h6 id="landsea-nc"><a href="#landsea-nc" class="headerlink" title="landsea.nc"></a>landsea.nc</h6><p>下载：<a target="_blank" rel="noopener" href="https://www.ncl.ucar.edu/Applications/Data/cdf/landsea.nc">https://www.ncl.ucar.edu/Applications/Data/cdf/landsea.nc</a></p>
+<p>landsea.nc文件中包含lon, lat, LSMASK三个变量，该文件可利用ncview可视化查看，查看命令<code>ncview landsea.nc</code>。</p>
+<p>核心代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># # ocean_stokes.py</span><br><span class="hljs-comment"># VARNAME = &quot;LSMASK&quot;</span><br><span class="hljs-comment"># LANDMASK = &quot;/home/manasakura/coding/gravity_workspace/Data/LANDSEA_MASK/landsea.nc&quot;</span><br>landsea = spatial().from_netCDF4(LANDMASK,<br>        date=<span class="hljs-literal">False</span>, varname=VARNAME)<br></code></pre></td></tr></table></figure>
+
+<p>from_netCDF4()函数返回值为landsea（spatial类型），包含attributes, data, extent, filename, lon, lat, spacing等成员变量。data变量中包含的即是landsea.nc文件中的”LSMASK”变量值，下面需要对data变量多加以说明。</p>
+<p>data：180×360的ndarray类型的矩阵，上半矩阵为南半球，下半矩阵为北半球，左半矩阵为东半球，右半矩阵为西半球。即是以0度经线和南纬90度纬线的交叉点为坐标原点建立坐标系，横坐标为i，纵坐标为j，i越往东值越大，j越往北值越大，用numpy读取該矩阵也是同理，按照此坐标系可确定矩阵每个坐标（i，j）所对应的地理坐标。</p>
+<h3 id="scripts文件夹"><a href="#scripts文件夹" class="headerlink" title="scripts文件夹"></a>scripts文件夹</h3><h4 id="time-py"><a href="#time-py" class="headerlink" title="time.py"></a>time.py</h4><h5 id="calendar-to-grace-year-month-1-around-np-floor"><a href="#calendar-to-grace-year-month-1-around-np-floor" class="headerlink" title="calendar_to_grace(year,month&#x3D;1,around&#x3D;np.floor)"></a>calendar_to_grace(year,month&#x3D;1,around&#x3D;np.floor)</h5><p>**comments:**convert calendar dates to GRACE&#x2F;GRACE-FO months</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">grace_month</span> = around(<span class="hljs-number">12</span>.<span class="hljs-number">0</span>*(year - <span class="hljs-number">2002</span>.<span class="hljs-number">0</span>)) + month<br></code></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GRACE/" rel="tag">GRACE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/09/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%8C%85"><span class="nav-number">1.2.</span> <span class="nav-text">工具包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.3.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96"><span class="nav-number">1.4.</span> <span class="nav-text">依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E7%9B%AE%E5%BD%95-gravity-toolkit"><span class="nav-number">1.4.1.</span> <span class="nav-text">根目录(gravity-toolkit)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#binder%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">1.4.2.</span> <span class="nav-text">.binder文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#github-workflows"><span class="nav-number">1.4.3.</span> <span class="nav-text">.github&#x2F;workflows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#doc%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">1.4.4.</span> <span class="nav-text">.doc文件夹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-1"><span class="nav-number">1.5.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pip-%E5%AE%89%E8%A3%85-%E6%88%96%E9%80%89%E6%8B%A9%E4%B8%8B%E9%9D%A2%E7%9A%84setup%E5%AE%89%E8%A3%85"><span class="nav-number">1.5.1.</span> <span class="nav-text">pip 安装(或选择下面的setup安装)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setup%E5%AE%89%E8%A3%85"><span class="nav-number">1.5.2.</span> <span class="nav-text">setup安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D"><span class="nav-number">1.5.3.</span> <span class="nav-text">拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.5.4.</span> <span class="nav-text">环境变量设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.5.5.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-number">1.5.6.</span> <span class="nav-text">备注</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="nav-number">2.</span> <span class="nav-text">学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.1.</span> <span class="nav-text">文档学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#doc%E6%96%87%E4%BB%B6%E5%A4%B9-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">doc文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gravity-toolkit%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.1.2.</span> <span class="nav-text">gravity_toolkit文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SLR%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">SLR文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#C20-py"><span class="nav-number">2.1.2.1.1.</span> <span class="nav-text">C20.py</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#C20-RL06-txt-PROC-CSR"><span class="nav-number">2.1.2.1.1.1.</span> <span class="nav-text">C20_RL06.txt(PROC&#x3D;CSR)</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CS2-py"><span class="nav-number">2.1.2.1.2.</span> <span class="nav-text">CS2.py</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#C21-22-S21-22-RL06-txt-PROC-CSR"><span class="nav-number">2.1.2.1.2.1.</span> <span class="nav-text">C21(22)_S21(22)_RL06.txt(PROC&#x3D;CSR)&#96;</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C30-py"><span class="nav-number">2.1.2.1.3.</span> <span class="nav-text">C30.py</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR"><span class="nav-number">2.1.2.1.3.1.</span> <span class="nav-text">CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C40-py"><span class="nav-number">2.1.2.1.4.</span> <span class="nav-text">C40.py</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR-1"><span class="nav-number">2.1.2.1.4.1.</span> <span class="nav-text">CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C50-py"><span class="nav-number">2.1.2.1.5.</span> <span class="nav-text">C50.py</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#CSR-Monthly-5x5-Gravity-Harmonics-txt-PROC-CSR-2"><span class="nav-number">2.1.2.1.5.1.</span> <span class="nav-text">CSR_Monthly_5x5_Gravity_Harmonics.txt(PROC&#x3D;CSR)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gen-averaging-kernel-py"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">gen_averaging_kernel.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gen-disc-load-py"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">gen_disc_load.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gen-harmonics-py"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">gen_harmonics.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gen-stokes-py"><span class="nav-number">2.1.2.5.</span> <span class="nav-text">gen_stokes.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#grace-date-py"><span class="nav-number">2.1.2.6.</span> <span class="nav-text">grace_date.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#grace-find-months-py"><span class="nav-number">2.1.2.7.</span> <span class="nav-text">grace_find_months.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#grace-months-index-py"><span class="nav-number">2.1.2.8.</span> <span class="nav-text">grace_months_index.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#grace-input-months-py"><span class="nav-number">2.1.2.9.</span> <span class="nav-text">grace_input_months.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#geocenter-py"><span class="nav-number">2.1.2.10.</span> <span class="nav-text">geocenter.py</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#from-tellus"><span class="nav-number">2.1.2.10.1.</span> <span class="nav-text">from_tellus()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#harmonics-py"><span class="nav-number">2.1.2.11.</span> <span class="nav-text">harmonics.py</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#drift-self-t-epoch-2003-3"><span class="nav-number">2.1.2.11.1.</span> <span class="nav-text">drift(self, t, epoch&#x3D;2003.3)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#from-dict-self-d-kwargs"><span class="nav-number">2.1.2.11.2.</span> <span class="nav-text">from_dict(self, d, **kwargs)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mean-self-apply-False-indices-Ellipsis"><span class="nav-number">2.1.2.11.3.</span> <span class="nav-text">mean(self, apply&#x3D;False, indices&#x3D;Ellipsis)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ocean-stokes-py"><span class="nav-number">2.1.2.12.</span> <span class="nav-text">ocean_stokes.py</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ocean-stokes-LANDMASK-LMAX-MMAX-None-LOVE-None-VARNAME-%E2%80%99LSMASK%E2%80%99-SIMPLIFY-False"><span class="nav-number">2.1.2.12.1.</span> <span class="nav-text">ocean_stokes(LANDMASK, LMAX, MMAX&#x3D;None, LOVE&#x3D;None, VARNAME&#x3D;’LSMASK’,       SIMPLIFY&#x3D;False)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96landsea-nc%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.2.12.1.1.</span> <span class="nav-text">读取landsea.nc文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read-GRACE-harmonics-py"><span class="nav-number">2.1.2.13.</span> <span class="nav-text">read_GRACE_harmonics.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read-love-numbers-py"><span class="nav-number">2.1.2.14.</span> <span class="nav-text">read_love_numbers.py</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#load-love-numbers"><span class="nav-number">2.1.2.14.1.</span> <span class="nav-text">load love_numbers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#load-Load-Love2-CE-dat"><span class="nav-number">2.1.2.14.2.</span> <span class="nav-text">load Load_Love2_CE.dat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#load-PREM-LLNs-truncated-dat"><span class="nav-number">2.1.2.14.3.</span> <span class="nav-text">load PREM-LLNs-truncated.dat</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read-GIA-model-py"><span class="nav-number">2.1.2.15.</span> <span class="nav-text">read_GIA_model.py</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#read-GIA-model-input-file-GIA-None-MMAX-None-DATAFORM-None-kwargs"><span class="nav-number">2.1.2.15.1.</span> <span class="nav-text">read_GIA_model(input_file, GIA&#x3D;None, MMAX&#x3D;None, DATAFORM&#x3D;None, **kwargs)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gia-from-GIA-self-filename-kwargs"><span class="nav-number">2.1.2.15.2.</span> <span class="nav-text">gia.from_GIA(self, filename, **kwargs)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spatial-py"><span class="nav-number">2.1.2.16.</span> <span class="nav-text">spatial.py</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#spatial-from-netCDF4-self-filename-kwargs"><span class="nav-number">2.1.2.16.1.</span> <span class="nav-text">spatial.from_netCDF4(self, filename, **kwargs)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#landsea-nc"><span class="nav-number">2.1.2.16.1.1.</span> <span class="nav-text">landsea.nc</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scripts%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">2.1.3.</span> <span class="nav-text">scripts文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#time-py"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">time.py</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#calendar-to-grace-year-month-1-around-np-floor"><span class="nav-number">2.1.3.1.1.</span> <span class="nav-text">calendar_to_grace(year,month&#x3D;1,around&#x3D;np.floor)</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

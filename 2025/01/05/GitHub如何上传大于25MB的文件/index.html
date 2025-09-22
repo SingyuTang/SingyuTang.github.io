@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>github如何上传大于25mb的文件 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="GitGitHub" />
+  
+  
+  
+  
+  <meta name="description" content="前言利用Git上传代码，当大于25MB的文件时，会提示上传失败，此时需要使用Git LFS(Git Large File)来上传大文件。Git安装可参考Git的安装步骤。 1 下载安装Git LFS1.1 下载Git LFSGit LFS 下载链接：https:&#x2F;&#x2F;github.com&#x2F;git-lfs&#x2F;git-lfs&#x2F;releases   1.2 安装Git LFS下载完成后，双击安装包，按照提示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub如何上传大于25MB的文件">
+<meta property="og:url" content="https://singyutang.github.io/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="前言利用Git上传代码，当大于25MB的文件时，会提示上传失败，此时需要使用Git LFS(Git Large File)来上传大文件。Git安装可参考Git的安装步骤。 1 下载安装Git LFS1.1 下载Git LFSGit LFS 下载链接：https:&#x2F;&#x2F;github.com&#x2F;git-lfs&#x2F;git-lfs&#x2F;releases   1.2 安装Git LFS下载完成后，双击安装包，按照提示">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-05T08:29:01.000Z">
+<meta property="article:modified_time" content="2025-01-07T05:43:22.765Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="GitHub">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-GitHub如何上传大于25MB的文件" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      GitHub如何上传大于25MB的文件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/" class="article-date">
+	  <time datetime="2025-01-05T08:29:01.000Z" itemprop="datePublished">一月 5, 2025</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>利用Git上传代码，当大于25MB的文件时，会提示上传失败，此时需要使用Git LFS(Git Large File)来上传大文件。Git安装可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46351233/article/details/124733661">Git的安装步骤</a>。</p>
+<h1 id="1-下载安装Git-LFS"><a href="#1-下载安装Git-LFS" class="headerlink" title="1 下载安装Git LFS"></a>1 下载安装Git LFS</h1><h2 id="1-1-下载Git-LFS"><a href="#1-1-下载Git-LFS" class="headerlink" title="1.1 下载Git LFS"></a>1.1 下载Git LFS</h2><p>Git LFS 下载链接：<a target="_blank" rel="noopener" href="https://github.com/git-lfs/git-lfs/releases">https://github.com/git-lfs/git-lfs/releases</a></p>
+
+
+<h2 id="1-2-安装Git-LFS"><a href="#1-2-安装Git-LFS" class="headerlink" title="1.2 安装Git LFS"></a>1.2 安装Git LFS</h2><p>下载完成后，双击安装包，按照提示进行安装即可。</p>
+<h1 id="2-使用Git-LFS"><a href="#2-使用Git-LFS" class="headerlink" title="2.使用Git LFS"></a>2.使用Git LFS</h1><h2 id="2-1-初始化并推送单个文件"><a href="#2-1-初始化并推送单个文件" class="headerlink" title="2.1 初始化并推送单个文件"></a>2.1 初始化并推送单个文件</h2><p>进入我的项目文件夹路径<code>C:\Users\tang xingyou\MyGithub\GRACE_GMT_scripts</code>，打开Git Bash，输入以下命令：</p>
+<p>初始化仓库并安装LFS应用</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">git init<br>git <span class="hljs-keyword">lfs</span> install<br>git <span class="hljs-keyword">lfs</span> track *<br>git <span class="hljs-keyword">add</span> .gitattributes<br><br></code></pre></td></tr></table></figure>
+<p>添加属性文件上传的说明：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">git</span> commit -m <span class="hljs-string">&quot;.gitattributes commit&quot;</span><br></code></pre></td></tr></table></figure>
+<p>建立本地和 Github 仓库的链接（origin 后接自己仓库的链接）</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">git</span> remote <span class="hljs-keyword">add</span> origin https:<span class="hljs-comment">//github.com/SingyuTang/GRACE_GMT_scripts.git</span><br></code></pre></td></tr></table></figure>
+
+<p>上传文件，推送到远程分支，远程仓库默认分支是 <code>main</code>，因此这里为main分支（可以使用<code>git branch</code>命令查看当前分支</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> -u <span class="hljs-built_in">origin</span> main<br></code></pre></td></tr></table></figure>
+
+<p>注意，推送前可以使用<code>git ls-remote --heads origin</code>查看远程仓库分支，如果显示的是其他分支（如 master），需要推送到对应分支：</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master<br></code></pre></td></tr></table></figure>
+
+<p>或者将远程分支名称更改为 main（推荐）再推送：</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> main<br></code></pre></td></tr></table></figure>
+<p>如果当前分支名称不是main，可使用命令<code>git branch -M main</code>将当前分支重命名为 main，并强制执行（如果目标分支名已经存在，将会覆盖它）。实际操作步骤如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs css">查看当前分支<br>git branch<br>如果当前分支名称不是 <span class="hljs-selector-tag">main</span>，可以使用以下命令重命名<br>git branch -M <span class="hljs-selector-tag">main</span><br>如果远程仓库使用的是 <span class="hljs-selector-tag">main</span> 分支，重命名本地分支后，需要更新远程的分支关联<br>git push <span class="hljs-attr">--set-upstream</span> origin <span class="hljs-selector-tag">main</span><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="2-2-推送全部文件"><a href="#2-2-推送全部文件" class="headerlink" title="2.2 推送全部文件"></a>2.2 推送全部文件</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">git</span> <span class="hljs-keyword">add</span> *<br><span class="hljs-symbol">git</span> commit -m <span class="hljs-string">&quot;Git LFS commit&quot;</span><br><span class="hljs-symbol">git</span> <span class="hljs-keyword">push</span> origin main<br></code></pre></td></tr></table></figure>
+<h2 id="2-3-其它配置"><a href="#2-3-其它配置" class="headerlink" title="2.3 其它配置"></a>2.3 其它配置</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs stylus">设置为 <span class="hljs-number">0</span> 表示关闭低速检测，Git 不会因传输速度过低而中断连接<br>git config <span class="hljs-attr">--global</span> http<span class="hljs-selector-class">.lowSpeedLimit</span> <span class="hljs-number">0</span><br>设置为 <span class="hljs-number">99999</span> 表示允许长时间的低速传输<br>git config <span class="hljs-attr">--global</span> http<span class="hljs-selector-class">.lowSpeedTime</span> <span class="hljs-number">99999</span><br>支持更大的数据块传输<br>git config <span class="hljs-attr">--global</span> http<span class="hljs-selector-class">.postBuffer</span> <span class="hljs-number">157286400</span><br>清除当前远程仓库（origin）的代理设置，确保 Git 直接通过本地网络连接到远程仓库<br>git config <span class="hljs-attr">--global</span> <span class="hljs-attr">--add</span> remote<span class="hljs-selector-class">.origin</span><span class="hljs-selector-class">.proxy</span> <span class="hljs-string">&quot;&quot;</span><br>指定使用 OpenSSL 作为 Git 的 SSL 后端，用于处理 HTTPS 请求的加密通信，更稳定<br>git config <span class="hljs-attr">--global</span> http<span class="hljs-selector-class">.sslBackend</span> <span class="hljs-string">&quot;openssl&quot;</span><br>禁用 SSL 证书验证，忽略 HTTPS 请求中的证书检查。这样可以绕过证书相关的问题<br>git config <span class="hljs-attr">--global</span> http<span class="hljs-selector-class">.sslVerify</span> false<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://openatomworkshop.csdn.net/67400fc2cd8b2677c3e4ac18.html?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~activity-3-129878135-blog-129417749.235%5Ev43%5Epc_blog_bottom_relevance_base1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~activity-3-129878135-blog-129417749.235%5Ev43%5Epc_blog_bottom_relevance_base1">GitHub 上传大文件（＞25 MB）教程</a>（推荐）</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mu_xing_/article/details/128285608?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Ctr-2-128285608-blog-129417749.235%5Ev43%5Epc_blog_bottom_relevance_base1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Ctr-2-128285608-blog-129417749.235%5Ev43%5Epc_blog_bottom_relevance_base1">CSDN-GitHub上传大于25M的文件</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/01/07/GRACE%E4%B8%AD%E7%9A%84MASCON%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E7%AE%80%E4%BB%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          GRACE中的Mascons数据最新下载简介
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/09/29/GRACE-GRACE-FO-L2%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E9%93%BE%E6%8E%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">GRACE/GRACE-FO L2数据下载最新链接</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85Git-LFS"><span class="nav-number">2.</span> <span class="nav-text">1 下载安装Git LFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%B8%8B%E8%BD%BDGit-LFS"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 下载Git LFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85Git-LFS"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 安装Git LFS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E4%BD%BF%E7%94%A8Git-LFS"><span class="nav-number">3.</span> <span class="nav-text">2.使用Git LFS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%B9%B6%E6%8E%A8%E9%80%81%E5%8D%95%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 初始化并推送单个文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%8E%A8%E9%80%81%E5%85%A8%E9%83%A8%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 推送全部文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%85%B6%E5%AE%83%E9%85%8D%E7%BD%AE"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 其它配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

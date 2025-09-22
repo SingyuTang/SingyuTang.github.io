@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>学习拓展一 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="FNL和GFS数据的区别GFS（1）gfs是实时产品，包括初始分析场和预报场，其中，只有初始场为同化（三维变分）过后的分析场，随后时次都是预报结果。因此，每隔6小时，都有N多天的预报结果，3小时间隔，前192小时位高分辨率，后面分辨率降低。（2）gfs是预报场，可以实时的提供。GFS和Fnl文件的区别FNL（1）fnl（Final）Fnl全球资料数据是每隔6小时一次的（1度1度或者为2.5度2.5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习拓展一">
+<meta property="og:url" content="https://singyutang.github.io/2024/05/16/%E5%AD%A6%E4%B9%A0%E6%8B%93%E5%B1%95%E4%B8%80/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="FNL和GFS数据的区别GFS（1）gfs是实时产品，包括初始分析场和预报场，其中，只有初始场为同化（三维变分）过后的分析场，随后时次都是预报结果。因此，每隔6小时，都有N多天的预报结果，3小时间隔，前192小时位高分辨率，后面分辨率降低。（2）gfs是预报场，可以实时的提供。GFS和Fnl文件的区别FNL（1）fnl（Final）Fnl全球资料数据是每隔6小时一次的（1度1度或者为2.5度2.5">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://singyutang.github.io/image.png">
+<meta property="article:published_time" content="2024-05-16T07:04:36.000Z">
+<meta property="article:modified_time" content="2024-05-17T09:17:20.418Z">
+<meta property="article:author" content="SingyuTang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://singyutang.github.io/image.png">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-学习拓展一" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      学习拓展一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/05/16/%E5%AD%A6%E4%B9%A0%E6%8B%93%E5%B1%95%E4%B8%80/" class="article-date">
+	  <time datetime="2024-05-16T07:04:36.000Z" itemprop="datePublished">五月 16, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="FNL和GFS数据的区别"><a href="#FNL和GFS数据的区别" class="headerlink" title="FNL和GFS数据的区别"></a>FNL和GFS数据的区别</h1><p>GFS<br>（1）gfs是实时产品，包括初始分析场和预报场，其中，只有初始场为同化（三维变分）过后的分析场，随后时次都是预报结果。因此，每隔6小时，都有N多天的预报结果，3小时间隔，前192小时位高分辨率，后面分辨率降低。<br>（2）gfs是预报场，可以实时的提供。<br>GFS和Fnl文件的区别FNL<br>（1）fnl（Final）Fnl全球资料数据是每隔6小时一次的（1度<em>1度或者为2.5度</em>2.5度）的格点数据。这个产品来自全球资料同化系统（GDAS），这一个系统持续的手机来自全球通讯系统（The Global Telecommunications System(GTS))以及其他的一些资源。这个再分析资料从地表面一直到高空，设置了26层，从1000Hpa到10Hpa。参数包括表面气压、海表面气压、位势高度、温度、海表温度、土壤状况、冰覆盖率、相对湿度、u，v风速、垂直运动、涡度以及臭氧。<br>（2）fnl是最终分析场，都是同化过后的结果，可以补齐了实时状态下没有收集齐的某些观测资料，但是绝大部分情况下和gfs的初始场差不多。因为只有分析场，每天只有4个时次。<br>（3）fnl是分析场，只能做历史个例的分析。<br>（4）FNL本质上是operational analysis（业务分析）。它是利用Global Forecast System和Data Assimilation产生的。每六个小时， GFS会初始化，然后进行16天的预报。过一段时间后，随着更多的数据收集到，GFS再进行一次run，并同化这些数据。这次run只有9个小时，产生的数据会作为下次的（6小时之后）初始条件，并产生FNL数据。Reanalysis数据是用历史上收集的所有数据，用统一的算法进行同化。这样，就尽可能减少算法变化带来的对数据的影响。reanalysis数据当然也有自己各种各样的问题，但相对于operational analysis, 就更适合于气候研究。</p>
+<h1 id="水文过程线"><a href="#水文过程线" class="headerlink" title="水文过程线"></a>水文过程线</h1><p>水文过程线描述的是河川径流量随时间的变化过程。它将河川径流量与雨雪补给来源联系起来，表达了径流与降水和其他流域环境要素之间的关系，及其随时间的推移变化。水文过程线提供了在干旱、洪涝及正常天气情况下，地表径流过程及其变化信息。总之，河川径流的长期过程，在一系列不规则的增减作用下，保持相对稳定的变化。在雨季，径流量随降水而增加，到了旱季，则逐渐减少。影响径流量大小的因素包括集水面积、暴雨强度、流域条件、到达观测点之前水流的距离及路径。</p>
+<p>水文过程线反映了降水通过水文气候过程转化成径流的过程。同时，水文过程线也描述了径流速率随时间的变化过程、径流速率峰值和径流总量。径流过程中的水文气候作用，指的是降雨到达地表后如何以不同方式到达河道。追溯单次降雨事件是评估多次降雨事件的基础。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B0%B4%E6%96%87%E8%BF%87%E7%A8%8B%E7%BA%BF/5886126">百度百科-水文过程线</a></p>
+<h1 id="WRF-Hydro研究"><a href="#WRF-Hydro研究" class="headerlink" title="WRF-Hydro研究"></a>WRF-Hydro研究</h1><p>首先，一维 (1D) 柱地表模型计算能量（显热和潜热、净辐射）和水分（冠层拦截、渗透、过度渗透、深层渗透）的垂直通量以及土壤热和水分状态。随后，使用时间步长加权方法 (Gochis) 将渗透过量、积水深度和土壤湿度从 1D LSM 网格（通常为 1-4 km 空间分辨率）分解为高分辨率（通常为 30-100 m）路由网格。和Chen，2003）并被传递到地下和地表水流地形路由模块。</p>
+<p>为了让模型读取soil_properties.nc.nc 文件，必须在编译时将 SPATIAL_SOIL 环境变量设置为 1。</p>
+<p>如果采用wrfout_d01*作为FORCING数据，分辨率可查看WRF中的namelist.input文件。DOMAIN文件夹中的wrfinput_d01、geo_em01文件的分辨率也可根据同种方法进行查看。</p>
+<p>问题：如何设置查看WRF-Hydro输出文件的分辨率？</p>
+<p>LDASOUT_DOMAIN1文件：通过ncdump命令打印查看global attributes中的proj4，该变量定义了LDASOUT_DOMAIN1文件的投影方式和坐标系统（不为经纬度坐标，需转换）。</p>
+<p>在 WRF-Hydro 中，子网格聚合&#x2F;分解（aggregation&#x2F;disaggregation）用于表示比本地陆地表面模型网格更精细的网格尺度上的陆上和地下流动过程。</p>
+<p>路由计算可以在相对高分辨率的陆地表面（例如，25米数字高程模型）上执行，而本地陆地表面模型可以在更大（例如，1公里）的网格尺寸上运行。</p>
+<p>AGGFACTR：子网格聚合因子，定义为子网格分辨率与原生土地模型分辨率的比率。不能为1.</p>
+<p>通过在模型名称列表文件中指定地面流或地下流路由选项并指定与陆地表面模型域文件尺寸（IX、JX）不同的地形网格域文件尺寸（IXRT、JXRT）来激活聚合&#x2F;分解例程。 ）。此外，模型子网格大小 (DXRT)、路由时间步长 (DTRT) 和整数除数 (AGGFACTRT) 决定聚合&#x2F;分解例程如何划分本机模型网格方块，所有这些都需要在模型 Hydro.namelist 文件中指定。<br>如果 IXRT&#x3D;IX、JXRT&#x3D;JX 和 AGGFACTRT&#x3D;1，聚合&#x2F;分解方案将被激活，但不会对陆地表面模型网格和地形路径网格之间的模型分辨率产生任何有效的变化。为 IXRT、JXRT 和 AGGFACTRT≠1 指定不同的值将有效改变陆地模型和地形布线网格之间的模型分辨率。如地表径流路由第 3.5 节中所述，<strong>DXRT 和 DTRT 必须始终根据路由网格指定，即使它们与本地陆地表面模型网格相同</strong>。</p>
+<p>DXRT：Specification of the routing grid cell spacing，布线网格单元间距的规范</p>
+<p>聚合因子 &#x3D; 4 的常规陆地表面模型网格内的路由子网格实施示例<br><img src="/image.png" alt="alt text"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/05/17/%E5%88%A9%E7%94%A8WRF-Hydro%E8%BF%9B%E8%A1%8C%E6%B2%B3%E6%B5%81%E6%B5%81%E9%87%8F%E4%BC%B0%E8%AE%A1%E6%88%96%E6%B4%AA%E6%B0%B4%E9%A2%84%E6%8A%A5%E7%9A%84%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          利用WRF-Hydro进行河流流量估计或洪水预报的相关论文整理一
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/05/14/WRF-Hydro%E4%B8%AD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86%E3%80%90%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB%E3%80%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">WRF-Hydro中可能使用到的各种数据整理【附原文分享】</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FNL%E5%92%8CGFS%E6%95%B0%E6%8D%AE%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">FNL和GFS数据的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B0%B4%E6%96%87%E8%BF%87%E7%A8%8B%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">水文过程线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WRF-Hydro%E7%A0%94%E7%A9%B6"><span class="nav-number">3.</span> <span class="nav-text">WRF-Hydro研究</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

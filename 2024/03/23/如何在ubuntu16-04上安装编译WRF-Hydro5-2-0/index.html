@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>如何在ubuntu16.04上安装编译wrf-hydro5.2.0 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="WRF-Hydro5.2.0软件安装WRF4.5.2tooklkitubuntu16.04netCDF" />
+  
+  
+  
+  
+  <meta name="description" content="如何在ubuntu16.04上安装WRF-Hydro 1. 安装包下载WRF-Hydro使用单独从WRF-Hydro官网的进行安装，不使用WRF目录下的hydro模块进行处理，原因是后者相比之下会少一些提供的模板和数据等。 软件下载地址  github下载：https:&#x2F;&#x2F;github.com&#x2F;NCAR&#x2F;wrf_hydro_nwm_public&#x2F;releases&#x2F;v5.2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在ubuntu16.04上安装编译WRF-Hydro5.2.0">
+<meta property="og:url" content="https://singyutang.github.io/2024/03/23/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF-Hydro5-2-0/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="如何在ubuntu16.04上安装WRF-Hydro 1. 安装包下载WRF-Hydro使用单独从WRF-Hydro官网的进行安装，不使用WRF目录下的hydro模块进行处理，原因是后者相比之下会少一些提供的模板和数据等。 软件下载地址  github下载：https:&#x2F;&#x2F;github.com&#x2F;NCAR&#x2F;wrf_hydro_nwm_public&#x2F;releases&#x2F;v5.2.0">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-22T20:10:52.000Z">
+<meta property="article:modified_time" content="2024-07-22T04:03:30.313Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="WRF-Hydro5.2.0">
+<meta property="article:tag" content="软件安装">
+<meta property="article:tag" content="WRF4.5.2">
+<meta property="article:tag" content="tooklkit">
+<meta property="article:tag" content="ubuntu16.04">
+<meta property="article:tag" content="netCDF">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-如何在ubuntu16-04上安装编译WRF-Hydro5-2-0" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      如何在ubuntu16.04上安装编译WRF-Hydro5.2.0
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/03/23/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF-Hydro5-2-0/" class="article-date">
+	  <time datetime="2024-03-22T20:10:52.000Z" itemprop="datePublished">三月 23, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如何在ubuntu16.04上安装WRF-Hydro</p>
+<h1 id="1-安装包下载"><a href="#1-安装包下载" class="headerlink" title="1. 安装包下载"></a>1. 安装包下载</h1><p>WRF-Hydro使用单独从<a target="_blank" rel="noopener" href="https://ral.ucar.edu/projects/wrf_hydro/model-code">WRF-Hydro官网</a>的进行安装，不使用WRF目录下的hydro模块进行处理，原因是后者相比之下会少一些提供的模板和数据等。</p>
+<p>软件下载地址</p>
+<ol>
+<li><p>github下载：<a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_nwm_public/releases/v5.2.0">https://github.com/NCAR/wrf_hydro_nwm_public&#x2F;releases&#x2F;v5.2.0</a></p>
+</li>
+<li><p>官网下载：<a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_nwm_public/archive/refs/tags/v5.2.0.tar.gz">https://github.com/NCAR/wrf_hydro_nwm_public&#x2F;archive&#x2F;refs&#x2F;tags&#x2F;v5.2.0.tar.gz</a></p>
+</li>
+</ol>
+<p>提示：在安装WRF-Hydro5.2.0之前，需要先<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">安装WRF4.5.0和WPS4.5.2</a>。此外这里为了方便安装，这里已经打包整理好了教程中所有可能使用到的数据、软件和所需库，可点击百度网盘分享链接进行下载，这里下载完成后教程后面提到的下载可无需进行再次下载。<br>百度网盘分享链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1PMmrUYXGhvfm8jhYl4SJ1Q">https://pan.baidu.com/s/1PMmrUYXGhvfm8jhYl4SJ1Q</a><br>提取码：6zwu</p>
+<h1 id="2-所需库下载"><a href="#2-所需库下载" class="headerlink" title="2. 所需库下载"></a>2. 所需库下载</h1><p>在教程<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0</a> 中netcdf安装版本为v4.1.3，该版本可通过一个安装包netcdf就将两者同时安装。安装更高版本的netcdf需要将c和fortran分开，先装netcdf-c才能装netcdf-fortran。所需安装库如下。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/madler/zlib/releases/download/v1.2.13/zlib-1.2.13.tar.gz">zlib-1.2.13</a></p>
+<p><a target="_blank" rel="noopener" href="https://hdf-wordpress-1.s3.amazonaws.com/wp-content/uploads/manual/HDF5/HDF5_1_14_3/src/hdf5-1.14.3.tar.gz">hdf5-1.14.3</a></p>
+<p><a target="_blank" rel="noopener" href="https://curl.se/download/curl-7.77.0.tar.gz">curl-7.77.0</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Unidata/netcdf-c/archive/refs/tags/v4.9.2.tar.gz">netcdf-c-4.9.2</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Unidata/netcdf-fortran/archive/refs/tags/v4.6.1.tar.gz">netcdf-fortran-4.6.1</a></p>
+<h1 id="3-安装及环境配置"><a href="#3-安装及环境配置" class="headerlink" title="3. 安装及环境配置"></a>3. 安装及环境配置</h1><h2 id="3-1-环境预配置及说明"><a href="#3-1-环境预配置及说明" class="headerlink" title="3.1 环境预配置及说明"></a>3.1 环境预配置及说明</h2><p>运用教程<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0</a>中的netcdf环境版本为v4.1.3太低，不能运行WRF-Hydro，因此需要新建另一个netcdf环境。这里列出<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">教程</a>安装WRF后设置的有关WRF的环境,，作为参照。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">############################################################## WRF BEGIN ################################</span><br><span class="hljs-built_in">export</span> DIR=/home/root123/coding/WRF/Build_WRF/LIBRARIES<br><span class="hljs-built_in">export</span> CC=gcc<br><span class="hljs-built_in">export</span> CXX=g++<br><span class="hljs-built_in">export</span> FC=gfortran<br><span class="hljs-built_in">export</span> FCFLAGS=-m64<br><span class="hljs-built_in">export</span> F77=gfortran<br><span class="hljs-built_in">export</span> FFLAGS=-m64<br><span class="hljs-built_in">export</span> CFLAGS=-m64<br><br><span class="hljs-comment">## --------------- grib2 ----------------------------------------</span><br><span class="hljs-comment"># 安装WRF库时设置变量LDFLAGS和CPPFLAGS如下两行，安装完成后可注释</span><br><span class="hljs-comment">#export LDFLAGS=-L$DIR/grib2/lib</span><br><span class="hljs-comment">#export CPPFLAGS=-I$DIR/grib2/include</span><br><span class="hljs-built_in">export</span> JASPERLIB=<span class="hljs-variable">$DIR</span>/grib2/lib<br><span class="hljs-built_in">export</span> JASPERINC=<span class="hljs-variable">$DIR</span>/grib2/include<br><br><span class="hljs-comment">##  -------------- MPICH 3.0.4--------------------------------------</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/mpich/bin:<span class="hljs-variable">$DIR</span>/mpich/lib:<span class="hljs-variable">$DIR</span>/mpich/include:<span class="hljs-variable">$PATH</span><br><br><span class="hljs-comment">## --------------  NETCDF BEGIN  -----------------------</span><br><span class="hljs-comment">## ------------WRF 4.5.2 | WPS -----&amp;&amp; -----netcdf 4.1.3---------</span><br><span class="hljs-built_in">export</span> NETCDF=<span class="hljs-variable">$DIR</span>/netcdf<br><span class="hljs-comment"># 安装WRF库时设置变量LDFLAGS和CPPFLAGS如上设置，安装完成后注释，这里设置的变量</span><br><span class="hljs-comment"># LDFLAGS和CPPFLAGS主要用于运行WRF脚本使用，在安装库时请注释</span><br><span class="hljs-built_in">export</span> LDFLAGS=-L<span class="hljs-variable">$NETCDF</span>/lib<br><span class="hljs-built_in">export</span> CPPFLAGS=-I<span class="hljs-variable">$NETCDF</span>/include<br><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/netcdf/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>:<span class="hljs-variable">$NETCDF</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> LIBS=<span class="hljs-string">&quot;-lnetcdf -lz&quot;</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>/lib/:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-variable">$NETCDF</span>/lib:<span class="hljs-variable">$&#123;LD_LIBRARY_PATH&#125;</span><br><span class="hljs-built_in">export</span> NETCDF_INC=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/include&quot;</span><br><span class="hljs-built_in">export</span> NETCDF_LIB=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/lib&quot;</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF_LIB</span>:<span class="hljs-variable">$NETCDF_INC</span>:<span class="hljs-variable">$PATH</span><br><br><span class="hljs-comment">## ------------NETCDF END  --------------------------------</span><br><br><span class="hljs-built_in">export</span> HDF5PATH=<span class="hljs-variable">$NETCDF</span><br><span class="hljs-built_in">export</span> WRF_DIR=~/coding/WRF/Build_WRF/WRFV4.5.2<br><span class="hljs-built_in">export</span> WRFIO_NCD_NO_LARGE_FILE_SUPPORT=1<br><br><br><span class="hljs-comment">################################################  WRF END #########################################</span><br></code></pre></td></tr></table></figure>
+
+<p>本教程仅针对WRF-Hydro的安装教程和环境配置，所对应的netcdf版本为v4.9.2。</p>
+<p>mpich库在教程<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0</a>中已经安装并设置好环境变量，环境变量CC、CXX、FC、FCFLAGS、F77、FFLAGS、CFLAGS已经设置完成。其他相关变量也保持不变。因此<strong>仅需针对环境变量中的netcdf部分</strong>进行修改更新即可，安装库和配置环境变量前请将环境变量中的netcdf4.1.3部分注释，也就是将下面所示部分注释掉。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">## ------------WRF 4.5.2 | WPS -----&amp;&amp; -----netcdf 4.1.3---------</span><br><span class="hljs-built_in">export</span> NETCDF=<span class="hljs-variable">$DIR</span>/netcdf<br><span class="hljs-comment"># 安装WRF库时设置变量LDFLAGS和CPPFLAGS如上设置，安装完成后注释，这里设置的变量</span><br><span class="hljs-comment"># LDFLAGS和CPPFLAGS主要用于运行WRF脚本使用，在安装库时请注释</span><br><span class="hljs-built_in">export</span> LDFLAGS=-L<span class="hljs-variable">$NETCDF</span>/lib<br><span class="hljs-built_in">export</span> CPPFLAGS=-I<span class="hljs-variable">$NETCDF</span>/include<br><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/netcdf/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>:<span class="hljs-variable">$NETCDF</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> LIBS=<span class="hljs-string">&quot;-lnetcdf -lz&quot;</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>/lib/:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-variable">$NETCDF</span>/lib:<span class="hljs-variable">$&#123;LD_LIBRARY_PATH&#125;</span><br><span class="hljs-built_in">export</span> NETCDF_INC=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/include&quot;</span><br><span class="hljs-built_in">export</span> NETCDF_LIB=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/lib&quot;</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF_LIB</span>:<span class="hljs-variable">$NETCDF_INC</span>:<span class="hljs-variable">$PATH</span><br></code></pre></td></tr></table></figure>
+
+<p>将WRF部分的netcdf4.1.3部分的环境变量设置完成后，即可开始安装。本次安装netcdf安装路径为<code>/usr/local/netcdf4</code>。</p>
+<h2 id="3-2-安装zlib"><a href="#3-2-安装zlib" class="headerlink" title="3.2 安装zlib"></a>3.2 安装zlib</h2><p>将下载好的zlib压缩包拖入<code>/usr/local/netcdf4/</code>中进行解压，进入解压后的zlib文件夹，打开终端，输入以下命令进行安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/usr/local/netcdf4<br>make<br>make check<br>make install<br></code></pre></td></tr></table></figure>
+
+<p>安装完成后会在<code>/usr/local/netcdf4</code>这个目录下生成三个文件夹，lib，include，share</p>
+<h2 id="3-3-安装hdf5"><a href="#3-3-安装hdf5" class="headerlink" title="3.3 安装hdf5"></a>3.3 安装hdf5</h2><p>将下载好的hdf5压缩包拖入<code>/usr/local/netcdf4/</code>中进行解压，进入解压后的hdf5文件夹，打开终端，输入以下命令进行安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/usr/local/netcdf4<br>make<br>make check<br>make install<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-4-安装curl"><a href="#3-4-安装curl" class="headerlink" title="3.4 安装curl"></a>3.4 安装curl</h2><p>打开文件<code>~/.bashrc</code>，设置环境变量信息。设置以下两个环境变量前请将前面出现过的这两个变量注释掉。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 设置以下两个环境变量前请将前面出现过的这两个变量注释掉</span><br><span class="hljs-built_in">export</span> LDFLAGS=-L/usr/local/netcdf4/lib<br><span class="hljs-built_in">export</span> CPPFLAGS=-I/usr/local/netcdf4/include<br></code></pre></td></tr></table></figure>
+
+<p>将下载好的curl压缩包拖入<code>/usr/local/netcdf4/</code>中进行解压，进入解压后的curl文件夹，打开终端，输入以下命令进行安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/usr/local/netcdf4<br>make<br>make check<br>make install<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-5-安装netcdf-c"><a href="#3-5-安装netcdf-c" class="headerlink" title="3.5 安装netcdf-c"></a>3.5 安装netcdf-c</h2><p>将下载好的netcdf-c压缩包拖入<code>/usr/local/netcdf4/</code>中进行解压，进入解压后的netcdf-c文件夹，打开终端，输入以下命令进行安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/usr/local/netcdf4 --disable-dap<br>make<br>make check<br>make install<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-6-安装netcdf-fortran"><a href="#3-6-安装netcdf-fortran" class="headerlink" title="3.6 安装netcdf-fortran"></a>3.6 安装netcdf-fortran</h2><p>打开文件<code>~/.bashrc</code>，设置环境变量信息。设置以下环境变量前请将前面出现过的该变量注释掉。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 设置以下两个环境变量前请将前面出现过的这两个变量注释掉</span><br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=/usr/local/netcdf4/lib:<span class="hljs-variable">$&#123;LD_LIBRARY_PATH&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>将</p>
+<p>将下载好的netcdf-fortran压缩包拖入<code>/usr/local/netcdf4/</code>中进行解压，进入解压后的netcdf-fortran文件夹，打开终端，输入以下命令进行安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/usr/local/netcdf4 --disable-dap<br>make<br>make check<br>make install<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-7-环境变量设置"><a href="#3-7-环境变量设置" class="headerlink" title="3.7 环境变量设置"></a>3.7 环境变量设置</h2><p>添加环境变量如下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> NETCDF=/usr/local/netcdf4<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>:<span class="hljs-variable">$NETCDF</span>/bin:<span class="hljs-variable">$PATH</span><br></code></pre></td></tr></table></figure>
+
+<p>此时netcdf v4.9.2安装完毕。通过<code>source ～/.bashrc</code>命令更新环境变量。通过<code>nc-config --all</code>查看安装信息和netcdf版本。该环境可支持WRF-Hydro的运行，也似乎支持WRF的运行。</p>
+<h2 id="3-8环境变量代码优化"><a href="#3-8环境变量代码优化" class="headerlink" title="*3.8环境变量代码优化"></a>*3.8环境变量代码优化</h2><p>通过本教程安装了netcdf4.9.2用以编译运行WRF-Hydro，但是通过教程<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0</a>可以知道系统中还存在netcdf4.1.3用于WRF的运行，为了方便两者的切换而不是频繁注释，特此定义了一个bool变量<code>NETCDF_TYPE</code>用以切换。<code>NETCDF_TYPE</code>变量控制netcdf版本，如果NETCDF_TYPE&#x3D;1,则对应netcdf4.1.3；如果<code>NETCDF_TYPE=2</code>,则对应netcdf4.9.2。</p>
+<p>*注意1：但是好像NETCDF_TYPE&#x3D;1时，系统中的netcdf会指向<code>/usr/include</code>，netcdf v4.4，原因尚不清楚，但不影响使用。</p>
+<p>*注意2：在编译运行WRF和WRF-Hydro时，可直接设置<code>NETCDF_TYPE=2</code>，也能保证二者运行。</p>
+<p>完整WRF环境变量设置如下，与上面用以参照的环境变量相比，只更改了<strong>NETCDF</strong>部分的环境变量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">############################################################## WRF BEGIN ################################</span><br><span class="hljs-built_in">export</span> DIR=/home/root123/coding/WRF/Build_WRF/LIBRARIES<br><span class="hljs-built_in">export</span> CC=gcc<br><span class="hljs-built_in">export</span> CXX=g++<br><span class="hljs-built_in">export</span> FC=gfortran<br><span class="hljs-built_in">export</span> FCFLAGS=-m64<br><span class="hljs-built_in">export</span> F77=gfortran<br><span class="hljs-built_in">export</span> FFLAGS=-m64<br><span class="hljs-built_in">export</span> CFLAGS=-m64<br><br><span class="hljs-comment">## --------------- grib2 ----------------------------------------</span><br><span class="hljs-built_in">export</span> LDFLAGS=-L<span class="hljs-variable">$DIR</span>/grib2/lib<br><span class="hljs-built_in">export</span> CPPFLAGS=-I<span class="hljs-variable">$DIR</span>/grib2/include<br><span class="hljs-built_in">export</span> JASPERLIB=<span class="hljs-variable">$DIR</span>/grib2/lib<br><span class="hljs-built_in">export</span> JASPERINC=<span class="hljs-variable">$DIR</span>/grib2/include<br><br><span class="hljs-comment">##  -------------- MPICH 3.0.4--------------------------------------</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/mpich/bin:<span class="hljs-variable">$DIR</span>/mpich/lib:<span class="hljs-variable">$DIR</span>/mpich/include:<span class="hljs-variable">$PATH</span><br><br><span class="hljs-comment">## --------------  NETCDF BEGIN  -----------------------</span><br><span class="hljs-comment">## 运行WRF和WPS时使用netcdf 4.1.3，运行WRF_Hydro时使用netcdf4.9.2。 ！！！！！！只需要更改NETCDF_TYPE变量即可。</span><br><span class="hljs-comment"># 定义NETCDF_TYPE变量控制netcdf版本，如果NETCDF_TYPE=1,则对应netcdf4.1.3；如果NETCDF_TYPE=2,则对应netcdf4.9.2。</span><br>NETCDF_TYPE=1<br><span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF_TYPE</span>&quot;</span> -eq 1 ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-comment">## ------------WRF 4.5.2 | WPS -----&amp;&amp; -----netcdf 4.1.3---------</span><br>    <span class="hljs-built_in">export</span> NETCDF=<span class="hljs-variable">$DIR</span>/netcdf<br>    <span class="hljs-built_in">export</span> LDFLAGS=-L<span class="hljs-variable">$NETCDF</span>/lib<br>    <span class="hljs-built_in">export</span> CPPFLAGS=-I<span class="hljs-variable">$NETCDF</span>/include<br>    <span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/netcdf/bin:<span class="hljs-variable">$PATH</span><br>    <span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>:<span class="hljs-variable">$NETCDF</span>/bin:<span class="hljs-variable">$PATH</span><br>    <span class="hljs-built_in">export</span> LIBS=<span class="hljs-string">&quot;-lnetcdf -lz&quot;</span><br>    <span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>/lib/:<span class="hljs-variable">$PATH</span><br>    <span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-variable">$NETCDF</span>/lib:<span class="hljs-variable">$&#123;LD_LIBRARY_PATH&#125;</span><br>    <span class="hljs-built_in">export</span> NETCDF_INC=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/include&quot;</span><br>    <span class="hljs-built_in">export</span> NETCDF_LIB=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/lib&quot;</span><br>    <span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF_LIB</span>:<span class="hljs-variable">$NETCDF_INC</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF_TYPE</span>&quot;</span> -eq 2 ]; <span class="hljs-keyword">then</span><br>    <span class="hljs-comment">## ------------WRF-Hydro 5.2.0 ------&amp;&amp; ----netcdf 4.9.2---------</span><br>    <span class="hljs-built_in">export</span> LDFLAGS=-L/usr/local/netcdf4/lib<br>    <span class="hljs-built_in">export</span> CPPFLAGS=-I/usr/local/netcdf4/include<br>    <span class="hljs-built_in">export</span> LD_LIBRARY_PATH=/usr/local/netcdf4/lib:<span class="hljs-variable">$&#123;LD_LIBRARY_PATH&#125;</span><br>    <span class="hljs-built_in">export</span> NETCDF=/usr/local/netcdf4<br>    <span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>:<span class="hljs-variable">$NETCDF</span>/bin:<span class="hljs-variable">$PATH</span><br>    <span class="hljs-built_in">export</span> NETCDF_INC=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/include&quot;</span><br>    <span class="hljs-built_in">export</span> NETCDF_LIB=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/lib&quot;</span><br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment">## ------------NETCDF END  --------------------------------</span><br><span class="hljs-comment"># ---------------------------------------------------------------------------------</span><br><br><span class="hljs-built_in">export</span> HDF5PATH=<span class="hljs-variable">$NETCDF</span><br><span class="hljs-built_in">export</span> WRF_DIR=~/coding/WRF/Build_WRF/WRFV4.5.2<br><span class="hljs-built_in">export</span> WRFIO_NCD_NO_LARGE_FILE_SUPPORT=1<br><span class="hljs-comment">################################################  WRF END #########################################</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="4-构建、编译WRF-Hydro"><a href="#4-构建、编译WRF-Hydro" class="headerlink" title="4. 构建、编译WRF-Hydro"></a>4. 构建、编译WRF-Hydro</h1><p><em>根据下载安装包下中<code>/wrf_hydro_nwm_public/trunk/NDHMS</code>下的README.build.txt文件进行编译。</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure<br>./compile_offline_Noah.sh setEnvar.sh<br>OR<br>./compile_offline_NoahMP.sh setEnvar.sh<br></code></pre></td></tr></table></figure>
+
+<p>输出结果包含<code>Make was successful</code>则说明编译运行成功。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43727319/article/details/119491592">ubuntu学习_2：ubuntu中安装netcdf4教程</a></p>
+<h1 id="附加网址推荐"><a href="#附加网址推荐" class="headerlink" title="附加网址推荐"></a>附加网址推荐</h1><p><a target="_blank" rel="noopener" href="https://www.zlib.net/">zlib官网</a><br><a target="_blank" rel="noopener" href="https://github.com/madler/zlib/releases">zlib github下载</a><br><a target="_blank" rel="noopener" href="https://curl.se/download/">curl官网下载</a><br><a target="_blank" rel="noopener" href="https://www.unidata.ucar.edu/software/netcdf/">netcdf官网</a><br><a target="_blank" rel="noopener" href="https://github.com/Unidata/netcdf-c/releases">netcdf-c github下载</a><br><a target="_blank" rel="noopener" href="https://github.com/Unidata/netcdf-fortran/releases">netcdf-fortran github下载</a><br><a target="_blank" rel="noopener" href="https://portal.hdfgroup.org/downloads/index.html">hdf5官网下载</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/netCDF/" rel="tag">netCDF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tooklkit/" rel="tag">tooklkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/25/%E5%85%B3%E4%BA%8E%E6%96%87%E7%8C%AE%E3%80%90%E4%BD%BF%E7%94%A8%E9%9B%86%E6%88%90WRF-Hydro%E6%A8%A1%E6%8B%9F%E9%A2%84%E6%B5%8B21%E4%B8%96%E7%BA%AA%E4%B8%AD%E5%8F%B6%E7%BE%8E%E5%9B%BD%E4%B8%9C%E5%8C%97%E9%83%A8%E6%9E%81%E7%AB%AF%E6%B0%B4%E6%B5%81%E5%92%8C%E5%86%85%E9%99%86%E6%B4%AA%E6%B0%B4%E7%9A%84%E5%8F%98%E5%8C%96%E3%80%91%E7%9A%84%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          关于文献【使用集成WRF-Hydro模拟预测21世纪中叶美国东北部极端水流和内陆洪水的变化】的参考文献
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E5%8C%85%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">1. 安装包下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%89%80%E9%9C%80%E5%BA%93%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">2. 所需库下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">3. 安装及环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E7%8E%AF%E5%A2%83%E9%A2%84%E9%85%8D%E7%BD%AE%E5%8F%8A%E8%AF%B4%E6%98%8E"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 环境预配置及说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%AE%89%E8%A3%85zlib"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 安装zlib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%AE%89%E8%A3%85hdf5"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 安装hdf5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E5%AE%89%E8%A3%85curl"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 安装curl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-%E5%AE%89%E8%A3%85netcdf-c"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 安装netcdf-c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E5%AE%89%E8%A3%85netcdf-fortran"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 安装netcdf-fortran</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.7.</span> <span class="nav-text">3.7 环境变量设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96"><span class="nav-number">3.8.</span> <span class="nav-text">*3.8环境变量代码优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E6%9E%84%E5%BB%BA%E3%80%81%E7%BC%96%E8%AF%91WRF-Hydro"><span class="nav-number">4.</span> <span class="nav-text">4. 构建、编译WRF-Hydro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%E7%BD%91%E5%9D%80%E6%8E%A8%E8%8D%90"><span class="nav-number">6.</span> <span class="nav-text">附加网址推荐</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

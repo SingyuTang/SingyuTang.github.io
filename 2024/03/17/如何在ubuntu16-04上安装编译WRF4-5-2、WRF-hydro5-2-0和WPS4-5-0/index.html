@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>如何在ubuntu16.04上安装编译wrf4.5.2和wps4.5.0 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="toolkit软件安装WRF4.5.2WPS4.5.0ubuntu16.04" />
+  
+  
+  
+  
+  <meta name="description" content="为了方便安装，这里已经搜集了所有教程中可能使用到的数据、软件和所需库，可点击百度网盘分享链接进行下载，这里下载完成后教程后面提到的下载可无需进行再次下载。百度网盘分享链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1gdu_VTehi5VX6XXknZMCLw提取码：rbpn 1. 环境测试在~&#x2F;coding文件夹下创建文件夹WRF,进入该文件夹创建两个文件夹，分别为Build_WRF、TE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0">
+<meta property="og:url" content="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="为了方便安装，这里已经搜集了所有教程中可能使用到的数据、软件和所需库，可点击百度网盘分享链接进行下载，这里下载完成后教程后面提到的下载可无需进行再次下载。百度网盘分享链接：https:&#x2F;&#x2F;pan.baidu.com&#x2F;s&#x2F;1gdu_VTehi5VX6XXknZMCLw提取码：rbpn 1. 环境测试在~&#x2F;coding文件夹下创建文件夹WRF,进入该文件夹创建两个文件夹，分别为Build_WRF、TE">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-17T15:23:07.000Z">
+<meta property="article:modified_time" content="2024-07-22T04:03:09.763Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="toolkit">
+<meta property="article:tag" content="软件安装">
+<meta property="article:tag" content="WRF4.5.2">
+<meta property="article:tag" content="WPS4.5.0">
+<meta property="article:tag" content="ubuntu16.04">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-如何在ubuntu16-04上安装编译WRF4-5-2、WRF-hydro5-2-0和WPS4-5-0" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/" class="article-date">
+	  <time datetime="2024-03-17T15:23:07.000Z" itemprop="datePublished">三月 17, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了方便安装，这里已经搜集了所有教程中可能使用到的数据、软件和所需库，可点击百度网盘分享链接进行下载，这里下载完成后教程后面提到的下载可无需进行再次下载。<br>百度网盘分享链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1gdu_VTehi5VX6XXknZMCLw">https://pan.baidu.com/s/1gdu_VTehi5VX6XXknZMCLw</a><br>提取码：rbpn</p>
+<h1 id="1-环境测试"><a href="#1-环境测试" class="headerlink" title="1. 环境测试"></a>1. 环境测试</h1><p>在<code>~/coding</code>文件夹下创建文件夹<code>WRF</code>,进入该文件夹创建两个文件夹，分别为<code>Build_WRF</code>、<code>TESTS</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/coding/WRF<br><span class="hljs-built_in">mkdir</span> Build_WRF TESTS<br><span class="hljs-built_in">cd</span> TESTS<br></code></pre></td></tr></table></figure>
+
+<p>运行一些测试来验证Fortran编译器和C编译器是否可用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install csh gfortran m4 build-essential<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">which</span> gfortran<br><span class="hljs-built_in">which</span> cpp<br><span class="hljs-built_in">which</span> gcc<br>gcc --version<br></code></pre></td></tr></table></figure>
+
+<p>下载测试包<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_tests.tar">Fortran and C Tests Tar File</a></p>
+<p>将测试包解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -xf Fortran_C_tests.tar<br></code></pre></td></tr></table></figure>
+
+<p>共有7项测试，请一次一次完成</p>
+<p><strong>Test #1:</strong>  TEST_1_fortran_only_fixed.f  </p>
+<p><em>在命令行输入以下内容:</em>  </p>
+<blockquote>
+<p>gfortran TEST_1_fortran_only_fixed.f</p>
+</blockquote>
+<p><em>现在输入:</em></p>
+<blockquote>
+<p>.&#x2F;a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS test 1 fortran only fixed format</p>
+</blockquote>
+<p><strong>Test #2:</strong> TEST_2_fortran_only_free.f90  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gfortran TEST_2_fortran_only_free.f90</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>.&#x2F;a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>Assume Fortran 2003: has FLUSH, ALLOCATABLE, derived type, and ISO C Binding<br>SUCCESS test 2 fortran only free format</p>
+</blockquote>
+<p><strong>Test #3:</strong> <u>C</u>: TEST_3_c_only.c  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gcc TEST_3_c_only.c</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>.&#x2F;a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS test 3 c only</p>
+</blockquote>
+<p><strong>Test #4:</strong> : TEST_4_fortran+c_c.c, and TEST_4_fortran+x_f.f90  </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>gcc -c -m64 TEST_4_fortran+c_c.c</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>gfortran -c -m64 TEST_4_fortran+c_f.f90</p>
+</blockquote>
+<p>*<em>然后输入:</em></p>
+<blockquote>
+<p>gfortran -m64 TEST_4_fortran+c_f.o TEST_4_fortran+c_c.o</p>
+</blockquote>
+<p><em>然后输入:</em></p>
+<blockquote>
+<p>.&#x2F;a.out</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx &#x3D; 2.00 and ii &#x3D; 1<br>SUCCESS test 4 fortran calling c</p>
+</blockquote>
+<p><strong>Test #5:</strong> csh </p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>.&#x2F;TEST_csh.csh</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS csh test</p>
+</blockquote>
+<p><strong>Test #6:</strong> perl</p>
+<p><em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>.&#x2F;TEST_perl.pl</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS perl test</p>
+</blockquote>
+<p><strong>Test #7:</strong> sh</p>
+<p> <em>在命令行输入以下内容:</em></p>
+<blockquote>
+<p>.&#x2F;TEST_sh.sh</p>
+</blockquote>
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>SUCCESS sh test</p>
+</blockquote>
+<h1 id="2-环境设置"><a href="#2-环境设置" class="headerlink" title="2. 环境设置"></a>2. 环境设置</h1><p>在~&#x2F;.bashrc中添加以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">###################  WRF 4.5.2 + WPS 4.5.0  ############################</span><br><br><span class="hljs-built_in">export</span> DIR=/home/root123/coding/WRF/Build_WRF/LIBRARIES<br><span class="hljs-built_in">export</span> CC=gcc<br><span class="hljs-built_in">export</span> CXX=g++<br><span class="hljs-built_in">export</span> FC=gfortran<br><span class="hljs-built_in">export</span> FCFLAGS=-m64<br><span class="hljs-built_in">export</span> F77=gfortran<br><span class="hljs-built_in">export</span> FFLAGS=-m64<br><span class="hljs-built_in">export</span> LDFLAGS=-L<span class="hljs-variable">$DIR</span>/grib2/lib<br><span class="hljs-built_in">export</span> CPPFLAGS=-I<span class="hljs-variable">$DIR</span>/grib2/include<br><span class="hljs-built_in">export</span> CFLAGS=-m64<br><span class="hljs-built_in">export</span> JASPERLIB=<span class="hljs-variable">$DIR</span>/grib2/lib<br><span class="hljs-built_in">export</span> JASPERINC=<span class="hljs-variable">$DIR</span>/grib2/include<br><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/netcdf/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> NETCDF=<span class="hljs-variable">$DIR</span>/netcdf/<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$DIR</span>/mpich/bin:<span class="hljs-variable">$DIR</span>/mpich/lib:<span class="hljs-variable">$DIR</span>/mpich/include:<span class="hljs-variable">$PATH</span><br><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>:<span class="hljs-variable">$NETCDF</span>/bin:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> LIBS=<span class="hljs-string">&quot;-lnetcdf -lz&quot;</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF</span>/lib/:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> LD_LIBRARY_PATH=<span class="hljs-variable">$NETCDF</span>/lib:<span class="hljs-variable">$&#123;LD_LIBRARY_PATH&#125;</span><br><span class="hljs-built_in">export</span> NETCDF_INC=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/include&quot;</span><br><span class="hljs-built_in">export</span> NETCDF_LIB=<span class="hljs-string">&quot;<span class="hljs-variable">$NETCDF</span>/lib&quot;</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$NETCDF_LIB</span>:<span class="hljs-variable">$NETCDF_INC</span>:<span class="hljs-variable">$PATH</span><br><br><span class="hljs-built_in">export</span> WRF_DIR=~/coding/WRF/Build_WRF/WRFV4.5.2<br><span class="hljs-built_in">export</span> WRFIO_NCD_NO_LARGE_FILE_SUPPORT=1<br><span class="hljs-built_in">export</span> HDF5PATH=<span class="hljs-variable">$NETCDF</span><br></code></pre></td></tr></table></figure>
+
+<p>更改完成后，打开终端输入<code>source ~/.bashrc</code></p>
+<h1 id="3-构建库"><a href="#3-构建库" class="headerlink" title="3. 构建库"></a>3. 构建库</h1><h2 id="3-0-下载所需库"><a href="#3-0-下载所需库" class="headerlink" title="3.0 下载所需库"></a>3.0 下载所需库</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/">Index of &#x2F;wrf&#x2F;OnLineTutorial&#x2F;compile_tutorial&#x2F;tar_files</a></p>
+<p>需要下载的库如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">netcdf-4.1.3.tar.gz<br>mpich-3.0.4.tar.gz<br>zlib-1.2.7.tar.gz<br>libpng-1.2.50.tar.gz<br>jasper-1.900.1.tar.gz<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> Build_WRF<br><span class="hljs-built_in">mkdir</span> LIBRARIES<br>LIBRARIES<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-1-NetCDF"><a href="#3-1-NetCDF" class="headerlink" title="3.1 NetCDF"></a>3.1 NetCDF</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装netcdf-c</span><br>tar xzvf netcdf-4.1.3.tar.gz     <span class="hljs-comment">#or just .tar if no .gz present</span><br><span class="hljs-built_in">cd</span> netcdf-4.1.3<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/netcdf --disable-dap --disable-netcdf-4 --disable-shared<br>make<br>make install<br><span class="hljs-built_in">cd</span> ..<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-2-MPICH"><a href="#3-2-MPICH" class="headerlink" title="3.2 MPICH"></a>3.2 MPICH</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar xzvf mpich-3.0.4.tar.gz     <span class="hljs-comment">#or just .tar if no .gz present</span><br><span class="hljs-built_in">cd</span> mpich-3.0.4<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/mpich<br>make<br>make install<br><span class="hljs-built_in">cd</span> ..<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-3-zlib"><a href="#3-3-zlib" class="headerlink" title="3.3 zlib"></a>3.3 zlib</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar xzvf zlib-1.2.11.tar.gz     <span class="hljs-comment">#or just .tar if no .gz present</span><br><span class="hljs-built_in">cd</span> zlib-1.2.11<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/grib2<br>make<br>make install<br><span class="hljs-built_in">cd</span> ..<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-4-libpng"><a href="#3-4-libpng" class="headerlink" title="3.4 libpng"></a>3.4 libpng</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar xzvf libpng-1.2.50.tar.gz     <span class="hljs-comment">#or just .tar if no .gz present</span><br><span class="hljs-built_in">cd</span> libpng-1.2.50<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/grib2<br>make<br>make install<br><span class="hljs-built_in">cd</span> ..<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-5-Jasper"><a href="#3-5-Jasper" class="headerlink" title="3.5 Jasper"></a>3.5 Jasper</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar xzvf jasper-1.900.1.tar.gz     <span class="hljs-comment">#or just .tar if no .gz present</span><br><span class="hljs-built_in">cd</span> jasper-1.900.1<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/grib2<br>make<br>make install<br><span class="hljs-built_in">cd</span> ..<br></code></pre></td></tr></table></figure>
+
+<h1 id="4-库兼容性测试"><a href="#4-库兼容性测试" class="headerlink" title="4. 库兼容性测试"></a>4. 库兼容性测试</h1><p>下载测试包<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compile_tutorial/tar_files/Fortran_C_NETCDF_MPI_tests.tar">Fortran_C_NETCDF_MPI_tests.tar</a></p>
+<p><strong><u>Test #1</u></strong>: Fortran + C + NetCDF</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> <span class="hljs-variable">$&#123;NETCDF&#125;</span>/include/netcdf.inc .<br><br>gfortran -c 01_fortran+c+netcdf_f.f<br>gcc -c 01_fortran+c+netcdf_c.c<br>gfortran 01_fortran+c+netcdf_f.o 01_fortran+c+netcdf_c.o -L<span class="hljs-variable">$&#123;NETCDF&#125;</span>/lib -lnetcdff -lnetcdf<br>./a.out<br></code></pre></td></tr></table></figure>
+
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx &#x3D; 2.00 and ii &#x3D; 1<br>SUCCESS test 1 fortran + c + netcdf</p>
+</blockquote>
+<p><strong><u>Test #2</u></strong>: Fortran + C + NetCDF + MPI</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> <span class="hljs-variable">$&#123;NETCDF&#125;</span>/include/netcdf.inc .<br><br>mpif90 -c 02_fortran+c+netcdf+mpi_f.f<br>mpicc -c 02_fortran+c+netcdf+mpi_c.c<br>mpif90 02_fortran+c+netcdf+mpi_f.o 02_fortran+c+netcdf+mpi_c.o -L<span class="hljs-variable">$&#123;NETCDF&#125;</span>/lib -lnetcdff -lnetcdf<br>mpirun ./a.out<br></code></pre></td></tr></table></figure>
+
+<p><em>以下内容将出现在屏幕上:</em></p>
+<blockquote>
+<p>C function called by Fortran<br>Values are xx &#x3D; 2.00 and ii &#x3D; 1<br>status &#x3D; 2<br>SUCCESS test 2 fortran + c + netcdf + mpi</p>
+</blockquote>
+<h1 id="5-构建WRF"><a href="#5-构建WRF" class="headerlink" title="5. 构建WRF"></a>5. 构建WRF</h1><p>在<code>Build_WRF</code>文件夹中解压<code>WRFv4.5.2.tar.gz</code>，解压后文件夹名为<code>WRFV4.5.2</code>，进入该文件夹。</p>
+<p>编译前使用命令<code>uname -a</code>查看电脑详细信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> WRFV4.5.2<br>./configure<br></code></pre></td></tr></table></figure>
+
+<p>这里注意使用<code>./configure</code>命令编译WRF时，从以下32、33、34中选择，推荐34；</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-number">32</span>. (serial) <span class="hljs-number">33</span>. (smpar) <span class="hljs-number">34</span>. (dmpar) <span class="hljs-number">35</span>. (dm+sm) GNU (gfortran/gcc)<br></code></pre></td></tr></table></figure>
+
+<p><code>Compile for nesting?</code>选择<code>1=basic</code></p>
+<p>出现如下则说明安装成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Configuration successful! <br>------------------------------------------------------------------------<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs subunit"><span class="hljs-keyword">Testing </span>for NetCDF, C and Fortran compiler<br><br>This installation of NetCDF is 64-bit<br>                 C compiler is 64-bit<br>           Fortran compiler is 64-bit<br>              It will build in 64-bit<br></code></pre></td></tr></table></figure>
+
+<p>编译 <code>em_real</code> 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">./compile em_real &gt;&amp; log.compile<br><span class="hljs-built_in">cd</span> ..<br></code></pre></td></tr></table></figure>
+
+<p>编译成功<code>log.compile</code>会出现如下类似内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bansh">---&gt;                  Executables successfully built                  &lt;---<br> <br>-rwxrwxr-x 1 root123 root123 45400664 3月  21 10:49 main/ndown.exe<br>-rwxrwxr-x 1 root123 root123 45286000 3月  21 10:49 main/real.exe<br>-rwxrwxr-x 1 root123 root123 44823216 3月  21 10:49 main/tc.exe<br>-rwxrwxr-x 1 root123 root123 49968288 3月  21 10:48 main/wrf.exe<br> <br>==========================================================================<br></code></pre></td></tr></table></figure>
+
+<p> 编译成功后会在<code>main</code>文件夹内出现以下文件，同时也可根据是否生成exe文件来检查是否编译成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">wrf.exe<br>real.exe<br>ndown.exe<br>tc.exe<br></code></pre></td></tr></table></figure>
+
+<h1 id="6-构建WPS"><a href="#6-构建WPS" class="headerlink" title="6. 构建WPS"></a>6. 构建WPS</h1><p>在<code>Build_WRF</code>文件夹中解压<code>WPS-master.zip</code>，解压后文件夹更改为<code>WPSV4.5.0</code>，进入该文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> WPSV4.5.0<br>./clean<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/netcdf CC=mpicc CXX=mpicxx FC=mpif90<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">^M: Command not found.<br>^M: Command not found.<br><span class="hljs-keyword">then</span>^M: Command not found.<br>endif^M: Command not found.<br>^M: Command not found.<br><span class="hljs-built_in">set</span>: Syntax Error.<br></code></pre></td></tr></table></figure>
+
+<p>或执行<code>./configure</code>出现错误<code>bash: ./configure: /bin/sh^M: 解释器错误: 没有那个文件或目录</code>。</p>
+<p>解决办法</p>
+<p>进入WPSV4.5.0文件夹内输入以下命令即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -i <span class="hljs-string">&#x27;s/\r$//&#x27;</span> clean<br>sed -i <span class="hljs-string">&#x27;s/\r$//&#x27;</span> configure<br></code></pre></td></tr></table></figure>
+
+<p>再输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">./clean<br>./configure --prefix=<span class="hljs-variable">$DIR</span>/netcdf CC=mpicc CXX=mpicxx FC=mpif90<br></code></pre></td></tr></table></figure>
+
+<p>编译WPS</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -i <span class="hljs-string">&#x27;s/\r$//&#x27;</span> compile<br>./compile &gt;&amp; log.compile<br></code></pre></td></tr></table></figure>
+
+<p>如果构建成功，<code>WPSV4.5.0</code>目录下应该存在3个可执行文件，链接到相应的<code>src/</code>目录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">geogrid.exe -&gt; geogrid/src/geogrid.exe<br>ungrib.exe -&gt; ungrib/src/ungrib.exe<br>metgrid.exe -&gt; metgrid/src/metgrid.exe<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-静态地理数据"><a href="#7-静态地理数据" class="headerlink" title="7. 静态地理数据"></a>7. 静态地理数据</h1><ol>
+<li><p>选择 <a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz">Download Highest Resolution of each Mandatory Field</a> 下载静态地理数据，这些是运行WPS和WRF所需的所有强制字段，包含每个必填字段的最高分辨率这是最常用的字段，建议用于大多数应用。如对其他字段感兴趣，可以直接访问<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html">WPS V4地理静态数据下载页面</a>进行查看和下载。</p>
+</li>
+<li><p>下载完成后，解压完成后的文件名也许为<code>geog</code>。将文件重命名为<code>WPS_GEOG</code>。</p>
+</li>
+<li><p>在<code>Build_WRF</code>文件夹下新建文件夹<code>WPS_Data</code>，将解压后的文件夹<code>WPS_GEOG</code>移动到<code>./WPS_Data/WPS_Geographical_Static_Data/</code>目录下。</p>
+</li>
+<li><p>修改<code>namelist.wps</code>文件中<code>&amp;geogrid</code>部分的<code>geog_data_path</code>变量，<code>geog_data_path=&#39;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG&#39;</code>。</p>
+<p>*<em>为了确保不出错，最好将高分辨率（<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_high_res_mandatory.tar.gz">Highest Resolution</a>）数据和全部数据（<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/src/wps_files/geog_complete.tar.gz">geog_complete</a>)都下载好的数据放入上面创建的<code>WPS_GEOG</code>文件夹中。</em></p>
+</li>
+</ol>
+<h1 id="8-实时气象数据"><a href="#8-实时气象数据" class="headerlink" title="8. 实时气象数据"></a>8. 实时气象数据</h1><p>数据下载地址：<a target="_blank" rel="noopener" href="https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/">https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/</a></p>
+<p>也可使用wget命令下载GFS数据，以2024-03-12: 00时数据为例，该数据时间分辨率为6h（21600s）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20240312/00/atmos/gfs.t00z.pgrb2.0p25.f000<br><br>wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20230312/00/atmos/gfs.t00z.pgrb2.0p25.f003<br><br>wget https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/gfs.20230312/00/atmos/gfs.t00z.pgrb2.0p25.f006<br></code></pre></td></tr></table></figure>
+
+<p>在<code>Build_WRF</code>文件夹下创建文件夹<code>DATA</code>，将下载的GFS数据移动到<code>DATA</code>文件夹下。</p>
+<h1 id="9-运行WPS和WRF"><a href="#9-运行WPS和WRF" class="headerlink" title="9. 运行WPS和WRF"></a>9. 运行WPS和WRF</h1><h2 id="9-1-运行WPS"><a href="#9-1-运行WPS" class="headerlink" title="9.1 运行WPS"></a>9.1 运行WPS</h2><p>进入<code>WPSV4.5.0</code>文件夹内，运行WPS。在运行之前，修改namelist.wps中的<code>geog-data_path</code>变量，注意一定要是绝对路径，不包含<code>~</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">geog_data_path=<span class="hljs-string">&#x27;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG</span><br></code></pre></td></tr></table></figure>
+
+<p>另外将namelist.wps文件中的内容替换为以下内容，以GFS文件<code>gfs.t00z.pgrb2.0p25.f000</code>为例。该文件为2024-03-12: 00时间点的<a target="_blank" rel="noopener" href="https://www.ftp.ncep.noaa.gov/data/nccf/com/gfs/prod/">气象数据</a>，时间分辨率为6h（21600s）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs textile">&amp;share<br> wrf_core = &#x27;ARW&#x27;,<br> max_dom = 2,<br> start_date = &#x27;2024-03-12_00:00:00&#x27;,&#x27;2024-03-12_00:00:00&#x27;,<br> end_date   = &#x27;2024-03-12_00:00:00&#x27;,&#x27;2024-03-12_00:00:00&#x27;,<br> interval_seconds = 21600,<br> io_form_geogrid = 2<br>/<br><br>&amp;geogrid<br> parent_id         =   1,   1,<br> parent_grid_ratio =   1,   3,<br> i_parent_start    =   1,  10,<br> j_parent_start    =   1,  20,<br> e_we              =  150, 220,<br> e_sn              =  130, 214,<br> geog_data_res = &#x27;default&#x27;,&#x27;default&#x27;,<br> dx = 15000,<br> dy = 15000,<br> map_proj = &#x27;lambert&#x27;,<br> ref_lat   =  28.00,<br> ref_lon   =  104.00,<br> truelat1  =  28.0,<br> truelat2  =  28.0,<br> stand_lon =  104.0,<br> geog_data_path = &#x27;/home/root123/coding/WRF/Build_WRF/WPS_Data/WPS_Geographical_Static_Data/WPS_GEOG&#x27;<br>/<br><br>&amp;ungrib<br> out_format = &#x27;WPS&#x27;,<br> prefix = &#x27;FILE&#x27;,<br>/<br><br>&amp;metgrid<br> fg_name = &#x27;FILE&#x27;<br>/<br></code></pre></td></tr></table></figure>
+
+
+
+<p>修改完成后，开始运行程序。</p>
+<ol>
+<li><p>执行<code>geogrid.exe</code>, 这一步将生成<code>geo_em</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> WPSV4.5.0<br><br>./geogrid.exe &gt;&amp; log.geogrid<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p> <code>geogrid.exe</code>执行成功后，会在<code>geogrid.log</code> 文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs textile">2024-03-21 16:58:31.070 ---  *** Successful completion of program geogrid.exe ***<br></code></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li><p>执行ungrib.exe，这一步将生成前缀为’FILE’的文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./link_grib.csh ../DATA/gfs.t00z.pgrb2.0p25.f000<br><span class="hljs-built_in">ln</span> -sf ungrib/Variable_Tables/Vtable.GFS Vtable<br>./ungrib.exe &gt;&amp; log.ungrib<br></code></pre></td></tr></table></figure>
+
+<p><code>ungrib.exe</code>执行成功后，会在<code>ungrib.log</code>文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs textile">2024-03-21 17:13:42.605 --- ****  Deleting temporary files created by ungrib...<br>2024-03-21 17:13:42.605 ---  Deleting file: ./PFILE:2024-03-12_00<br>2024-03-21 17:13:42.756 --- ****  Done deleting temporary files.<br>2024-03-21 17:13:42.756 ---  *** Successful completion of program ungrib.exe ***<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>执行metgrid.exe，这一步将生成每个时间段的前缀为<code>met_em*</code>的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./metgrid.exe &gt;&amp; log.metgrid<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><code>metgrid.exe</code>执行成功后，会在<code>metgrid.log</code>文件末尾出现以下内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs textile">2024-03-21 17:24:05.809 ---  *** Successful completion of program metgrid.exe ***<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-2-运行WRF"><a href="#9-2-运行WRF" class="headerlink" title="9.2 运行WRF"></a>9.2 运行WRF</h2><p>进入<code>WRFV4.5.2/test/em_real/</code>目录下。首先将刚才<code>WPSV4.5.0</code>目录下生成的前缀为<code>met_em*</code>的文件拷贝到<code>WRFV4.5.2/test/em_real/</code>目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> met_em* ../WRFV4.5.2/test/em_real/<br><span class="hljs-built_in">cd</span> ../WRFV4.5.2/test/em_real/<br>mpirun -np 1 ./real.exe<br></code></pre></td></tr></table></figure>
+
+<p>这将生成两个文件，分别为<code>rsl.error.0000</code>和<code>rsl.out.0000</code>。如果在<code>rsl.error.0000</code>文件中看到<code>SUCCESS</code>，并且生成<code>wrfbdy_d01</code>和<code>wrfinput_d0*</code>文件，证明运行成功，继续执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mpirun -np 8 ./wrf.exe<br></code></pre></td></tr></table></figure>
+
+<p>再次检查<code>rsl</code>文件是否<code>SUCCESS</code>，并确保拥有预期所有的<code>wrfout*</code>文件。如果有，则运行成功。</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/350005982">知乎-Ubuntu中配置WRF</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php">WRF-How to Compile WRF: The Complete Process</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu16-04/" rel="tag">ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag">软件安装</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/23/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF-Hydro5-2-0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          如何在ubuntu16.04上安装编译WRF-Hydro5.2.0
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E6%B5%8B%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">1. 环境测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">2. 环境设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%9E%84%E5%BB%BA%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">3. 构建库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-0-%E4%B8%8B%E8%BD%BD%E6%89%80%E9%9C%80%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">3.0 下载所需库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-NetCDF"><span class="nav-number">3.2.</span> <span class="nav-text">3.1 NetCDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-MPICH"><span class="nav-number">3.3.</span> <span class="nav-text">3.2 MPICH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-zlib"><span class="nav-number">3.4.</span> <span class="nav-text">3.3 zlib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-libpng"><span class="nav-number">3.5.</span> <span class="nav-text">3.4 libpng</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-Jasper"><span class="nav-number">3.6.</span> <span class="nav-text">3.5 Jasper</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%BA%93%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">4. 库兼容性测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E6%9E%84%E5%BB%BAWRF"><span class="nav-number">5.</span> <span class="nav-text">5. 构建WRF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%9E%84%E5%BB%BAWPS"><span class="nav-number">6.</span> <span class="nav-text">6. 构建WPS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E9%9D%99%E6%80%81%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE"><span class="nav-number">7.</span> <span class="nav-text">7. 静态地理数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E5%AE%9E%E6%97%B6%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">8.</span> <span class="nav-text">8. 实时气象数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E8%BF%90%E8%A1%8CWPS%E5%92%8CWRF"><span class="nav-number">9.</span> <span class="nav-text">9. 运行WPS和WRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-%E8%BF%90%E8%A1%8CWPS"><span class="nav-number">9.1.</span> <span class="nav-text">9.1 运行WPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-%E8%BF%90%E8%A1%8CWRF"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 运行WRF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">10.</span> <span class="nav-text">参考文档</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

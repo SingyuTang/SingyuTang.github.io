@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>机器学习中的监督学习与非监督学习 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="机器学习" />
+  
+  
+  
+  
+  <meta name="description" content="1. 监督学习与非监督学习1.1. 监督学习（Supervised Learning）在监督学习中，模型通过学习输入数据与其对应的标签之间的关系来进行训练。这意味着给定一组输入数据和其对应的正确输出（标签），模型尝试学习如何将输入映射到输出。监督学习的常见应用包括分类和回归问题。在分类任务中，模型试图将输入数据分为预定义的类别之一；在回归任务中，模型试图预测一个连续值。例如，给定一组电子邮件和它们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习中的监督学习与非监督学习">
+<meta property="og:url" content="https://singyutang.github.io/2024/05/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="1. 监督学习与非监督学习1.1. 监督学习（Supervised Learning）在监督学习中，模型通过学习输入数据与其对应的标签之间的关系来进行训练。这意味着给定一组输入数据和其对应的正确输出（标签），模型尝试学习如何将输入映射到输出。监督学习的常见应用包括分类和回归问题。在分类任务中，模型试图将输入数据分为预定义的类别之一；在回归任务中，模型试图预测一个连续值。例如，给定一组电子邮件和它们">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-09T08:52:21.000Z">
+<meta property="article:modified_time" content="2024-05-09T11:32:27.796Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-机器学习中的监督学习与非监督学习" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      机器学习中的监督学习与非监督学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/05/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/" class="article-date">
+	  <time datetime="2024-05-09T08:52:21.000Z" itemprop="datePublished">五月 9, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-监督学习与非监督学习"><a href="#1-监督学习与非监督学习" class="headerlink" title="1. 监督学习与非监督学习"></a>1. 监督学习与非监督学习</h1><h2 id="1-1-监督学习（Supervised-Learning）"><a href="#1-1-监督学习（Supervised-Learning）" class="headerlink" title="1.1. 监督学习（Supervised Learning）"></a>1.1. 监督学习（Supervised Learning）</h2><p><strong>在监督学习中，模型通过学习输入数据与其对应的标签之间的关系来进行训练</strong>。这意味着给定一组输入数据和其对应的正确输出（标签），模型尝试学习如何将输入映射到输出。<br>监督学习的常见应用包括分类和回归问题。在分类任务中，模型试图将输入数据分为预定义的类别之一；在回归任务中，模型试图预测一个连续值。<br>例如，给定一组电子邮件和它们的分类（垃圾邮件或非垃圾邮件），监督学习算法可以学习如何自动将新的电子邮件分类为垃圾邮件或非垃圾邮件。</p>
+<h2 id="1-2-非监督学习（Unsupervised-Learning）"><a href="#1-2-非监督学习（Unsupervised-Learning）" class="headerlink" title="1.2. 非监督学习（Unsupervised Learning）"></a>1.2. 非监督学习（Unsupervised Learning）</h2><p><strong>在非监督学习中，模型在没有标签的情况下从未标记的数据中学习结构和模式</strong>。<br>非监督学习的目标通常是发现数据中的隐藏结构或特征。这可以通过聚类或降维等技术来实现。<br>聚类是将数据集中的样本分成不同的组，使得每个组内的样本彼此相似，而不同组之间的样本则尽可能不同。降维则是将高维数据转换为低维表示，同时尽可能地保留原始数据的信息。<br>例如，给定一组包含未标记的图片，非监督学习算法可以将这些图片分成不同的群组，而无需事先知道图片的内容或主题。<br>总的来说，监督学习关注如何从带有标签的数据中学习，而非监督学习关注如何从无标签的数据中学习。这两种学习范式都在各自的场景中有着广泛的应用。</p>
+<h1 id="2-监督分类与非监督分类"><a href="#2-监督分类与非监督分类" class="headerlink" title="2.监督分类与非监督分类"></a>2.监督分类与非监督分类</h1><h2 id="2-1-监督分类（Supervised-Classification）"><a href="#2-1-监督分类（Supervised-Classification）" class="headerlink" title="2.1 监督分类（Supervised Classification）"></a>2.1 监督分类（Supervised Classification）</h2><p>监督分类是一种监督学习任务，其中数据集中的每个样本都有一个明确的标签或类别。<br><strong>监督分类的目标是通过训练模型来预测新数据的类别标签，使得模型能够将输入数据正确地分类到预定义的类别中</strong>。<br>常见的监督分类算法包括支持向量机（SVM）、决策树、随机森林、逻辑回归等。</p>
+<h2 id="2-2-非监督聚类（Unsupervised-Clustering）"><a href="#2-2-非监督聚类（Unsupervised-Clustering）" class="headerlink" title="2.2 非监督聚类（Unsupervised Clustering）"></a>2.2 非监督聚类（Unsupervised Clustering）</h2><p>非监督聚类是一种非监督学习任务，其中数据集中的样本没有明确的标签或类别。<br><strong>非监督聚类的目标是将数据集中的样本分成不同的组或簇，使得每个组内的样本彼此相似，而不同组之间的样本尽可能不同</strong>。<br>聚类算法试图找到数据中的内在结构，而不是根据预定义的类别进行分类。<br>常见的非监督聚类算法包括 K-means 聚类、层次聚类、DBSCAN（基于密度的聚类）、高斯混合模型等。<br>虽然监督分类和非监督聚类都涉及将数据划分为不同的类别或组，但它们的关键区别在于监督分类需要标签，而非监督聚类不需要。监督分类的目标是学习数据中的模式，以便根据这些模式对新数据进行分类，而非监督聚类的目标是在不知道数据内在结构的情况下对数据进行分组。</p>
+<h1 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenKFKevin/article/details/70547549">监督学习和非监督学习的区别</a><br><a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/compare/the-difference-between-machine-learning-supervised-and-unsupervised/">有监督机器学习和无监督机器学习之间有什么区别？</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/05/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          机器学习中的评价指标
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/05/07/%E6%B4%AA%E6%B0%B4%E7%A0%94%E7%A9%B6%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">【文献分享】-洪水研究相关文献整理一</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E4%B8%8E%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">1. 监督学习与非监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%EF%BC%88Supervised-Learning%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. 监督学习（Supervised Learning）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%EF%BC%88Unsupervised-Learning%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. 非监督学习（Unsupervised Learning）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%9B%91%E7%9D%A3%E5%88%86%E7%B1%BB%E4%B8%8E%E9%9D%9E%E7%9B%91%E7%9D%A3%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">2.监督分类与非监督分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E7%9B%91%E7%9D%A3%E5%88%86%E7%B1%BB%EF%BC%88Supervised-Classification%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 监督分类（Supervised Classification）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E9%9D%9E%E7%9B%91%E7%9D%A3%E8%81%9A%E7%B1%BB%EF%BC%88Unsupervised-Clustering%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 非监督聚类（Unsupervised Clustering）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.</span> <span class="nav-text">参考博客</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

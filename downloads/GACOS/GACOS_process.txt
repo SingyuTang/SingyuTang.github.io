@@ -1,0 +1,170 @@
+#!/bin/sh
+##########################################################
+# Script that:
+# -GACOS (GACOS correct)
+# 将该脚本拷贝到SBAS工作目录下，和dem、rmli、diff_dir同级目录
+#########################################################################################################
+
+##########################################################################################################
+# 获取脚本所在的当前目录
+basedir=`cd $(dirname $0); pwd -P`
+echo $basedir
+# 获取脚本名字及绝对路径
+scriptname=`basename $0`
+para_file=$basedir"/"$scriptname
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo          " `basename $0`: GACOS (GACOS correct) "
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+echo              " bash GACOS_process <$para_file>  "
+
+####################create para_file for GACOS############################
+# diff_dir, dem_dir, GACOS_dir分别为解缠图(adf.unw)、*.dem/*.dem.par、GACOS数据(binary）和bperp_file文件的存放目录
+# diff_dir，dem_dir，GACOS_dir，para_file，unw_mask 位于sbas文件夹中
+diff_dir=diff_dir1
+dem_dir=dem
+GACOS_dir=GACOS
+para_file=$basedir"/para_file"
+# fine_lookup_table 位于dem文件夹中
+fine_lookup_table="fine_qinling.utm_to_rdc"
+master_date=20210823
+# unw_mask：The mask file used by unw, must have the same width as the unw file"
+unw_mask="unw_mask.ras"
+
+echo "####################Parameters of GACOS_process########################" > $para_file
+echo "SLC_dir:                $diff_dir             # SLC directory with xxxxyyyy" >> $para_file
+echo "master:                 $master_date       # master image " >> $para_file
+echo "DEM_dir:                    $dem_dir             # DEM directory with *.dem & *.dem.par" >> $para_file
+echo "fine_lookup_table:                    $fine_lookup_table             # fine_lookup_table filename" >> $para_file
+echo "#################### required for GACOS ##############################" >> $para_file
+echo "gacos_dir:                         $GACOS_dir  # gacos download data directory" >> $para_file
+echo "bandwidth:                         0.056  # The bandwidth of the data, unit meter" >> $para_file
+echo "gacos_flag:                        1    # 0:no (atm.unw)  1:yes (gacos.unw)" >> $para_file
+echo "gacos_flag:                        1    # 0:no (atm.unw)  1:yes (gacos.unw)" >> $para_file
+echo "unw_mask:                         $unw_mask  # The mask file used by unw, must have the same width as the unw file" >> $para_file
+echo "######################################################################" >> $para_file
+##################### 从para_file文件中读取参数  #####################
+SLCDIR=`grep SLC_dir: $para_file | awk '{print $2}'`
+DEM=`grep DEM_dir: $para_file | awk '{print $2}'`
+reference=`grep master: $para_file | awk '{print $2}'`
+fine_lookup_table=`grep fine_lookup_table: $para_file | awk '{print $2}'`
+####################required for GACOS############################
+gacos_dir=`grep gacos_dir: $para_file | awk '{print $2}'`
+bandwidth=`grep bandwidth: $para_file | awk '{print $2}'`
+gacos_flag=`grep gacos_flag: $para_file | awk '{print $2}'`
+############################ GACOS ###########################
+
+	echo " GACOS( GACOS correct )......"
+	bperp=bperp_file
+	raw_par=dem/seg.dem.par
+
+	mli_ave=rmli/rmli.ave
+	
+	cat $bperp | while read Rline
+ 	do
+	# cat $bperp | read Rline
+	# Rline=`sed -n '1p' $bperp`
+  	num=`echo $Rline | awk '{print $1}'`
+  	master=`echo $Rline | awk '{print $2}'`
+  	slave=`echo $Rline | awk '{print $3}'`
+  
+	width_mli=`grep range_samples: ./rmli/$reference.mli.par | awk '{print $2}'`
+	nlines_mli=`grep azimuth_lines: ./rmli/$reference.mli.par | awk '{print $2}'`
+	width_utm=`grep width: ./$raw_par | awk '{print $2}'`
+	inc_angle=`grep incidence_angle: ./rmli/$reference.mli.par | awk '{print $2}'`
+
+
+	#####Prepare parameter file###
+
+    rm -rf GACOS_par
+	mkdir GACOS_par
+	cp $raw_par ./GACOS_par/$master.gacos.par
+	rsc=./$gacos_dir/${master}.ztd.rsc
+	gacos_width=`grep XMAX $rsc | awk '{print $2}'`
+	gacos_nlines=`grep YMAX $rsc | awk '{print $2}'`
+	gacos_corner_lat=`grep Y_FIRST $rsc | awk '{print $2}'`
+	gacos_corner_lon=`grep X_FIRST $rsc | awk '{print $2}'`
+	gacos_post_lat=`grep Y_STEP $rsc | awk '{print $2}'`
+	gacos_post_lon=`grep X_STEP $rsc | awk '{print $2}'`
+
+	sed -i '7c width:                '$gacos_width'' ./GACOS_par/$master.gacos.par
+	sed -i '8c nlines:               '$gacos_nlines'' ./GACOS_par/$master.gacos.par
+	sed -i '9c corner_lat:     '$gacos_corner_lat'  decimal degrees' ./GACOS_par/$master.gacos.par
+	sed -i '10c corner_lon:     '$gacos_corner_lon'  decimal degrees' ./GACOS_par/$master.gacos.par
+	sed -i '11c post_lat:    '$gacos_post_lat'  decimal degrees' ./GACOS_par/$master.gacos.par
+	sed -i '12c post_lon:    '$gacos_post_lon'  decimal degrees' ./GACOS_par/$master.gacos.par
+
+
+
+	cp $raw_par ./GACOS_par/$slave.gacos.par
+	rsc=./$gacos_dir/${slave}.ztd.rsc
+	gacos_width=`grep XMAX $rsc | awk '{print $2}'`
+	gacos_nlines=`grep YMAX $rsc | awk '{print $2}'`
+	gacos_corner_lat=`grep Y_FIRST $rsc | awk '{print $2}'`
+	gacos_corner_lon=`grep X_FIRST $rsc | awk '{print $2}'`
+	gacos_post_lat=`grep Y_STEP $rsc | awk '{print $2}'`
+	gacos_post_lon=`grep X_STEP $rsc | awk '{print $2}'`
+
+
+
+	sed -i '7c width:                '$gacos_width'' ./GACOS_par/$slave.gacos.par
+	sed -i '8c nlines:               '$gacos_nlines'' ./GACOS_par/$slave.gacos.par
+	sed -i '9c corner_lat:     '$gacos_corner_lat'  decimal degrees' ./GACOS_par/$slave.gacos.par
+	sed -i '10c corner_lon:     '$gacos_corner_lon'  decimal degrees' ./GACOS_par/$slave.gacos.par
+	sed -i '11c post_lat:    '$gacos_post_lat'  decimal degrees' ./GACOS_par/$slave.gacos.par
+	sed -i '12c post_lon:    '$gacos_post_lon'  decimal degrees' ./GACOS_par/$slave.gacos.par
+
+#################################
+	# 二进制文件转换为float/fcomplex类型数据, swap_type=4(output float32)
+	swap_bytes ./$gacos_dir/$master.ztd ./$gacos_dir/$master.ztd.trans 4
+	swap_bytes ./$gacos_dir/$slave.ztd ./$gacos_dir/$slave.ztd.trans 4
+	# GACOS数据(对流层延迟图)投影变换，gacos下的坐标系转化为seg.dem.par下的地理坐标系（WGS84）
+	dem_trans ./GACOS_par/$master.gacos.par ./$gacos_dir/$master.ztd.trans ./$raw_par ./$gacos_dir/$master.ztd.poj - -
+	dem_trans ./GACOS_par/$slave.gacos.par ./$gacos_dir/$slave.ztd.trans ./$raw_par ./$gacos_dir/$slave.ztd.poj - -
+	# GACOS求差
+	float_math ./$gacos_dir/$slave.ztd.poj ./$gacos_dir/$master.ztd.poj ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm 1 1
+	echo "geocode ./$DEM/$reference.geo_to_rdc_fine ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm ./dem/$master"_"$slave.dztd.poj.rdc $width_mli $nlines_mli 0 0 1 1 2 8"
+	# 求差后的GACOS数据由地理坐标系（seg.dem.par）转换为雷达坐标系（.mli）
+	geocode ./$DEM/$fine_lookup_table ./$gacos_dir/$master"_"$slave.dztd.poj $width_utm ./dem/$master"_"$slave.dztd.poj.rdc $width_mli $nlines_mli 0 0 1 1 2 8
+	rashgt ./$DEM/$master"_"$slave.dztd.poj.rdc ./rmli/$reference.mli $width_mli - - - - - - - - -
+        
+	##############Correct in matlab############
+	echo "****************The atmospheric correction in matlab**************"
+	m_file="$master"_"$slave.gacos.correct.m"
+	echo "clear all;clc;" >> $m_file
+	# echo "第一步时间差法（1）：直接读取干涉解缠图（相位）" >> $m_file
+	echo "[unw, count] = freadbkb('${SLCDIR}/${master}_${slave}.atm.fit.unw', $nlines_mli, 'float32');" >> $m_file
+	# temp="% 第一步时间差法（2）: 已在shell脚本中使用float_math求差，直接读取天顶延迟图差分图$DEM"/"$master"_"$slave.dztd.poj.rdc（时间差分）"
+	# echo "$temp" >> $m_file
+	echo "[data, count] = freadbkb('dem/$master"_"$slave.dztd.poj.rdc', $nlines_mli, 'float32');" >> $m_file
+	echo "los=data./cos($inc_angle*pi/180);" >> $m_file
+	echo "pha=los./($bandwidth/(4*pi));" >> $m_file
+	echo "index=find(unw==0 | isnan(unw));" >> $m_file
+	echo "unw(index)=nan;" >> $m_file
+	# echo "% 第二步(1): 选取相对稳定的点ref" >> $m_file
+	echo "meanp=mean(unw(:),'omitnan');" >> $m_file
+	echo "[value,ref_index]=min(abs(unw(:)-meanp));" >> $m_file
+	echo "[col,row]=ind2sub(size(unw), ref_index);" >> $m_file
+	# echo "% 第二步(2): 然后针对ref的干涉图和大气层延迟图进行差分（空间差分）" >> $m_file
+	echo "unw(index)=0;" >> $m_file
+	echo "pha_ref=pha-pha(col,row);" >> $m_file
+	echo "unw_ref=unw-unw(col,row);" >> $m_file
+	# echo "% 第三步: 应用校正，校正后的干涉图(相位)=差分后的解缠相位-差分后的大气延迟（默认较晚一个日期减去较早一个日期进行差分）" >> $m_file
+	echo "unw_gacos=unw_ref-pha_ref;" >> $m_file
+	echo "count = fwritebkb(unw_gacos,'${SLCDIR}/${master}_${slave}.adf.gacos.unw','float32');" >> $m_file
+	echo "" >> $m_file
+	echo "" >> $m_file
+	echo "" >> $m_file
+	matlab -nodesktop -nosplash -nodisplay < $m_file
+	rm $m_file
+#############################################
+	echo "###############  mask_data  and quad_fit  ###################"
+	mask_data ./$SLCDIR/$master"_"$slave.adf.gacos.unw $width_mli ./$SLCDIR/$master"_"$slave.adf.gacos.unw_msk $unw_mask 0
+	rasrmg ./$SLCDIR/$master"_"$slave.adf.gacos.unw_msk ./rmli/$reference.mli $width_mli - - - - - - - - - -
+	quad_fit ./$SLCDIR/$master"_"$slave.adf.gacos.unw_msk ./$SLCDIR/$master"_"$slave.diff_par 32 32 - plot_data 0
+	quad_sub ./$SLCDIR/$master"_"$slave.adf.gacos.unw_msk ./$SLCDIR/$master"_"$slave.diff_par ./$SLCDIR/$master"_"$slave.gacos.fit.unw 0 0
+	rasrmg ./$SLCDIR/$master"_"$slave.gacos.fit.unw ./rmli/$reference.mli $width_mli - - - - - - - - - - ./$SLCDIR/$master"_"$slave.gacos.fit.unw.ras
+	done
+
+echo " END of GACOS process!"
+
+

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>在ubuntu16.04中安装r和wrf-hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="WRF-Hydro5.2.0RtoolkitUbuntu16.04GDALrwrfhydro错误总结" />
+  
+  
+  
+  
+  <meta name="description" content="前言基于WRF-Hydro包计算河道流量，整理好所需要的准备配置文件（hydro.namelist和namelist.hrldas）和数据后，需要使用命令mpirun -np 8 .&#x2F;wrf_hydro.exe运行计算最终结果，结果变量详细介绍可查看WRF-Hydro v5.2 Output Variable Matrix，对于输出结果可视化可使用 rwrfhydro 工具，该工具是基于R语言进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Ubuntu16.04中安装R和WRF-Hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一">
+<meta property="og:url" content="https://singyutang.github.io/2024/04/23/%E5%9C%A8Ubuntu16-04%E4%B8%AD%E5%AE%89%E8%A3%85R%E5%92%8CWRF-Hydro%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7%E7%AE%B1rwrfhydro%E6%97%B6%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E4%B8%80/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="前言基于WRF-Hydro包计算河道流量，整理好所需要的准备配置文件（hydro.namelist和namelist.hrldas）和数据后，需要使用命令mpirun -np 8 .&#x2F;wrf_hydro.exe运行计算最终结果，结果变量详细介绍可查看WRF-Hydro v5.2 Output Variable Matrix，对于输出结果可视化可使用 rwrfhydro 工具，该工具是基于R语言进行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-23T03:00:25.000Z">
+<meta property="article:modified_time" content="2024-07-22T04:08:14.489Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="WRF-Hydro5.2.0">
+<meta property="article:tag" content="R">
+<meta property="article:tag" content="toolkit">
+<meta property="article:tag" content="Ubuntu16.04">
+<meta property="article:tag" content="GDAL">
+<meta property="article:tag" content="rwrfhydro">
+<meta property="article:tag" content="错误总结">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-在Ubuntu16-04中安装R和WRF-Hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      在Ubuntu16.04中安装R和WRF-Hydro可视化工具箱rwrfhydro时可能遇到的问题汇总一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/04/23/%E5%9C%A8Ubuntu16-04%E4%B8%AD%E5%AE%89%E8%A3%85R%E5%92%8CWRF-Hydro%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7%E7%AE%B1rwrfhydro%E6%97%B6%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB%E4%B8%80/" class="article-date">
+	  <time datetime="2024-04-23T03:00:25.000Z" itemprop="datePublished">四月 23, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基于WRF-Hydro包计算河道流量，整理好所需要的准备配置文件（hydro.namelist和namelist.hrldas）和数据后，需要使用命令<code>mpirun -np 8 ./wrf_hydro.exe</code>运行计算最终结果，结果变量详细介绍可查看<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/outputvariablematrix-v5.2.0.pdf">WRF-Hydro v5.2 Output Variable Matrix</a>，对于输出结果可视化可使用 <a target="_blank" rel="noopener" href="https://github.com/NCAR/rwrfhydro%E2%80%8B">rwrfhydro</a> 工具，该工具是基于R语言进行编写，如果使用需要在ubuntu中配置R环境，这里将在配置R环境以及安装rwrfhydro工具时可能会出现的一些问题进行简单的汇总。</p>
+<h1 id="安装R包devtools出现错误，无法安装ragg-profvis-textshaping包"><a href="#安装R包devtools出现错误，无法安装ragg-profvis-textshaping包" class="headerlink" title="安装R包devtools出现错误，无法安装ragg,profvis,textshaping包"></a>安装R包devtools出现错误，无法安装ragg,profvis,textshaping包</h1><p>将这些R包分开进行安装，将缺失的依赖一一找到并进行安装。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-keyword">install</span>.packages(<span class="hljs-string">&quot;ragg&quot;</span>)<br><span class="hljs-keyword">install</span>.packages(<span class="hljs-string">&quot;profvis&quot;</span>)<br><span class="hljs-keyword">install</span>.packages(<span class="hljs-string">&quot;textshaping&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+
+<p>可能遇到的详细安装报错信息查看下文。</p>
+<h1 id="安装rwrfhydro包提示GDAL版本低于2-0-1，需要更新"><a href="#安装rwrfhydro包提示GDAL版本低于2-0-1，需要更新" class="headerlink" title="安装rwrfhydro包提示GDAL版本低于2.0.1，需要更新"></a>安装rwrfhydro包提示GDAL版本低于2.0.1，需要更新</h1><p>参考博客<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/447664123">Ubuntu 安装 GDAL 2.1</a>进行更新，具体操作如下。</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs smali">sudo<span class="hljs-built_in"> add-apt-repository </span>-y ppa:ubuntugis/ppa<br>sudo apt update<br>sudo apt upgrade<br><br>apt install gdal-bin libgdal-dev<br><br></code></pre></td></tr></table></figure>
+
+<p>安装完成后，使用<code>gdalinfo --version</code>查看版本。</p>
+<h1 id="安装R包raster报错C-17"><a href="#安装R包raster报错C-17" class="headerlink" title="安装R包raster报错C++17"></a>安装R包raster报错C++17</h1><p>参考博客<a target="_blank" rel="noopener" href="https://www.omicsclass.com/article/2313">安装R包报错C++17</a>进行修改，具体操作如下。</p>
+<p>这个是GCC版本问题;设置一下用新版本就行了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p ~/.R<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;CXX17 = g++ -std=c++17 -fPIC&#x27;</span> &gt; ~/.R/Makevars<br></code></pre></td></tr></table></figure>
+
+<h1 id="安装R包ragg配置错误"><a href="#安装R包ragg配置错误" class="headerlink" title="安装R包ragg配置错误"></a>安装R包ragg配置错误</h1><p>报错<stdin>:1:22: fatal error: ft2build.h: 没有那个文件或目录</p>
+<p>解决方法：安装该R包所需要的相关依赖和库，可通过查看报错信息找到必须的库进行安装。我的系统为Ubuntu系统，因此选择安装deb包进行安装。</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs q">sudo apt libfreetype6-<span class="hljs-built_in">dev</span> libpng-<span class="hljs-built_in">dev</span> libtiffs-<span class="hljs-built_in">dev</span> libjpeg-<span class="hljs-built_in">dev</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="安装R包ggmap报错dependency-png’-isnot-available-for-package-‘ggmap’"><a href="#安装R包ggmap报错dependency-png’-isnot-available-for-package-‘ggmap’" class="headerlink" title="安装R包ggmap报错dependency png’ isnot available for package ‘ggmap’"></a>安装R包ggmap报错dependency png’ isnot available for package ‘ggmap’</h1><p>该错误信息说明缺少系统软件包libpng，或需要升级。</p>
+<p>解决方法</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs q"><br>sudo apt-<span class="hljs-built_in">get</span> <span class="hljs-keyword">update</span><br>sudo apt-<span class="hljs-built_in">get</span> install libpng-<span class="hljs-built_in">dev</span><br><br></code></pre></td></tr></table></figure>
+
+<h1 id="安装R包ggmap提示libpng16-so-16：无法打开共享对象文件-没有那个文件或目录"><a href="#安装R包ggmap提示libpng16-so-16：无法打开共享对象文件-没有那个文件或目录" class="headerlink" title="安装R包ggmap提示libpng16.so.16：无法打开共享对象文件: 没有那个文件或目录"></a>安装R包ggmap提示libpng16.so.16：无法打开共享对象文件: 没有那个文件或目录</h1><p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38402294/article/details/112629389">博客</a>进行对应库的安装。ubuntu系统可直接进行安装。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> install libpng16-16<br></code></pre></td></tr></table></figure>
+
+<h1 id="安装R包textshaping配置错误"><a href="#安装R包textshaping配置错误" class="headerlink" title="安装R包textshaping配置错误"></a>安装R包textshaping配置错误</h1><p>报错<stdin>:1:19: fatal error: hb-ft.h: 没有那个文件或目录</p>
+<p>解决方法：安装该R包所需要的相关依赖和库，可通过查看报错信息找到必须的库进行安装。我的系统为Ubuntu系统，因此选择安装deb包进行安装。</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs q">sudo apt-<span class="hljs-built_in">get</span> install libharfbuzz-<span class="hljs-built_in">dev</span> libfribidi-<span class="hljs-built_in">dev</span><br></code></pre></td></tr></table></figure>
+<h1 id="安装R包profvis配置错误"><a href="#安装R包profvis配置错误" class="headerlink" title="安装R包profvis配置错误"></a>安装R包profvis配置错误</h1><p>报错信息与安装R包textshaping相同，可参照安装R包textshaping时的解决方案进行修改。</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>rwrfhydro在使用中脚本有诸多限制，可能会出现较多问题，且利用R语言进行地学制图美观性较差，绘图建议使用<a target="_blank" rel="noopener" href="https://www.ncl.ucar.edu/Download/">NCL</a>，可视化可使用<a target="_blank" rel="noopener" href="https://downloads.unidata.ucar.edu/idv/">IDV</a>或<a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/">Panoply</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GDAL/" rel="tag">GDAL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/R/" rel="tag">R</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu16-04/" rel="tag">Ubuntu16.04</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rwrfhydro/" rel="tag">rwrfhydro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/" rel="tag">错误总结</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/04/25/WRF-Hydro%E7%9A%84%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          WRF-Hydro的文献调研
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/04/03/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85WRF-Hydro-GIS-Pre-Processing-Tools5-2-0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">安装使用WRF Hydro GIS Pre-Processing Tools</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85devtools%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%EF%BC%8C%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85ragg-profvis-textshaping%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">安装R包devtools出现错误，无法安装ragg,profvis,textshaping包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85rwrfhydro%E5%8C%85%E6%8F%90%E7%A4%BAGDAL%E7%89%88%E6%9C%AC%E4%BD%8E%E4%BA%8E2-0-1%EF%BC%8C%E9%9C%80%E8%A6%81%E6%9B%B4%E6%96%B0"><span class="nav-number">3.</span> <span class="nav-text">安装rwrfhydro包提示GDAL版本低于2.0.1，需要更新</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85raster%E6%8A%A5%E9%94%99C-17"><span class="nav-number">4.</span> <span class="nav-text">安装R包raster报错C++17</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ragg%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">5.</span> <span class="nav-text">安装R包ragg配置错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ggmap%E6%8A%A5%E9%94%99dependency-png%E2%80%99-isnot-available-for-package-%E2%80%98ggmap%E2%80%99"><span class="nav-number">6.</span> <span class="nav-text">安装R包ggmap报错dependency png’ isnot available for package ‘ggmap’</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85ggmap%E6%8F%90%E7%A4%BAlibpng16-so-16%EF%BC%9A%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E5%85%B1%E4%BA%AB%E5%AF%B9%E8%B1%A1%E6%96%87%E4%BB%B6-%E6%B2%A1%E6%9C%89%E9%82%A3%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E7%9B%AE%E5%BD%95"><span class="nav-number">7.</span> <span class="nav-text">安装R包ggmap提示libpng16.so.16：无法打开共享对象文件: 没有那个文件或目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85textshaping%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">8.</span> <span class="nav-text">安装R包textshaping配置错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85R%E5%8C%85profvis%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF"><span class="nav-number">9.</span> <span class="nav-text">安装R包profvis配置错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">10.</span> <span class="nav-text">后记</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

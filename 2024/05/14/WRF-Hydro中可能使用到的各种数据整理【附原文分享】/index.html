@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>wrf-hydro中可能使用到的各种数据整理【附原文分享】 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="websites文献分享数据分享WRF-Hydro5.2.0" />
+  
+  
+  
+  
+  <meta name="description" content="径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非 WRF-水力耦合建模系统的案例研究标题：Role of Runoff–Infiltration Partitioning and Resolved Overland Flow on Land–Atmosphere Feedbacks: A Case Study with the WRF-Hydro Coupled Modeling Sy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WRF-Hydro中可能使用到的各种数据整理【附原文分享】">
+<meta property="og:url" content="https://singyutang.github.io/2024/05/14/WRF-Hydro%E4%B8%AD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86%E3%80%90%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB%E3%80%91/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非 WRF-水力耦合建模系统的案例研究标题：Role of Runoff–Infiltration Partitioning and Resolved Overland Flow on Land–Atmosphere Feedbacks: A Case Study with the WRF-Hydro Coupled Modeling Sy">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-14T03:40:59.000Z">
+<meta property="article:modified_time" content="2024-06-01T12:51:16.087Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="websites">
+<meta property="article:tag" content="文献分享">
+<meta property="article:tag" content="数据分享">
+<meta property="article:tag" content="WRF-Hydro5.2.0">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-WRF-Hydro中可能使用到的各种数据整理【附原文分享】" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      WRF-Hydro中可能使用到的各种数据整理【附原文分享】
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/05/14/WRF-Hydro%E4%B8%AD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86%E3%80%90%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB%E3%80%91/" class="article-date">
+	  <time datetime="2024-05-14T03:40:59.000Z" itemprop="datePublished">五月 14, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非-WRF-水力耦合建模系统的案例研究"><a href="#径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非-WRF-水力耦合建模系统的案例研究" class="headerlink" title="径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非 WRF-水力耦合建模系统的案例研究"></a>径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非 WRF-水力耦合建模系统的案例研究</h2><p>标题：Role of Runoff–Infiltration Partitioning and Resolved Overland Flow on Land–Atmosphere Feedbacks: A Case Study with the WRF-Hydro Coupled Modeling System for West Africa<br>原文链接：<a target="_blank" rel="noopener" href="https://journals.ametsoc.org/view/journals/hydr/17/5/jhm-d-15-0089_1.xml">https://journals.ametsoc.org/view/journals/hydr/17/5/jhm-d-15-0089_1.xml</a><br>期刊：Journal of Hydrometeorology</p>
+<p>（TRMM 降水数据在<a target="_blank" rel="noopener" href="http://mirador.gsfc.nasa.gov/cgi-bin/mirador/homepageAlt.pl?keyword=TRMM_3B42%E5%9C%A8%E7%BA%BF%E8%8E%B7%E5%8F%96%EF%BC%8CESA-CCI">http://mirador.gsfc.nasa.gov/cgi-bin/mirador/homepageAlt.pl?keyword=TRMM_3B42在线获取，ESA-CCI</a> 土壤湿度数据在<a target="_blank" rel="noopener" href="http://www.esa-soilmoisture/">http://www.esa-soilmoisture</a> -cci.org&#x2F;node&#x2F;145，CRU 温度数据位于<a target="_blank" rel="noopener" href="http://www.cru.uea.ac.uk/cru/data/hrg/%EF%BC%8CMTE">http://www.cru.uea.ac.uk/cru/data/hrg/，MTE</a> 数据位于<a target="_blank" rel="noopener" href="https://climatedataguide.ucar.edu/climate-">https://climatedataguide.ucar.edu/climate-</a> data&#x2F;fluxnet-mte-multi-tree-ensemble。）流量数据由加纳水资源、工程和住房部水文服务部提供。有关 HydroSHEDS 数据的技术信息可在线获取：<a target="_blank" rel="noopener" href="http://hydrosheds.cr.usgs.gov./">http://Hydrosheds.cr.usgs.gov。</a> WRF-Hydro 预处理工具可在线获取：<a target="_blank" rel="noopener" href="https://www.ral.ucar.edu/sites/default/files/public/projects/wrf_Hydro/v3_0/Standalone_Tool_v2_2.zip%E3%80%82">https://www.ral.ucar.edu/sites/default/files/public/projects/wrf_Hydro/v3_0/Standalone_Tool_v2_2.zip。</a> WRF 和 WRF-Hydro 模拟在德国气候计算中心进行。</p>
+<h2 id="使用-LSTM-网络改进-WRF-Hydro-模型中的水流预测"><a href="#使用-LSTM-网络改进-WRF-Hydro-模型中的水流预测" class="headerlink" title="使用 LSTM 网络改进 WRF-Hydro 模型中的水流预测"></a>使用 LSTM 网络改进 WRF-Hydro 模型中的水流预测</h2><p>标题：Improving streamflow prediction in the WRF-Hydro model with LSTM networks<br>原文链接：<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0022169421013470">https://www.sciencedirect.com/science/article/pii/S0022169421013470</a><br>期刊：Journal of Hydrology</p>
+<p>HydroSHEDS 条件DEM和湖泊多边形可在<a target="_blank" rel="noopener" href="http://www.hydrosheds.org获取,昭阳湖入流观测数据可在http//www.water.or.kr">http://www.Hydrosheds.org获取，昭阳湖入流观测数据可在http://www.water.or.kr</a> 获取，LDAPS和 ASOS 气象强迫数据集可以在<a target="_blank" rel="noopener" href="http://data.kma.go.kr上获取,土壤图可以在/">http://data.kma.go.kr上获取，土壤图可以在</a> <a target="_blank" rel="noopener" href="http://soil.rda.go.kr/">http://soil.rda.go.kr</a> 上获取。</p>
+<h2 id="使用长短期记忆网络和大陆规模的数据集成增强水流预测并提取见解"><a href="#使用长短期记忆网络和大陆规模的数据集成增强水流预测并提取见解" class="headerlink" title="使用长短期记忆网络和大陆规模的数据集成增强水流预测并提取见解"></a>使用长短期记忆网络和大陆规模的数据集成增强水流预测并提取见解</h2><p>标题：Enhancing Streamflow Forecast and Extracting Insights Using Long-Short Term Memory Networks With Data Integration at Continental Scales<br>原文链接：<a target="_blank" rel="noopener" href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019WR026793">https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019WR026793</a><br>期刊：Water Resources Research</p>
+<p>CAMELS的大部分每日径流观测开始于1980年，结束于2014年。我们在本研究中使用的气象强迫数据是北美陆地数据同化系统（NLDAS）的每日数据。用作我们模型输入的骆驼流域属性包括地形、气候特征、土地覆盖、土壤和地质特征（表 1）。</p>
+<p>CAMELS数据集，包括流域属性、强迫数据和水流，可以从本文提供的引文中下载。这项工作得到了国家科学基金会奖 EAR-1832294 的支持。根据合同 DE-SC0016605，KF 得到了美国能源部生物与环境研究办公室的部分支持。径流数据可以从美国地质调查局国家水数据网站（<a target="_blank" rel="noopener" href="https://doi.org/10.5066/F7P55KJN%EF%BC%89%E4%B8%8B%E8%BD%BD%E3%80%82%E6%88%91%E4%BB%AC%E7%9A%84">https://doi.org/10.5066/F7P55KJN）下载。我们的</a> LSTM 代码可在 GitHub ( <a target="_blank" rel="noopener" href="https://github.com/mhpi/HydroDL">https://github.com/mhpi/HydroDL</a> )上获取。</p>
+<h2 id="使用长短期记忆-LSTM-网络进行降雨径流建模"><a href="#使用长短期记忆-LSTM-网络进行降雨径流建模" class="headerlink" title="使用长短期记忆 (LSTM) 网络进行降雨径流建模"></a>使用长短期记忆 (LSTM) 网络进行降雨径流建模</h2><p>标题：Rainfall–runoff modelling using Long Short-Term Memory (LSTM) networks<br>原文链接：<a target="_blank" rel="noopener" href="https://hess.copernicus.org/articles/22/6005/2018/">https://hess.copernicus.org/articles/22/6005/2018/</a><br>期刊：Hydrology and Earth System Sciences</p>
+<p>我们在 CAMELS 数据集的大量流域上测试了该方法 （Addor 等人，  2017 b；Newman 等人，  2014）。该数据集可免费获取，包括美国本土 671 个流域的气象强迫数据和观测到的流量。对于每个流域，CAMELS 数据集还包括 Sacramento 土壤湿度核算模型（Burnash 等人，  1973 年）与 Snow-17 雪模型（Anderson，  1973 年）相结合的模拟流量的时间序列。</p>
+<p>我们研究的基础数据是 CAMELS 数据集 （Addor 等人，  2017 b；Newman 等人，  2014）。该缩写代表“大样本研究的流域属性”，它是一个免费提供的数据集，包含美国本土 (CONUS) 的 671 个流域，人为干扰最小。该数据集包含流域汇总（集中）气象强迫数据和从 1980 年开始（对于大多数流域）的每日时间尺度观测到的流量。气象数据是根据三个不同的网格数据源计算的（Daymet、 Thornton 等人，  2012 年；Maurer ，Maurer 等人，  2002 年；以及 NLDAS， Xia 等人，  2012 年），包括日长、降水量、短波向下辐射、最高和最低温度、雪水当量和湿度。<strong>我们使用 Daymet 数据，因为它具有最高的空间分辨率（1 公里网格，而 Maurer 和 NLDAS 为 12 公里网格）作为计算流域平均值和所有可用气象输入变量（雪水当量和白天的长度</strong>。</p>
+<p>Addor, N., Newman, A. J., Mizukami, N., and Clark, M. P.: Catchment attributes for large-sample studies, UCAR&#x2F;NCAR, Boulder, CO, USA, <a target="_blank" rel="noopener" href="https://doi.org/10.5065/D6G73C3Q">https://doi.org/10.5065/D6G73C3Q</a>, 2017b. a, b</p>
+<p>Newman, A., Sampson, K., Clark, M., Bock, A., Viger, R., and Blodgett, D.: A large-sample watershed-scale hydrometeorological dataset for the contiguous USA, UCAR&#x2F;NCAR, Boulder, CO, USA, <a target="_blank" rel="noopener" href="https://doi.org/10.5065/D6MW2F4D">https://doi.org/10.5065/D6MW2F4D</a>, 2014. a, b</p>
+<p>Newman, A. J., Clark, M. P., Sampson, K., Wood, A., Hay, L. E., Bock, A., Viger, R. J., Blodgett, D., Brekke, L., Arnold, J. R., Hopson, T., and Duan, Q.: Development of a large-sample watershed-scale hydrometeorological data set for the contiguous USA: data set characteristics and assessment of regional variability in hydrologic model performance, Hydrol. Earth Syst. Sci., 19, 209–223, <a target="_blank" rel="noopener" href="https://doi.org/10.5194/hess-19-209-2015">https://doi.org/10.5194/hess-19-209-2015</a>, 2015. a, b, c, d</p>
+<h2 id="使用独立估计的流量持续时间曲线对未测量位置的模拟历史日流量进行偏差校正"><a href="#使用独立估计的流量持续时间曲线对未测量位置的模拟历史日流量进行偏差校正" class="headerlink" title="使用独立估计的流量持续时间曲线对未测量位置的模拟历史日流量进行偏差校正"></a>使用独立估计的流量持续时间曲线对未测量位置的模拟历史日流量进行偏差校正</h2><p>标题：Bias correction of simulated historical daily streamflow at ungauged locations by using independently estimated flow duration curves<br>原文链接：<a target="_blank" rel="noopener" href="https://hess.copernicus.org/articles/22/5741/2018/">https://hess.copernicus.org/articles/22/5741/2018/</a><br>期刊：Hydrology and Earth System Sciences</p>
+<p>提出的方法是使用来自美国本土GAGES-II 数据库（Falcone，  2011）中 1980 年 10 月 1 日至 2013 年 9 月 30 日期间参考质量流量计的每日平均流量数据进行探索的。径流数据直接从国家水信息系统网站（NWISWeb， <a href="http://waterdata.usgs.gov；最后访问：2017年9月20日）获得。对于每个流量计，相关的盆地特征是从">http://waterdata.usgs.gov；最后访问：2017年9月20日）获得。对于每个流量计，相关的盆地特征是从</a> GAGES-II 数据库中获得的（Falcone，  2011）。</p>
+<p>Falcone, J.：用于评估水流的量具的地理空间属性，数字空间数据集，可访问：<a target="_blank" rel="noopener" href="http://water.usgs.gov/GIS/metadata/usgswrd/XML/gagesII_Sept2011.xml">http://water.usgs.gov/GIS/metadata/usgswrd/XML/gagesII_Sept2011.xml</a> （最后访问：2018 年 11 月 5 日）， 2011.a  、b、c、d</p>
+<h2 id="使用实时监测站网络和混合机器学习方法进行每日流量预测"><a href="#使用实时监测站网络和混合机器学习方法进行每日流量预测" class="headerlink" title="使用实时监测站网络和混合机器学习方法进行每日流量预测"></a>使用实时监测站网络和混合机器学习方法进行每日流量预测</h2><p>标题：Daily Streamflow Forecasting Using Networks of Real-Time Monitoring Stations and Hybrid Machine Learning Methods<br>原文链接：<a target="_blank" rel="noopener" href="https://www.mdpi.com/2073-4441/16/9/1284">https://www.mdpi.com/2073-4441/16/9/1284</a><br>期刊：Water</p>
+<p>本研究中使用的数据集属于公共领域，可从加拿大水调查（针对排放）、安大略省环境部省级地下水监测计划（针对地下水位数据）和加拿大环境部（针对排放）下载。降水数据）。</p>
+<h2 id="提高水文数据稀疏地区数据驱动降雨径流模型预测能力的自训练方法"><a href="#提高水文数据稀疏地区数据驱动降雨径流模型预测能力的自训练方法" class="headerlink" title="提高水文数据稀疏地区数据驱动降雨径流模型预测能力的自训练方法"></a>提高水文数据稀疏地区数据驱动降雨径流模型预测能力的自训练方法</h2><p>标题：Self-training approach to improve the predictability of data-driven rainfall-runoff model in hydrological data-sparse regions<br>原文链接：<a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.jhydrol.2024.130862">https://doi.org/10.1016/j.jhydrol.2024.130862</a><br>期刊：Journal of Hydrology</p>
+<p>为了研究自我训练在分析涵盖各种地质和气候条件的水流网络中的有效性，我们使用流域属性和大样本研究气象学（CAMELS）数据集（Newman et al., 2015）。我们利用该数据集是因为他们对数据的公众信心，这可能会加强我们假设的验证（在2.4 节中讨论）。该数据集包括美国大陆 671 个不受管制的流域的流域平均水文气象时间序列、流域特征和每日径流量测量值。值得注意的是，该数据集已被广泛利用，以促进数据驱动模型用于各种目的的泛化和应用（例如，Feng et al., 2020、Gauch et al., 2021b、Kratzert et al., 2019b）。我们采用了与Gauch 等人 (2021b)和Kratzert 等人 (2019b)相同的 531 个盆地子集（见图1），同时排除了 140 个盆地，这些盆地在不同方法中计算的流域边界显示出相当大的不一致。与上述研究一致，我们利用毛雷尔气象强迫数据集，其中包括每日累积降水量（<br>PRCP，最高和最低气温、短波辐射和蒸气压，对每个盆地进行空间平均。此外，我们使用了27个静态流域特征，包括地形、气候特征、土地覆盖、土壤和地质特征（表1）。</p>
+<p>CAMELS数据集：Newman, A. J., Clark, M. P., Sampson, K., Wood, A., Hay, L. E., Bock, A., Viger, R. J., Blodgett, D., Brekke, L., Arnold, J. R., Hopson, T., and Duan, Q.: Development of a large-sample watershed-scale hydrometeorological data set for the contiguous USA: data set characteristics and assessment of regional variability in hydrologic model performance, Hydrol. Earth Syst. Sci., 19, 209–223, <a target="_blank" rel="noopener" href="https://doi.org/10.5194/hess-19-209-2015">https://doi.org/10.5194/hess-19-209-2015</a>, 2015.</p>
+<h2 id="使用长短期记忆-LSTM-神经网络来提高美国西部河流的流量预测"><a href="#使用长短期记忆-LSTM-神经网络来提高美国西部河流的流量预测" class="headerlink" title="使用长短期记忆 (LSTM) 神经网络来提高美国西部河流的流量预测"></a>使用长短期记忆 (LSTM) 神经网络来提高美国西部河流的流量预测</h2><p>标题：<br>原文链接：<a target="_blank" rel="noopener" href="https://hess.copernicus.org/articles/26/5449/2022">https://hess.copernicus.org/articles/26/5449/2022</a><br>期刊：Hydrology and Earth System Sciences</p>
+<p>ERA5：我们使用流域平均 ERA5 变量（近地表、地表和地下）作为 LSTM 的训练数据。ERA5 的数据可从<a target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/#!/search?text=ERA5&type=dataset%E8%8E%B7%E5%8F%96%E3%80%82">https://cds.climate.copernicus.eu/#!/search?text=ERA5&amp;type=dataset获取。</a></p>
+<p>IFS：IFS 数据（最多 10 天的前置时间）在运行时用作 LSTM 的输入（可从<a target="_blank" rel="noopener" href="https://apps.ecmwf.int/archive-catalogue/?class=od&stream=oper&expver=1%E8%8E%B7%E5%8F%96%EF%BC%89%E3%80%82">https://apps.ecmwf.int/archive-catalogue/?class=od&amp;stream=oper&amp;expver=1获取）。</a> 该系统有详细描述（<a target="_blank" rel="noopener" href="https://www.ecmwf.int/en/publications/ifs-documentation%EF%BC%89">https://www.ecmwf.int/en/publications/ifs-documentation）</a></p>
+<p>GloFAS：全球水文预报和监测系统。自 2017 年 11 月起一直在生成每日集合洪水预测和每月季节性水流展望，并作为哥白尼应急管理服务的组成部分运行。对于2021年5月25日之前的日期（即所有测试期和大部分运行期），我们使用GloFAS 2.1版（Zsoter et al. ,  2019 a）；此后，我们使用 GloFAS 3.1 版（Zsoter 等人，  2021）。GloFAS 产品可从其专用信息系统免费获取，并向所有以下注册者开放（<a target="_blank" rel="noopener" href="https://www.globalfloods.eu/%EF%BC%8C%E6%9C%80%E5%90%8E%E8%AE%BF%E9%97%AE%E6%97%A5%E6%9C%9F%EF%BC%9A2022">https://www.globalfloods.eu/，最后访问日期：2022</a> 年 8 月 1 日），其水文数据来自哥白尼气候数据存储 ( <a target="_blank" rel="noopener" href="https://cds/">https://cds</a>) .climate.copernicus.eu&#x2F;#!&#x2F;home，最后访问日期：2022 年 8 月 1 日）。有关 GloFAS 服务的更多详细信息，请访问专用 wiki（<a target="_blank" rel="noopener" href="https://confluence.ecmwf.int/display/CEMS/Global+Flood+Awareness+System%EF%BC%8C%E6%9C%80%E5%90%8E%E8%AE%BF%E9%97%AE%E6%97%A5%E6%9C%9F%EF%BC%9A2022">https://confluence.ecmwf.int/display/CEMS/Global+Flood+Awareness+System，最后访问日期：2022</a> 年 8 月 1 日）。使用了两组 GloFAS 数据：GloFAS-ERA5 （Zsoter 等人，  2019 b），这是通过使用 ERA5 重新分析强制水文模型创建的每日河流流量的全球建模数据集，以及 GloFAS 预测（Zsoter 等人，  2019 ） a，2021），全球每日河流流量预报的集合，由 ECMWF IFS 的集合预报强制执行。这些数据是全球性的，具有每日频率，分辨率为0.1°×0.1°。</p>
+<p>观测值数据：观测仪表数据下载自<a target="_blank" rel="noopener" href="https://dwr.state.co.us/Tools/Stations%EF%BC%88%EF%BC%88%E5%AF%B9%E4%BA%8E">https://dwr.state.co.us/Tools/Stations（（对于</a> ESSC2）和<a target="_blank" rel="noopener" href="https://waterdata.usgs.gov/nwis%EF%BC%88%E6%89%80%E6%9C%89%E5%85%B6%E4%BB%96%EF%BC%89%E3%80%82%E8%BF%99%E4%BA%9B%E6%95%B0%E6%8D%AE%E4%BB%A5">https://waterdata.usgs.gov/nwis（所有其他）。这些数据以</a> 3 小时为单位提供，几乎实时发布，并且大部分覆盖范围从 1990 年左右开始。</p>
+<h1 id="使用独立估计的流量持续时间曲线对未测量位置模拟的历史日流量进行偏差校正"><a href="#使用独立估计的流量持续时间曲线对未测量位置模拟的历史日流量进行偏差校正" class="headerlink" title="使用独立估计的流量持续时间曲线对未测量位置模拟的历史日流量进行偏差校正"></a>使用独立估计的流量持续时间曲线对未测量位置模拟的历史日流量进行偏差校正</h1><p>标题：Bias correction of simulated historical daily streamflow at ungauged locations by using independently estimated flow duration curves<br>原文链接：<a target="_blank" rel="noopener" href="https://hess.copernicus.org/articles/22/5741/2018/">https://hess.copernicus.org/articles/22/5741/2018/</a></p>
+<p>期刊：Hydrology and Earth System Sciences</p>
+<p>使用 GAGES-II 数据库 ( Falcone ,  2011 )中美国本土从 1980 年 10 月 1 日至 2013 年 9 月 30 日期间的参考质量流量计的每日平均流量数据。</p>
+<p>用于产生本文讨论的结果的数据和脚本可以在Farmer 等人（2018）中找到。</p>
+<p>Farmer, WH、Over, TM 和 Kiang, JE：使用独立估计的流量持续时间曲线对未测量位置模拟的历史每日流量进行偏差校正：数据发布，技术代表，美国地质调查局，弗吉尼亚州雷斯顿，https: &#x2F;&#x2F;doi.org&#x2F;10.5066&#x2F;F7VD6XNG，2018年</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/websites/" rel="tag">websites</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" rel="tag">数据分享</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/05/16/%E5%AD%A6%E4%B9%A0%E6%8B%93%E5%B1%95%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          学习拓展一
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/05/14/%E5%9C%9F%E8%80%B3%E5%85%B62023%E5%8F%8C%E9%9C%87%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%E6%95%B0%E6%8D%AE%E5%92%8C%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86-%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">土耳其2023双震部分参考数据和处理工具整理【附原文分享】</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%84%E6%B5%81-%E5%85%A5%E6%B8%97%E5%88%86%E5%8C%BA%E5%92%8C%E5%B7%B2%E8%A7%A3%E5%86%B3%E7%9A%84%E5%9C%B0%E8%A1%A8%E6%B5%81%E9%87%8F%E5%AF%B9%E9%99%86%E5%9C%B0-%E5%A4%A7%E6%B0%94%E5%8F%8D%E9%A6%88%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9A%E8%A5%BF%E9%9D%9E-WRF-%E6%B0%B4%E5%8A%9B%E8%80%A6%E5%90%88%E5%BB%BA%E6%A8%A1%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6"><span class="nav-number">1.</span> <span class="nav-text">径流-入渗分区和已解决的地表流量对陆地-大气反馈的作用：西非 WRF-水力耦合建模系统的案例研究</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-LSTM-%E7%BD%91%E7%BB%9C%E6%94%B9%E8%BF%9B-WRF-Hydro-%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E6%B0%B4%E6%B5%81%E9%A2%84%E6%B5%8B"><span class="nav-number">2.</span> <span class="nav-text">使用 LSTM 网络改进 WRF-Hydro 模型中的水流预测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%E5%92%8C%E5%A4%A7%E9%99%86%E8%A7%84%E6%A8%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E6%88%90%E5%A2%9E%E5%BC%BA%E6%B0%B4%E6%B5%81%E9%A2%84%E6%B5%8B%E5%B9%B6%E6%8F%90%E5%8F%96%E8%A7%81%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">使用长短期记忆网络和大陆规模的数据集成增强水流预测并提取见解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86-LSTM-%E7%BD%91%E7%BB%9C%E8%BF%9B%E8%A1%8C%E9%99%8D%E9%9B%A8%E5%BE%84%E6%B5%81%E5%BB%BA%E6%A8%A1"><span class="nav-number">4.</span> <span class="nav-text">使用长短期记忆 (LSTM) 网络进行降雨径流建模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%8B%AC%E7%AB%8B%E4%BC%B0%E8%AE%A1%E7%9A%84%E6%B5%81%E9%87%8F%E6%8C%81%E7%BB%AD%E6%97%B6%E9%97%B4%E6%9B%B2%E7%BA%BF%E5%AF%B9%E6%9C%AA%E6%B5%8B%E9%87%8F%E4%BD%8D%E7%BD%AE%E7%9A%84%E6%A8%A1%E6%8B%9F%E5%8E%86%E5%8F%B2%E6%97%A5%E6%B5%81%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%81%8F%E5%B7%AE%E6%A0%A1%E6%AD%A3"><span class="nav-number">5.</span> <span class="nav-text">使用独立估计的流量持续时间曲线对未测量位置的模拟历史日流量进行偏差校正</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%9E%E6%97%B6%E7%9B%91%E6%B5%8B%E7%AB%99%E7%BD%91%E7%BB%9C%E5%92%8C%E6%B7%B7%E5%90%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E8%BF%9B%E8%A1%8C%E6%AF%8F%E6%97%A5%E6%B5%81%E9%87%8F%E9%A2%84%E6%B5%8B"><span class="nav-number">6.</span> <span class="nav-text">使用实时监测站网络和混合机器学习方法进行每日流量预测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E9%AB%98%E6%B0%B4%E6%96%87%E6%95%B0%E6%8D%AE%E7%A8%80%E7%96%8F%E5%9C%B0%E5%8C%BA%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E9%99%8D%E9%9B%A8%E5%BE%84%E6%B5%81%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B%E8%83%BD%E5%8A%9B%E7%9A%84%E8%87%AA%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">提高水文数据稀疏地区数据驱动降雨径流模型预测能力的自训练方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86-LSTM-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%9D%A5%E6%8F%90%E9%AB%98%E7%BE%8E%E5%9B%BD%E8%A5%BF%E9%83%A8%E6%B2%B3%E6%B5%81%E7%9A%84%E6%B5%81%E9%87%8F%E9%A2%84%E6%B5%8B"><span class="nav-number">8.</span> <span class="nav-text">使用长短期记忆 (LSTM) 神经网络来提高美国西部河流的流量预测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%8B%AC%E7%AB%8B%E4%BC%B0%E8%AE%A1%E7%9A%84%E6%B5%81%E9%87%8F%E6%8C%81%E7%BB%AD%E6%97%B6%E9%97%B4%E6%9B%B2%E7%BA%BF%E5%AF%B9%E6%9C%AA%E6%B5%8B%E9%87%8F%E4%BD%8D%E7%BD%AE%E6%A8%A1%E6%8B%9F%E7%9A%84%E5%8E%86%E5%8F%B2%E6%97%A5%E6%B5%81%E9%87%8F%E8%BF%9B%E8%A1%8C%E5%81%8F%E5%B7%AE%E6%A0%A1%E6%AD%A3"><span class="nav-number"></span> <span class="nav-text">使用独立估计的流量持续时间曲线对未测量位置模拟的历史日流量进行偏差校正</span></a>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

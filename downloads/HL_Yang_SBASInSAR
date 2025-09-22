@@ -1,0 +1,282 @@
+#------------------------------ 计算干涉图 ----------------------------
+ls *.slc > data_tab
+sed -i 's/.slc//g' data_tab
+ls *.slc > q1
+ls *.slc.par > q2
+paste q1 q2 > slc_tab
+rm q1 q2
+mk_mli_all slc_tab rmli 20 4 1 0.7 0.35 rmli.ave
+cd rmli
+montage -label %f -geometry +5+4 -tile +3 -resize 800x800 *.mli.ras mli.montage.jpg
+cd ..
+cd dem
+srtm2dem cz.tif cz.dem cz.dem.par
+cd ..
+reference=20181205
+gc_map rmli/$reference.mli.par - dem/cz.dem.par dem/cz.dem dem/seg.dem.par dem/seg.dem dem/cz.utm_to_rdc 2 2 dem/sim_sar - - - - - ls_map 8 2
+
+reference_mli_par=rmli/$reference.mli.par
+mli_range_samples=`grep range_samples: $reference_mli_par | awk '{print $2}'`
+mli_azimuth_lines=`grep azimuth_lines: $reference_mli_par | awk '{print $2}'`
+seg_dem_par=dem/seg.dem.par
+segdem_width=`grep width: $seg_dem_par | awk '{print $2}'`
+segdem_nlines=`grep nlines: $seg_dem_par | awk '{print $2}'`
+rasmph dem/cz.utm_to_rdc $segdem_width
+#disras dem/cz.utm_to_rdc.ras
+geocode dem/cz.utm_to_rdc dem/sim_sar $segdem_width dem/rdc.sim_sar $mli_range_samples $mli_azimuth_lines 1 0
+geocode dem/cz.utm_to_rdc dem/seg.dem $segdem_width dem/rdc.seg.dem $mli_range_samples $mli_azimuth_lines 1 0
+create_diff_par rmli/$reference.mli.par - dem/cz.diff_par 1 0
+init_offsetm rmli/rmli.ave dem/rdc.sim_sar dem/cz.diff_par 1 1 - - - - 7 256
+offset_pwrm rmli/rmli.ave dem/rdc.sim_sar dem/cz.diff_par cz.diff.offs cz.diff.snr 128 128 cz.diff.offsets 1 64 64 7
+offset_fitm cz.diff.offs cz.diff.snr dem/cz.diff_par cz.diff.coffs cz.diff.coffsets 7 3
+gc_map_fine dem/cz.utm_to_rdc $segdem_width dem/cz.diff_par dem/fine_cz.utm_to_rdc
+geocode dem/fine_cz.utm_to_rdc dem/seg.dem $segdem_width dem/fine_rdc.seg.dem $mli_range_samples $mli_azimuth_lines 1 0
+geocode dem/fine_cz.utm_to_rdc dem/sim_sar $segdem_width dem/fine_rdc.sim_sar $mli_range_samples $mli_azimuth_lines 1 0
+
+base_calc slc_tab $reference.slc.par bperp_file itab 1 1 - - - - 7
+base_plot slc_tab $reference.slc.par itab bperp_file 2 1 
+mk_diff_2d slc_tab itab 0 dem/fine_rdc.seg.dem - rmli/rmli.ave rmli diff_dir 20 4 3 1 1 0
+
+
+# ------------------------------------------------------------------------
+# 一. 时间序列分析：1.提取高相干点
+
+cd diff_dir
+ls *.base > base.list
+cp base.list date.list
+sed -i 's/.base//g' date.list	
+cp date.list ../date.list
+cd ..
+first_inf_date=`head -n 1 date.list`
+## 提取高相干点文件pt
+rm pt diff_tab pdiff_unw
+raspwr rmli/$reference.mli $mli_range_samples - - - - - - - rmli/$reference.mli.bmp
+image2pt unw_mask.ras $mli_range_samples pt 1 1 6
+ras_pt pt - rmli/$reference.mli.bmp pt.bmp 1 1 255 255 0 3
+## 提取高相干点的解缠后的差分干涉信息pdiff_unw，diff_tab使用解缠后去趋势的结果
+ls diff_dir/*.adf.fit.unw > diff_tab
+mk_d2pt diff_tab pt $mli_range_samples 2 1 1 pdiff_unw
+rm -rf ras
+mkdir ras
+ras_data_pt pt - pdiff_unw 1 - rmli/$reference.mli.bmp ras/pdiff 2 1 1 TWO_PI 1
+ls rmli/*.mli > q3
+ls rmli/*.mli.par > q4
+paste q3 q4 > mli_tab
+rm q3 q4
+## 提取高相干点的后向散射强度信息pmli_par
+MLI2pt mli_tab pt - pmli_par - -
+# 复制参考影像的强度文件到当前文件夹，并替换range_looks和azimuth_looks为1
+cp $reference_mli_par .
+
+## 提取高程值并显示
+rm pdem
+data2pt dem/fine_rdc.seg.dem $reference.mli.par pt $reference.mli.par pdem 1 2
+pdisdt_pwr24 pt - $reference.mli.par pdem 1 $reference.mli.par rmli/$reference.mli 6.28 1
+#disdt_pwr24
+# 一. 时间序列分析：2.SBAS分析
+## 确定参考点refp，输出点索引（index）为 refp_ind
+discc diff_dir/$first_inf_date.adf.cc ./rmli/rmli.ave $mli_range_samples
+prox_prt pt - pdem 1925 1377 5 25 30 2 - 1 > tmp.prox_prt
+refp_ind=`grep '1925' tmp.prox_prt | grep '1377' | awk '{print $2}'`
+
+## 对参考点进行均值滤波
+rm pdiff_unwa
+spf_pt pt - $reference.mli.par pdiff_unw pdiff_unwa - 2 25 0 - $refp_ind 1
+pdisdt_pwr24 pt - $reference.mli.par pdiff_unw 1 $reference.mli.par rmli/$reference.mli 6.28 1
+pdisdt_pwr24 pt - $reference.mli.par pdiff_unwa 1 $reference.mli.par rmli/$reference.mli 6.28 1
+cd ras
+rm pdiff_unwa_*.bmp
+cd ..
+ras_data_pt pt - pdiff_unwa 1 - rmli/$reference.mli.bmp ras/pdiff_unwa 2 1 1 TWO_PI 1
+cd ras
+montage -label %f -geometry +5+4 -tile +3 -resize 1000x1000 pdiff_unwa_*.bmp pdiff_unwa.montage.jpg
+cd ..
+## 解缠后相位转位移
+## itab1中包含全部的解缠文件，itab包含要去除的解缠文件（0）和保留的解缠文件（1）
+cp itab itab1
+dispmap_pt pt - pmli_par itab1 pdiff_unwa pdem pdisp_unwa 0
+pdisdt_pwr24 pt - $reference.mli.par pdisp_unwa 91 $reference.mli.par rmli/$reference.mli 0.3 1
+cd ras
+rm pdisp_unwa_*.bmp
+cd ..
+ras_data_pt pt - pdisp_unwa 1 - rmli/$reference.mli.bmp ras/pdisp_unwa 2 1 1 0.3 1
+## 查看pdisp_unwa.montage.jpg 修改itab来进行干涉对的选择，用于后面的SBAS分析(mb_pt)
+cd ras
+montage -label %f -geometry +5+4 -tile +3 -resize 1000x1000 pdisp_unwa_*.bmp pdisp_unwa.montage.jpg
+cd ..
+gedit itab
+# 获取挑选的影像的解缠图像并保存在SELECT_UNW文件夹中
+rm -rf SELECT_UNWA
+mkdir SELECT_UNWA
+
+awk '{if($4==1) print $0}' itab > itab_select
+rm tmp select_bperp_file
+awk '{print $3}' itab_select > select_ind
+cat select_ind | while read line;
+do
+	sed -n "${line}p" bperp_file >> select_base
+done
+awk '{print $2}' select_base > tmp2
+awk '{print $3}' select_base > tmp3
+touch select_unw.ls
+paste select_ind tmp2 tmp3 > select_base_tab
+ls ras/pdisp_unwa_*.bmp > pdisp_unwa.ls
+cat select_ind | while read line;
+do
+	sed -n "${line}p" pdisp_unwa.ls >> select_pdisp_unwa
+done
+awk '{print"cp "$1" SELECT_UNWA" }' select_pdisp_unwa > cp_bash
+bash cp_bash
+cp select_pdisp_unwa SELECT_UNWA
+cp select_base_tab SELECT_UNWA
+rm itab_select select_ind tmp2 tmp3 select_pdisp_unwa cp_bash select_base select_base_tab
+cd SELECT_UNWA
+montage -label %f -geometry +5+4 -tile +3 -resize 1000x1000 pdisp_unwa_*.bmp select_pdisp_unwa.montage.jpg
+cd ..
+## 对参考点进行SBAS分析，生成高程改正文件（phgt_out）,形变序列相位文件（pdiff_ts）,高程和形变模型相位（pdiff_sim），形变速率相位（prate），质量文件（psigma_ts，psigma_fit）。
+rm pitab_ts pdiff_ts pdiff_sim psigma_ts phgt_out prate pconst psigma_fit
+mb_pt pt - pmli_par itab pdiff_unwa $refp_ind - pitab_ts pdiff_ts pdiff_sim psigma_ts 1 phgt_out 0 prate pconst psigma_fit $reference.mli.par
+## 显示形变速率相位
+pdisdt_pwr24 pt - $reference.mli.par pdiff_ts 11 $reference.mli.par rmli/$reference.mli 6.28 1
+pdisdt_pwr24 pt - $reference.mli.par prate 1 $reference.mli.par rmli/$reference.mli 6.28 1
+prasdt_pwr24 pt - $reference.mli.par prate 1 $reference.mli.par rmli/$reference.mli 6.28 4
+## 显示质量图
+pdisdt_pwr24 pt - $reference.mli.par psigma_ts 1 $reference.mli.par rmli/$reference.mli 0.628 1
+## 生成形变序列相位图
+cd ras
+rm pdiff_ts_*.bmp
+cd ..
+ras_data_pt pt - pdiff_ts 1 - rmli/$reference.mli.bmp ras/pdiff_ts 2 1 1 TWO_PI 1
+## 根据时间序列标准差生成掩膜文件pmask0
+rm pmask0
+thres_msk_pt pt pmask0 psigma_ts 1 0. 0.3
+pmsk=-
+# 一. 时间序列分析：3.大气延迟误差剔除
+## 时间域滤波，pdiff_ts_tpf为滤波后的形变序列相位文件，pdiff_ts_tpf1包含大气延迟相位和非线性形变
+rm pdiff_ts_tpf pdiff_ts_tpf1
+# dtmax影响很小，mode有一点影响
+tpf_pt pt $pmsk pmli_par pitab_ts pdiff_ts pdiff_ts_tpf 2 1000. 1 9
+sub_phase_pt pt $pmsk pdiff_ts - pdiff_ts_tpf pdiff_ts_tpf1 0 0
+## 查看pdiff_ts_tpf图像(复数影像)
+pdismph_pwr24 pt $pmsk $reference.mli.par pdiff_ts_tpf 2 $reference.mli.par rmli/$reference.mli 1
+pdisdt_pwr24 pt - $reference.mli.par pdiff_ts_tpf1 22 $reference.mli.par rmli/$reference.mli 6.28 1
+prasdt_pwr24 pt $pmsk $reference.mli.par pdiff_ts_tpf 22 $reference.mli.par rmli/$reference.mli 6.28 4
+## 空间域滤波，patm_ts_A为大气延迟相位
+rm patm_ts_A
+## 个人认为32 4最好
+fspf_pt pt $pmsk $reference.mli.par pdiff_ts_tpf1 patm_ts_A - 2 32 4 1
+prasdt_pwr24 pt $pmsk $reference.mli.par patm_ts_A 22 $reference.mli.par rmli/$reference.mli 6.28 4
+cd ras
+rm patm_ts_A_*.bmp
+cd ..
+ras_data_pt pt $pmsk patm_ts_A 1 - rmli/$reference.mli.bmp ras/patm_ts_A 2 1 1 6.24 1
+cd ras
+montage -label %f -geometry +5+4 -tile +3 -resize 1000x1000 patm_ts_A_*.bmp patm_ts_A.montage.jpg
+cd ..
+# 一. 时间序列分析：4.累计形变与形变速率计算
+## 形变时序相位减去大气延迟相位即可得到最终的时间序列形变相位pdiff_ts_A
+rm pdiff_ts_A
+sub_phase_pt pt $pmsk pdiff_ts - patm_ts_A pdiff_ts_A 0 0
+pdisdt_pwr24 pt - $reference.mli.par pdiff_ts_A 22 $reference.mli.par rmli/$reference.mli 6.28 1
+prasdt_pwr24 pt $pmsk $reference.mli.par pdiff_ts_A 22 $reference.mli.par rmli/$reference.mli 6.28 4
+## 相位转距离 pdisp_ts_A，ras_data_pt查看ts文件
+rm pdisp_ts_A
+dispmap_pt pt $pmsk pmli_par pitab_ts pdiff_ts_A pdem pdisp_ts_A 0
+pdisdt_pwr24 pt $pmsk $reference.mli.par pdisp_ts_A 26 $reference.mli.par rmli/$reference.mli 0.3 1
+pdisdt_pwr24 pt $pmsk $reference.mli.par pdiff_ts_A 26 $reference.mli.par rmli/$reference.mli 6.28 1
+prasdt_pwr24 pt $pmsk $reference.mli.par pdisp_ts_A 23 $reference.mli.par rmli/$reference.mli 0.3 4
+cd ras
+rm pdisp_ts_A_*.bmp
+rm pdiff_ts_A*.bmp
+cd ..
+ras_data_pt pt - pdiff_ts_A 1 - rmli/$reference.mli.bmp ras/pdiff_ts_A 2 1 1 TWO_PI 1 
+ras_data_pt pt - pdisp_ts_A 1 - rmli/$reference.mli.bmp ras/pdisp_ts_A 2 1 1 0.3 1 
+cd ras
+montage -label %f -geometry +5+4 -tile +3 -resize 1000x1000 pdisp_ts_A_*.bmp pdisp_ts_A.montage.jpg
+cd ..
+pt2data pt $pmsk $reference.mli.par pdisp_ts_A 1 disp_ts_A $reference.mli.par 2 - 4.0 3
+
+## 利用def_mod_pt计算线性形变相位，计算前利用spf_pt滤波
+rm pbase_ts pdiff_ts_Aa
+base_orbit_pt pmli_par pitab_ts - pbase_ts
+spf_pt pt $pmsk $reference.mli.par pdiff_ts_A pdiff_ts_Aa - 2 25 0 - $refp_ind 0
+
+## pdef_A为生成的线性速率文件，pres_A为相位残差，pdh_A为高程改正值，pdiff_A为点差分干涉文件，punw_A为pdiff_A的解缠相位文件，通过设置sigma_max参数控制pmask_A掩膜文件覆盖范围
+rm pres_A pdh_A pdef_A punw_A psigma_A pmask_A pdh_err_A pdef_err_A pppc_err_A
+def_mod_pt pt - pmli_par - pitab_ts pbase_ts 0 pdiff_ts_Aa 0 $refp_ind pres_A pdh_A pdef_A punw_A psigma_A pmask_A 60. -0.01 0.01 1.5 5 pdh_err_A pdef_err_A pppc_err_A
+## 计算残差相位的相干性pcct_A，设置阈值剔除质量差的点并制作掩膜文件pmask_A_070，pmask_A_070掩膜文件通过thres_msk_pt命令进行进一步筛选
+discc 
+rm pcct_A
+cct_pt pt pmask_A $reference.mli.par pres_A pcct_A 2 0. 0 5
+cp pmask_A pmask_A_070
+pmsk_A=pmask_A_070
+thres_msk_pt pt $pmsk_A pcct_A 1 0.70 1.01
+# 查看pdata(pres_A pdh_A pdef_A punw_A psigma_A)命令，prasdt_pwr24
+prasdt_pwr24 pt $pmsk_A $reference.mli.par pres_A 1 $reference.mli.par rmli/$reference.mli 0.1 4
+prasdt_pwr24 pt - $reference.mli.par pdef_A 1 $reference.mli.par rmli/$reference.mli 0.1 4
+pdisdt_pwr24 pt - $reference.mli.par pdef_A 1 $reference.mli.par rmli/$reference.mli 0.1 1
+prasdt_pwr24 pt $pmsk_A $reference.mli.par punw_A 1 $reference.mli.par rmli/$reference.mli 6.28 4
+vu_disp pt - pmli_par pitab_ts pdisp_ts_A pdef_A pdem psigma_A pdh_err_A pdef_err_A - rmli/$reference.mli.bmp -0.1 0.1 2 128
+dis_data
+dis_ipta
+sigma_pt pt $pmsk_A pdef_A psigma_pdef_A 1 2 - 
+prasdt_pwr24 pt $pmsk_A $reference.mli.par psigma_pdef_A 1 $reference.mli.par rmli/$reference.mli 0.01 4
+pdisdt_pwr24 pt - $reference.mli.par pdef_A 1 $reference.mli.par rmli/$reference.mli 0.1 1
+# 二. 地理编码
+## 生成形变速率
+rm plist_map pmap_coord plat_lon
+## SAR坐标系转地理坐标系
+pt2geo pt $pmsk_A $reference.mli.par - pdem dem/seg.dem.par diff_dir/$first_inf_date.diff_par 1 1 plist_map pmap_coord plat_lon
+rm qinling.def qinling.def.bmp
+## pt2d,根据输出结果进行地理编码
+pt2d plist_map $pmsk_A pdef_A 1 qinling.def $segdem_width $segdem_nlines 30 30 1 1 2 3 3 1
+## 把编码后的结果生成图片格式
+ras8_float qinling.def - $segdem_width qinling.def.bmp 1 0.0 240. - - - 0 -0.05 0.05 0 0 1.0 0.35 1 1 0 1 1 1
+
+geocode_back rmli/$reference.mli $mli_range_samples dem/fine_qinling.utm_to_rdc rmli/$reference.rmli_utm $segdem_width $segdem_nlines
+raspwr rmli/$reference.rmli_utm $segdem_width - - - - - - - rmli/$reference.rmli_utm.bmp
+comb_hsi qinling.def.bmp rmli/$reference.rmli_utm.bmp qinling.def.map.bmp
+data2geotiff dem/seg.dem.par qinling.def 2 qinling.def.tif
+
+disp_prt plist_map $pmsk_A - pmli_par  pitab_ts pmap_coord pdem pdef_A pcct_A pdh_err_A pdef_err_A pdisp_ts_A $refp_ind items.txt disp_tab.txt
+kml_pt disp_tab.txt 5 4 7 "LOS rate[mm/yr]" 6 "height" 8 coherence 1 qinling_disp.tmp.kml button_master.png gamma_logo.png - 1 0. 240.
+
+## 生成形变时序
+pdisdt_pwr24 pt - $reference.mli.par pdisp_ts_A 34 $reference.mli.par rmli/$reference.mli 0.3 1
+pdisdt_pwr24 pt - $reference.mli.par pdiff_ts_A 1 $reference.mli.par rmli/$reference.mli 6.28 1
+rm pdisp_ts_A_bmp.ls
+cd ras
+rm pdisp_ts_A_bmp.ls
+ls pdisp_ts_A_*.bmp > pdisp_ts_A_bmp.ls
+cp pdisp_ts_A_bmp.ls ../pdisp_ts_A.ls
+cd ..
+sed -i "s/.bmp//g" pdisp_ts_A.ls
+n_pdisp_ts_A=`wc -l pdisp_ts_A.ls`
+## 批量转换
+rm -rf pdisptif
+mkdir pdisptif
+declare -i count
+count=1
+cat pdisp_ts_A.ls | while read a;
+do echo "*************** $a is converting to $a.def.tif , count is equal to $count***************"
+	pt2d plist_map $pmsk_A pdisp_ts_A $count pdisptif/$a.def $segdem_width $segdem_nlines 30 30 1 1 2 3 3 1
+	data2geotiff dem/seg.dem.par pdisptif/$a.def 2 pdisptif/$a.def.tif
+	ras8_float pdisptif/$a.def - $segdem_width pdisptif/$a.def.bmp 1 0.0 240. - - - 0 -0.05 0.05 0 0 1.0 0.35 1 1 0 1 1 1
+	comb_hsi pdisptif/$a.def.bmp rmli/$reference.rmli_utm.bmp pdisptif/$a.def.map.bmp
+	count=$count+1
+done
+
+cd pdisptif
+montage -label %f -geometry +5+4 -tile +3 -resize 1000x1000 *.def.map.bmp def.map.montage.jpg
+cd ..
+pdisdt_pwr24 pt $pmsk_A $reference.mli.par pdisp_ts_A 34 $reference.mli.par rmli/$reference.mli 0.3 1
+## 转换一景影像
+rm los24.def los24.def.bmp los24.def.map.bmp los24.def.tif
+pt2d plist_map $pmsk_A pdisp_ts_A 24 los24.def $segdem_width $segdem_nlines 30 30 1 1 2 3 3 1
+ras8_float los24.def - $segdem_width los24.def.bmp 1 0.0 240. - - - 0 -0.05 0.05 0 0 1.0 0.35 1 1 0 1 1 1
+comb_hsi los24.def.bmp rmli/$reference.rmli_utm.bmp los24.def.map.bmp
+data2geotiff dem/seg.dem.par los24.def 2 los24.def.tif
+
+pdisdt_pwr24_map plist_map $pmsk_A dem/seg.dem.par pdisp_ts_A  rmli/$reference.rmli_utm 0.05 1
+prasdt_pwr24_map
+

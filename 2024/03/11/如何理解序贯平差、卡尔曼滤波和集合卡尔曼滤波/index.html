@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="卡尔曼滤波序贯平差公式推导" />
+  
+  
+  
+  
+  <meta name="description" content="序贯平差概念序贯平差也叫逐次相关间接平差，它是将观测值分成两组或多组，按组的顺序分别做相关间接平差，从而使其达到与两期或多期网一起做整体平差同样的结果。 公式推导将观测值 L 分为两组，记 $\overset{L_{k-1}}{\tiny n_{k-1}}$ 和 $\overset{L_{k}}{\tiny n_{k}}$, 它们的权阵分别记为 $P_{k-1}$ 和 $P_{k}$，设这两组观测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波">
+<meta property="og:url" content="https://singyutang.github.io/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="序贯平差概念序贯平差也叫逐次相关间接平差，它是将观测值分成两组或多组，按组的顺序分别做相关间接平差，从而使其达到与两期或多期网一起做整体平差同样的结果。 公式推导将观测值 L 分为两组，记 $\overset{L_{k-1}}{\tiny n_{k-1}}$ 和 $\overset{L_{k}}{\tiny n_{k}}$, 它们的权阵分别记为 $P_{k-1}$ 和 $P_{k}$，设这两组观测">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-11T03:07:13.000Z">
+<meta property="article:modified_time" content="2024-04-08T13:34:07.994Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="卡尔曼滤波">
+<meta property="article:tag" content="序贯平差">
+<meta property="article:tag" content="公式推导">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      如何理解序贯平差、卡尔曼滤波和集合卡尔曼滤波
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/03/11/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E3%80%81%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E5%92%8C%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" class="article-date">
+	  <time datetime="2024-03-11T03:07:13.000Z" itemprop="datePublished">三月 11, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="序贯平差"><a href="#序贯平差" class="headerlink" title="序贯平差"></a>序贯平差</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>序贯平差也叫逐次相关间接平差，它是将观测值分成两组或多组，按组的顺序分别做相关间接平差，从而使其达到与两期或多期网一起做整体平差同样的结果。</p>
+<h2 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h2><p>将观测值 L 分为两组，记 $\overset{L_{k-1}}{\tiny n_{k-1}}$ 和 $\overset{L_{k}}{\tiny n_{k}}$, 它们的权阵分别记为 $P_{k-1}$ 和 $P_{k}$，设这两组观测值不相关，有<br>$$<br>\overset{L}{\tiny n \ 1} &#x3D; [\ \begin{matrix} L_{k-1} \ L_{k} \end{matrix}\ ]<br>$$<br>$$<br>\overset{P}{\tiny n \ n} &#x3D; \begin{equation} \left[ \begin{matrix} P_{k-1} &amp; 0 \ 0 &amp; P_{k} \end{matrix} \right] \end{equation}<br>$$<br>当参数间不存在约束条件时，其误差方程为<br>$$<br>\begin{equation} V_{k-1} &#x3D; B_{k-1}  \hat{x} - l_{k-1}<br>\tag{1}\end{equation}<br>$$<br>$$<br>\begin{equation} V_{k} &#x3D; B_{k}  \hat{x} - l_{k}<br>\tag{2}\end{equation}<br>$$<br>式中<br>$$<br>\hat{X} &#x3D; X^0 + \hat{x}, \quad l_{i}&#x3D;L_{i}-L_{i}^0(i&#x3D;k,k-1)<br>$$<br>将 （1）式单独平差，得<br>$$<br>\hat{x}<em>{k-1} &#x3D; Q</em>{\hat{x}<em>{k-1}}B</em>{k-1}^TP_{k-1}l_{k-1} \tag{3}<br>$$<br>式中，$Q_{\hat{x}<em>{k-1}}$ 为 $\hat{X}</em>{k-1}$ (即 $\hat{x}<em>{k-1}$) 的协因数阵，故有<br>$$<br>Q</em>{\hat{X}<em>{k-1}} &#x3D; (B</em>{k-1}^T P_{k-1}B_{k-1})^{-1} \tag{4}<br>$$<br>或<br>$$<br>Q_{\hat{X}<em>{k-1}} ^{-1}&#x3D; (B</em>{k-1}^T P_{k-1}B_{k-1}) \tag{5}<br>$$<br>$\hat{x}<em>{k-1}$ 表示由第一组观测值 $L</em>{k-1}$ 平差所得 $\hat{x}$ 的值<br>将（1）和（2）联合解算，即由两组观测值作整体平差，可组成法方程为<br>$$<br>(Q_{\hat{X}<em>{k-1}} ^{-1}+ B</em>{k}^T P_{k}B_{k}) \hat{x}-(B_{k-1}^TP_{k-1}B_{k-1}+B_{k}^TP_{k}l_{k})&#x3D;0 \tag{6}<br>$$<br>其解为<br>$$<br>\hat{x}&#x3D;(Q_{\hat{X}<em>{k-1}} ^{-1}+ B</em>{k}^T P_{k}B_{k})^{-1}(B_{k-1}^TP_{k-1}B_{k-1}+B_{k}^TP_{k}l_{k})<br>$$<br>它是两组观测值整体平差的结果，按间接平差知，其法方程系数的逆阵就是\ $\hat{X}$ 的协因数阵，故有<br>$$<br>Q_{\hat{X}}&#x3D;(Q_{\hat{X}<em>{k-1}} ^{-1}+ B</em>{k}^T P_{k}B_{k})^{-1} \tag{7}<br>$$<br>于是上式为<br>$$<br>\hat{x}&#x3D;Q_{\hat{X}}B_{k-1}^TP_{k-1}B_{k-1}+Q_{\hat{X}}B_{k}^TP_{k}l_{k} \tag{8}<br>$$<br>考虑（3）和（7）式，<br>$$<br>B_{k-1}^TP_{k-1}l_{k-1}&#x3D;Q_{\hat{X}<em>{k-1}}^{-1}\hat{x}</em>{k-1} \tag{9}<br>$$<br>$$<br>Q_{\hat{X}<em>{k-1}}^{-1}&#x3D;Q</em>{\hat{X}<em>{k}}^{-1}-B</em>{k}^T P_{k} B_{k} \tag{10}<br>$$<br>则（8）式为<br>$$<br>\hat{x}&#x3D;\hat{x}<em>{k-1}+Q</em>{\hat{X}} B_{k}^T P_{k}(l_{k}-B_{k}\hat{x}<em>{k-1}) \tag{11}<br>$$<br>令<br>$$<br>J&#x3D;Q</em>{\hat{X}}B_{k}^T P_{k} \tag{12}<br>$$<br>$$<br>\bar{l}<em>{k} &#x3D; l</em>{k} - B_{k}\hat{x}<em>{k-1} \tag{13}<br>$$<br>则上式为<br>$$<br>\hat{x}&#x3D;\hat{x}</em>{k-1}+J \bar{l}<em>{k} \tag{14}<br>$$<br>将（10）式两边左乘 $Q</em>{\hat{X}}$,，顾及（12）得<br>$$<br>Q_{\hat{X}}Q_{\hat{X}<em>{k-1}}^{-1} &#x3D; I-JB</em>{k}<br>$$<br>再对两边右乘 $Q_{\hat{X}<em>{k-1}}$，得<br>$$<br>Q</em>{\hat{X}}&#x3D;Q_{\hat{X}<em>{k-1}} - JB</em>{k}Q_{\hat{X}<em>{k-1}} \tag{15}<br>$$<br>由矩阵反演公式知<br>$$<br>\begin{equation}<br>Q</em>{\hat{X}} &#x3D; (Q_{\hat{X}<em>{k-1}}^{-1}+B</em>{k}^T P_{k}B_{k})^{-1}<br>&#x3D;Q_{\hat{X}<em>{k-1}}-Q</em>{\hat{X}<em>{k-1}}B</em>{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}<em>{k-1}}B</em>{k}^T)^{-1}B_{k}Q_{\hat{X}<em>{k-1}}<br>\end{equation} \tag{16}<br>$$<br>比较（15）与（16）式知：<br>$$<br>J &#x3D; Q</em>{\hat{X}<em>{k-1}}B</em>{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}<em>{k-1}}B</em>{k}^T)^{-1} \tag{17}<br>$$<br>J 阵称为卡尔曼滤波增益矩阵或称序贯平差的增益矩阵。<br>将（17）式代入（14）式即得序贯平差的递推计算式。</p>
+<h2 id="结论-序贯平差算法"><a href="#结论-序贯平差算法" class="headerlink" title="结论 (序贯平差算法)"></a>结论 (序贯平差算法)</h2><ol>
+<li><p>使用参数平差改正值 $\hat{x}$ 计算<br>状态递推<br>$$<br>\hat{x}<em>{k} &#x3D; \hat{x}</em>{k-1} + J_{k} \bar{l}<em>{k}<br>$$<br>$$<br>\bar{l}</em>{k} &#x3D; l_{k} - B_{k}\hat{x}<em>{k-1}<br>$$<br>方差递推<br>$$<br>\begin{equation}<br>Q</em>{\hat{X}} &#x3D;Q_{\hat{X}<em>{k-1}}-Q</em>{\hat{X}<em>{k-1}}B</em>{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}<em>{k-1}}B</em>{k}^T)^{-1}B_{k}Q_{\hat{X}<em>{k-1}}<br>\end{equation}<br>$$<br>增益矩阵<br>$$<br>J &#x3D; Q</em>{\hat{X}<em>{k-1}}B</em>{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}<em>{k-1}}B</em>{k}^T)^{-1}<br>$$</p>
+</li>
+<li><p>使用参数平差值（待估状态/参数量）$\hat{X}$ 计算<br>状态递推<br>$$<br>\hat{X}<em>{k} &#x3D; \hat{X}</em>{k-1} + J_{k} \bar{L}<em>{k}<br>$$<br>$$<br>\bar{L}</em>{k} &#x3D; L_{k} - B_{k}\hat{X}<em>{k-1}<br>$$<br>方差递推<br>$$<br>\begin{equation}<br>Q</em>{\hat{X}<em>{k}} &#x3D;Q</em>{\hat{X}<em>{k-1}}-Q</em>{\hat{X}<em>{k-1}}B</em>{k}^T(P_{k}^{-1}+B_{k}Q_{\hat{X}<em>{k-1}}B</em>{k}^T)^{-1}B_{k}Q_{\hat{X}<em>{k-1}}<br>\end{equation}<br>$$<br>增益矩阵<br>$$<br>J</em>{k} &#x3D; Q_{\hat{X}<em>{k-1}}B</em>{k}^T (P_{k}^{-1}+B_{k}Q_{\hat{X}<em>{k-1}}B</em>{k}^T)^{-1}<br>$$</p>
+</li>
+</ol>
+<h2 id="推导流程"><a href="#推导流程" class="headerlink" title="推导流程"></a>推导流程</h2><p>使用参数平差值（待估状态/参数量）$\hat{X}$ 计算</p>
+
+
+<h1 id="卡尔曼滤波"><a href="#卡尔曼滤波" class="headerlink" title="卡尔曼滤波"></a>卡尔曼滤波</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>卡尔曼滤波是一种线性最小方差估计，采用动力学方程即状态方程描述被估计量的动态变化规律，被估计量的动态统计信息由激励白噪声的统计信息和动力学方程确定。其计算过程是一个不断地预测、修正的过程。在求解时不需要存储大量的观测数据，并且当得到新的观测数据时，可随时估算得新的滤波值，便于实时处理观测结果。<br>1.基于前一时间点的系统状态的概率分布给出当前时间点的系统状态的概率分布预测 P1<br>2.基于当前时间点的观测量的概率分布 Q 给出另一组对当前时间点系统状态的概率分布预测 P2 (这里需要注意，如果传感器能直接把系统状态都观测了，那么我们直接用观测量的概率分布 Q 作为 P2 就好了，但是有可能传感器观测的物理量量并不是直接的系统状态，而是其他物理量，这时我们需要通过做一个线性变换来获得 P2)<br>3.现在，我们有两个关于当前时间点系统状态的概率分布的预测 P1 和 P2，我们于是可以计算它们的联合概率分布，这个联合概率分布就是我们最终想要的更正过后的当前时间点的系统状态概率分布，有了它我们就可以进入下一个时间点继续迭代我们交替的预测-更正步骤了。<br>注意：系统状态和测量值都服从线性高斯分布。</p>
+<h2 id="卡尔曼滤波算法"><a href="#卡尔曼滤波算法" class="headerlink" title="卡尔曼滤波算法"></a>卡尔曼滤波算法</h2><p>状态递推<br>$$<br>x_{k}’&#x3D;x_{k}+K’(\overrightarrow z_{k} - H_{k}X_{k})<br>$$<br>方差递推<br>$$<br>P_{k}’&#x3D;P_{k}-K’H_{k}P_{k}<br>$$<br>增益矩阵<br>$$<br>K’&#x3D;P_{k}H_{k}^T(H_{k}P_{k}H_{k}^T+R_{k})^{-1}<br>$$</p>
+<p>变量解释<br>$$<br>x_{K}’: 最佳估计<br>$$<br>$$<br>x_{k}: 当前状态<br>$$<br>$$<br>P_{k}: 当前状态x_{k}的协方差阵<br>$$<br>$$<br>\overrightarrow z_{k}: 观测值平均值<br>$$</p>
+<p>$H_{k}$: 由于单位、比例等不同对传感器加上一个映射矩阵（尺度变换），从而保证每个传感器输出读数尺度相同，处于同一空间<br>$$<br>R_{k}: 传感器噪声<br>$$<br>$$<br>K’ : 卡尔曼增益<br>$$</p>
+<h1 id="集合卡尔曼滤波"><a href="#集合卡尔曼滤波" class="headerlink" title="集合卡尔曼滤波"></a>集合卡尔曼滤波</h1><h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/122926813">序贯最小二乘平差 &#x2F; 递推最小二乘平差公式推导</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Gou_Hailong/article/details/131031339">序贯最小二乘平差 VS 卡尔曼滤波</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/" rel="tag">公式推导</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/" rel="tag">卡尔曼滤波</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE/" rel="tag">序贯平差</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/12/07/SWOT%E4%BB%8B%E7%BB%8D%E3%80%81%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6%E5%8F%8A%E5%BA%94%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">SWOT介绍、研究现状及应用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE"><span class="nav-number">1.</span> <span class="nav-text">序贯平差</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.2.</span> <span class="nav-text">公式推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA-%E5%BA%8F%E8%B4%AF%E5%B9%B3%E5%B7%AE%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">结论 (序贯平差算法)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BC%E6%B5%81%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">推导流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2"><span class="nav-number">2.</span> <span class="nav-text">卡尔曼滤波</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">卡尔曼滤波算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2"><span class="nav-number">3.</span> <span class="nav-text">集合卡尔曼滤波</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">4.</span> <span class="nav-text">参考文档</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

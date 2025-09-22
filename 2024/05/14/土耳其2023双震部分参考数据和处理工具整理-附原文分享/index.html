@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>土耳其2023双震部分参考数据和处理工具整理【附原文分享】 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="websites文献分享InSAR数据分享toolkit地震土耳其双震" />
+  
+  
+  
+  
+  <meta name="description" content="土耳其2023双震同震形变分析的参考数据和处理工具整理【附原文分享】提供可用数据和代码的论文Traditional seismic hazard analyses underestimate hazard levels when compared to observations from the 2023 Kahramanmaras earthquakes原文链接：https:&#x2F;&#x2F;www.natu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="土耳其2023双震部分参考数据和处理工具整理【附原文分享】">
+<meta property="og:url" content="https://singyutang.github.io/2024/05/14/%E5%9C%9F%E8%80%B3%E5%85%B62023%E5%8F%8C%E9%9C%87%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%E6%95%B0%E6%8D%AE%E5%92%8C%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86-%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="土耳其2023双震同震形变分析的参考数据和处理工具整理【附原文分享】提供可用数据和代码的论文Traditional seismic hazard analyses underestimate hazard levels when compared to observations from the 2023 Kahramanmaras earthquakes原文链接：https:&#x2F;&#x2F;www.natu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-14T02:23:11.000Z">
+<meta property="article:modified_time" content="2024-05-14T02:42:03.200Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="websites">
+<meta property="article:tag" content="文献分享">
+<meta property="article:tag" content="InSAR">
+<meta property="article:tag" content="数据分享">
+<meta property="article:tag" content="toolkit">
+<meta property="article:tag" content="地震">
+<meta property="article:tag" content="土耳其双震">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-土耳其2023双震部分参考数据和处理工具整理-附原文分享" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      土耳其2023双震部分参考数据和处理工具整理【附原文分享】
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/05/14/%E5%9C%9F%E8%80%B3%E5%85%B62023%E5%8F%8C%E9%9C%87%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%E6%95%B0%E6%8D%AE%E5%92%8C%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86-%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB/" class="article-date">
+	  <time datetime="2024-05-14T02:23:11.000Z" itemprop="datePublished">五月 14, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="土耳其2023双震同震形变分析的参考数据和处理工具整理【附原文分享】"><a href="#土耳其2023双震同震形变分析的参考数据和处理工具整理【附原文分享】" class="headerlink" title="土耳其2023双震同震形变分析的参考数据和处理工具整理【附原文分享】"></a>土耳其2023双震同震形变分析的参考数据和处理工具整理【附原文分享】</h1><h2 id="提供可用数据和代码的论文"><a href="#提供可用数据和代码的论文" class="headerlink" title="提供可用数据和代码的论文"></a>提供可用数据和代码的论文</h2><h3 id="Traditional-seismic-hazard-analyses-underestimate-hazard-levels-when-compared-to-observations-from-the-2023-Kahramanmaras-earthquakes"><a href="#Traditional-seismic-hazard-analyses-underestimate-hazard-levels-when-compared-to-observations-from-the-2023-Kahramanmaras-earthquakes" class="headerlink" title="Traditional seismic hazard analyses underestimate hazard levels when compared to observations from the 2023 Kahramanmaras earthquakes"></a>Traditional seismic hazard analyses underestimate hazard levels when compared to observations from the 2023 Kahramanmaras earthquakes</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43247-023-01148-y">https://www.nature.com/articles/s43247-023-01148-y</a></p>
+<p>两次地震记录的地面运动数据集来自 Gülerce 等人。<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43247-023-01148-y#ref-CR10">10</a>，他们使用了土耳其灾害和应急管理局 (AFAD) 发布的原始地面加速度数据。他们消除了潜在有问题的记录（即，跟踪不完整、噪声内容较多或事件跟踪不清晰的记录），并根据 Akkar 等人中描述的程序处理剩余记录。<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43247-023-01148-y#ref-CR11">11</a> .由于本研究主要关注振幅相对较高的地震动，因此仅考虑断层面100 km以内的记录。此外，上部 30 米内的时间平均剪切波速度（）未知的台站记录也被删除，因为该站点代理是 GMM 的关键输入。这导致了<em>Mw</em> 7.8 Pazarcik 事件的 51 项记录和<em>Mw</em> 7.5 Elbistan 事件的 25 项记录。对于所有记录，计算三个地面运动强度测量：峰值地面加速度 ( <em>PGA</em> ) 和 0.5 秒和 1.0 秒周期的 5% 阻尼弹性谱加速度 (和 )。选择这三个参数是为了粗略地考虑地面运动频率内容的变化。所有强度测量的 RotD50 值都是根据两个正交水平分量计算的。对于两个水平和正交分量，RotD50值是通过以小增量旋转地面运动来计算的，以获得各个方向上的加速度；计算每个方向的强度测量；并计算所有方向的中值强度<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43247-023-01148-y#ref-CR12">12</a>。(选自论文<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43247-023-01148-y">Traditional seismic hazard analyses underestimate hazard levels when compared to observations from the 2023 Kahramanmaras earthquakes</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://tadas.afad.gov.tr/event-detail/17966">AFAD_Kahramanmaraş_Mw7.7_PGA_data</a></p>
+<p><a target="_blank" rel="noopener" href="https://tadas.afad.gov.tr/event-detail/17969">AFAD_Elbistan (Kahramanmaraş)_Mw7.6_PGA_data</a></p>
+<h3 id="Geometric-controls-on-cascading-rupture-of-the-2023-Kahramanmaras-earthquake-doublet"><a href="#Geometric-controls-on-cascading-rupture-of-the-2023-Kahramanmaras-earthquake-doublet" class="headerlink" title="Geometric controls on cascading rupture of the 2023 Kahramanmaraş earthquake doublet"></a>Geometric controls on cascading rupture of the 2023 Kahramanmaraş earthquake doublet</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41561-023-01283-3">https://www.nature.com/articles/s41561-023-01283-3</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.tusaga-aktif.gov.tr/Web/DepremVerileri.aspx">地震区TUSAGA-Active固定GNSS站1秒数据</a></p>
+<p>GNSS 原始数据由 Türkiye Ulusal Sabit GNSS Ağı-Aktif (TUSAGA-Active) 系统 ( <a target="_blank" rel="noopener" href="https://www.tusaga-aktif.gov.tr/Web/DepremVerileri.aspx">https://www.tusaga-aktif.gov.tr/Web/DepremVerileri.aspx</a> )提供。</p>
+<p>与BP结果相关的大地测量数据、滑动模型和数据集可以从<a target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.8271589%E4%B8%8B%E8%BD%BD">https://doi.org/10.5281/zenodo.8271589下载</a></p>
+<h3 id="The-overall-subshear-and-multi-segment-rupture-of-the-2023-Mw7-8-Kahramanmaras-Turkey-earthquake-in-millennia-supercycle"><a href="#The-overall-subshear-and-multi-segment-rupture-of-the-2023-Mw7-8-Kahramanmaras-Turkey-earthquake-in-millennia-supercycle" class="headerlink" title="The overall-subshear and multi-segment rupture of the 2023 Mw7.8 Kahramanmaraş, Turkey earthquake in millennia supercycle"></a>The overall-subshear and multi-segment rupture of the 2023 Mw7.8 Kahramanmaraş, Turkey earthquake in millennia supercycle</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s43247-023-01030-x">https://www.nature.com/articles/s43247-023-01030-x</a></p>
+<p>断层破裂痕迹来自USGS。高速率 GNSS 数据由 TUSAGA-Aktif (<a target="_blank" rel="noopener" href="https://www.tusagaaktif.gov.tr/">https://www.tusagaaktif.gov.tr/</a>) 提供。强震动数据可从土耳其灾害和紧急事务管理局（AFAD；<a target="_blank" rel="noopener" href="https://tadas.afad.gov.tr/event-detail/15499%EF%BC%89%E8%8E%B7%E5%8F%96%E3%80%82%E7%9F%A9%E5%BC%A0%E9%87%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E6%9D%A5%E8%87%AA%E5%85%A8%E5%B1%80%E8%B4%A8%E5%BF%83%E7%9F%A9%E5%BC%A0%E9%87%8F%E9%A1%B9%E7%9B%AE%EF%BC%88CMT%EF%BC%9Bhttp://www.globalcmt.org%EF%BC%89%E3%80%82%E5%9C%B0%E9%9C%87%E6%95%B0%E6%8D%AE%E7%94%B1IRIS%EF%BC%88https://ds.iris.edu/wilber3/%EF%BC%89%E5%92%8C%E4%B8%AD%E5%9B%BD%E5%9C%B0%E9%9C%87%E5%B1%80%E5%9C%B0%E7%90%83%E7%89%A9%E7%90%86%E7%A0%94%E7%A9%B6%E6%89%80%E5%9B%BD%E5%AE%B6%E5%9C%B0%E9%9C%87%E5%8F%B0%E7%BD%91%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83%EF%BC%88http://www.seisdmc.ac%EF%BC%89%E6%8F%90%E4%BE%9B.cn%EF%BC%89%E3%80%82%E5%BD%93%E5%9C%B0%E5%9C%B0%E9%9C%87%E7%9B%AE%E5%BD%95%E5%8F%AF%E5%9C%A8">https://tadas.afad.gov.tr/event-detail/15499）获取。矩张量解决方案来自全局质心矩张量项目（CMT；http://www.globalcmt.org）。地震数据由IRIS（https://ds.iris.edu/wilber3/）和中国地震局地球物理研究所国家地震台网数据管理中心（http://www.seisdmc.ac）提供.cn）。当地地震目录可在</a> AFAD (<a target="_blank" rel="noopener" href="https://deprem.afad.gov.tr/eventcatalog">https://deprem.afad.gov.tr/eventcatalog</a>) 上获取。反演中使用的 SAR 数据、马赫波搜索中使用的台站列表、SEBP 结果和 FFI 滑移模型可在以下网址获取：<a target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.8402190%E3%80%82">https://doi.org/10.5281/zenodo.8402190。</a></p>
+<h3 id="Immature-characteristics-of-the-East-Anatolian-Fault-Zone-from-SAR-GNSS-and-strong-motion-data-of-the-2023-Turkiye–Syria-earthquake-doublet"><a href="#Immature-characteristics-of-the-East-Anatolian-Fault-Zone-from-SAR-GNSS-and-strong-motion-data-of-the-2023-Turkiye–Syria-earthquake-doublet" class="headerlink" title="Immature characteristics of the East Anatolian Fault Zone from SAR, GNSS and strong motion data of the 2023 Türkiye–Syria earthquake doublet"></a>Immature characteristics of the East Anatolian Fault Zone from SAR, GNSS and strong motion data of the 2023 Türkiye–Syria earthquake doublet</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41598-024-61326-6">https://www.nature.com/articles/s41598-024-61326-6</a></p>
+<p>2023 年土耳其-叙利亚双重地震的震源和地表破裂轨迹由美国地质调查局提供 (<a target="_blank" rel="noopener" href="https://earthquake.usgs.gov).强震数据从土耳其地震、灾害和应急管理局/">https://earthquake.usgs.gov)。强震数据从土耳其地震、灾害和应急管理局</a> (AFAD) 下载 (<a target="_blank" rel="noopener" href="https://deprem.afad.gov.tr/)%E3%80%82%E6%89%80%E6%9C%89%E7%BD%91%E7%AB%99%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1%E8%AE%BF%E9%97%AE%E6%97%A5%E6%9C%9F%E4%B8%BA">https://deprem.afad.gov.tr/)。所有网站的最后一次访问日期为</a> 2023 年 8 月 15 日。</p>
+<h3 id="Coseismic-Faulting-Model-and-Post-Seismic-Surface-Motion-of-the-2023-Turkey–Syria-Earthquake-Doublet-Revealed-by-InSAR-and-GPS-Measurements"><a href="#Coseismic-Faulting-Model-and-Post-Seismic-Surface-Motion-of-the-2023-Turkey–Syria-Earthquake-Doublet-Revealed-by-InSAR-and-GPS-Measurements" class="headerlink" title="Coseismic Faulting Model and Post-Seismic Surface Motion of the 2023 Turkey–Syria Earthquake Doublet Revealed by InSAR and GPS Measurements"></a>Coseismic Faulting Model and Post-Seismic Surface Motion of the 2023 Turkey–Syria Earthquake Doublet Revealed by InSAR and GPS Measurements</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/15/13/3327">https://www.mdpi.com/2072-4292/15/13/3327</a></p>
+<p>GPS数据是从内华达测地实验室收集的：<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/">http://geodesy.unr.edu/</a>  ，<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/#:~:text=%5BFebruary%2013%2C%202023%5D%20Turkey%20M%207.8%20and%20M%207.5%20Earthquakes">Turkey Mw 7.8 and Mw 7.5 Earthquakes</a>   包含初步同震偏移测量的文件可用于<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/news_items/20230213/us6000jllz_final5min.txt">M7.8 (us6000jllz)</a>和<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/news_items/20230213/us6000jlqa_final5min.txt">M7.5 (us6000jlqa)</a>。</p>
+<p>SRTM DEM 数据是空隙填充的无缝 SRTM 数据 V4，可从 CGIAR-CSI SRTM 30 数据库获取：<a target="_blank" rel="noopener" href="http://srtm.csi.cgiar.org/%EF%BC%8C%E4%BA%8E">http://srtm.csi.cgiar.org/，于</a> 2023 年 4 月 10 日访问。GACOS 数据可在此处免费获取： <a target="_blank" rel="noopener" href="http://www.gacos.net,于/">www.gacos.net，于</a> 2023 年 3 月 20 日访问。GPS 数据是从内华达大地测量实验室收集的（<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/%EF%BC%8C%E4%BA%8E">http://geodesy.unr.edu/，于</a> 2023 年 3 月 6 日访问）。</p>
+<h3 id="Source-Model-of-the-2023-Turkey-Earthquake-Sequence-Imaged-by-Sentinel-1-and-GPS-Measurements-Implications-for-Heterogeneous-Fault-Behavior-along-the-East-Anatolian-Fault-Zone"><a href="#Source-Model-of-the-2023-Turkey-Earthquake-Sequence-Imaged-by-Sentinel-1-and-GPS-Measurements-Implications-for-Heterogeneous-Fault-Behavior-along-the-East-Anatolian-Fault-Zone" class="headerlink" title="Source Model of the 2023 Turkey Earthquake Sequence Imaged by Sentinel-1 and GPS Measurements: Implications for Heterogeneous Fault Behavior along the East Anatolian Fault Zone"></a>Source Model of the 2023 Turkey Earthquake Sequence Imaged by Sentinel-1 and GPS Measurements: Implications for Heterogeneous Fault Behavior along the East Anatolian Fault Zone</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/15/10/2618">https://www.mdpi.com/2072-4292/15/10/2618</a></p>
+<p>高速率 (1 Hz) GPS 数据是从 TUSAGA-Aktif（<a target="_blank" rel="noopener" href="https://www.tusaga-aktif.gov.tr/%EF%BC%8C%E4%BA%8E">https://www.tusaga-aktif.gov.tr/，于</a> 2023 年 2 月 25 日访问）收集的。基于震后卫星数据分析的土耳其地震序列的初步地表破裂来自 USGS（<a target="_blank" rel="noopener" href="https://usgs.maps.arcgis.com/apps/webappviewer/index.html?id=5229bb842bd64b688d769abbefe43b46%EF%BC%8C%E4%BA%8E">https://usgs.maps.arcgis.com/apps/webappviewer/index.html?id=5229bb842bd64b688d769abbefe43b46，于</a> 20 日访问） 2023 年 3 月）。 2023 年土耳其地震序列的重新定位余震由 Zenodo 存档（<a target="_blank" rel="noopener" href="https://zenodo.org/record/76">https://zenodo.org/record/76</a> 99882#.ZEKnT3ZBy3A，于 2023 年 3 月 10 日访问）。</p>
+<h3 id="Coseismic-Slip-Distribution-and-Coulomb-Stress-Change-of-the-2023-MW-7-8-Pazarcik-and-MW-7-5-Elbistan-Earthquakes-in-Turkey"><a href="#Coseismic-Slip-Distribution-and-Coulomb-Stress-Change-of-the-2023-MW-7-8-Pazarcik-and-MW-7-5-Elbistan-Earthquakes-in-Turkey" class="headerlink" title="Coseismic Slip Distribution and Coulomb Stress Change of the 2023 MW 7.8 Pazarcik and MW 7.5 Elbistan Earthquakes in Turkey"></a>Coseismic Slip Distribution and Coulomb Stress Change of the 2023 MW 7.8 Pazarcik and MW 7.5 Elbistan Earthquakes in Turkey</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/16/2/240">https://www.mdpi.com/2072-4292/16/2/240</a></p>
+<p> GPS 数据收集自内华达大地测量实验室（<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/%EF%BC%8C%E8%AE%BF%E9%97%AE%E6%97%A5%E6%9C%9F%EF%BC%9A2023">http://geodesy.unr.edu/，访问日期：2023</a> 年 3 月 6 日）。基于对震后卫星数据分析的土耳其地震序列的初步地表破裂数据来自 USGS（<a target="_blank" rel="noopener" href="https://usgs.maps.arcgis.com/apps/webappviewer/%EF%BC%8C%E4%BA%8E">https://usgs.maps.arcgis.com/apps/webappviewer/，于</a> 2023 年 6 月 16 日访问）。 2023 年土耳其地震序列的重新定位余震由 Zenodo 存档（<a target="_blank" rel="noopener" href="https://zenodo.org/record/7699882#.ZEKnT3ZBy3A%EF%BC%8C%E4%BA%8E">https://zenodo.org/record/7699882#.ZEKnT3ZBy3A，于</a> 2023 年 8 月 10 日访问）。 SRTM DEM 数据取自美国国家航空航天局 (NASA) 提供的 30 m 分辨率航天飞机雷达地形任务 (SRTM) 数字高程模型 (DEM) (<a target="_blank" rel="noopener" href="https://www.earthdata.nasa.gov/esds/%E7%AB%9E%E4%BA%89%E6%80%A7%E8%AE%A1%E5%88%92/%E6%8E%AA%E6%96%BD/nasadem%EF%BC%8C%E4%BA%8E">https://www.earthdata.nasa.gov/esds/竞争性计划/措施/nasadem，于</a> 2023 年 4 月 12 日访问）。</p>
+<p>震区有23个GPS站。 GPS 数据从内华达大地测量实验室获得（网站：<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/%EF%BC%8C%E4%BA%8E">http://geodesy.unr.edu/，于</a> 2023 年 3 月 6 日访问）。数据采样率为5分钟[ <a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/16/2/240#B29-remotesensing-16-00240">29</a> ]。该数据集包括每个 GPS 站坐标与其每日平均坐标的偏差的时间序列。根据美国地质调查局(UGUS)公布的土耳其两次地震的地震发生时间，计算了土耳其两次地震引起的三维地表位移。</p>
+<p>Space Geodetic Insights to the Dramatic Stress Rotation Induced by the February 2023 Turkey-Syria Earthquake Doublet</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/abs/10.1029/2023GL107788">https://onlinelibrary.wiley.com/doi/abs/10.1029/2023GL107788</a></p>
+<p>焦点机制数据可以从 <a target="_blank" rel="noopener" href="https://deprem.afad.gov.tr/event-focal-mechanism">https://deprem.afad.gov.tr/event-focal-mechanism</a> 免费下载。简单断层迹线和破裂迹线可以从Reitman等人那里得到。 （2023）。大多数图形是由 Generic Mapping Tools 6.4.0 软件绘制的（<a target="_blank" rel="noopener" href="https://www.generic-mapping-tools.org/download/%EF%BC%9BWessel">https://www.generic-mapping-tools.org/download/；Wessel</a> 等人，2019）。 SMVCE软件可以从<a target="_blank" rel="noopener" href="https://gip.csu.edu.cn/radar/gongkaicontent.jsp?urltype=news.NewsContentUrl&wbtreeid=1137&wbnewsid=3072%E4%B8%8B%E8%BD%BD%EF%BC%8C%E8%A7%A3%E5%8E%8B%E7%A0%81%E5%B0%86%E5%8F%91%E9%80%81%E5%88%B0%E5%A1%AB%E5%86%99%E7%9A%84%E9%82%AE%E7%AE%B1%E5%9C%B0%E5%9D%80%E3%80%82%E6%9C%AC%E6%96%87%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E7%94%A8%E4%BA%8E">https://gip.csu.edu.cn/radar/gongkaicontent.jsp?urltype=news.NewsContentUrl&amp;wbtreeid=1137&amp;wbnewsid=3072下载，解压码将发送到填写的邮箱地址。本文中使用的用于</a> Sentinel-1 干涉处理的 CtSent 工具箱可以从 Zenodo (Ma, 2021) 下载。解包操作的代码可以从 Zenodo (Ma, 2024) 下载。我们的 3D 位移图和滑移分布可以从 Zenodo 下载（Ma et al., 2023）。</p>
+<h3 id="Rapid-Surface-Rupture-Mapping-from-Satellite-Data-The-2023-Kahramanmaras-Turkey-Turkiye-Earthquake-Sequence"><a href="#Rapid-Surface-Rupture-Mapping-from-Satellite-Data-The-2023-Kahramanmaras-Turkey-Turkiye-Earthquake-Sequence" class="headerlink" title="Rapid Surface Rupture Mapping from Satellite Data: The 2023 Kahramanmaraş, Turkey (Türkiye), Earthquake Sequence"></a>Rapid Surface Rupture Mapping from Satellite Data: The 2023 Kahramanmaraş, Turkey (Türkiye), Earthquake Sequence</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://pubs.geoscienceworld.org/ssa/tsr/article/3/4/289/628908/Rapid-Surface-Rupture-Mapping-from-Satellite-Data">https://pubs.geoscienceworld.org/ssa/tsr/article/3/4/289/628908/Rapid-Surface-Rupture-Mapping-from-Satellite-Data</a></p>
+<p>测绘数据可作为美国地质调查局 (USGS) 数据发布 (doi: <a target="_blank" rel="noopener" href="https://doi.org/10.5066/P985I7U2">10.5066&#x2F;P985I7U2</a> )。雷达像素相关数据可作为 USGS 数据发布 (doi: <a target="_blank" rel="noopener" href="https://doi.org/10.5066/P9R6DSVZ">10.5066&#x2F;P9R6DSVZ</a> )。 USGS 活动页面Mw 7.8 和Mw 7.5 级地震可分别访问<a target="_blank" rel="noopener" href="https://earthquake.usgs.gov/earthquakes/eventpage/us6000jllz/executive%E5%92%8Chttps://earthquake.usgs.gov/earthquakes/eventpage/us6000jlqa/executive%E3%80%82">https://earthquake.usgs.gov/earthquakes/eventpage/us6000jllz/executive和https://earthquake.usgs.gov/earthquakes/eventpage/us6000jlqa/executive。</a> WorldView 图像可从 USGS 危险数据分发系统<a target="_blank" rel="noopener" href="https://hddsexplorer.usgs.gov/">https://hddsexplorer.usgs.gov</a>获取，并通过 Maxar 的 USG+ 许可证进行访问。 Sentinel 场景可从 Copernicus 开放访问中心获取，网址为<a target="_blank" rel="noopener" href="https://scihub.copernicus.eu/%E3%80%82%E5%85%88%E8%BF%9B%E9%99%86%E5%9C%B0%E8%A7%82%E6%B5%8B%E5%8D%AB%E6%98%9F">https://scihub.copernicus.eu/。先进陆地观测卫星</a> (ALOS) 场景可从阿拉斯加卫星设施获取：<a target="_blank" rel="noopener" href="https://asf.alaska.edu/data-sets/sar-data-sets/alos-palsar/%E3%80%82%E6%89%80%E6%9C%89%E7%BD%91%E7%AB%99%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1%E8%AE%BF%E9%97%AE%E6%97%B6%E9%97%B4%E4%B8%BA">https://asf.alaska.edu/data-sets/sar-data-sets/alos-palsar/。所有网站的最后一次访问时间为</a> 2023 年 8 月。</p>
+<h3 id="The-GEM-Global-Active-Faults-Database"><a href="#The-GEM-Global-Active-Faults-Database" class="headerlink" title="The GEM Global Active Faults Database"></a>The GEM Global Active Faults Database</h3><p>原文链接：<a target="_blank" rel="noopener" href="https://journals.sagepub.com/doi/full/10.1177/8755293020944182">https://journals.sagepub.com/doi/full/10.1177/8755293020944182</a></p>
+<hr>
+<h2 id="可使用的数据"><a href="#可使用的数据" class="headerlink" title="可使用的数据"></a>可使用的数据</h2><p>地震数据由IRIS（<a target="_blank" rel="noopener" href="https://ds.iris.edu/wilber3/%EF%BC%89%EF%BC%9A%E9%9C%87%E7%BA%A7%E5%92%8C%E6%B7%B1%E5%BA%A6%E4%BF%A1%E6%81%AF">https://ds.iris.edu/wilber3/）：震级和深度信息</a></p>
+<p>当地地震目录 AFAD ：利用PGA、PGV数据</p>
+<p><a target="_blank" rel="noopener" href="https://tadas.afad.gov.tr/event-detail/17966">AFAD_Kahramanmaraş_Mw7.7_PGA_data</a></p>
+<p><a target="_blank" rel="noopener" href="https://tadas.afad.gov.tr/event-detail/17969">AFAD_Elbistan (Kahramanmaraş)_Mw7.6_PGA_data</a></p>
+<p>在地震学中，rjb、rrup、repi 和 rhyp 是指地震事件中的不同距离参数，用于描述地震的影响范围和强度。它们的含义如下：</p>
+<ol>
+<li>**Rjb (Joyner-Boore距离)**：Rjb是指从地震震源到地表上一个位置的水平距离，通常以水平地面的最短路径来计算。Rjb通常用于描述地震动的地表效应，是建筑物受到地震影响的重要参数。</li>
+<li>**Rrup (Radiated距离)**：Rrup是指从地震震源到一个位置的最短三维路径距离，考虑了地震波的传播路径和地球的地形。Rrup是用于描述地震强度的一个重要参数，通常用于地震烈度的计算。</li>
+<li>**Repi (Epicentral距离)**：Repi是指从地震震源到地表上的一个位置的水平距离，沿着地表的最短路径计算。Repi通常用于描述地震震中附近地区的地震影响，是一个重要的地震参数。</li>
+<li>**Rhyp (Hypocentral距离)**：Rhyp是指从地震震源到地球内部某一点的直线距离，即震源到该点的最短路径。Rhyp通常用于描述地震发生的深度，以及地震波在地球内部传播的距离。</li>
+</ol>
+<p>高速率 GNSS 数据由 TUSAGA-Aktif：<a target="_blank" rel="noopener" href="https://www.tusaga-aktif.gov.tr/Web/DepremVerileri.aspx">地震区TUSAGA-Active固定GNSS站1秒数据</a></p>
+<p>GNSS处理后的数据：<a target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.8271589">https://doi.org/10.5281/zenodo.8271589</a></p>
+<p>处理方法见论文：<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41561-023-01283-3">Geometric controls on cascading rupture of the 2023 Kahramanmaraş earthquake doublet</a></p>
+<p>USGS地震震源信息：<a target="_blank" rel="noopener" href="https://earthquake.usgs.gov/earthquakes/map/?extent=36.03133,34.21143&extent=38.8782,40.89111&range=search&timeZone=utc&search=%7B%22name%22:%22Search%20Results%22,%22params%22:%7B%22starttime%22:%222023-02-04%2000:00:00%22,%22endtime%22:%222023-02-07%2023:59:59%22,%22minmagnitude%22:7,%22orderby%22:%22time%22%7D%7D">震源信息-CSV-KML</a></p>
+<p>全球断层数据：<a target="_blank" rel="noopener" href="https://github.com/GEMScienceTools/gem-global-active-faults">https://github.com/GEMScienceTools/gem-global-active-faults</a></p>
+<p>地震USGS测绘信息：USGS 活动页面Mw 7.8 和Mw 7.5 级地震可分别访问<a target="_blank" rel="noopener" href="https://earthquake.usgs.gov/earthquakes/eventpage/us6000jllz/executive%E5%92%8Chttps://earthquake.usgs.gov/earthquakes/eventpage/us6000jlqa/executive%E3%80%82">https://earthquake.usgs.gov/earthquakes/eventpage/us6000jllz/executive和https://earthquake.usgs.gov/earthquakes/eventpage/us6000jlqa/executive。</a></p>
+<p>内华达大地测量实验室收集的GPS数据：<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/">http://geodesy.unr.edu/</a>  ，</p>
+<p><a target="_blank" rel="noopener" href="http://geodesy.unr.edu/#:~:text=%5BFebruary%2013%2C%202023%5D%20Turkey%20M%207.8%20and%20M%207.5%20Earthquakes">Turkey M 7.8 and M 7.5 Earthquakes</a>   包含初步同震偏移测量的文件可用于<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/news_items/20230213/us6000jllz_final5min.txt">M7.8 (us6000jllz)</a>和<a target="_blank" rel="noopener" href="http://geodesy.unr.edu/news_items/20230213/us6000jlqa_final5min.txt">M7.5 (us6000jlqa)</a>。</p>
+<p> 数据采样率为5分钟。该数据集包括每个 GPS 站坐标与其每日平均坐标的偏差的时间序列。根据美国地质调查局(UGUS)公布的土耳其两次地震的地震发生时间，计算了<strong>土耳其两次地震引起的三维地表位移</strong>。</p>
+<h2 id="其它论文"><a href="#其它论文" class="headerlink" title="其它论文"></a>其它论文</h2><h3 id="会议论文"><a href="#会议论文" class="headerlink" title="会议论文"></a>会议论文</h3><p><a target="_blank" rel="noopener" href="https://gfzpublic.gfz-potsdam.de/pubman/faces/ViewItemFullPage.jsp?itemId=item_5021830">A 3D co-seismic ground deformation reconstruction of the February 2023 Southeast Anatolian earthquake sequence using satellite SAR and optical data</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.spiedigitallibrary.org/conference-proceedings-of-spie/12786/127861C/Impact-assessment-of-the-catastrophic-earthquakes-of-6-February-2023/10.1117/12.2682926.full">Impact assessment of the catastrophic earthquakes of 6 February 2023 in Turkey and Syria via the exploitation of satellite datasets</a></p>
+<p><a target="_blank" rel="noopener" href="https://gfzpublic.gfz-potsdam.de/pubman/faces/ViewItemFullPage.jsp?itemId=item_5021830_2">A 3D co-seismic ground deformation reconstruction of the February 2023 Southeast Anatolian earthquake sequence using satellite SAR and optical data</a></p>
+<h3 id="期刊文章"><a href="#期刊文章" class="headerlink" title="期刊文章"></a>期刊文章</h3><p><a target="_blank" rel="noopener" href="https://www.lyellcollection.org/doi/abs/10.1144/jgs2023-021">Journal of the Geological Society - Long silence on the East Anatolian Fault Zone (Southern Turkey) ends with devastating double earthquakes (6 February 2023) over a seismic gap: implications for the seismic potential in the Eastern Mediterranean region</a></p>
+<p><a target="_blank" rel="noopener" href="http://arxiv.org/abs/2308.02144">arxiv - Rapid 3D dynamic rupture modeling of the February 6, 2023, Kahramanmaras, Turkey, Mw7.8 and Mw7.7 earthquake doublet</a></p>
+<p><a target="_blank" rel="noopener" href="https://par.nsf.gov/biblio/10417588-slip-distribution-february-mw-mw-kahramanmaras-turkey-earthquake-sequence-east-anatolian-fault-zone">Seismica - Slip distribution of the February 6, 2023 Mw 7.8 and Mw 7.6, Kahramanmaraş, Turkey earthquake sequence in the East Anatolian Fault Zone</a></p>
+<p><a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/abs/10.1029/2023GL104693">Geophysical Research Letters - Coseismic Kinematics of the 2023 Kahramanmaras, Turkey Earthquake Sequence From InSAR and Optical Data</a></p>
+<p><a target="_blank" rel="noopener" href="http://proceedings.bas.bg/index.php/cr/article/view/293">Proceedings of the Bulgarian Academy of Sciences - Determining the Deformations of the Earth’s Surface after the Earthquakes in Turkey-Syria of 06 February 2023 - Initial Results</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.mdpi.com/1424-8220/23/14/6342">Sensors - Evaluating Urban Building Damage of 2023 Kahramanmaras, Turkey Earthquake Sequence Using SAR Change Detection</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.mdpi.com/2072-4292/15/10/2656">Remote Sensing - Three-Dimensional Deformation of the 2023 Turkey Mw 7.8 and Mw 7.7 Earthquake Sequence Obtained by Fusing Optical and SAR Images</a></p>
+<p><a target="_blank" rel="noopener" href="https://doi.org/10.1785/0220230146">Seismological Research Letters - The 2023 Mw 7.8 and 7.6 Earthquake Doublet in Southeast Türkiye: Coseismic and Early Postseismic Deformation, Faulting Model, and Potential Seismic Hazard</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.science.org/doi/10.1126/science.adi0685">Science - The complex dynamics of the 2023 Kahramanmaraş, Turkey, Mw 7.8-7.7 earthquake doublet</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.science.org/doi/abs/10.1126/science.adi1519">Science - Supershear triggering and cascading fault ruptures of the 2023 Kahramanmaraş, Türkiye, earthquake doublet</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.science.org/doi/10.1126/science.adj3770">Science - Surface deformations of the 6 February 2023 earthquake sequence, eastern Türkiye</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/InSAR/" rel="tag">InSAR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/websites/" rel="tag">websites</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9C%9F%E8%80%B3%E5%85%B6%E5%8F%8C%E9%9C%87/" rel="tag">土耳其双震</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9C%B0%E9%9C%87/" rel="tag">地震</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E4%BA%AB/" rel="tag">数据分享</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E7%8C%AE%E5%88%86%E4%BA%AB/" rel="tag">文献分享</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/05/14/WRF-Hydro%E4%B8%AD%E5%8F%AF%E8%83%BD%E4%BD%BF%E7%94%A8%E5%88%B0%E7%9A%84%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E6%95%B4%E7%90%86%E3%80%90%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB%E3%80%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          WRF-Hydro中可能使用到的各种数据整理【附原文分享】
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/05/10/%E6%96%87%E7%8C%AE%E6%8E%A8%E8%8D%90-%E6%97%A0%E6%B5%8B%E7%AB%99%E6%B5%81%E5%9F%9F%E7%89%B9%E5%A4%A7%E6%B4%AA%E6%B0%B4%E7%9A%84%E5%85%A8%E7%90%83%E9%A2%84%E6%B5%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">文献推荐-无测站流域特大洪水的全球预测</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%9F%E8%80%B3%E5%85%B62023%E5%8F%8C%E9%9C%87%E5%90%8C%E9%9C%87%E5%BD%A2%E5%8F%98%E5%88%86%E6%9E%90%E7%9A%84%E5%8F%82%E8%80%83%E6%95%B0%E6%8D%AE%E5%92%8C%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86%E3%80%90%E9%99%84%E5%8E%9F%E6%96%87%E5%88%86%E4%BA%AB%E3%80%91"><span class="nav-number">1.</span> <span class="nav-text">土耳其2023双震同震形变分析的参考数据和处理工具整理【附原文分享】</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BE%9B%E5%8F%AF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%92%8C%E4%BB%A3%E7%A0%81%E7%9A%84%E8%AE%BA%E6%96%87"><span class="nav-number">1.1.</span> <span class="nav-text">提供可用数据和代码的论文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Traditional-seismic-hazard-analyses-underestimate-hazard-levels-when-compared-to-observations-from-the-2023-Kahramanmaras-earthquakes"><span class="nav-number">1.1.1.</span> <span class="nav-text">Traditional seismic hazard analyses underestimate hazard levels when compared to observations from the 2023 Kahramanmaras earthquakes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geometric-controls-on-cascading-rupture-of-the-2023-Kahramanmaras-earthquake-doublet"><span class="nav-number">1.1.2.</span> <span class="nav-text">Geometric controls on cascading rupture of the 2023 Kahramanmaraş earthquake doublet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-overall-subshear-and-multi-segment-rupture-of-the-2023-Mw7-8-Kahramanmaras-Turkey-earthquake-in-millennia-supercycle"><span class="nav-number">1.1.3.</span> <span class="nav-text">The overall-subshear and multi-segment rupture of the 2023 Mw7.8 Kahramanmaraş, Turkey earthquake in millennia supercycle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Immature-characteristics-of-the-East-Anatolian-Fault-Zone-from-SAR-GNSS-and-strong-motion-data-of-the-2023-Turkiye%E2%80%93Syria-earthquake-doublet"><span class="nav-number">1.1.4.</span> <span class="nav-text">Immature characteristics of the East Anatolian Fault Zone from SAR, GNSS and strong motion data of the 2023 Türkiye–Syria earthquake doublet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Coseismic-Faulting-Model-and-Post-Seismic-Surface-Motion-of-the-2023-Turkey%E2%80%93Syria-Earthquake-Doublet-Revealed-by-InSAR-and-GPS-Measurements"><span class="nav-number">1.1.5.</span> <span class="nav-text">Coseismic Faulting Model and Post-Seismic Surface Motion of the 2023 Turkey–Syria Earthquake Doublet Revealed by InSAR and GPS Measurements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Model-of-the-2023-Turkey-Earthquake-Sequence-Imaged-by-Sentinel-1-and-GPS-Measurements-Implications-for-Heterogeneous-Fault-Behavior-along-the-East-Anatolian-Fault-Zone"><span class="nav-number">1.1.6.</span> <span class="nav-text">Source Model of the 2023 Turkey Earthquake Sequence Imaged by Sentinel-1 and GPS Measurements: Implications for Heterogeneous Fault Behavior along the East Anatolian Fault Zone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Coseismic-Slip-Distribution-and-Coulomb-Stress-Change-of-the-2023-MW-7-8-Pazarcik-and-MW-7-5-Elbistan-Earthquakes-in-Turkey"><span class="nav-number">1.1.7.</span> <span class="nav-text">Coseismic Slip Distribution and Coulomb Stress Change of the 2023 MW 7.8 Pazarcik and MW 7.5 Elbistan Earthquakes in Turkey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rapid-Surface-Rupture-Mapping-from-Satellite-Data-The-2023-Kahramanmaras-Turkey-Turkiye-Earthquake-Sequence"><span class="nav-number">1.1.8.</span> <span class="nav-text">Rapid Surface Rupture Mapping from Satellite Data: The 2023 Kahramanmaraş, Turkey (Türkiye), Earthquake Sequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-GEM-Global-Active-Faults-Database"><span class="nav-number">1.1.9.</span> <span class="nav-text">The GEM Global Active Faults Database</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">可使用的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E8%AE%BA%E6%96%87"><span class="nav-number">1.3.</span> <span class="nav-text">其它论文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%9A%E8%AE%AE%E8%AE%BA%E6%96%87"><span class="nav-number">1.3.1.</span> <span class="nav-text">会议论文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E5%88%8A%E6%96%87%E7%AB%A0"><span class="nav-number">1.3.2.</span> <span class="nav-text">期刊文章</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

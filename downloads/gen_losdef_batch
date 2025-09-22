@@ -1,0 +1,27 @@
+#批量生成los向累计形变图
+#mkdir los
+#cp diff_dir/diff_par.in diff2_ts
+reference=20181229
+reference_mli_par=rmli/$reference.mli.par
+reference_slc_par=$reference.slc.par
+slc_range_samples=`grep range_samples: $reference_slc_par | awk '{print $2}'`
+mli_range_samples=`grep range_samples: $reference_mli_par | awk '{print $2}'`
+segdem_width=`grep width: $seg_dem_par | awk '{print $2}'`
+segdem_nlines=`grep nlines: $seg_dem_par | awk '{print $2}'`
+for i in {001..061};do
+echo $i > diff_num
+# 需要更换20210920_20211002.off相对应的文件，任选一个diff_dir文件中*.off的即可
+awk '{print "dispmap diff2_ts/diff2_ts_"$1".diff - '"$reference"'.slc.par diff_dir/20210920_20211002.off los/"$1".los 1"}' diff_num > MB_bash
+
+
+##############mli.par  range samples 3420 seg.dem.par_width  23012 nlines 14586
+awk '{print "geocode_back los/"$1".los '"$mli_range_samples"' dem/fine_cz.utm_to_rdc los/"$1".los_utm '"$segdem_width"' '"$segdem_nlines"'"}' diff_num >> MB_bash
+awk '{print "geocode_back rmli/20181123.mli '"$mli_range_samples"' dem/fine_cz.utm_to_rdc rmli/20181123.rmli_utm '"$segdem_width"' '"$segdem_nlines"'"}' diff_num >> MB_bash
+
+awk '{print "data2geotiff dem/seg.dem.par los/"$1".los_utm 2 los/"$1".los_utm.tif"}' diff_num >> MB_bash
+bash MB_bash
+done
+
+
+
+

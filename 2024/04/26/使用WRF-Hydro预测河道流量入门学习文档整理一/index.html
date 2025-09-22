@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    
+<script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>使用wrf-hydro预测河道流量入门学习文档整理一 | SingyuTang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="websitesWRF-Hydro5.2.0toolkitdocumentsWRF4.5.2WPS4.5.0WRF Hydro GIS Pre-Processing ToolsHydroSHEDS" />
+  
+  
+  
+  
+  <meta name="description" content="1. 前言这篇文档主要是针对WRF-Hydro计算河道流量（Standalone Mode下）相关流程中可能使用到的工具、学习文档、使用教程进行一些汇总和梳理，其最终目的为获取河道流量及其相关变量。 2. 软件下载、安装和编译本章主要介绍相关工具包的下载、安装与编译的文档与教程分享。 2.1 WRF4.5.2和WPS4.5.0下载、安装与编译可通过结合下面两个链接查看WRF和WPS的下载安装与编译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用WRF-Hydro预测河道流量入门学习文档整理一">
+<meta property="og:url" content="https://singyutang.github.io/2024/04/26/%E4%BD%BF%E7%94%A8WRF-Hydro%E9%A2%84%E6%B5%8B%E6%B2%B3%E9%81%93%E6%B5%81%E9%87%8F%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3%E6%95%B4%E7%90%86%E4%B8%80/index.html">
+<meta property="og:site_name" content="SingyuTang">
+<meta property="og:description" content="1. 前言这篇文档主要是针对WRF-Hydro计算河道流量（Standalone Mode下）相关流程中可能使用到的工具、学习文档、使用教程进行一些汇总和梳理，其最终目的为获取河道流量及其相关变量。 2. 软件下载、安装和编译本章主要介绍相关工具包的下载、安装与编译的文档与教程分享。 2.1 WRF4.5.2和WPS4.5.0下载、安装与编译可通过结合下面两个链接查看WRF和WPS的下载安装与编译">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-26T01:57:32.000Z">
+<meta property="article:modified_time" content="2024-04-27T13:12:30.470Z">
+<meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="websites">
+<meta property="article:tag" content="WRF-Hydro5.2.0">
+<meta property="article:tag" content="toolkit">
+<meta property="article:tag" content="documents">
+<meta property="article:tag" content="WRF4.5.2">
+<meta property="article:tag" content="WPS4.5.0">
+<meta property="article:tag" content="WRF Hydro GIS Pre-Processing Tools">
+<meta property="article:tag" content="HydroSHEDS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="SingyuTang" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="/css/hiero.css" >
+  <link rel="stylesheet" href="/css/glyphs.css" >
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/my.css">
+
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "首页"; 
+
+  themeMenus["/archives"] = "归档"; 
+
+  themeMenus["/about"] = "关于"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" rel="home" >
+                <img style="margin-bottom: 10px;"  width="124px" height="124px" alt="Hike News" src="https://avatars.githubusercontent.com/u/87192126?v=4">
+              </a>
+            
+          </h1>
+
+          
+            <div class="site-description">SingyuTang的个人博客</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">首页</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">归档</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">关于</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-使用WRF-Hydro预测河道流量入门学习文档整理一" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      使用WRF-Hydro预测河道流量入门学习文档整理一
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2024/04/26/%E4%BD%BF%E7%94%A8WRF-Hydro%E9%A2%84%E6%B5%8B%E6%B2%B3%E9%81%93%E6%B5%81%E9%87%8F%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3%E6%95%B4%E7%90%86%E4%B8%80/" class="article-date">
+	  <time datetime="2024-04-26T01:57:32.000Z" itemprop="datePublished">四月 26, 2024</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>这篇文档主要是针对WRF-Hydro计算河道流量（Standalone Mode下）相关流程中可能使用到的工具、学习文档、使用教程进行一些汇总和梳理，其最终目的为获取河道流量及其相关变量。</p>
+<h1 id="2-软件下载、安装和编译"><a href="#2-软件下载、安装和编译" class="headerlink" title="2. 软件下载、安装和编译"></a>2. 软件下载、安装和编译</h1><p>本章主要介绍相关工具包的下载、安装与编译的文档与教程分享。</p>
+<h2 id="2-1-WRF4-5-2和WPS4-5-0下载、安装与编译"><a href="#2-1-WRF4-5-2和WPS4-5-0下载、安装与编译" class="headerlink" title="2.1 WRF4.5.2和WPS4.5.0下载、安装与编译"></a>2.1 WRF4.5.2和WPS4.5.0下载、安装与编译</h2><p>可通过结合下面两个链接查看WRF和WPS的下载安装与编译。</p>
+<p><a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/OnLineTutorial/compilation_tutorial.php">在线官方教程-How to Compile WRF:The Complete Process</a></p>
+<p><a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/">个人博客-如何在ubuntu16.04上安装编译WRF4.5.2和WPS4.5.0</a></p>
+<h2 id="2-2-WRF-Hydro5-2-0下载、安装与编译"><a href="#2-2-WRF-Hydro5-2-0下载、安装与编译" class="headerlink" title="2.2 WRF-Hydro5.2.0下载、安装与编译"></a>2.2 WRF-Hydro5.2.0下载、安装与编译</h2><p>详细安装已在个人博客中进行介绍，可点击下面链接进行查看下载、安装与编译。</p>
+<p><a href="https://singyutang.github.io/2024/03/23/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF-Hydro5-2-0/">个人博客-如何在ubuntu16.04上安装编译WRF-Hydro5.2.0</a></p>
+<h2 id="2-3-WRF-Hydro-GIS-Pre-Processing-Tools5-2-0下载、安装"><a href="#2-3-WRF-Hydro-GIS-Pre-Processing-Tools5-2-0下载、安装" class="headerlink" title="2.3 WRF Hydro GIS Pre-Processing Tools5.2.0下载、安装"></a>2.3 WRF Hydro GIS Pre-Processing Tools5.2.0下载、安装</h2><p>详细安装已在个人博客中进行介绍，可点击下面链接进行查看下载、安装与编译，该工具包支持的ArCGIS Pro的版本也在博客中提供，可点击下面的博客链接跳转进行下载。这里也给出了WRF-Hydro ArcGIS Pre-processing Tools Version v5.2.0的工具包下载链接。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_arcgis_preprocessor/archive/refs/tags/5.2.0.tar.gz">WRF-Hydro ArcGIS Pre-processing Tools Version v5.2.0 release tar.gz压缩包下载</a></p>
+<p><a href="https://singyutang.github.io/2024/04/03/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85WRF-Hydro-GIS-Pre-Processing-Tools5-2-0/">个人博客-安装使用WRF Hydro GIS Pre-Processing Tools5.2.0</a></p>
+<h1 id="3-工具包模块功能介绍与使用教程"><a href="#3-工具包模块功能介绍与使用教程" class="headerlink" title="3. 工具包模块功能介绍与使用教程"></a>3. 工具包模块功能介绍与使用教程</h1><p>本章内容主要是对以上内容中提到的工具包说明文档以及使用教程的分享，并简单介绍处理流程。下面将根据工具包的使用顺序进行依次介绍。注意：本章内容都是基于WRF-Hydro在Standalone Mode下运行，使用Noah-MP陆地表面模型。</p>
+<p>1.<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/wps.html#">在线WPS用户指南-The WRF Preprocessing System (WPS)模块功能详细介绍与运行</a></p>
+<p>该教程中主要展示了如何利用WPS得到WRF-Hydro工具包中所需要的<code>geo_em.d*.nc</code>文件和<code>met_em.d*</code>文件。<code>geo_em.d*.nc</code>是WRFHydro_GIS_Preprocessor工具包处理所必要的文件，<code>met_em.d*</code>文件是WRF工具包生成<code>wrfinput_d*</code>的必要文件。<code>wrfinput_d*</code>文件是WRFHydro_GIS_Preprocessor工具包处理所必要的文件。WPS主要需要修改的配置文件为”namelist.wps”。</p>
+<p>WPS所必要的数据包括Static Geographical Data和Grided Meteorological Data两种数据文件，可通过查看<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/#7-%E9%9D%99%E6%80%81%E5%9C%B0%E7%90%86%E6%95%B0%E6%8D%AE">个人博客-静态地理数据</a>和<a href="https://singyutang.github.io/2024/03/17/%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu16-04%E4%B8%8A%E5%AE%89%E8%A3%85%E7%BC%96%E8%AF%91WRF4-5-2%E3%80%81WRF-hydro5-2-0%E5%92%8CWPS4-5-0/#8-%E5%AE%9E%E6%97%B6%E6%B0%94%E8%B1%A1%E6%95%B0%E6%8D%AE">个人博客-GFS实时气象数据</a>进行下载。</p>
+<p>关于WPS详细模块和功能介绍可点击上面链接进行查看，这里将其目录截图进行展示。<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/wrf-hydrov5.2technicaldescription.pdf">wrf-hydrov5.2用户手册</a>在第 5.2节 <em>Domain processing and description of surface physiographic input files</em>也作了简单运行流程介绍。</p>
+
+
+<p>2.<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/running_wrf.html">在线WRF用户指南-WRF运行详细步骤与说明</a></p>
+<p>该教程只介绍WRF在河道流量中使用到的处理流程，确保在运行WRF前进行<a target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/wrf_users_guide/build/html/initialization.html">编译</a>。在WRF的处理流程中，主要会使用到WPS处理结果中<code>met_em.*</code>文件，然后利用<code>real.exe</code>程序生成<code>WRFHydro_GIS_Preprocessor</code>工具将会使用的 <code>wrfinput_d0* </code>文件，当然该文件也可通过R程序<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/create_wrfinput.zip">create_wrfinput.R</a>生成。WRF中主要修改的配置文件为”namelist.wps”和”namelist.input”。<em>注意修改WRF中的配置文件时要和WPS中的配置文件参数相对应。</em></p>
+<p>3.<a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_arcgis_preprocessor/releases/download/5.2.0/WRFHydro_GIS_Preprocessor_v5_2_0.pdf">WRFHydro_GIS_Preprocessor_v5_2_0 pdf版本学习教程</a></p>
+<p>该实用程序旨在帮助用户使用ArcGIS Pro软件创建 WRF-Hydro routing grids。文档中详细介绍了模块的功能、、数据介绍、操作流程、文件输入、文件输出、输入文件和输出文件的详细介绍及使用到的参数说明等。</p>
+<p>程序所需的必备文件输入为WPS中的输出”geo_em.d*.nc”和高程文件，高程文件主要使用<a target="_blank" rel="noopener" href="https://www.hydrosheds.org/hydrosheds-core-downloads">HydroSHEDS</a>中的Void-filled DEM产品。输出文件包含”Fulldom_hires.nc”、”GEOGRID_LDASOUT_Spatial_Metadata.nc”、”GWBASINS.nc”、”LAKEPARM.nc”、”Route_Link.nc”、”Streams.*”等，有关的文件说明和变量介绍在文档中有详细介绍。</p>
+<p>4.<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/wrf-hydrov5.2technicaldescription.pdf">WRF-HydroV5.2.0TechnicalDescription pdf</a></p>
+<p>本文档主要介绍WR-Hydro中各模块的功能介绍，对于处理流程的介绍较为简略，但对于每个配置文件的设置，每个参数的含义都有详细介绍和说明。如果想要了解和学习WRF-Hydro的详细操作流程和演示（独立模式，standalone mode），请参照<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">howtobuildrunwrfhydrov511instandalonemode.pdf</a>和<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">wrf-hydrov511testcaseuserguide.pdf</a></p>
+<p>5.<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">如何在独立模式下构建和运行 WRF-Hydro 5.1.1</a></p>
+<p>该文档仍然支持WRF-Hydro v5.2.0的学习。该文档用于对示例测试用例的引导，旨在引导您使用准备好的地理输入以及为特定区域（域）准备的强迫数据来运行 WRF-Hydro 建模系统。我们提供<a target="_blank" rel="noopener" href="https://github.com/NCAR/wrf_hydro_nwm_public/releases/download/v5.2.0/croton_NY_training_example_v5.2.tar.gz">测试数据</a>来测试您的 WRF-Hydro 可执行文件是否已正确编译并能够在您的系统上运行。</p>
+<p> <em>注意：这里提供的测试数据为在独立模式（Standalone Mode）下运行WRF-Hydro。</em></p>
+<p>6.<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildrunwrfhydrov511instandalonemode.pdf">WRF-Hydro V5.1.1 独立测试用例用户指南</a></p>
+<p>该文档仍然支持WRF-Hydro v5.2.0的学习。文档旨在利用示例测试用例指导完成 WRF-Hydro 模型构建过程，然后指导您完成创建自定义地理输入和强制数据与 Noah-MP 陆地表面模型一起在独立模式下运行的工作流程。详细目录和工作流程如下图所示。</p>
+<p>该文档介绍了WRF-Hydro如下内容：</p>
+<p>（1）WRF-Hydro的编译与运行；</p>
+<p>（2）WRF-Hydro的所需脚本与必要安装库；</p>
+<p>（3）WRF-Hydro的案例分享和数据下载；</p>
+<p>（4）WRF-Hydro的详细工作流程，包含WRF、WPS和WRFHydro_GIS_Preprocessor的数据准备部分；</p>
+<p>（5）配置文件的必要修改部分注明；</p>
+<p>（6）WRF-Hydro的输出结果评价，主要是利用<a target="_blank" rel="noopener" href="https://github.com/NCAR/rwrfhydro">rwrfhydro</a>工具进行评价和可视化，但不建议使用这个工具包，受限太多。</p>
+
+
+
+
+<p>7.<a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/public/projects/wrf-hydro/technical-description-user-guide/outputvariablematrix-v5.2.0.pdf">WRF-Hydro v5.2 Output Variable Matrix pdf</a></p>
+<p> 该文档详细介绍了WRF-Hydro程序运行输出后的各文件以及变量，包含对于所有文件中变量的详细介绍，有不清楚的可进行下载查看。</p>
+<p>8.其他文档</p>
+<p>以下v5.1.1版本的文档皆可用于v5.2.0的学习。</p>
+<p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/howtobuildandrunwrfhydrov511coupledtowrf.pdf">如何构建和运行与 WRF 耦合的 WRF-Hydro V5.1.1</a> 暂不使用</p>
+<p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs/water/wrf-hydrov511testcaseuserguide.pdf">耦合 WRF|WRF-Hydro V5.1.1 测试用例用户指南</a> 暂不使用</p>
+<p><a target="_blank" rel="noopener" href="https://ral.ucar.edu/sites/default/files/docs//noah-mpoptionsindicatorsofusagewithwrfhydronwm.pdf">Noah-MP 名单 选项 WRFHydro v5.1.1&#x2F;NWM 使用指标</a> NWM暂不使用，但是NOah-MP有需要可进行查看</p>
+<p><a target="_blank" rel="noopener" href="https://data.hydrosheds.org/file/technical-documentation/HydroSHEDS_TechDoc_v1_4.pdf">HydroSHEDS Technical Documentation</a></p>
+<h1 id="4-后记"><a href="#4-后记" class="headerlink" title="4. 后记"></a>4. 后记</h1><p>WRF-Hydro中的树形工作目录如图，只展示用户需要自己计算的部分</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs stylus">wrf_hydro_nwm_public-<span class="hljs-number">5.2</span>.<span class="hljs-number">0</span><br>    └── tests<br>    └── ...<br>    └── trunk<br>        ├── NDHMS<br>            ├── ...<br>            └── RUN<br>                ├── ...<br>                ├── DOMAIN<br>                    ├── Fulldom_hires<span class="hljs-selector-class">.nc</span><br>                    ├── wrinput_d01<span class="hljs-selector-class">.nc</span><br>                    ├── geo_em<span class="hljs-selector-class">.d01</span><span class="hljs-selector-class">.nc</span><br>                    └── ...<br>                ├── FORCING<br>                    └── ...<br>                ├── RESTART<br>                    └── ... <br>                ├── wrf_hydro<span class="hljs-selector-class">.exe</span><br>                ├── namelist<span class="hljs-selector-class">.hrldas</span><br>                ├── hydro<span class="hljs-selector-class">.namelist</span><br>                ├── SOILPARM<span class="hljs-selector-class">.TBL</span><br>                ├── MPTABLE<span class="hljs-selector-class">.TBL</span><br>                ├── CHANPAM<span class="hljs-selector-class">.TBL</span><br>                ├── HYDRO<span class="hljs-selector-class">.TBL</span><br>                ├── GENPARM<span class="hljs-selector-class">.TBL</span><br>                └── ...<br><br></code></pre></td></tr></table></figure>
+
+<p>本文档中分享的内容尚不完整，后续将根据实际处理进行不断完善。<br>目前以上内容包括WRF-Hydro中处理流程的一些文档的介绍和分享，但只包含了处理过程中“DOMAIN”文件夹中数据的描述，缺少关于气象强迫(FORCING)数据的获取以及“FORCING”文件夹的介绍说明和处理流程，以及坐标转化、格式转化、重采样等相关问题的整理，这些工作将于最近进行更新。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HydroSHEDS/" rel="tag">HydroSHEDS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WPS4-5-0/" rel="tag">WPS4.5.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro-GIS-Pre-Processing-Tools/" rel="tag">WRF Hydro GIS Pre-Processing Tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF-Hydro5-2-0/" rel="tag">WRF-Hydro5.2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WRF4-5-2/" rel="tag">WRF4.5.2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/documents/" rel="tag">documents</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/toolkit/" rel="tag">toolkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/websites/" rel="tag">websites</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+
+<script src="/js/vdonate.js"></script>
+
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: '/img/wxpay.jpg',
+  alipayImage: '/img/alipay.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/05/07/%E6%B4%AA%E6%B0%B4%E7%A0%94%E7%A9%B6%E7%9B%B8%E5%85%B3%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86%E4%B8%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          【文献分享】-洪水研究相关文献整理一
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/04/25/WRF-Hydro%E7%9A%84%E6%96%87%E7%8C%AE%E8%B0%83%E7%A0%94/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">WRF-Hydro的文献调研</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD%E3%80%81%E5%AE%89%E8%A3%85%E5%92%8C%E7%BC%96%E8%AF%91"><span class="nav-number">2.</span> <span class="nav-text">2. 软件下载、安装和编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-WRF4-5-2%E5%92%8CWPS4-5-0%E4%B8%8B%E8%BD%BD%E3%80%81%E5%AE%89%E8%A3%85%E4%B8%8E%E7%BC%96%E8%AF%91"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 WRF4.5.2和WPS4.5.0下载、安装与编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-WRF-Hydro5-2-0%E4%B8%8B%E8%BD%BD%E3%80%81%E5%AE%89%E8%A3%85%E4%B8%8E%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 WRF-Hydro5.2.0下载、安装与编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-WRF-Hydro-GIS-Pre-Processing-Tools5-2-0%E4%B8%8B%E8%BD%BD%E3%80%81%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 WRF Hydro GIS Pre-Processing Tools5.2.0下载、安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%B7%A5%E5%85%B7%E5%8C%85%E6%A8%A1%E5%9D%97%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">3. 工具包模块功能介绍与使用教程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%90%8E%E8%AE%B0"><span class="nav-number">4.</span> <span class="nav-text">4. 后记</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 SingyuTang All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+
+<script src="/js/my.js"></script>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/scripts.js"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
