@@ -21,21 +21,22 @@
   
     <meta name="description" content="FNL和GFS数据的区别GFS（1）gfs是实时产品，包括初始分析场和预报场，其中，只有初始场为同化（三维变分）过后的分析场，随后时次都是预报结果。因此，每隔6小时，都有N多天的预报结果，3小时间隔，前192小时位高分辨率，后面分辨率降低。（2）gfs是预报场，可以实时的提供。GFS和Fnl文件的区别FNL（1）fnl（Final）Fnl全球资料数据是每隔6小时一次的（1度1度或者为2.5度2.5">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习拓展一">
+<meta property="og:title" content="WRF-Hydro学习拓展一">
 <meta property="og:url" content="https://singyutang.github.io/2024/05/16/%E5%AD%A6%E4%B9%A0%E6%8B%93%E5%B1%95%E4%B8%80/index.html">
 <meta property="og:site_name" content="SingyuTang">
 <meta property="og:description" content="FNL和GFS数据的区别GFS（1）gfs是实时产品，包括初始分析场和预报场，其中，只有初始场为同化（三维变分）过后的分析场，随后时次都是预报结果。因此，每隔6小时，都有N多天的预报结果，3小时间隔，前192小时位高分辨率，后面分辨率降低。（2）gfs是预报场，可以实时的提供。GFS和Fnl文件的区别FNL（1）fnl（Final）Fnl全球资料数据是每隔6小时一次的（1度1度或者为2.5度2.5">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://singyutang.github.io/image.png">
 <meta property="article:published_time" content="2024-05-16T07:04:36.000Z">
-<meta property="article:modified_time" content="2024-05-17T09:17:20.418Z">
+<meta property="article:modified_time" content="2025-09-23T11:36:59.685Z">
 <meta property="article:author" content="SingyuTang">
+<meta property="article:tag" content="WRF-Hydro5.2.0">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://singyutang.github.io/image.png">
   
   
   
-  <title>学习拓展一 - SingyuTang</title>
+  <title>WRF-Hydro学习拓展一 - SingyuTang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +215,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="学习拓展一"></span>
+            <span id="subtitle" data-typed-text="WRF-Hydro学习拓展一"></span>
           
         </div>
 
@@ -295,7 +296,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">学习拓展一</h1>
+            <h1 id="seo-header">WRF-Hydro学习拓展一</h1>
             
             
               <div class="markdown-body">
@@ -323,6 +324,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="category-chain-item">学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/WRF-Hydro5-2-0/" class="print-no-link">#WRF-Hydro5.2.0</a>
+      
+    </div>
   
 </div>
 
@@ -332,7 +361,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>学习拓展一</div>
+      <div>WRF-Hydro学习拓展一</div>
       <div>https://singyutang.github.io/2024/05/16/学习拓展一/</div>
     </div>
     <div class="license-meta">
@@ -476,6 +505,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -695,6 +730,49 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
   <script defer src="/js/leancloud.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
@@ -713,5 +791,20 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
