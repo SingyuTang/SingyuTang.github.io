@@ -26,13 +26,13 @@
 <meta property="og:site_name" content="SingyuTang">
 <meta property="og:description" content="FNL和GFS数据的区别GFS（1）gfs是实时产品，包括初始分析场和预报场，其中，只有初始场为同化（三维变分）过后的分析场，随后时次都是预报结果。因此，每隔6小时，都有N多天的预报结果，3小时间隔，前192小时位高分辨率，后面分辨率降低。（2）gfs是预报场，可以实时的提供。GFS和Fnl文件的区别FNL（1）fnl（Final）Fnl全球资料数据是每隔6小时一次的（1度1度或者为2.5度2.5">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://singyutang.github.io/image.png">
+<meta property="og:image" content="https://singyutang.github.io/2024/05/16/%E5%AD%A6%E4%B9%A0%E6%8B%93%E5%B1%95%E4%B8%80/image.png">
 <meta property="article:published_time" content="2024-05-16T07:04:36.000Z">
 <meta property="article:modified_time" content="2025-09-23T11:36:59.685Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="WRF-Hydro5.2.0">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://singyutang.github.io/image.png">
+<meta name="twitter:image" content="https://singyutang.github.io/2024/05/16/%E5%AD%A6%E4%B9%A0%E6%8B%93%E5%B1%95%E4%B8%80/image.png">
   
   
   
@@ -310,12 +310,12 @@
 <p>如果采用wrfout_d01*作为FORCING数据，分辨率可查看WRF中的namelist.input文件。DOMAIN文件夹中的wrfinput_d01、geo_em01文件的分辨率也可根据同种方法进行查看。</p>
 <p>问题：如何设置查看WRF-Hydro输出文件的分辨率？</p>
 <p>LDASOUT_DOMAIN1文件：通过ncdump命令打印查看global attributes中的proj4，该变量定义了LDASOUT_DOMAIN1文件的投影方式和坐标系统（不为经纬度坐标，需转换）。</p>
-<p>在 WRF-Hydro 中，子网格聚合&#x2F;分解（aggregation&#x2F;disaggregation）用于表示比本地陆地表面模型网格更精细的网格尺度上的陆上和地下流动过程。</p>
+<p>在 WRF-Hydro 中，子网格聚合/分解（aggregation/disaggregation）用于表示比本地陆地表面模型网格更精细的网格尺度上的陆上和地下流动过程。</p>
 <p>路由计算可以在相对高分辨率的陆地表面（例如，25米数字高程模型）上执行，而本地陆地表面模型可以在更大（例如，1公里）的网格尺寸上运行。</p>
 <p>AGGFACTR：子网格聚合因子，定义为子网格分辨率与原生土地模型分辨率的比率。不能为1.</p>
-<p>通过在模型名称列表文件中指定地面流或地下流路由选项并指定与陆地表面模型域文件尺寸（IX、JX）不同的地形网格域文件尺寸（IXRT、JXRT）来激活聚合&#x2F;分解例程。 ）。此外，模型子网格大小 (DXRT)、路由时间步长 (DTRT) 和整数除数 (AGGFACTRT) 决定聚合&#x2F;分解例程如何划分本机模型网格方块，所有这些都需要在模型 Hydro.namelist 文件中指定。<br>如果 IXRT&#x3D;IX、JXRT&#x3D;JX 和 AGGFACTRT&#x3D;1，聚合&#x2F;分解方案将被激活，但不会对陆地表面模型网格和地形路径网格之间的模型分辨率产生任何有效的变化。为 IXRT、JXRT 和 AGGFACTRT≠1 指定不同的值将有效改变陆地模型和地形布线网格之间的模型分辨率。如地表径流路由第 3.5 节中所述，<strong>DXRT 和 DTRT 必须始终根据路由网格指定，即使它们与本地陆地表面模型网格相同</strong>。</p>
+<p>通过在模型名称列表文件中指定地面流或地下流路由选项并指定与陆地表面模型域文件尺寸（IX、JX）不同的地形网格域文件尺寸（IXRT、JXRT）来激活聚合/分解例程。 ）。此外，模型子网格大小 (DXRT)、路由时间步长 (DTRT) 和整数除数 (AGGFACTRT) 决定聚合/分解例程如何划分本机模型网格方块，所有这些都需要在模型 Hydro.namelist 文件中指定。<br>如果 IXRT=IX、JXRT=JX 和 AGGFACTRT=1，聚合/分解方案将被激活，但不会对陆地表面模型网格和地形路径网格之间的模型分辨率产生任何有效的变化。为 IXRT、JXRT 和 AGGFACTRT≠1 指定不同的值将有效改变陆地模型和地形布线网格之间的模型分辨率。如地表径流路由第 3.5 节中所述，<strong>DXRT 和 DTRT 必须始终根据路由网格指定，即使它们与本地陆地表面模型网格相同</strong>。</p>
 <p>DXRT：Specification of the routing grid cell spacing，布线网格单元间距的规范</p>
-<p>聚合因子 &#x3D; 4 的常规陆地表面模型网格内的路由子网格实施示例<br><img src="/image.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p>聚合因子 = 4 的常规陆地表面模型网格内的路由子网格实施示例<br><img src="image.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 
                 
               </div>
