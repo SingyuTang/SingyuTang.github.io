@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://singyutang.github.io/2025/09/23/%E5%A6%82%E4%BD%95%E8%A7%A3%E8%AF%BB%E5%88%A9%E7%94%A8GRACE-LB%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%E5%87%BA%E7%9A%84LGD%E7%9A%84ASD%E5%9B%BE/image-1.png">
 <meta property="og:image" content="https://singyutang.github.io/2025/09/23/%E5%A6%82%E4%BD%95%E8%A7%A3%E8%AF%BB%E5%88%A9%E7%94%A8GRACE-LB%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%E5%87%BA%E7%9A%84LGD%E7%9A%84ASD%E5%9B%BE/image.png">
 <meta property="article:published_time" content="2025-09-22T16:11:48.000Z">
-<meta property="article:modified_time" content="2025-09-24T15:54:54.585Z">
+<meta property="article:modified_time" content="2025-09-25T06:27:20.713Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="GRACE">
 <meta property="article:tag" content="GRACE-FO">
@@ -310,17 +310,17 @@
                 <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>利用 GRACE/GRACE-FO 星间测距数据（KBR、LRI）计算 LGD 通常会同时计算 LGD 的功率谱（PSD）或振幅谱（ASD），如下所示</p>
 <center>[Li2024] ASD of LGD </center>
 
-<p><img src="image.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p><img src="/2025/09/23/%E5%A6%82%E4%BD%95%E8%A7%A3%E8%AF%BB%E5%88%A9%E7%94%A8GRACE-LB%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%E5%87%BA%E7%9A%84LGD%E7%9A%84ASD%E5%9B%BE/image.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 <center>[Zhu2025] AO error, ocean tide (OT) error</center>
 
-<p><img src="image-2.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p><img src="/2025/09/23/%E5%A6%82%E4%BD%95%E8%A7%A3%E8%AF%BB%E5%88%A9%E7%94%A8GRACE-LB%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%E5%87%BA%E7%9A%84LGD%E7%9A%84ASD%E5%9B%BE/image-2.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 <center>[Ghobadi-Far2022] ASD of LGD</center>
 
-<p><img src="image-1.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p><img src="/2025/09/23/%E5%A6%82%E4%BD%95%E8%A7%A3%E8%AF%BB%E5%88%A9%E7%94%A8GRACE-LB%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%E5%87%BA%E7%9A%84LGD%E7%9A%84ASD%E5%9B%BE/image-1.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 <p>对于不了解信号处理和功率谱的新手来说，刚接触时看到这类图或许无从获取信息及分析，本文从 ASD 的公式推导出发，对 ASD 进行详细介绍，并<strong>以[Li2024]论文中的 ASD 图为例进行解读</strong>，帮助新手更好的理解这类结果图。一些关于信号处理中的专业名词和原理可查看另一篇博客进行详细学习。</p>
 <h1 id="2-分析ASD图"><a href="#2-分析ASD图" class="headerlink" title="2. 分析ASD图"></a>2. 分析ASD图</h1><h2 id="2-1-整体分析ASD"><a href="#2-1-整体分析ASD" class="headerlink" title="2.1 整体分析ASD"></a>2.1 整体分析ASD</h2><center>[Li2024] ASD of LGD </center>
 
-<p><img src="image.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<p><img src="/2025/09/23/%E5%A6%82%E4%BD%95%E8%A7%A3%E8%AF%BB%E5%88%A9%E7%94%A8GRACE-LB%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97%E5%87%BA%E7%9A%84LGD%E7%9A%84ASD%E5%9B%BE/image.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
 <p>（1）因为：方差= ASD 的平方对频率积分（$\sigma^2 = \int_{0}^{\infty} \text{ASD}^2(f) \, df$）</p>
 <p>可据此从上图中判断各曲线的方差和标准差分布情况，其中LRI LGD (reference orbit removed)最小。</p>
 <p>（2）保留参考轨道（蓝/橙）曲线在<strong>低频端（~10⁻⁴–10⁻³ Hz）</strong>振幅很大（十的负二次方量级），总体比“removed”曲线高很多 —— 表明参考轨道相关误差主要影响低频段。</p>
@@ -427,10 +427,10 @@
 <pre><code class="hljs">黄（LRI removed）在很多频率段是更低的噪声底，说明 LRI 在这些频率段噪声更小（激光测距在中高频通常优于微波测距）。
 
 紫（KBR removed）在某一段出现上升（一个 bump），可能是 KBR 的系统噪声、相位计噪声、或处理后遗留的谱线/机械/热噪所致。
-</code></pre><h2 id="2-4-LRI和KBR的对比"><a href="#2-4-LRI和KBR的对比" class="headerlink" title="2.4 LRI和KBR的对比"></a>2.4 LRI和KBR的对比</h2><p>短周期/中高频段（&gt;≈10⁻² Hz）：LRI（黄/蓝）总体<strong>噪声底</strong>比 KBR（紫/橙）更低，尤其是在“removed”情形下差距更明显 ⇒ 说明 LRI 在短时尺度/高频分量上性能更好（这与 LRI 的设计目标相符）。</p>
+</code></pre><h2 id="2-3-LRI和KBR的对比"><a href="#2-3-LRI和KBR的对比" class="headerlink" title="2.3 LRI和KBR的对比"></a>2.3 LRI和KBR的对比</h2><p>短周期/中高频段（&gt;≈10⁻² Hz）：LRI（黄/蓝）总体<strong>噪声底</strong>比 KBR（紫/橙）更低，尤其是在“removed”情形下差距更明显 ⇒ 说明 LRI 在短时尺度/高频分量上性能更好（这与 LRI 的设计目标相符）。</p>
 <p>超低频（&lt;≈10⁻³ Hz）：曲线受到参考轨道与大尺度地球信号主导，两种测距系统差别被轨道误差掩盖（因此“reserved”曲线接近）。去除轨道成分后，仪器之间的差异在中高频显现出来。</p>
 <p>KBR 的 bump（紫色在 ~几×10⁻² Hz）：可能是 KBR 的系统带噪、谐振或处理残留。需要查看 KBR 的内部噪声谱或相位计特性确认。</p>
-<h2 id="2-5-可能的噪声-谱形来源"><a href="#2-5-可能的噪声-谱形来源" class="headerlink" title="2.5 可能的噪声/谱形来源"></a>2.5 可能的噪声/谱形来源</h2><ul>
+<h2 id="2-4-可能的噪声-谱形来源"><a href="#2-4-可能的噪声-谱形来源" class="headerlink" title="2.4 可能的噪声/谱形来源"></a>2.4 可能的噪声/谱形来源</h2><ul>
 <li><p>参考轨道误差（低频、保留时主导）</p>
 </li>
 <li><p>大尺度地球物理信号（潮汐、长周期水文/大气质心变化）</p>
@@ -457,6 +457,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="category-chain-item">学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
     <div class="post-meta">
