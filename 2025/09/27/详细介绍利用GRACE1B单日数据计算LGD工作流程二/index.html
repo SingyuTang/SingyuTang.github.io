@@ -19,25 +19,28 @@
   <meta name="author" content="SingyuTang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. GRACE中的Mascons数据下载简介GRACE 孪生卫星于 2002 年 3 月 17 日发射，对地球重力场变化进行详细测量，并彻底改变了对地球陆地、冰盖和海洋水库以及地震和地壳变形的研究。两颗 GRACE 卫星已完成超过 13 年的连续测量！ GRACE 是美国和德国航天机构（NASA 和 DLR）的合作项目。目前，GRACE 地面段的运营由 GFZ 德国地球科学研究中心和欧洲航天局">
+    <meta name="description" content="简介此前的文章详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)已经介绍了如何利用KBR1B数据计算RA和LGD，详细计算流程可参照该文章。本文只是更新基于LRI1B数据计算RA和LGD的处理脚本，脚本可跳转附件进行下载。 附件所有程序脚本都打包到压缩包中，解压后文件目录如下。 123456789Scripts_grace_lri1b_lgd_20250927&#x2F;├──">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GRACE中的Mascons数据最新下载简介">
-<meta property="og:url" content="https://singyutang.github.io/2025/01/07/GRACE%E4%B8%AD%E7%9A%84MASCON%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:title" content="详细介绍利用GRACE1B单日数据计算LGD工作流程二(基于LRI1B单日数据)">
+<meta property="og:url" content="https://singyutang.github.io/2025/09/27/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E5%88%A9%E7%94%A8GRACE1B%E5%8D%95%E6%97%A5%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97LGD%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E4%BA%8C/index.html">
 <meta property="og:site_name" content="SingyuTang">
-<meta property="og:description" content="1. GRACE中的Mascons数据下载简介GRACE 孪生卫星于 2002 年 3 月 17 日发射，对地球重力场变化进行详细测量，并彻底改变了对地球陆地、冰盖和海洋水库以及地震和地壳变形的研究。两颗 GRACE 卫星已完成超过 13 年的连续测量！ GRACE 是美国和德国航天机构（NASA 和 DLR）的合作项目。目前，GRACE 地面段的运营由 GFZ 德国地球科学研究中心和欧洲航天局">
+<meta property="og:description" content="简介此前的文章详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)已经介绍了如何利用KBR1B数据计算RA和LGD，详细计算流程可参照该文章。本文只是更新基于LRI1B数据计算RA和LGD的处理脚本，脚本可跳转附件进行下载。 附件所有程序脚本都打包到压缩包中，解压后文件目录如下。 123456789Scripts_grace_lri1b_lgd_20250927&#x2F;├──">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-07T04:12:45.000Z">
-<meta property="article:modified_time" content="2025-01-07T07:09:07.742Z">
+<meta property="article:published_time" content="2025-09-27T08:34:56.000Z">
+<meta property="article:modified_time" content="2025-09-27T08:47:12.647Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="GRACE">
 <meta property="article:tag" content="GRACE-FO">
-<meta property="article:tag" content="websites">
-<meta property="article:tag" content="Mascons">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="LGD">
+<meta property="article:tag" content="ASD">
+<meta property="article:tag" content="GROOPS">
+<meta property="article:tag" content="LRI1B">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>GRACE中的Mascons数据最新下载简介 - SingyuTang</title>
+  <title>详细介绍利用GRACE1B单日数据计算LGD工作流程二(基于LRI1B单日数据) - SingyuTang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -101,7 +104,119 @@
 
 
   
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 
 <body>
@@ -216,7 +331,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GRACE中的Mascons数据最新下载简介"></span>
+            <span id="subtitle" data-typed-text="详细介绍利用GRACE1B单日数据计算LGD工作流程二(基于LRI1B单日数据)"></span>
           
         </div>
 
@@ -227,8 +342,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-01-07 12:12" pubdate>
-          2025年1月7日 中午
+        <time datetime="2025-09-27 16:34" pubdate>
+          2025年9月27日 下午
         </time>
       </span>
     
@@ -239,7 +354,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          146 字
         
       </span>
     
@@ -251,7 +366,7 @@
         
         
           <!-- compatible with older versions-->
-          10 分钟
+          2 分钟
         
       </span>
     
@@ -297,72 +412,15 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">GRACE中的Mascons数据最新下载简介</h1>
+            <h1 id="seo-header">详细介绍利用GRACE1B单日数据计算LGD工作流程二(基于LRI1B单日数据)</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="1-GRACE中的Mascons数据下载简介"><a href="#1-GRACE中的Mascons数据下载简介" class="headerlink" title="1. GRACE中的Mascons数据下载简介"></a>1. GRACE中的Mascons数据下载简介</h1><p>GRACE 孪生卫星于 2002 年 3 月 17 日发射，对地球重力场变化进行详细测量，并彻底改变了对地球陆地、冰盖和海洋水库以及地震和地壳变形的研究。两颗 GRACE 卫星已完成超过 13 年的连续测量！</p>
-<p>GRACE 是美国和德国航天机构（NASA 和 DLR）的合作项目。目前，GRACE 地面段的运营由 GFZ 德国地球科学研究中心和欧洲航天局 (ESA) 共同资助。NASA、ESA、GFZ 和 DLR 正在支持继续测量地球系统的质量再分布。该任务的设计、建造和发射的主要合作伙伴包括喷气推进实验室（JPL）、德克萨斯大学空间研究中心（CSR）、德国地球科学研究中心（GFZ）以及 Astrium GmBH、Space Systems Loral (SS&#x2F;L)、Onera 和 Eurockot GmBH。</p>
-<p>质量浓度块（Mascons）本质上是另一种形式的重力场基函数，用于拟合 GRACE 卫星的星间测距观测数据。与标准的球谐函数方法相比，mascons 提供了多个关键优势。球谐方法是 GRACE&#x2F;GRACE-FO 观测前十年中的标准方法，而 Mascons 的应用使得地球物理约束的实现变得更加容易。这些先验约束有助于在 Level-2 数据处理阶段过滤掉 GRACE&#x2F;GRACE-FO 观测数据中的噪声，这种方法比球谐方法生成的陆地和海洋网格所需的经验性后处理滤波更加严谨。</p>
-<p>目前发布Mascons数据产品的包括三大机构，分别是CSR、JPL和GSFC（注意不是GFZ）。</p>
-<h1 id="2-JPL发布的Mascons数据下载"><a href="#2-JPL发布的Mascons数据下载" class="headerlink" title="2.JPL发布的Mascons数据下载"></a>2.JPL发布的Mascons数据下载</h1><p>简介：JPL RL06M 质量块解决方案针对放置在椭圆地球表面的 4,551 个等面积 3 度球冠质量块求解每月重力场变化。自然，这些质量块的子集位于海岸线上，因此它们包含混合的陆地和海洋信号。该产品应用了海岸线分辨率改进 (CRI) 过滤器以在后处理步骤中分离每个陆地&#x2F;海洋质量块内的陆地和海洋质量部分。由于海岸线定义明确，因此此过滤器的效果将在数据中轻松看到。更多处理细节可在<a target="_blank" rel="noopener" href="https://grace.jpl.nasa.gov/data/get-data/jpl_global_mascons/">官网</a>查看。</p>
-<p>JPL Mascons数据下载官网：<a target="_blank" rel="noopener" href="https://grace.jpl.nasa.gov/data/get-data/jpl_global_mascons/">https://grace.jpl.nasa.gov/data/get-data/jpl_global_mascons/</a></p>
-<h2 id="数据下载"><a href="#数据下载" class="headerlink" title="数据下载"></a>数据下载</h2><ol>
-<li>登陆官网，如图，当前JPL-Mascons数据最新版本为JPL RL06.3_v04。</li>
-</ol>
-
-
-
-<ol start="2">
-<li>点击右上角”Current Data Versions”中的”JPL PO.DAAC.”，跳转的页面为最新JPL-Mascons数据下载页面，如图。</li>
-</ol>
-
-
-
-
-<ol start="3">
-<li>进入”JPL PO.DAAC.”页面后，点击”Data Access”，跳转至数据下载页面，如图。</li>
-</ol>
-
-
-<ol start="4">
-<li>点击上图中红框标记的链接，即”Search Granules”，跳转至数据搜索页面，如图。</li>
-</ol>
-
-
-<ol start="5">
-<li>搜索页面如上图，点击“下载”按钮，进行下载，数据格式为NC格式，下载成功。</li>
-</ol>
-
-
-<ol start="6">
-<li>查看数据可使用Matlab或Python读取查看，也可使用NASA提供的可视化工具进行查看，如<a target="_blank" rel="noopener" href="https://www.giss.nasa.gov/tools/panoply/download/">Panoply</a>，如使用Ubuntu系统，Panoply可参考<a href="https://singyutang.github.io/2023/09/26/ubuntu16.04%E5%AE%89%E8%A3%85jdk%E5%92%8Cpanoply/">博客</a>安装。</li>
-</ol>
-<h1 id="3-CSR发布的Mascons数据下载"><a href="#3-CSR发布的Mascons数据下载" class="headerlink" title="3.CSR发布的Mascons数据下载"></a>3.CSR发布的Mascons数据下载</h1><p>简介：CSR-Mascons数据产品当前最新产品为RL06.3(RL0603)，RL06.3 质量块已被重新处理的 RL06.3 质量块取代。与 RL06.2 质量块相比，RL06.3产品使用改进后的 GRACE-FO 加速度计数据处理重力场（ACH 与 ACX2 数据集），以应对采用宽松的姿态控制死区的日期，从而缓解冷气体推进系统的泄漏。重新处理的月份包括 2023 年 1 月和 2 月，以及 2023 年 7 月及之后的所有月份。更多处理细节可在<a target="_blank" rel="noopener" href="https://www2.csr.utexas.edu/grace/RL06_mascons.html">CSR Mascons官网</a>查看。</p>
-<p>CSR Mascons数据下载官网：<a target="_blank" rel="noopener" href="https://www2.csr.utexas.edu/grace/RL06_mascons.html">https://www2.csr.utexas.edu/grace/RL06_mascons.html</a></p>
-<p>注意：本文撰写时发布的CSR Mascons数据时间跨度：2002 年 4 月至 2024 年 10 月，数据更新日期：2025-01-06.</p>
-<h2 id="数据下载-1"><a href="#数据下载-1" class="headerlink" title="数据下载"></a>数据下载</h2><ol>
-<li>登陆官网，如图，当前CSR Mascons数据最新版本为 CSR RL06.3(RL0603)。</li>
-</ol>
-
-
-<ol start="2">
-<li>点击下图红框中的内容进行下载，数据格式为NC，数据查看见上文。</li>
-</ol>
-
-
-
-<h1 id="4-GSFC发布的Mascons数据下载"><a href="#4-GSFC发布的Mascons数据下载" class="headerlink" title="4. GSFC发布的Mascons数据下载"></a>4. GSFC发布的Mascons数据下载</h1><p>简介：GSFC机构发布的Mascons产品包含每月 Mascons 产品和高分辨率趋势质量矩产品，更多细节和<a target="_blank" rel="noopener" href="https://earth.gsfc.nasa.gov/sites/default/files/2022-05/gsfc_mascons_hdf5_format_rl06v2.pdf">参考文档</a>可在<a target="_blank" rel="noopener" href="https://earth.gsfc.nasa.gov/geo/data/grace-mascons">GSFC官网</a>查看。</p>
-<p>数据下载官网：<a target="_blank" rel="noopener" href="https://earth.gsfc.nasa.gov/geo/data/grace-mascons">https://earth.gsfc.nasa.gov/geo/data/grace-mascons</a></p>
-<h2 id="数据下载-2"><a href="#数据下载-2" class="headerlink" title="数据下载"></a>数据下载</h2><ol>
-<li>登陆官网，如图，当前GSFC Mascons数据最新版本为RL06v2.0。</li>
-</ol>
-
-
-<ol start="2">
-<li>根据研究需要下载对应的数据，数据格式为HDF5、ASCII或NC，数据查看见上文。</li>
-</ol>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>此前的文章<a href="https://singyutang.github.io/2025/09/23/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E5%88%A9%E7%94%A8GRACE1B%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97LGD%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/">详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)</a>已经介绍了如何利用KBR1B数据计算RA和LGD，详细计算流程可参照该文章。本文只是更新基于LRI1B数据计算RA和LGD的处理脚本，脚本可跳转附件进行下载。</p>
+<h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><p>所有程序脚本都打包到压缩包中，解压后文件目录如下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Shell">Scripts_grace_lri1b_lgd_20250927/<br>├── process_cwt_fliter_signal_data.m<br>├── S00GroopsIntegrateOrbitLRI-20200707.xml<br>├── S01SatelliteTrackingFromLRI-20200707.xml<br>├── S02compute_grace_lgd.py<br>├── S03cwt_fliter_lgd_ra.m<br>├── S04lgd_ra_lpsd.py<br>└── S05plot_lgd_ra_cwt_filter.py<br><br></code></pre></td></tr></table></figure>
+<p>下载链接：<a href="/downloads/Scripts_grace_lri1b_lgd_20250927.zip" download>GRACE-FO LRI1B单日数据反演LGD和RA脚本</a></p>
 
                 
               </div>
@@ -400,9 +458,15 @@
       
         <a href="/tags/GRACE-FO/" class="print-no-link">#GRACE-FO</a>
       
-        <a href="/tags/websites/" class="print-no-link">#websites</a>
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
       
-        <a href="/tags/Mascons/" class="print-no-link">#Mascons</a>
+        <a href="/tags/LGD/" class="print-no-link">#LGD</a>
+      
+        <a href="/tags/ASD/" class="print-no-link">#ASD</a>
+      
+        <a href="/tags/GROOPS/" class="print-no-link">#GROOPS</a>
+      
+        <a href="/tags/LRI1B/" class="print-no-link">#LRI1B</a>
       
     </div>
   
@@ -414,8 +478,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GRACE中的Mascons数据最新下载简介</div>
-      <div>https://singyutang.github.io/2025/01/07/GRACE中的MASCON数据下载简介/</div>
+      <div>详细介绍利用GRACE1B单日数据计算LGD工作流程二(基于LRI1B单日数据)</div>
+      <div>https://singyutang.github.io/2025/09/27/详细介绍利用GRACE1B单日数据计算LGD工作流程二/</div>
     </div>
     <div class="license-meta">
       
@@ -427,7 +491,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年1月7日</div>
+          <div>2025年9月27日</div>
         </div>
       
       
@@ -459,18 +523,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/09/23/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E5%88%A9%E7%94%A8GRACE1B%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97LGD%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/" title="详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/01/05/GitHub%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E5%A4%A7%E4%BA%8E25MB%E7%9A%84%E6%96%87%E4%BB%B6/" title="GitHub如何上传大于25MB的文件">
-                        <span class="hidden-mobile">GitHub如何上传大于25MB的文件</span>
+                      <a href="/2025/09/23/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5/" title="信号处理中的一些概念">
+                        <span class="hidden-mobile">信号处理中的一些概念</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

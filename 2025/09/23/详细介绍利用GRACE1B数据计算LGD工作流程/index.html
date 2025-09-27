@@ -21,14 +21,14 @@
   
     <meta name="description" content="1.前言本文详细介绍了利用GRACE-FO卫星Level-1B（L1B）数据中的KBR1B单日观测数据，计算视线向重力差（line-of-sight gravity difference, LGD）和距离加速度残差（range accelrations difference, RA）的完整工作流程。该流程基于GROOPS软件进行动力学轨道积分与K‐Band ranging(KBR) Level1B">
 <meta property="og:type" content="article">
-<meta property="og:title" content="详细介绍利用GRACE1B单日数据计算LGD工作流程">
+<meta property="og:title" content="详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)">
 <meta property="og:url" content="https://singyutang.github.io/2025/09/23/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E5%88%A9%E7%94%A8GRACE1B%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97LGD%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/index.html">
 <meta property="og:site_name" content="SingyuTang">
 <meta property="og:description" content="1.前言本文详细介绍了利用GRACE-FO卫星Level-1B（L1B）数据中的KBR1B单日观测数据，计算视线向重力差（line-of-sight gravity difference, LGD）和距离加速度残差（range accelrations difference, RA）的完整工作流程。该流程基于GROOPS软件进行动力学轨道积分与K‐Band ranging(KBR) Level1B">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://singyutang.github.io/2025/09/23/%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E5%88%A9%E7%94%A8GRACE1B%E6%95%B0%E6%8D%AE%E8%AE%A1%E7%AE%97LGD%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/image.png">
 <meta property="article:published_time" content="2025-09-22T16:10:11.000Z">
-<meta property="article:modified_time" content="2025-09-26T15:42:31.374Z">
+<meta property="article:modified_time" content="2025-09-27T08:36:09.526Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="GRACE">
 <meta property="article:tag" content="GRACE-FO">
@@ -42,7 +42,7 @@
   
   
   
-  <title>详细介绍利用GRACE1B单日数据计算LGD工作流程 - SingyuTang</title>
+  <title>详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据) - SingyuTang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -333,7 +333,7 @@ mjx-container[display="true"] + br {
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="详细介绍利用GRACE1B单日数据计算LGD工作流程"></span>
+            <span id="subtitle" data-typed-text="详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)"></span>
           
         </div>
 
@@ -414,7 +414,7 @@ mjx-container[display="true"] + br {
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">详细介绍利用GRACE1B单日数据计算LGD工作流程</h1>
+            <h1 id="seo-header">详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)</h1>
             
             
               <div class="markdown-body">
@@ -465,8 +465,8 @@ mjx-container[display="true"] + br {
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>Li, Hao-si, Shuang Yi, Zi-ren Luo, and Peng Xu. 2024. “Revealing High-Temporal-Resolution Flood Evolution With Low Latency Using GRACE Follow-On Ranging Data.” Water Resources Research 60(6):e2023WR036332. doi:10.1029/2023WR036332.</p>
 <p>Han, Shin-Chan, Khosro Ghobadi-Far, In-Young Yeo, Christopher M. McCullough, Eunjee Lee, and Jeanne Sauber. 2021. “GRACE Follow-On Revealed Bangladesh Was Flooded Early in the 2020 Monsoon Season Due to Premature Soil Saturation.” Proceedings of the National Academy of Sciences 118(47):e2109086118. doi:10.1073/pnas.2109086118.</p>
 <h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><p>上述中涉及到的所有程序脚本都打包到压缩包中，解压后文件目录如下。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Shell">Scripts_grace_lgd_20250926/<br>├── process_cwt_fliter_signal_data.m<br>├── S00GroopsIntegrateOrbitKBR-20200707.xml<br>├── S01SatelliteTrackingFromKBR-20200707.xml<br>├── S02compute_grace_lgd.py<br>├── S03cwt_fliter_lgd_ra.m<br>├── S04lgd_ra_lpsd.py<br>└── S05plot_lgd_ra_cwt_filter.py<br><br></code></pre></td></tr></table></figure>
-<p>下载链接：<a href="/downloads/Scripts_grace_lgd_20250926.zip" download>GRACE-FO KBR1B单日数据反演LGD和RA脚本</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Shell">Scripts_grace_kbr1b_lgd_20250926/<br>├── process_cwt_fliter_signal_data.m<br>├── S00GroopsIntegrateOrbitKBR-20200707.xml<br>├── S01SatelliteTrackingFromKBR-20200707.xml<br>├── S02compute_grace_lgd.py<br>├── S03cwt_fliter_lgd_ra.m<br>├── S04lgd_ra_lpsd.py<br>└── S05plot_lgd_ra_cwt_filter.py<br><br></code></pre></td></tr></table></figure>
+<p>下载链接：<a href="/downloads/Scripts_grace_kbr1b_lgd_20250926.zip" download>GRACE-FO KBR1B单日数据反演LGD和RA脚本</a></p>
 
                 
               </div>
@@ -524,7 +524,7 @@ mjx-container[display="true"] + br {
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>详细介绍利用GRACE1B单日数据计算LGD工作流程</div>
+      <div>详细介绍利用GRACE1B单日数据计算LGD工作流程一(基于KBR1B单日数据)</div>
       <div>https://singyutang.github.io/2025/09/23/详细介绍利用GRACE1B数据计算LGD工作流程/</div>
     </div>
     <div class="license-meta">
