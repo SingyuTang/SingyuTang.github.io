@@ -27,7 +27,7 @@
 <meta property="og:description" content="1.项目简介本项目是对Ghobadi-Far等人（2022）提出的沿轨分析方法的工程化实现与扩展，其核心创新在于利用奥地利格拉茨技术大学（TU Graz）发布的ITSG-Grace2018高频日解重力场模型，替代传统的月平均解，从而在亚月（Sub-monthly）时间尺度上捕捉瞬时地球物理质量迁移信号 。    GRACE（Gravity Recovery and Climate Experime">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-12-10T06:45:04.000Z">
-<meta property="article:modified_time" content="2025-12-12T07:34:51.861Z">
+<meta property="article:modified_time" content="2025-12-12T07:43:00.940Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="GRACE">
 <meta property="article:tag" content="GRACE-FO">
@@ -403,13 +403,13 @@
 <li>物理意义：如果亚马逊河的洪水波向下游传播，或者土壤湿度随季节增加，用户将观察到LGD曲线的峰值在不同日期的轨道上发生位移或幅值增长。这是验证时变重力场模型捕捉动态过程能力的强有力工具。</li>
 </ul>
 <h1 id="5-用户指南与操作流程"><a href="#5-用户指南与操作流程" class="headerlink" title="5. 用户指南与操作流程"></a>5. 用户指南与操作流程</h1><p>本指南假定用户具备基本的Linux或Windows命令行操作能力，并已安装Python (3.8+) 和 MATLAB (R2020a+)。</p>
-<h2 id="5-1-环境部署"><a href="#5-1-环境部署" class="headerlink" title="5.1 环境部署"></a>5.1 环境部署</h2><ol>
+<h2 id="5-1-环境部署"><a href="#5-1-环境部署" class="headerlink" title="5.1 环境部署"></a>5.1 环境部署</h2><ul>
 <li><strong>Python依赖安装：</strong></li>
-</ol>
-<p><code>pip install numpy scipy matplotlib</code></p>
-<ol>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install numpy scipy matplotlib<br></code></pre></td></tr></table></figure>
+<ul>
 <li><strong>MATLAB工具箱检查：</strong> 在MATLAB命令窗口输入 ver，确认已安装 “Signal Processing Toolbox” 和 “Wavelet Toolbox”。</li>
-</ol>
+</ul>
 <h2 id="5-2-数据准备"><a href="#5-2-数据准备" class="headerlink" title="5.2 数据准备"></a>5.2 数据准备</h2><p>在运行代码前，请确保以下数据已下载并按目录结构存放：</p>
 <ol>
 <li><strong>ITSG Daily Solutions (.gfc)</strong>:<ul>
@@ -431,7 +431,7 @@
 <p><em>注：BASE_DIR为GROOPS工作目录，也就是上面所提到的<code>workdir</code>，如 <code>BASE_DIR = r&#39;G:\GROOPS\PNAS2020Workspace&#39;</code></em></p>
 <h2 id="5-3-运行步骤"><a href="#5-3-运行步骤" class="headerlink" title="5.3 运行步骤"></a>5.3 运行步骤</h2><p><strong>步骤一：LGD正演计算 (Python)</strong></p>
 <p>编辑 sh2lgd.py：</p>
-<h1 id="配置示例"><a href="#配置示例" class="headerlink" title="配置示例"></a>配置示例</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">BASE_DIR = <span class="hljs-string">r&#x27;G:\GROOPS\PNAS2020Workspace&#x27;</span>		<span class="hljs-comment"># 工作空间根目录</span><br>STATIC_FILE_REL = <span class="hljs-string">r&#x27;grace_products\GSM-2_2020122-2020152_GRFO_UTCSR_BB01_0603&#x27;</span>		<span class="hljs-comment"># 背景场文件 (相对于 BASE_DIR 或绝对路径)</span><br>START_DATE = <span class="hljs-string">&#x27;2020-06-01&#x27;</span>	<span class="hljs-comment"># 处理时间范围起始时间</span><br>END_DATE = <span class="hljs-string">&#x27;2020-08-30&#x27;</span>		<span class="hljs-comment"># 处理时间范围终止时间</span><br>MAX_DEGREE = <span class="hljs-number">40</span>  <span class="hljs-comment"># 根据ITSG模型的阶数设定</span><br>REGION_CFG = &#123;<br>        <span class="hljs-string">&#x27;lon&#x27;</span>: (<span class="hljs-number">88</span>, <span class="hljs-number">92</span>),  <span class="hljs-comment"># 感兴趣区域经度范围</span><br>        <span class="hljs-string">&#x27;lat&#x27;</span>: (<span class="hljs-number">22</span>, <span class="hljs-number">26</span>),  <span class="hljs-comment"># 感兴趣区域纬度范围</span><br>        <span class="hljs-string">&#x27;lat_limit&#x27;</span>: (-<span class="hljs-number">80.0</span>, <span class="hljs-number">80.0</span>),  <span class="hljs-comment"># 轨道纬度限制</span><br>        <span class="hljs-string">&#x27;dir&#x27;</span>: <span class="hljs-string">&#x27;asc&#x27;</span>  <span class="hljs-comment"># 轨道方向 &#x27;asc&#x27; (升轨) 或 &#x27;desc&#x27; (降轨)</span><br>    &#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 配置示例</span><br>BASE_DIR = <span class="hljs-string">r&#x27;G:\GROOPS\PNAS2020Workspace&#x27;</span>		<span class="hljs-comment"># 工作空间根目录</span><br>STATIC_FILE_REL = <span class="hljs-string">r&#x27;grace_products\GSM-2_2020122-2020152_GRFO_UTCSR_BB01_0603&#x27;</span>		<span class="hljs-comment"># 背景场文件 (相对于 BASE_DIR 或绝对路径)</span><br>START_DATE = <span class="hljs-string">&#x27;2020-06-01&#x27;</span>	<span class="hljs-comment"># 处理时间范围起始时间</span><br>END_DATE = <span class="hljs-string">&#x27;2020-08-30&#x27;</span>		<span class="hljs-comment"># 处理时间范围终止时间</span><br>MAX_DEGREE = <span class="hljs-number">40</span>  <span class="hljs-comment"># 根据ITSG模型的阶数设定</span><br>REGION_CFG = &#123;<br>        <span class="hljs-string">&#x27;lon&#x27;</span>: (<span class="hljs-number">88</span>, <span class="hljs-number">92</span>),  <span class="hljs-comment"># 感兴趣区域经度范围</span><br>        <span class="hljs-string">&#x27;lat&#x27;</span>: (<span class="hljs-number">22</span>, <span class="hljs-number">26</span>),  <span class="hljs-comment"># 感兴趣区域纬度范围</span><br>        <span class="hljs-string">&#x27;lat_limit&#x27;</span>: (-<span class="hljs-number">80.0</span>, <span class="hljs-number">80.0</span>),  <span class="hljs-comment"># 轨道纬度限制</span><br>        <span class="hljs-string">&#x27;dir&#x27;</span>: <span class="hljs-string">&#x27;asc&#x27;</span>  <span class="hljs-comment"># 轨道方向 &#x27;asc&#x27; (升轨) 或 &#x27;desc&#x27; (降轨)</span><br>    &#125;<br></code></pre></td></tr></table></figure>
 <p>预期输出：results/ 目录下生成一系列 time-lgd-YYYY-MM-DD.mat 文件。</p>
 <p><strong>步骤二：信号滤波 (MATLAB)</strong></p>
 <p>在 MATLAB 中打开并运行 S03cwt_fliter_lgd_ra.m。</p>
