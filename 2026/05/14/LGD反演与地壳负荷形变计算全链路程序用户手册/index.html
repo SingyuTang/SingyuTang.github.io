@@ -27,7 +27,7 @@
 <meta property="og:description" content="📖 GRACE-FO LGD 反演与地壳负荷形变计算全链路程序用户手册 (User Manual)1. 系统概述 (Overview)本系统是一套完全解耦的地球物理计算管线（Pipeline），旨在打通从卫星重力学到形变大地测量学的数据链路。系统实现了以下核心闭环：  读取 GRACE-FO 卫星的星间视线重力差（LGD）观测值。 通过带有正则化约束的九宫格（Mascon）算法，反演出地表等效水">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-13T19:21:08.000Z">
-<meta property="article:modified_time" content="2026-05-13T19:26:55.316Z">
+<meta property="article:modified_time" content="2026-05-13T19:39:23.941Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="GRACE">
 <meta property="article:tag" content="GRACE-FO">
@@ -244,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.3k 字
+          5.8k 字
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
           <!-- compatible with older versions-->
-          44 分钟
+          49 分钟
         
       </span>
     
@@ -317,25 +317,33 @@
 <h2 id="2-系统管线架构-Pipeline-Architecture"><a href="#2-系统管线架构-Pipeline-Architecture" class="headerlink" title="2. 系统管线架构 (Pipeline Architecture)"></a>2. 系统管线架构 (Pipeline Architecture)</h2><p>整个数据流分为 5 个独立但连贯的模块：<br><code>LGDInversionSuite.py</code> ➔ <code>export_ewhnpz_to_lgdtws_nc.py</code> ➔ <code>gen_lgd_tws.py</code> ➔ <code>run_cn_lgd_tws.py</code> ➔ <code>plot_ts.py</code></p>
 <h2 id="3-核心模块与参数详解-Step-by-Step-Guide"><a href="#3-核心模块与参数详解-Step-by-Step-Guide" class="headerlink" title="3. 核心模块与参数详解 (Step-by-Step Guide)"></a>3. 核心模块与参数详解 (Step-by-Step Guide)</h2><h3 id="模块一：时变重力高频反演-Inversion"><a href="#模块一：时变重力高频反演-Inversion" class="headerlink" title="模块一：时变重力高频反演 (Inversion)"></a>模块一：时变重力高频反演 (Inversion)</h3><p><strong>运行脚本</strong>：<code>python LGDInversionSuite.py</code><br><strong>功能描述</strong>：本模块是整套系统的“核心算法大脑”。它读取预处理好的 GRACE-FO 星间视线重力差（LGD）瞬时数据与卫星轨道状态向量，利用最小二乘法与 Tikhonov 多维正则化，将极度稀疏的单日重力测量值解算为地表高分辨率的等效水高（EWH）时空演变矩阵，并输出为自描述的 <code>.npz</code> 文件供下游调用。</p>
 <p><strong>全参数详解（对应脚本中 <code>base_config</code> 与 <code>config</code> 字典）：</strong></p>
+<p>在 Markdown 中，如果表格的某个单元格内有<strong>没有空格的极长字符串（比如绝对文件路径）</strong>，大部分 Markdown 渲染器（如 GitHub、Typora 等）无法自动换行，这会导致整个表格被无限拉宽，严重破坏文档的美观排版。</p>
+<p>为了解决这个问题，在编写官方说明文档时，我们通常采用两种优雅的处理方式：</p>
+<ol>
+<li>使用 HTML 的 <code>&lt;br&gt;</code> 标签在表格内部强制换行。</li>
+<li>在表格里写简写，将长路径作为<strong>“注释（Note）”</strong>放在表格下方。</li>
+</ol>
+<p>这里我为你提供优化后的<strong>“1. 基础环境与轨道参数”</strong>表格（采用了“内部换行 + 路径缩写”的完美排版），你可以直接替换掉原来的部分：</p>
+<hr>
 <h4 id="1-基础环境与轨道参数-Base-Configurations"><a href="#1-基础环境与轨道参数-Base-Configurations" class="headerlink" title="1. 基础环境与轨道参数 (Base Configurations)"></a>1. 基础环境与轨道参数 (Base Configurations)</h4><p>这些参数主要定义了数据来源与底层轨道积分的物理范围，通常设定一次后无需频繁更改。</p>
 <div class="table-container">
 <table>
 <thead>
 <tr>
 <th style="text-align:left">参数名</th>
-<th style="text-align:left">推荐设置 (默认)</th>
+<th style="text-align:left">推荐设置 (示例)</th>
 <th style="text-align:left">物理/程序含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left"><code>groops_workspace</code></td>
-<td style="text-align:left">你的本地路径(如’G:\GROOPS\PNAS2020Workspace’)</td>
+<td style="text-align:left">你的本地路径<br><em>(如 <code>G:\GROOPS\...</code>)</em></td>
 <td style="text-align:left"><strong>GROOPS 工作空间目录</strong>。指向预先计算好的 GRACE-FO 卫星精密轨道数据。</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>lgd_results_dir</code></td>
-<td style="text-align:left">你的本地路径(如’G:\GROOPS\PNAS2020WorkspaceBase202005Field\LGDPostprocess\processed_results\GROOPS-NOAH_SM’)</td>
+<td style="text-align:left">你的本地路径<br><em>(见下方 <strong>注1</strong>)</em></td>
 <td style="text-align:left"><strong>LGD 观测值目录</strong>。指向从 Level-1B 数据中提取的、且已扣除背景场（如 GLDAS 土壤水分）的残差 LGD 数据路径。</td>
 </tr>
 <tr>
@@ -361,6 +369,54 @@
 </tbody>
 </table>
 </div>
+<h4 id="1-基础环境与轨道参数-Base-Configurations-1"><a href="#1-基础环境与轨道参数-Base-Configurations-1" class="headerlink" title="1. 基础环境与轨道参数 (Base Configurations)"></a>1. 基础环境与轨道参数 (Base Configurations)</h4><p>这些参数主要定义了数据来源与底层轨道积分的物理范围，通常设定一次后无需频繁更改。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">推荐设置 (默认)</th>
+<th style="text-align:left">物理/程序含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>groops_workspace</code></td>
+<td style="text-align:left">你的本地路径(如<br><em>(见下方 <strong>注1</strong>)</em>)</td>
+<td style="text-align:left"><strong>GROOPS 工作空间目录</strong>。指向预先计算好的 GRACE-FO 卫星精密轨道数据。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>lgd_results_dir</code></td>
+<td style="text-align:left">你的本地路径(如<br><em>(见下方 <strong>注2</strong>)</em>)</td>
+<td style="text-align:left"><strong>LGD 观测值目录</strong>。指向从 Level-1B 数据中提取的、且已扣除背景场（如 GLDAS 土壤水分）的残差 LGD 数据路径。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>region_lon</code><br><code>region_lat</code></td>
+<td style="text-align:left"><code>(88, 92)</code><br><code>(22, 26)</code></td>
+<td style="text-align:left"><strong>核心研究区边界</strong>。此处设定的为孟加拉国（Bangladesh）的经纬度边界框，用于在长长的卫星轨道中精准过滤出过境本区的有效时段。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>track_lat_limit</code></td>
+<td style="text-align:left"><code>(-80.0, 80.0)</code></td>
+<td style="text-align:left"><strong>轨道纬度限制</strong>。截取 GRACE-FO 数据时的通用有效纬度范围（排除极地密集交汇区的噪点）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>orbit_interval</code></td>
+<td style="text-align:left"><code>2</code></td>
+<td style="text-align:left"><strong>轨道采样间隔</strong>。默认 <code>2</code> 秒，完美兼顾空间采样密度与计算内存。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>n_max</code></td>
+<td style="text-align:left"><code>200</code></td>
+<td style="text-align:left"><strong>截断阶数</strong>。底层重力场球谐展开的最大阶数（Degree &amp; Order）。<code>200</code> 阶足以捕捉约 <code>100 km</code> 级别的地表质量剧变细节。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>📝 注1 (关于本地路径设置)</strong>：<br><code>r&#39;G:\GROOPS\PNAS2020Workspace&#39;</code></p>
+<p><strong>📝 注2 (关于本地路径设置)</strong>：<br><code>r&#39;G:\GROOPS\PNAS2020WorkspaceBase202005Field\LGDPostprocess\processed_results\GROOPS-NOAH_SM&#39;</code></p>
+</blockquote>
 <h4 id="2-空间防漏与网格参数-Spatial-Mascon-Settings-🔥【核心设计】"><a href="#2-空间防漏与网格参数-Spatial-Mascon-Settings-🔥【核心设计】" class="headerlink" title="2. 空间防漏与网格参数 (Spatial Mascon Settings) 🔥【核心设计】"></a>2. 空间防漏与网格参数 (Spatial Mascon Settings) 🔥【核心设计】</h4><div class="table-container">
 <table>
 <thead>
