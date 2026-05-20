@@ -19,15 +19,15 @@
   <meta name="author" content="SingyuTang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言：为什么我们需要了解这套推导？在从事地球物理反演、机器学习（如岭回归）或计算机视觉等领域的算法开发时，我们经常会看到代码里出现这样一行优雅的语句：1m &#x3D; scipy.linalg.solve(G.T @ G + alpha**2 * L.T @ L, G.T @ d)很多人知道这是在“求解带正则化的最小二乘问题”，但一旦被人问起：“这行代码是怎么从你的物理目标函数里推导出来的？”，往往会一时">
+    <meta name="description" content="地球物理反演：从目标函数到求解方程（法方程）的严密推导与代码映射前言：为什么我们需要了解这套推导？在从事地球物理反演、机器学习（如岭回归）或计算机视觉等领域的算法开发时，我们经常会看到代码里出现这样一行优雅的语句：1m &#x3D; scipy.linalg.solve(G.T @ G + alpha**2 * L.T @ L, G.T @ d)很多人知道这是在“求解带正则化的最小二乘问题”，但一旦被人问起">
 <meta property="og:type" content="article">
 <meta property="og:title" content="地球物理反演：从目标函数到求解方程（法方程）的严密推导与代码映射">
 <meta property="og:url" content="https://singyutang.github.io/2026/05/20/%E5%8F%8D%E6%BC%94%E4%B8%AD%E7%9A%84%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E6%98%AF%E6%80%8E%E4%B9%88%E6%8E%A8%E5%AF%BC%E6%88%90%E6%B3%95%E6%96%B9%E7%A8%8B%E7%9A%84/index.html">
 <meta property="og:site_name" content="SingyuTang">
-<meta property="og:description" content="前言：为什么我们需要了解这套推导？在从事地球物理反演、机器学习（如岭回归）或计算机视觉等领域的算法开发时，我们经常会看到代码里出现这样一行优雅的语句：1m &#x3D; scipy.linalg.solve(G.T @ G + alpha**2 * L.T @ L, G.T @ d)很多人知道这是在“求解带正则化的最小二乘问题”，但一旦被人问起：“这行代码是怎么从你的物理目标函数里推导出来的？”，往往会一时">
+<meta property="og:description" content="地球物理反演：从目标函数到求解方程（法方程）的严密推导与代码映射前言：为什么我们需要了解这套推导？在从事地球物理反演、机器学习（如岭回归）或计算机视觉等领域的算法开发时，我们经常会看到代码里出现这样一行优雅的语句：1m &#x3D; scipy.linalg.solve(G.T @ G + alpha**2 * L.T @ L, G.T @ d)很多人知道这是在“求解带正则化的最小二乘问题”，但一旦被人问起">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-05-20T12:08:43.000Z">
-<meta property="article:modified_time" content="2026-05-20T12:20:37.682Z">
+<meta property="article:modified_time" content="2026-05-20T12:22:50.330Z">
 <meta property="article:author" content="SingyuTang">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="洪水">
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.7k 字
         
       </span>
     
@@ -304,7 +304,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言：为什么我们需要了解这套推导？"><a href="#前言：为什么我们需要了解这套推导？" class="headerlink" title="前言：为什么我们需要了解这套推导？"></a>前言：为什么我们需要了解这套推导？</h2><p>在从事地球物理反演、机器学习（如岭回归）或计算机视觉等领域的算法开发时，我们经常会看到代码里出现这样一行优雅的语句：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">m = scipy.linalg.solve(G.T @ G + alpha**<span class="hljs-number">2</span> * L.T @ L, G.T @ d)<br></code></pre></td></tr></table></figure><br>很多人知道这是在“求解带正则化的最小二乘问题”，但一旦被人问起：<strong>“这行代码是怎么从你的物理目标函数里推导出来的？”</strong>，往往会一时语塞。</p>
+                <h1 id="地球物理反演：从目标函数到求解方程（法方程）的严密推导与代码映射"><a href="#地球物理反演：从目标函数到求解方程（法方程）的严密推导与代码映射" class="headerlink" title="地球物理反演：从目标函数到求解方程（法方程）的严密推导与代码映射"></a>地球物理反演：从目标函数到求解方程（法方程）的严密推导与代码映射</h1><h2 id="前言：为什么我们需要了解这套推导？"><a href="#前言：为什么我们需要了解这套推导？" class="headerlink" title="前言：为什么我们需要了解这套推导？"></a>前言：为什么我们需要了解这套推导？</h2><p>在从事地球物理反演、机器学习（如岭回归）或计算机视觉等领域的算法开发时，我们经常会看到代码里出现这样一行优雅的语句：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">m = scipy.linalg.solve(G.T @ G + alpha**<span class="hljs-number">2</span> * L.T @ L, G.T @ d)<br></code></pre></td></tr></table></figure><br>很多人知道这是在“求解带正则化的最小二乘问题”，但一旦被人问起：<strong>“这行代码是怎么从你的物理目标函数里推导出来的？”</strong>，往往会一时语塞。</p>
 <p>今天，我们就用最直白的语言和最严密的数学，一步步推导<strong>目标函数（Objective Function）</strong>是如何蜕变成为<strong>求解方程（法方程，Normal Equations）</strong>的。搞懂了这个过程，你就能随意魔改各种正则化项，写出属于你自己的反演算法。</p>
 <hr>
 <h2 id="1-问题的起点：定义目标函数-Objective-Function"><a href="#1-问题的起点：定义目标函数-Objective-Function" class="headerlink" title="1. 问题的起点：定义目标函数 (Objective Function)"></a>1. 问题的起点：定义目标函数 (Objective Function)</h2><p>假设我们有一组卫星观测数据 $\mathbf{d}$，我们想要反演地表的水质量变化 $\mathbf{m}$。物理正演模型可以写成一个线性方程：</p>
